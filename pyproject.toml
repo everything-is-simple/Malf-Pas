@@ -95,6 +95,7 @@ required_docs = [
 required_registries = [
     "governance/repo_governance_registry.toml",
     "governance/source_authority_registry.toml",
+    "governance/malf_v1_4_immutability_registry.toml",
     "governance/module_gate_registry.toml",
     "governance/module_ownership_registry.toml",
     "governance/storage_engine_registry.toml",

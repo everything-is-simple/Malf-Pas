@@ -157,6 +157,55 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(_check_root_directory_registry(repo_root / raw_path, registry))
         if raw_path == "governance/source_authority_registry.toml":
             findings.extend(_check_source_authority_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/malf_v1_4_immutability_registry.toml":
+            findings.extend(_check_malf_v1_4_immutability_registry(repo_root / raw_path, registry))
+    return findings
+
+
+def _check_malf_v1_4_immutability_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values: dict[str, Any] = {
+        "policy_status": "frozen-by-malf-v1-4-immutability-anchor-card-20260515-01",
+        "authority_doc": "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
+        "anchor_directory": "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
+        "anchor_zip": "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+        "anchor_manifest": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
+        ),
+        "runtime_authorized": False,
+        "formal_db_mutation_authorized": False,
+        "downstream_redefinition_authorized": False,
+        "legacy_schema_migration_authorized": False,
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    required_invariants = {
+        "MALF-V1-4-ANCHOR",
+        "STRUCTURE-FIRST",
+        "NO-PAS-REWRITE",
+        "NO-SIGNAL-REWRITE",
+        "NO-POSITION-TRADE-REWRITE",
+        "NO-AUTHORITY-BY-ADAPTER",
+        "ANCHOR-NOT-RUNTIME-AUTHORIZATION",
+        "MANIFEST-IS-BOUNDARY-EVIDENCE",
+    }
+    invariants = {
+        item.get("invariant_id"): item
+        for item in registry.get("invariants", [])
+        if isinstance(item, dict)
+    }
+    for invariant_id in sorted(required_invariants):
+        invariant = invariants.get(invariant_id)
+        if invariant is None:
+            findings.append(Finding(path, f"{invariant_id} invariant must be registered"))
+            continue
+        if invariant.get("required") is not True:
+            findings.append(Finding(path, f"{invariant_id} invariant must be required"))
+
     return findings
 
 

@@ -100,8 +100,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = malf-v1-4-immutability-anchor-card
+live next = predecessor-strength-map-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = source authority and non-migration rule passed
+repo status = malf v1.4 immutability anchor passed
 ```

@@ -36,7 +36,7 @@ no-legacy-code-migration
 | 6 | `daily-incremental-and-resume-protocol-card` | passed | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
 | 7 | `backtest-window-and-holdout-protocol-card` | passed | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
 | 8 | `source-authority-and-non-migration-rule-card` | passed | 冻结来源分类与非迁移规则 |
-| 9 | `malf-v1-4-immutability-anchor-card` | planned | 锚定 MALF v1.4 的系统位置与不变量 |
+| 9 | `malf-v1-4-immutability-anchor-card` | passed | 锚定 MALF v1.4 的系统位置与不变量 |
 | 10 | `predecessor-strength-map-card` | planned | 盘点旧系统与历史资料的最出彩强项 |
 | 11 | `pas-axiomatic-state-machine-card` | planned | 冻结 PAS 最小状态机与七层语义 |
 | 12 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
@@ -337,7 +337,39 @@ Runtime / formal DB / broker / profit claims = not authorized
 malf-v1-4-immutability-anchor-card
 ```
 
-## 10. 通过标准
+## 10. MALF v1.4 不可变锚点范围
+
+`malf-v1-4-immutability-anchor-card-20260515-01` 已冻结 MALF v1.4 的系统位置、
+锚点资产边界、MANIFEST 角色和下游不可重定义不变量。
+
+本卡已冻结的正式入口：
+
+```text
+docs/01-architecture/01-malf-v1-4-anchor-position-v1.md
+governance/malf_v1_4_immutability_registry.toml
+docs/04-execution/records/governance/009-malf-v1-4-immutability-anchor-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段 MALF v1.4 锚点裁决固定为：
+
+```text
+MALF v1.4 directory = immutable authority anchor
+MALF v1.4 zip = recoverable archive copy
+MANIFEST.json = package boundary evidence, not runtime proof
+MALF v1.4 = structure fact owner
+PAS / Signal / Position / Portfolio Plan / Trade = no MALF rewrite
+External adapters / engines = no MALF semantic ownership
+Anchor existence = no runtime, formal DB, broker, or profit authorization
+Legacy schema / runner / DuckDB surface migration = not authorized
+```
+
+第 9 卡通过后，live next 推进为：
+
+```text
+predecessor-strength-map-card
+```
+
+## 11. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -354,7 +386,7 @@ malf-v1-4-immutability-anchor-card
 | `pas-axiomatic-state-machine-card` | lifecycle、七层语义、handoff 边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 11. 当前结论
+## 12. 当前结论
 
 ```text
 This roadmap is legislation-first.

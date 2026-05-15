@@ -3,8 +3,8 @@ stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 active_route = "governance"
-active_card = "source-authority-and-non-migration-rule-card-20260515-01"
-current_allowed_next_card = "malf-v1-4-immutability-anchor-card"
+active_card = "malf-v1-4-immutability-anchor-card-20260515-01"
+current_allowed_next_card = "predecessor-strength-map-card"
 module_contract_freeze_required_before_runtime = true
 
 [[cards]]
@@ -66,6 +66,13 @@ conclusion = "docs/04-execution/records/governance/008-source-authority-and-non-
 [[cards]]
 route = "governance"
 card_id = "malf-v1-4-immutability-anchor-card"
+run_id = "malf-v1-4-immutability-anchor-card-20260515-01"
+status = "passed"
+conclusion = "docs/04-execution/records/governance/009-malf-v1-4-immutability-anchor-card-20260515-01.conclusion.md"
+
+[[cards]]
+route = "governance"
+card_id = "predecessor-strength-map-card"
 run_id = ""
 status = "planned"
-conclusion = "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md"
+conclusion = "docs/01-architecture/02-predecessor-strength-map-v1.md"

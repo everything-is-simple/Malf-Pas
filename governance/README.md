@@ -33,3 +33,6 @@ staging promote 的治理协议，不授权正式 DB mutation、schema migration
 
 `source_authority_registry.toml` 只冻结 MALF authority anchor、`G:\《股市浮沉二十载》` 书籍/思路风暴来源、
 `G:\malf-history` 历史版本取舍参考与非迁移边界，不授权旧代码迁移、书籍正文复制、runtime 或 broker。
+
+`malf_v1_4_immutability_registry.toml` 只冻结 MALF v1.4 锚点目录、归档、MANIFEST 与下游不可重定义不变量，
+不授权 runtime、正式 DB mutation、schema migration、broker 或收益证明。

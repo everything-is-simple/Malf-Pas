@@ -15,7 +15,7 @@ class MalfPasPaths:
     temp_root: Path
 
     @classmethod
-    def from_env(cls, repo_root: Path) -> "MalfPasPaths":
+    def from_env(cls, repo_root: Path) -> MalfPasPaths:
         root = repo_root.resolve()
         return cls(
             repo_root=root,
