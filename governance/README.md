@@ -36,3 +36,7 @@ staging promote 的治理协议，不授权正式 DB mutation、schema migration
 
 `malf_v1_4_immutability_registry.toml` 只冻结 MALF v1.4 锚点目录、归档、MANIFEST 与下游不可重定义不变量，
 不授权 runtime、正式 DB mutation、schema migration、broker 或收益证明。
+
+`predecessor_strength_registry.toml` 只冻结旧系统、历史资料、书籍来源与历史 repo 的可吸收强项、
+禁止迁移边界和后续使用边界，不授权旧代码、旧 schema、runner、DuckDB 表面、runtime、正式 DB mutation、
+broker 或收益证明。

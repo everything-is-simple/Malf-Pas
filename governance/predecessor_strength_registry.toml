@@ -1,0 +1,103 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/01-architecture/02-predecessor-strength-map-v1.md"
+policy_status = "frozen-by-predecessor-strength-map-card-20260515-01"
+next_card = "pas-axiomatic-state-machine-card"
+
+[[sources]]
+key = "malf_v1_4_anchor"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+classification = "authority_anchor"
+absorbable_strength = "MALF v1.4 structure fact, WavePosition, transition, boundary, and authority package discipline"
+forbidden_role = "downstream redefinition, runtime proof, schema transplant, runner transplant, or broker proof"
+downstream_use = "immutable structure input for PAS, Signal, Position, Portfolio Plan, Trade, and System Readout"
+
+[[sources]]
+key = "malf_v1_4_anchor_zip"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
+classification = "authority_anchor"
+absorbable_strength = "recoverable archive copy for MALF v1.4 authority package boundary"
+forbidden_role = "replacement for directory anchor, migrated schema source, runner source, or runtime artifact"
+downstream_use = "archive boundary verification only"
+
+[[sources]]
+key = "asteria_system_design_set_v1_0"
+path = "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0"
+classification = "reference_input"
+absorbable_strength = "governance pattern, document organization, gate discipline, execution four-pack, and validated archive workflow"
+forbidden_role = "current release state, runtime source, semantic owner, or formal proof replacement"
+downstream_use = "governance method and delivery discipline reference"
+
+[[sources]]
+key = "malf_system_history"
+path = "H:/Asteria-Validated/MALF-system-history"
+classification = "historical_tradeoff_reference"
+absorbable_strength = "MALF and PAS evolution history, retained gaps, definition drift lessons, and failed-path evidence"
+forbidden_role = "legacy code migration, schema transplant, runner transplant, DuckDB surface migration, or current semantic ownership"
+downstream_use = "PAS axiomatization and boundary-risk reference"
+
+[[sources]]
+key = "malf_reference"
+path = "H:/Asteria-Validated/MALF-reference"
+classification = "reference_input"
+absorbable_strength = "MALF and PAS bridge material, samples, definition side evidence, and validation clues"
+forbidden_role = "runtime source, formal proof replacement, or semantic owner"
+downstream_use = "side evidence and sample reference only"
+
+[[sources]]
+key = "lance_beggs_book_root"
+path = "G:/《股市浮沉二十载》"
+classification = "brainstorming_source"
+absorbable_strength = "PAS original problem sense, trading context, terminology, and brainstorming lineage"
+forbidden_role = "copied text corpus, runtime source, formal data root, broker instruction, position instruction, order instruction, fill instruction, or profit promise"
+downstream_use = "conceptual context that must be re-axiomatized inside this repo"
+
+[[sources]]
+key = "ytc_lance_beggs"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
+classification = "concept_source"
+absorbable_strength = "context, trigger, strength, lifecycle, opportunity boundary, and trade-management vocabulary"
+forbidden_role = "direct PAS output action, position owner, order owner, fill owner, broker instruction, or profit promise"
+downstream_use = "PAS state-machine and semantic-layer concept source"
+
+[[sources]]
+key = "malf_history_root"
+path = "G:/malf-history"
+classification = "historical_tradeoff_reference"
+absorbable_strength = "unfinished historical versions, module tradeoffs, implementation rationale, samples, retained gaps, and failure lessons"
+forbidden_role = "legacy code migration, schema transplant, runner transplant, DuckDB surface migration, or current semantic ownership"
+downstream_use = "tradeoff and retained-gap reference before freezing new contracts"
+
+[[sources]]
+key = "market_lifespan_quant"
+path = "G:/malf-history/MarketLifespan-Quant"
+classification = "reference_input"
+absorbable_strength = "PAS five-trigger experience, Signal and readout shape, statistical ranking, and candidate readout lessons"
+forbidden_role = "trigger schema inheritance, runner transplant, backtest proof, or current semantic owner"
+downstream_use = "PAS, Signal, ranking, and readout experience input"
+
+[[sources]]
+key = "emotion_quant_gamma"
+path = "G:/malf-history/EmotionQuant-gamma"
+classification = "reference_input"
+absorbable_strength = "T+1, A-share execution boundary, risk sidecar, and risk warning experience"
+forbidden_role = "execution runtime, risk runtime, broker loop, position logic, or current runtime owner"
+downstream_use = "A-share boundary and risk-sidecar reference"
+
+[[sources]]
+key = "astock_lifespan_alpha"
+path = "G:/malf-history/astock_lifespan-alpha"
+classification = "reference_input"
+absorbable_strength = "Alpha, PAS, Signal, Position decomposition, producer-consumer split, and contract-first recovery experience"
+forbidden_role = "legacy code migration, data runner transplant, queue table transplant, checkpoint table transplant, or completed-state inheritance"
+downstream_use = "module decomposition and contract-boundary reference"
+
+[[sources]]
+key = "lifespan_0_01"
+path = "G:/malf-history/lifespan-0.01"
+classification = "reference_input"
+absorbable_strength = "producer, runner, checkpoint, ledger, and raw_market to market_base engineering experience"
+forbidden_role = "schema transplant, runner transplant, database surface transplant, or historical pipeline behavior inheritance"
+downstream_use = "future Data Foundation and Pipeline design reference"

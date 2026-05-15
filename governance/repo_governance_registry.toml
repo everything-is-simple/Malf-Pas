@@ -12,11 +12,12 @@ temp_root = "H:/Malf-Pas-temp"
 previous_validated_root = "H:/Asteria-Validated"
 source_authority_registry = "governance/source_authority_registry.toml"
 malf_v1_4_immutability_registry = "governance/malf_v1_4_immutability_registry.toml"
+predecessor_strength_registry = "governance/predecessor_strength_registry.toml"
 historical_tradeoff_reference_root = "G:/malf-history"
 book_brainstorming_reference_root = "G:/《股市浮沉二十载》"
 pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
-current_allowed_next_card = "predecessor-strength-map-card"
+current_allowed_next_card = "pas-axiomatic-state-machine-card"
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
 
 required_authority_docs = [
@@ -27,6 +28,7 @@ required_authority_docs = [
     "docs/00-governance/04-root-directory-policy-v1.md",
     "docs/01-architecture/00-mainline-authoritative-map-v1.md",
     "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
+    "docs/01-architecture/02-predecessor-strength-map-v1.md",
     "docs/01-architecture/03-system-mainline-module-ownership-v1.md",
     "docs/01-architecture/04-storage-engine-and-portability-decision-v1.md",
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",

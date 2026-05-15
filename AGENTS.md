@@ -100,8 +100,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = predecessor-strength-map-card
+live next = pas-axiomatic-state-machine-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = malf v1.4 immutability anchor passed
+repo status = predecessor strength map passed
 ```

@@ -37,7 +37,7 @@ no-legacy-code-migration
 | 7 | `backtest-window-and-holdout-protocol-card` | passed | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
 | 8 | `source-authority-and-non-migration-rule-card` | passed | 冻结来源分类与非迁移规则 |
 | 9 | `malf-v1-4-immutability-anchor-card` | passed | 锚定 MALF v1.4 的系统位置与不变量 |
-| 10 | `predecessor-strength-map-card` | planned | 盘点旧系统与历史资料的最出彩强项 |
+| 10 | `predecessor-strength-map-card` | passed | 盘点旧系统与历史资料的最出彩强项 |
 | 11 | `pas-axiomatic-state-machine-card` | planned | 冻结 PAS 最小状态机与七层语义 |
 | 12 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
 
@@ -369,7 +369,39 @@ Legacy schema / runner / DuckDB surface migration = not authorized
 predecessor-strength-map-card
 ```
 
-## 11. 通过标准
+## 11. 旧系统强项地图范围
+
+`predecessor-strength-map-card-20260515-01` 已冻结旧系统、历史资料、书籍来源与历史 repo 的
+可吸收强项、禁止迁移 / 禁止继承边界和后续使用边界。
+
+本卡已冻结的正式入口：
+
+```text
+docs/01-architecture/02-predecessor-strength-map-v1.md
+governance/predecessor_strength_registry.toml
+docs/04-execution/records/governance/010-predecessor-strength-map-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段旧系统强项地图裁决固定为：
+
+```text
+MALF v1.4 anchor = immutable structure authority
+Asteria_System_Design_Set_v1_0 = governance pattern reference
+MALF-system-history / MALF-reference = historical and bridge reference only
+G:\《股市浮沉二十载》 = PAS brainstorming source, not runtime or broker source
+G:\《股市浮沉二十载》\2020.(Au)LanceBeggs = PAS context / trigger / strength / lifecycle concept source
+G:\malf-history and selected historical repos = tradeoff and failure-lesson reference
+Legacy code / schema / runner / DuckDB surface migration = not authorized
+Runtime / formal DB / broker / profit claims = not authorized
+```
+
+第 10 卡通过后，live next 推进为：
+
+```text
+pas-axiomatic-state-machine-card
+```
+
+## 12. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -386,7 +418,7 @@ predecessor-strength-map-card
 | `pas-axiomatic-state-machine-card` | lifecycle、七层语义、handoff 边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 12. 当前结论
+## 13. 当前结论
 
 ```text
 This roadmap is legislation-first.

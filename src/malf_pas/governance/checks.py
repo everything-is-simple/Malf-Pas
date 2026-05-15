@@ -159,6 +159,91 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(_check_source_authority_registry(repo_root / raw_path, registry))
         if raw_path == "governance/malf_v1_4_immutability_registry.toml":
             findings.extend(_check_malf_v1_4_immutability_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/predecessor_strength_registry.toml":
+            findings.extend(_check_predecessor_strength_registry(repo_root / raw_path, registry))
+    return findings
+
+
+def _check_predecessor_strength_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "policy_status": "frozen-by-predecessor-strength-map-card-20260515-01",
+        "authority_doc": "docs/01-architecture/02-predecessor-strength-map-v1.md",
+        "next_card": "pas-axiomatic-state-machine-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    expected_sources = {
+        "malf_v1_4_anchor": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
+            "authority_anchor",
+        ),
+        "malf_v1_4_anchor_zip": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+            "authority_anchor",
+        ),
+        "asteria_system_design_set_v1_0": (
+            "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0",
+            "reference_input",
+        ),
+        "malf_system_history": (
+            "H:/Asteria-Validated/MALF-system-history",
+            "historical_tradeoff_reference",
+        ),
+        "malf_reference": ("H:/Asteria-Validated/MALF-reference", "reference_input"),
+        "lance_beggs_book_root": ("G:/《股市浮沉二十载》", "brainstorming_source"),
+        "ytc_lance_beggs": ("G:/《股市浮沉二十载》/2020.(Au)LanceBeggs", "concept_source"),
+        "malf_history_root": ("G:/malf-history", "historical_tradeoff_reference"),
+        "market_lifespan_quant": ("G:/malf-history/MarketLifespan-Quant", "reference_input"),
+        "emotion_quant_gamma": ("G:/malf-history/EmotionQuant-gamma", "reference_input"),
+        "astock_lifespan_alpha": ("G:/malf-history/astock_lifespan-alpha", "reference_input"),
+        "lifespan_0_01": ("G:/malf-history/lifespan-0.01", "reference_input"),
+    }
+    sources = {
+        item.get("key"): item for item in registry.get("sources", []) if isinstance(item, dict)
+    }
+    for key, (expected_path, expected_classification) in expected_sources.items():
+        source = sources.get(key)
+        if source is None:
+            findings.append(Finding(path, f"{key} source must be registered"))
+            continue
+        if source.get("path") != expected_path:
+            findings.append(Finding(path, f"{key} path must be {expected_path!r}"))
+        if source.get("classification") != expected_classification:
+            findings.append(
+                Finding(path, f"{key} classification must be {expected_classification!r}")
+            )
+        for field in ["absorbable_strength", "forbidden_role", "downstream_use"]:
+            if not str(source.get(field, "")).strip():
+                findings.append(Finding(path, f"{key} must define {field}"))
+
+    forbidden_fragments = {
+        "legacy code migration",
+        "schema transplant",
+        "runner transplant",
+    }
+    for key in ["malf_system_history", "malf_history_root"]:
+        forbidden_role = str(sources.get(key, {}).get("forbidden_role", ""))
+        for fragment in forbidden_fragments:
+            if fragment not in forbidden_role:
+                findings.append(Finding(path, f"{key} must forbid {fragment!r}"))
+
+    action_forbidden_keys = {
+        "lance_beggs_book_root": {"broker", "order", "fill", "profit"},
+        "ytc_lance_beggs": {"broker", "order", "fill", "profit"},
+        "market_lifespan_quant": {"runner", "backtest proof", "semantic owner"},
+        "emotion_quant_gamma": {"broker", "position"},
+        "astock_lifespan_alpha": {"legacy code migration", "queue", "checkpoint"},
+        "lifespan_0_01": {"schema transplant", "runner transplant"},
+    }
+    for key, fragments in action_forbidden_keys.items():
+        forbidden_role = str(sources.get(key, {}).get("forbidden_role", ""))
+        for fragment in fragments:
+            if fragment not in forbidden_role:
+                findings.append(Finding(path, f"{key} must forbid {fragment!r}"))
+
     return findings
 
 
