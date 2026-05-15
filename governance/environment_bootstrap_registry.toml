@@ -61,6 +61,12 @@ status = "repo-local skeleton created"
 source = "H:/Asteria/.venv"
 reason = "virtual environments are local artifacts"
 
+[[local_environment_actions]]
+surface = "H:/Malf-Pas/.venv"
+source_reference = "H:/Asteria/.venv"
+decision = "recreate locally with Python 3.11 and install Malf-Pas dev dependencies; do not copy the old virtualenv"
+status = "repo-local virtualenv created with editable dev install"
+
 [[forbidden_migrations]]
 source = "H:/Asteria/scripts/* business runners"
 reason = "runtime and module runners are outside first roadmap authorization"

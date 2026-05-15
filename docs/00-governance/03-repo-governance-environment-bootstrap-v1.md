@@ -33,6 +33,16 @@
 | `H:\Asteria\AGENTS.md` | `AGENTS.md` |
 | `H:\Asteria\README.md` | `README.md` |
 
+`.venv` 的处理口径单独固定如下：
+
+```text
+copy H:\Asteria\.venv -> forbidden
+reference H:\Asteria\.venv package feasibility -> allowed
+create H:\Malf-Pas\.venv from local Python 3.11 -> allowed and preferred
+install -e .[dev] into H:\Malf-Pas\.venv -> allowed
+commit .venv into repo -> forbidden
+```
+
 ## 3. 明确不迁入
 
 | 来源 | 裁决 |
@@ -56,6 +66,9 @@
 ## 5. 验证命令
 
 ```powershell
+python -m venv H:\Malf-Pas\.venv
+H:\Malf-Pas\.venv\Scripts\python.exe -m pip install --upgrade pip
+H:\Malf-Pas\.venv\Scripts\python.exe -m pip install -e ".[dev]"
 python scripts\dev\doctor.py
 python scripts\governance\check_project_governance.py
 python -m unittest discover -s tests -p "test_*.py"

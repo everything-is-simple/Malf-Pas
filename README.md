@@ -77,6 +77,30 @@ No broker or live-trading discussion is opened by this repo initialization.
 12. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
 13. [执行区入口](docs/04-execution/README.md)
 
+## Python 环境
+
+首选 repo-local virtualenv：
+
+```powershell
+python -m venv H:\Malf-Pas\.venv
+H:\Malf-Pas\.venv\Scripts\python.exe -m pip install --upgrade pip
+H:\Malf-Pas\.venv\Scripts\python.exe -m pip install -e ".[dev]"
+```
+
+可选 conda fallback：
+
+```powershell
+conda env create -f environment.yml
+```
+
+说明：
+
+```text
+H:\Asteria\.venv is reference-only
+H:\Malf-Pas\.venv must be recreated locally
+.venv itself must stay out of git
+```
+
 ## 开发检查
 
 ```powershell

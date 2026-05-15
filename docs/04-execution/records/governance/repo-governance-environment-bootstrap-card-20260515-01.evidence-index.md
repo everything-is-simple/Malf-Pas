@@ -33,6 +33,7 @@
 | agent_rules | `AGENTS.md` |
 | repo_entry | `README.md` |
 | codex_repo_boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
+| repo_local_virtualenv | `H:\Malf-Pas\.venv` recreated locally with Python 3.11 editable dev install |
 | copied_virtualenv | `no` |
 | copied_business_runtime | `no` |
 | formal_db_mutation | `no` |

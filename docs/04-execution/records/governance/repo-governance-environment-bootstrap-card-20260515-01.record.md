@@ -17,6 +17,7 @@
 3. 裁决只继承治理环境形态，不继承 `.venv`、业务 runner、正式 DB、report/temp artifacts 或 Asteria release state。
 4. 建立 Malf-Pas repo-local workflow hooks、dev doctor、governance check、环境配置和机器可读治理骨架。
 5. 更新 roadmap、`.gitignore`、`AGENTS.md`、`README.md`、结论索引，并补齐第二卡 execution 四件套。
+6. 在 `H:\Malf-Pas` 用 Python 3.11 重建 repo-local `.venv`，执行 editable `.[dev]` 安装，不复制 `H:\Asteria\.venv`。
 
 ## 3. 关键验证
 
@@ -27,6 +28,7 @@
 | governance tests | `passed` |
 | Asteria hard-coded workflow path retained | `no` |
 | formal DB artifact created | `no` |
+| repo-local `.venv` recreated instead of copied | `passed` |
 
 ## 4. 外部证据资产
 
