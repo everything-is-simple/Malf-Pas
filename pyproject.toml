@@ -70,6 +70,7 @@ reference_roots = [
     "H:/Asteria-report",
     "H:/Asteria-temp",
     "G:/malf-history",
+    "G:/《股市浮沉二十载》",
     "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs",
 ]
 formal_source_roots = ["src", "scripts", "tests", "governance", "plugins"]
@@ -92,6 +93,7 @@ required_docs = [
 ]
 required_registries = [
     "governance/repo_governance_registry.toml",
+    "governance/source_authority_registry.toml",
     "governance/module_gate_registry.toml",
     "governance/module_ownership_registry.toml",
     "governance/storage_engine_registry.toml",

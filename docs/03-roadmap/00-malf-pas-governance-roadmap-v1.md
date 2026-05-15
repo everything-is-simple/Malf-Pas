@@ -17,6 +17,7 @@ governance-only
 doc-first
 read-only-to-previous-assets
 six-root-directory-policy
+book-and-history-reference-policy
 no-formal-db-mutation
 no-broker
 no-profit-claim
@@ -58,6 +59,8 @@ stage = governance-only / doc-first / no-formal-db-mutation
 
 上一版 `H:\Asteria`、`H:\Asteria-data`、`H:\Asteria-Validated`、`H:\Asteria-report`、
 `H:\Asteria-temp` 只作为只读参考，不得作为 `Malf-Pas` 当前 output root 或 scratch。
+`G:\《股市浮沉二十载》` 是 PAS 书籍参考与思路风暴来源根，`G:\malf-history` 是曾经做过但未完成的
+历史版本与模块取舍参考根；二者只读，不得作为 runtime、正式数据根、broker 指令或旧代码迁移来源。
 
 `repo-governance-environment-bootstrap-card` 必须把上一版系统的治理环境经验纳入第一张路线图，
 但不能把上一版 runtime、正式 DB 或模块实现直接迁入。
@@ -103,6 +106,7 @@ no copied business runtime
 | Codex repo-local boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
 | boundary freeze doc | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` |
 | root directory policy | `docs/00-governance/04-root-directory-policy-v1.md` / `governance/root_directory_registry.toml` |
+| source authority policy | `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md` / `governance/source_authority_registry.toml` |
 
 ## 5. 系统主线与自建/委外边界
 

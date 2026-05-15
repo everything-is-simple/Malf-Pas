@@ -91,3 +91,13 @@ forbidden_role = "semantic owner"
 surface = "historical repositories"
 allowed_role = "experience, samples, failure lessons"
 forbidden_role = "legacy code migration"
+
+[[external_boundaries]]
+surface = "G:/malf-history"
+allowed_role = "unfinished historical versions, module tradeoffs, implementation rationale, samples, and failure lessons"
+forbidden_role = "legacy code migration, schema transplant, runner transplant, or semantic ownership"
+
+[[external_boundaries]]
+surface = "G:/《股市浮沉二十载》"
+allowed_role = "PAS concept source, brainstorming source, context, trigger, strength, lifecycle, and opportunity boundary"
+forbidden_role = "runtime source, formal data source, broker instruction source, order source, or profit claim source"

@@ -1,0 +1,62 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md"
+policy_status = "active-source-authority-and-reference-policy"
+
+[[sources]]
+key = "malf_v1_4_anchor"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+classification = "authority_anchor"
+allowed_role = "structure fact, WavePosition, transition, boundary authority anchor"
+forbidden_role = "downstream redefinition target"
+
+[[sources]]
+key = "lance_beggs_book_root"
+path = "G:/《股市浮沉二十载》"
+classification = "brainstorming_source"
+allowed_role = "book family root for PAS concept source and brainstorming lineage"
+forbidden_role = "runtime, formal data root, broker instruction source, or copied text corpus"
+
+[[sources]]
+key = "ytc_lance_beggs"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
+classification = "concept_source"
+allowed_role = "PAS context, trigger, strength, lifecycle, opportunity boundary, and brainstorming source"
+forbidden_role = "position, order, fill, profit promise, or copied book text"
+
+[[sources]]
+key = "malf_history_root"
+path = "G:/malf-history"
+classification = "historical_tradeoff_reference"
+allowed_role = "unfinished historical versions, module tradeoffs, implementation rationale, samples, and failure lessons"
+forbidden_role = "legacy code migration, schema transplant, runner transplant, or current semantic ownership"
+
+[[sources]]
+key = "market_lifespan_quant"
+path = "G:/malf-history/MarketLifespan-Quant"
+classification = "reference_input"
+allowed_role = "PAS, Signal, ranking, and readout experience"
+forbidden_role = "current system semantic owner"
+
+[[sources]]
+key = "emotion_quant_gamma"
+path = "G:/malf-history/EmotionQuant-gamma"
+classification = "reference_input"
+allowed_role = "T+1, A-share boundary, and risk sidecar experience"
+forbidden_role = "current runtime owner"
+
+[[sources]]
+key = "astock_lifespan_alpha"
+path = "G:/malf-history/astock_lifespan-alpha"
+classification = "reference_input"
+allowed_role = "Alpha, PAS, Signal, and Position decomposition experience"
+forbidden_role = "legacy code migration"
+
+[[sources]]
+key = "lifespan_0_01"
+path = "G:/malf-history/lifespan-0.01"
+classification = "reference_input"
+allowed_role = "producer, runner, checkpoint, and ledger design experience"
+forbidden_role = "schema or runner transplant"

@@ -71,7 +71,8 @@ historical code transplant
 | `H:\Asteria-data` | 上一版数据根只读参考 | 只吸收上一版 formal DB、semantic mirror、ledger topology 经验；不迁移 schema、runner 或 DuckDB 表面 |
 | `H:\Asteria-report` | 上一版报告根只读参考 | 只吸收报告组织经验；不复用为当前 report root |
 | `H:\Asteria-temp` | 上一版临时根只读参考 | 只识别旧运行产物边界；不复用为当前 scratch |
-| `G:\malf-history` | 历史系统输入池 | 梳理各代系统最出彩模块与 retained gap |
+| `G:\malf-history` | 历史版本输入池 | 梳理曾经做过但未完成的各版本、各模块实现理由、权衡折衷、retained gap 与失败教训 |
+| `G:\《股市浮沉二十载》` | 书籍参考与思路风暴来源根 | 作为 PAS 概念、公理、问题意识和交易语境的只读来源 |
 | `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs` | PAS 概念锚点 | 提取 context、trigger、strength、lifecycle、业务边界 |
 
 当前 `Malf-Pas` 的 output root 必须按六根目录拆分：
@@ -109,6 +110,8 @@ flowchart LR
 | 边 debug 边发明 PAS 主线定义 | 会重演旧系统语义漂移 |
 | 下游模块反向修正 MALF | 会污染结构真值 |
 | 把历史 repo 当成现成成品迁入 | 会把旧债直接带进新系统 |
+| 忘记 `G:\malf-history` 的历史权衡 | 会重复旧版本已经暴露过的取舍问题 |
+| 忘记 `G:\《股市浮沉二十载》` 的概念源地位 | 会让 PAS 思路风暴脱离原始交易语境 |
 | 用开源项目替代语义定义 | 会失去系统主权 |
 | 第一阶段直接谈收益或实盘 | 当前没有证据支持 |
 

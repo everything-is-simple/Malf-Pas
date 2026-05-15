@@ -9,6 +9,7 @@ API contracts
 database topology
 historical ledger registries
 root directory registries
+source authority registries
 ```
 
 第一阶段不在此目录定义正式 runtime 合同。`module_ownership_registry.toml` 只冻结模块语义所有权，
@@ -25,3 +26,6 @@ staging promote 的治理协议，不授权正式 DB mutation、schema migration
 
 `root_directory_registry.toml` 只冻结 `Malf-Pas` 六根目录和上一版 `Asteria` 只读参考边界，
 不授权创建 DB、写入正式数据根、迁移旧运行产物或复用上一版 scratch。
+
+`source_authority_registry.toml` 只冻结 MALF authority anchor、`G:\《股市浮沉二十载》` 书籍/思路风暴来源、
+`G:\malf-history` 历史版本取舍参考与非迁移边界，不授权旧代码迁移、书籍正文复制、runtime 或 broker。

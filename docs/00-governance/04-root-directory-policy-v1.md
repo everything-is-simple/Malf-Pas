@@ -44,3 +44,14 @@
 6. 上一版 `H:\Asteria-*` 目录只能只读参考，不得作为当前系统 output root 或 scratch。
 7. 任何新脚本、hook、registry 或 card 如需要根目录，必须引用本文件与
    `governance/root_directory_registry.toml`。
+
+## 5. 外部参考根
+
+以下 `G:` 路径不是 `Malf-Pas` 六根目录的一部分，也不得作为 output root 或 scratch。
+它们只提供思想来源、历史版本经验与实现取舍参考。
+
+| reference_root | 当前角色 | 禁止解释 |
+|---|---|---|
+| `G:\《股市浮沉二十载》` | 书籍参考与思路风暴来源根 | 不得作为 runtime、正式数据根、broker 指令或收益承诺来源 |
+| `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs` | PAS context、trigger、strength、lifecycle 与业务边界概念锚点 | 不得复制正文或把交易管理动作直接变成 PAS 输出动作 |
+| `G:\malf-history` | 曾经做过但未完成的历史版本根；用于理解各模块实现理由、权衡折衷、样本和失败教训 | 不得迁移旧 schema、runner、DuckDB 表面或旧代码 |

@@ -10,6 +10,10 @@ validated_root = "H:/Malf-Pas-Validated"
 report_root = "H:/Malf-Pas-reprot"
 temp_root = "H:/Malf-Pas-temp"
 previous_validated_root = "H:/Asteria-Validated"
+source_authority_registry = "governance/source_authority_registry.toml"
+historical_tradeoff_reference_root = "G:/malf-history"
+book_brainstorming_reference_root = "G:/《股市浮沉二十载》"
+pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
 current_allowed_next_card = "backtest-window-and-holdout-protocol-card"
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
@@ -39,4 +43,5 @@ hard_rules = [
     "no-profit-claim",
     "no-legacy-code-migration",
     "six-root-directory-policy",
+    "book-and-history-reference-policy",
 ]

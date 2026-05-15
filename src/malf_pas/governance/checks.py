@@ -76,6 +76,9 @@ def _check_governance_roots(repo_root: Path, governance: dict[str, Any]) -> list
         "H:/Asteria-Validated",
         "H:/Asteria-report",
         "H:/Asteria-temp",
+        "G:/malf-history",
+        "G:/《股市浮沉二十载》",
+        "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs",
     }
     repo_roots = set(governance.get("repo_roots", []))
     reference_roots = set(governance.get("reference_roots", []))
@@ -148,6 +151,43 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.append(Finding(repo_root / raw_path, "broker_feasibility must remain deferred"))
         if raw_path == "governance/root_directory_registry.toml":
             findings.extend(_check_root_directory_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/source_authority_registry.toml":
+            findings.extend(_check_source_authority_registry(repo_root / raw_path, registry))
+    return findings
+
+
+def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_sources = {
+        "lance_beggs_book_root": ("G:/《股市浮沉二十载》", "brainstorming_source"),
+        "ytc_lance_beggs": ("G:/《股市浮沉二十载》/2020.(Au)LanceBeggs", "concept_source"),
+        "malf_history_root": ("G:/malf-history", "historical_tradeoff_reference"),
+    }
+    sources = {
+        item.get("key"): item for item in registry.get("sources", []) if isinstance(item, dict)
+    }
+    for key, (expected_path, expected_classification) in expected_sources.items():
+        source = sources.get(key)
+        if source is None:
+            findings.append(Finding(path, f"{key} source must be registered"))
+            continue
+        if source.get("path") != expected_path:
+            findings.append(Finding(path, f"{key} path must be {expected_path!r}"))
+        if source.get("classification") != expected_classification:
+            findings.append(
+                Finding(path, f"{key} classification must be {expected_classification!r}")
+            )
+
+    forbidden_fragments = {
+        "legacy code migration",
+        "schema transplant",
+        "runner transplant",
+    }
+    malf_history = sources.get("malf_history_root", {})
+    forbidden_role = str(malf_history.get("forbidden_role", ""))
+    for fragment in forbidden_fragments:
+        if fragment not in forbidden_role:
+            findings.append(Finding(path, f"malf_history_root must forbid {fragment!r}"))
     return findings
 
 

@@ -70,3 +70,21 @@ key = "previous_temp_root"
 path = "H:/Asteria-temp"
 role = "previous temp root"
 access_policy = "read-only reference; do not reuse for Malf-Pas"
+
+[[external_reference_roots]]
+key = "book_reference_root"
+path = "G:/《股市浮沉二十载》"
+role = "book reference and brainstorming source root"
+access_policy = "read-only concept source; not runtime, data root, broker instruction source, or scratch"
+
+[[external_reference_roots]]
+key = "lance_beggs_reference_root"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
+role = "PAS concept anchor for context, trigger, strength, lifecycle, and opportunity boundary"
+access_policy = "read-only concept source; do not copy book text into repo"
+
+[[external_reference_roots]]
+key = "malf_history_root"
+path = "G:/malf-history"
+role = "unfinished historical versions, module tradeoffs, implementation rationale, samples, and failure lessons"
+access_policy = "read-only reference; not current output root, schema source, runner source, or scratch"

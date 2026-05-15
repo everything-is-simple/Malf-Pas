@@ -18,6 +18,7 @@
 12. `docs/04-execution/00-conclusion-index-v1.md`
 13. `governance/repo_governance_registry.toml`
 14. `governance/root_directory_registry.toml`
+15. `governance/source_authority_registry.toml`
 
 ## 当前权威资产
 
@@ -33,6 +34,7 @@
 - `H:\Asteria-Validated\MALF-system-history`
 - `H:\Asteria-Validated\MALF-reference`
 - `G:\malf-history`
+- `G:\《股市浮沉二十载》`
 - `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs`
 
 ## 硬规则
@@ -51,6 +53,8 @@
 - `H:\Malf-Pas-reprot` 只放 report、audit readout 与运行报告输出；当前目录名固定为 `reprot`。
 - `H:\Malf-Pas-temp` 只放临时产物、cache 与 smoke-run scratch。
 - 上一版 `H:\Asteria*` 目录只作只读参考，不得作为当前系统 output root 或 scratch。
+- `G:\《股市浮沉二十载》` 是 PAS 概念、思路风暴、context/trigger/strength/lifecycle 的来源根；不得解释成运行代码、正式数据或交易指令来源。
+- `G:\malf-history` 是曾经做过但未完成的历史版本与模块取舍参考根；可读实现理由、权衡折衷、样本和失败教训，不得迁移旧 schema、runner 或代码表面。
 - repo 根目录不得落缓存、临时 DB、临时报告或运行产物。
 
 ## 工具顺序

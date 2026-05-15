@@ -38,4 +38,6 @@ Storage switch requires independent proof.
 Historical ledger topology is one logical ledger with governed sub-ledgers.
 Daily incremental update is manifest-first, dirty-scope-bound, checkpointed, and audit-gated before promote.
 Malf-Pas roots are split into repo / data / backup / validated / reprot / temp.
+Book-origin brainstorming comes from G:\《股市浮沉二十载》.
+Historical implementation tradeoff references come from G:\malf-history.
 ```
