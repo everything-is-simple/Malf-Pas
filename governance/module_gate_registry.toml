@@ -3,8 +3,8 @@ stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 active_route = "governance"
-active_card = "system-mainline-module-ownership-card-20260515-01"
-current_allowed_next_card = "storage-engine-and-portability-decision-card"
+active_card = "storage-engine-and-portability-decision-card-20260515-01"
+current_allowed_next_card = "historical-ledger-topology-protocol-card"
 module_contract_freeze_required_before_runtime = true
 
 [[cards]]
@@ -31,6 +31,13 @@ conclusion = "docs/04-execution/records/governance/003-system-mainline-module-ow
 [[cards]]
 route = "governance"
 card_id = "storage-engine-and-portability-decision-card"
+run_id = "storage-engine-and-portability-decision-card-20260515-01"
+status = "passed"
+conclusion = "docs/04-execution/records/governance/004-storage-engine-and-portability-decision-card-20260515-01.conclusion.md"
+
+[[cards]]
+route = "governance"
+card_id = "historical-ledger-topology-protocol-card"
 run_id = ""
 status = "planned"
 conclusion = "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md"

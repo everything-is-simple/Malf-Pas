@@ -29,7 +29,7 @@ no-legacy-code-migration
 | 1 | `governance-roadmap-freeze-card` | passed | 固定第一张路线图边界与命名口径 |
 | 2 | `repo-governance-environment-bootstrap-card` | passed | 从 Asteria 继承治理插件、脚本、环境与机器可读治理层的最小可重建边界 |
 | 3 | `system-mainline-module-ownership-card` | passed | 冻结 Data -> System 主线模块、语义所有权、自建/委外边界 |
-| 4 | `storage-engine-and-portability-decision-card` | planned | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
+| 4 | `storage-engine-and-portability-decision-card` | passed | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
 | 5 | `historical-ledger-topology-protocol-card` | planned | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
 | 6 | `daily-incremental-and-resume-protocol-card` | planned | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
 | 7 | `backtest-window-and-holdout-protocol-card` | planned | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
@@ -150,6 +150,27 @@ portable_runtime_boundary
 python_research_boundary
 go_distribution_candidate_boundary
 no_storage_switch_without_proof
+```
+
+本卡已冻结的正式入口：
+
+```text
+docs/01-architecture/04-storage-engine-and-portability-decision-v1.md
+governance/storage_engine_registry.toml
+docs/04-execution/records/governance/004-storage-engine-and-portability-decision-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段存储与便携性裁决固定为：
+
+```text
+DuckDB = research / proof default candidate
+SQLite = portable manifest / checkpoint / run ledger candidate
+Parquet = portable columnar fact candidate
+Hybrid = future evaluation candidate
+Python = research / proof primary environment
+Go compiled binary = portable distribution candidate only
+No storage switch without independent proof
+Runtime / formal DB / broker / profit claims = not authorized
 ```
 
 ## 7. 历史大账本与增量协议范围

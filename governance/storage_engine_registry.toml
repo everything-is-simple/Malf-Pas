@@ -1,0 +1,77 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+storage_decision_status = "frozen-by-storage-engine-and-portability-decision-card-20260515-01"
+authority_doc = "docs/01-architecture/04-storage-engine-and-portability-decision-v1.md"
+storage_switch_authorized = false
+runtime_authorized = false
+
+[[storage_roles]]
+surface = "DuckDB"
+role = "research_proof_default_candidate"
+decision = "local analysis, columnar scanning, multi-table audit, research query adapter"
+allowed = "research/proof adapter"
+forbidden = "formal truth owner or storage switch without independent proof"
+
+[[storage_roles]]
+surface = "SQLite"
+role = "portable_manifest_checkpoint_run_ledger_candidate"
+decision = "candidate for lightweight manifest, checkpoint, run ledger, and audit metadata in portable distribution"
+allowed = "portable metadata ledger candidate"
+forbidden = "business semantic owner or current formal storage replacement"
+
+[[storage_roles]]
+surface = "Parquet"
+role = "portable_columnar_fact_candidate"
+decision = "candidate for long-lived columnar facts, cross-language reads, and static archive proof"
+allowed = "columnar fact file candidate"
+forbidden = "standalone formal fact without manifest and lineage"
+
+[[storage_roles]]
+surface = "SQLite + Parquet"
+role = "portable_distribution_candidate"
+decision = "candidate split where SQLite owns metadata ledgers and Parquet owns columnar facts"
+allowed = "future proof candidate"
+forbidden = "replacement before independent proof"
+
+[[storage_roles]]
+surface = "Hybrid"
+role = "evaluation_candidate"
+decision = "SQLite for manifest/checkpoint/run ledger, Parquet for facts, DuckDB as research query adapter"
+allowed = "future topology evaluation"
+forbidden = "current schema freeze or runtime implementation"
+
+[[runtime_boundaries]]
+surface = "Python"
+role = "research_proof_environment"
+decision = "current primary environment for research, proof, governance checks, and ecosystem integration"
+allowed = "research/proof/audit"
+forbidden = "production release claim or broker loop"
+
+[[runtime_boundaries]]
+surface = "Go compiled binary"
+role = "portable_distribution_candidate"
+decision = "future candidate for offline readout and portable execution"
+allowed = "future portable proof only"
+forbidden = "current runtime build, broker instruction, order, position, fill, or profit claim"
+
+[[invariants]]
+id = "NO-STORAGE-SWITCH-WITHOUT-PROOF"
+value = true
+description = "No candidate storage engine can become formal storage without independent proof and execution records."
+
+[[invariants]]
+id = "NO-FORMAL-DB-MUTATION"
+value = true
+description = "Governance-only stage cannot write formal DuckDB, SQLite, db, or sqlite artifacts."
+
+[[invariants]]
+id = "PYTHON-RESEARCH-FIRST"
+value = true
+description = "Python remains the primary research and proof environment."
+
+[[invariants]]
+id = "GO-PORTABLE-CANDIDATE-ONLY"
+value = true
+description = "Go is reserved as a future portable distribution candidate only."

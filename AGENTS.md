@@ -77,8 +77,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = storage-engine-and-portability-decision-card
+live next = historical-ledger-topology-protocol-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = system mainline module ownership passed
+repo status = storage engine and portability decision passed
 ```
