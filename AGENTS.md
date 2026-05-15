@@ -9,9 +9,12 @@
 3. `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md`
 4. `docs/01-architecture/00-mainline-authoritative-map-v1.md`
 5. `docs/01-architecture/01-malf-v1-4-anchor-position-v1.md`
-6. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-7. `docs/04-execution/00-conclusion-index-v1.md`
-8. `governance/repo_governance_registry.toml`
+6. `docs/01-architecture/03-system-mainline-module-ownership-v1.md`
+7. `docs/01-architecture/04-storage-engine-and-portability-decision-v1.md`
+8. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
+9. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+10. `docs/04-execution/00-conclusion-index-v1.md`
+11. `governance/repo_governance_registry.toml`
 
 ## 当前权威资产
 
@@ -77,8 +80,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = historical-ledger-topology-protocol-card
+live next = daily-incremental-and-resume-protocol-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = storage engine and portability decision passed
+repo status = historical ledger topology protocol passed
 ```

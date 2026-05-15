@@ -2,28 +2,149 @@ registry_version = "2026-05-15.v1"
 stage = "governance-only"
 formal_root = "H:/Malf-Pas-data"
 validated_root = "H:/Asteria-Validated"
+read_only_reference_root = "H:/Asteria-data"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
-topology_status = "placeholder-only"
+topology_status = "frozen-by-historical-ledger-topology-protocol-card-20260515-01"
+authority_doc = "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md"
 released_formal_dbs = []
-retained_gaps = [
-    "formal DB topology",
-    "runner contract",
-    "historical ledger topology",
-    "daily incremental protocol",
+runtime_authorized = false
+schema_migration_authorized = false
+cross_db_atomicity_assumption_allowed = false
+
+common_governance_keys = [
+    "symbol",
+    "timeframe",
+    "bar_dt",
+    "trade_dt",
+    "plan_dt",
+    "run_id",
+    "source_run_id",
+    "schema_version",
+    "rule_version",
+    "source_manifest_hash",
+    "checkpoint_key",
 ]
 
-[[database_placeholders]]
+required_manifest_fields = [
+    "manifest_id",
+    "source_manifest_hash",
+    "source_root",
+    "provider_role",
+    "dataset_scope",
+    "input_version",
+    "schema_version",
+    "generated_by_run_id",
+    "audit_status",
+]
+
+retained_gaps = [
+    "formal DB topology implementation",
+    "daily incremental protocol",
+    "dirty scope algorithm",
+    "checkpoint and resume implementation",
+    "staging promote implementation",
+    "runner contract",
+]
+
+[[sub_ledgers]]
+order = 1
 ledger_role = "source_fact"
-status = "not-frozen"
-owning_future_card = "historical-ledger-topology-protocol-card"
+future_owner = "Data Foundation"
+purpose = "raw source facts, market base facts, metadata facts, tradability facts, provider adapter inputs"
+lineage_parent = "source_manifest"
+status = "protocol-frozen-no-formal-db"
 
-[[database_placeholders]]
+[[sub_ledgers]]
+order = 2
 ledger_role = "structure_fact"
-status = "MALF v1.4 anchor only; no runtime DB authorized"
-owning_future_card = "malf-v1-4-immutability-anchor-card"
+future_owner = "MALF v1.4"
+purpose = "wave, transition, boundary, WavePosition structure facts"
+lineage_parent = "source_fact"
+status = "validated-anchor-only-no-runtime-db"
 
-[[database_placeholders]]
+[[sub_ledgers]]
+order = 3
 ledger_role = "semantic_ledger"
-status = "not-frozen"
-owning_future_card = "pas-axiomatic-state-machine-card"
+future_owner = "PAS"
+purpose = "context, trigger, strength, lifecycle, opportunity interpretation"
+lineage_parent = "structure_fact"
+status = "protocol-frozen-no-runtime"
+
+[[sub_ledgers]]
+order = 4
+ledger_role = "decision_ledger"
+future_owner = "Signal"
+purpose = "candidate accept reject decision ledger"
+lineage_parent = "semantic_ledger"
+status = "protocol-frozen-no-order-position-fill"
+
+[[sub_ledgers]]
+order = 5
+ledger_role = "management_ledger"
+future_owner = "Position"
+purpose = "T1 T2, breakeven, tracking, entry exit plan semantics"
+lineage_parent = "decision_ledger"
+status = "protocol-frozen-no-runtime"
+
+[[sub_ledgers]]
+order = 6
+ledger_role = "portfolio_plan_ledger"
+future_owner = "Portfolio Plan"
+purpose = "portfolio admission, target exposure, trim planning semantics"
+lineage_parent = "management_ledger"
+status = "protocol-frozen-independent-lightweight-layer"
+
+[[sub_ledgers]]
+order = 7
+ledger_role = "execution_ledger"
+future_owner = "Trade"
+purpose = "order intent, fill, rejection ledger boundary"
+lineage_parent = "portfolio_plan_ledger"
+status = "protocol-frozen-broker-deferred"
+
+[[sub_ledgers]]
+order = 8
+ledger_role = "readout_ledger"
+future_owner = "System Readout"
+purpose = "audit snapshots, chain readout, backtest summary readout"
+lineage_parent = "execution_ledger"
+status = "protocol-frozen-readout-only"
+
+[[sub_ledgers]]
+order = 9
+ledger_role = "orchestration_ledger"
+future_owner = "Pipeline"
+purpose = "run, manifest, checkpoint, batch audit, schedule records"
+lineage_parent = "all_ledgers"
+status = "protocol-frozen-orchestration-only-no-business-semantics"
+
+[[invariants]]
+id = "HISTORICAL-LEDGER-ONE-LOGICAL-LEDGER"
+value = true
+description = "The system must be governed as one logical historical ledger with multiple sub-ledgers."
+
+[[invariants]]
+id = "COMMON-GOVERNANCE-KEYS-REQUIRED"
+value = true
+description = "Future sub-ledgers must reserve the common governance keys."
+
+[[invariants]]
+id = "SOURCE-MANIFEST-REQUIRED"
+value = true
+description = "Source facts and derived ledgers must bind to a source manifest."
+
+[[invariants]]
+id = "RUN-LINEAGE-REQUIRED"
+value = true
+description = "Derived facts must preserve run_id and source_run_id lineage."
+
+[[invariants]]
+id = "NO-CROSS-DB-ATOMICITY-ASSUMPTION"
+value = true
+description = "Cross-ledger consistency depends on lineage, manifest, and audit rather than implicit cross-DB transactions."
+
+[[invariants]]
+id = "NO-FORMAL-DB-MUTATION"
+value = true
+description = "Governance-only stage cannot write formal DuckDB, SQLite, db, parquet, or sqlite artifacts."

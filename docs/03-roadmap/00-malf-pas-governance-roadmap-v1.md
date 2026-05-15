@@ -30,7 +30,7 @@ no-legacy-code-migration
 | 2 | `repo-governance-environment-bootstrap-card` | passed | 从 Asteria 继承治理插件、脚本、环境与机器可读治理层的最小可重建边界 |
 | 3 | `system-mainline-module-ownership-card` | passed | 冻结 Data -> System 主线模块、语义所有权、自建/委外边界 |
 | 4 | `storage-engine-and-portability-decision-card` | passed | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
-| 5 | `historical-ledger-topology-protocol-card` | planned | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
+| 5 | `historical-ledger-topology-protocol-card` | passed | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
 | 6 | `daily-incremental-and-resume-protocol-card` | planned | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
 | 7 | `backtest-window-and-holdout-protocol-card` | planned | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
 | 8 | `source-authority-and-non-migration-rule-card` | planned | 冻结来源分类与非迁移规则 |
@@ -202,6 +202,27 @@ checkpoint_key
 | staging promote | working facts 如何审计后 promote，不允许半成品污染正式账本 |
 | 跨库一致性 | 不假设跨库事务原子性，靠 run lineage、manifest、audit 补齐 |
 | 统一更新 | 更新数据库时按共同键和 dirty scope 定位影响面 |
+
+本卡已冻结的正式入口：
+
+```text
+docs/01-architecture/05-historical-ledger-topology-protocol-v1.md
+governance/database_topology_registry.toml
+docs/04-execution/records/governance/005-historical-ledger-topology-protocol-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段历史大账本拓扑固定为：
+
+```text
+Historical ledger = one logical ledger with governed sub-ledgers
+Sub-ledgers = source_fact / structure_fact / semantic_ledger / decision_ledger / management_ledger / portfolio_plan_ledger / execution_ledger / readout_ledger / orchestration_ledger
+Common keys = symbol / timeframe / bar_dt / trade_dt / plan_dt / run_id / source_run_id / schema_version / rule_version / source_manifest_hash / checkpoint_key
+Source manifest = required input ledger binding
+Run lineage = required direct-parent proof chain
+Cross-ledger consistency = lineage / manifest / audit first
+Cross-DB atomicity assumption = not allowed
+Runtime / formal DB / broker / profit claims = not authorized
+```
 
 ## 8. 回测窗口与留出样本协议范围
 

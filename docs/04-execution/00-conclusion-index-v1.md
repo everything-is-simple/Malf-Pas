@@ -14,7 +14,7 @@
 | `governance` | `repo-governance-environment-bootstrap-card-20260515-01` | `passed` | 治理插件、脚本、环境与机器可读治理层最小可重建边界已冻结 | `docs/04-execution/records/governance/002-repo-governance-environment-bootstrap-card-20260515-01.conclusion.md` |
 | `governance` | `system-mainline-module-ownership-card-20260515-01` | `passed` | Data -> System 模块主线、语义所有权、自建/委外边界已冻结 | `docs/04-execution/records/governance/003-system-mainline-module-ownership-card-20260515-01.conclusion.md` |
 | `governance` | `storage-engine-and-portability-decision-card-20260515-01` | `passed` | DuckDB / SQLite+Parquet / Hybrid / Go / Python 角色矩阵已冻结；正式存储切换仍需独立 proof | `docs/04-execution/records/governance/004-storage-engine-and-portability-decision-card-20260515-01.conclusion.md` |
-| `governance` | `historical-ledger-topology-protocol-card` | `planned` | 历史大账本、子库共同键、run lineage | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `historical-ledger-topology-protocol-card-20260515-01` | `passed` | 历史大账本、子库共同键、source manifest、run lineage 与分账本规则已冻结 | `docs/04-execution/records/governance/005-historical-ledger-topology-protocol-card-20260515-01.conclusion.md` |
 | `governance` | `daily-incremental-and-resume-protocol-card` | `planned` | 每日增量、dirty scope、checkpoint、断点续传 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
 | `governance` | `backtest-window-and-holdout-protocol-card` | `planned` | 十年回测、三年滚动、留出样本边界 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
 | `governance` | `source-authority-and-non-migration-rule-card` | `planned` | 来源裁决与非迁移规则 | `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md` |
