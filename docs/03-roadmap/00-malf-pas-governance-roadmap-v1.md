@@ -89,6 +89,9 @@ no copied business runtime
 | dev doctor | `scripts/dev/doctor.py` |
 | reproducible env config | `pyproject.toml` / `environment.yml` |
 | machine-readable governance skeleton | `governance/*.toml` |
+| clean ignore rules | `.gitignore` |
+| agent rules | `AGENTS.md` |
+| repo entry | `README.md` |
 | Codex repo-local boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
 | boundary freeze doc | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` |
 

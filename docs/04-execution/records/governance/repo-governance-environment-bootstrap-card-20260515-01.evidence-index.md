@@ -29,6 +29,9 @@
 | dev_doctor_script | `scripts/dev/doctor.py` |
 | environment_config | `pyproject.toml` / `environment.yml` |
 | machine_readable_governance | `governance/*.toml` |
+| ignore_rules | `.gitignore` |
+| agent_rules | `AGENTS.md` |
+| repo_entry | `README.md` |
 | codex_repo_boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
 | copied_virtualenv | `no` |
 | copied_business_runtime | `no` |

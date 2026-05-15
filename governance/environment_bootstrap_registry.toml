@@ -34,6 +34,24 @@ decision = "document repo skill boundary only; no secret config"
 status = "repo-local README and skill created"
 
 [[surfaces]]
+surface = ".gitignore"
+source_reference = "H:/Asteria/.gitignore"
+decision = "inherit ignore-rule pattern and tighten it for Malf-Pas scratch and DB boundaries"
+status = "repo-local ignore rules created"
+
+[[surfaces]]
+surface = "AGENTS.md"
+source_reference = "H:/Asteria/AGENTS.md"
+decision = "inherit governance discipline pattern but rewrite authority set, stage truth, and repo-local checks"
+status = "repo-local agent rules created"
+
+[[surfaces]]
+surface = "README.md"
+source_reference = "H:/Asteria/README.md"
+decision = "inherit repo entry structure and reading-entry shape without copying Asteria release state"
+status = "repo-local repo entry created"
+
+[[surfaces]]
 surface = "governance/*.toml"
 source_reference = "H:/Asteria/governance"
 decision = "create placeholders for registry, gate, topology, and bootstrap decisions"

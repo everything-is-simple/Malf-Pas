@@ -13,10 +13,10 @@
 ## 2. 执行顺序
 
 1. 复核 `README.md`、重构总纲、来源裁决、主线权威图、MALF 锚点、roadmap、结论索引。
-2. 对照 `H:\Asteria` 的 `plugins`、`scripts/dev`、`scripts/governance`、`pyproject.toml`、`environment.yml`、`.gitignore`、`.codex`、`governance`。
+2. 对照 `H:\Asteria` 的 `.codex`、`.gitignore`、`AGENTS.md`、`README.md`、`plugins`、`scripts/dev`、`scripts/governance`、`pyproject.toml`、`environment.yml`、`governance`。
 3. 裁决只继承治理环境形态，不继承 `.venv`、业务 runner、正式 DB、report/temp artifacts 或 Asteria release state。
 4. 建立 Malf-Pas repo-local workflow hooks、dev doctor、governance check、环境配置和机器可读治理骨架。
-5. 更新 roadmap、AGENTS、README、结论索引，并补齐第二卡 execution 四件套。
+5. 更新 roadmap、`.gitignore`、`AGENTS.md`、`README.md`、结论索引，并补齐第二卡 execution 四件套。
 
 ## 3. 关键验证
 

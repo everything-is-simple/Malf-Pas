@@ -19,8 +19,19 @@
 | package / lint / test 配置 | 允许建立最小 Python 工具层 | `pyproject.toml` |
 | conda fallback | 允许建立可重建环境说明 | `environment.yml` |
 | ignore rules | 必须补齐缓存、DB、report、temp 忽略 | `.gitignore` |
+| agent rules | 允许继承治理纪律写法，但必须重写权威集与阶段真值 | `AGENTS.md` |
+| repo entry | 允许继承入口结构、关键路径、阅读入口写法，但不得复制 Asteria release state | `README.md` |
 | Codex repo-local 规则 | 允许文档化技能边界；不得迁入秘密 | `.codex/` |
 | machine-readable governance | 允许建立 registry / topology / bootstrap placeholders | `governance/*.toml` |
+
+本卡对你点名的四个治理面，当前已落地为：
+
+| Asteria 来源 | Malf-Pas 当前落点 |
+|---|---|
+| `H:\Asteria\.codex` | `.codex/README.md` 与 `.codex/skills/malf-pas-governance/SKILL.md` |
+| `H:\Asteria\.gitignore` | `.gitignore` |
+| `H:\Asteria\AGENTS.md` | `AGENTS.md` |
+| `H:\Asteria\README.md` | `README.md` |
 
 ## 3. 明确不迁入
 
