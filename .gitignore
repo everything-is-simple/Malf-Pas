@@ -1,20 +1,40 @@
 .DS_Store
 Thumbs.db
 
+# Python
+__pycache__/
+*.py[cod]
 .venv/
+venv/
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
-__pycache__/
-*.pyc
+.coverage
+htmlcov/
 
+# Local generated outputs
 tmp/
 temp/
 reports/
 artifacts/
 .codex-tmp/
 
+# Formal / scratch data artifacts are never repo-local.
 *.duckdb
+*.duckdb.wal
+*.duckdb.tmp
 *.db
 *.sqlite
+*.sqlite3
+*.parquet
+*.csv
+*.xlsx
+*.xls
 
+# Editor
+.vscode/
+.idea/
+
+# Agent local state
+.claude/
+.codex/config.toml

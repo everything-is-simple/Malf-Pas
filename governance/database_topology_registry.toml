@@ -1,0 +1,29 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_root = "H:/Malf-Pas-data"
+validated_root = "H:/Asteria-Validated"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+topology_status = "placeholder-only"
+released_formal_dbs = []
+retained_gaps = [
+    "formal DB topology",
+    "runner contract",
+    "historical ledger topology",
+    "daily incremental protocol",
+]
+
+[[database_placeholders]]
+ledger_role = "source_fact"
+status = "not-frozen"
+owning_future_card = "historical-ledger-topology-protocol-card"
+
+[[database_placeholders]]
+ledger_role = "structure_fact"
+status = "MALF v1.4 anchor only; no runtime DB authorized"
+owning_future_card = "malf-v1-4-immutability-anchor-card"
+
+[[database_placeholders]]
+ledger_role = "semantic_ledger"
+status = "not-frozen"
+owning_future_card = "pas-axiomatic-state-machine-card"

@@ -1,0 +1,114 @@
+from __future__ import annotations
+
+import tomllib
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Any
+
+
+@dataclass(frozen=True)
+class Finding:
+    path: Path
+    message: str
+
+
+IGNORED_PARTS = {
+    ".git",
+    ".venv",
+    "__pycache__",
+    ".pytest_cache",
+    ".mypy_cache",
+    ".ruff_cache",
+}
+
+
+def _load_toml(path: Path, findings: list[Finding]) -> dict[str, Any] | None:
+    if not path.exists():
+        findings.append(Finding(path, "required TOML file is missing"))
+        return None
+    with path.open("rb") as handle:
+        return tomllib.load(handle)
+
+
+def _project_governance(repo_root: Path, findings: list[Finding]) -> dict[str, Any]:
+    pyproject = _load_toml(repo_root / "pyproject.toml", findings)
+    if pyproject is None:
+        return {}
+    governance = pyproject.get("tool", {}).get("malf_pas", {}).get("governance", {})
+    if not governance:
+        findings.append(Finding(repo_root / "pyproject.toml", "missing tool.malf_pas.governance"))
+    return governance
+
+
+def _check_required_paths(repo_root: Path, raw_paths: list[str], findings: list[Finding]) -> None:
+    for raw_path in raw_paths:
+        path = repo_root / raw_path
+        if not path.exists():
+            findings.append(Finding(path, "required governance path is missing"))
+
+
+def _check_static_flags(repo_root: Path, governance: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected = {
+        "stage": "governance-only",
+        "formal_db_mutation": "no",
+        "broker_feasibility": "deferred",
+    }
+    for key, value in expected.items():
+        if governance.get(key) != value:
+            findings.append(Finding(repo_root / "pyproject.toml", f"{key} must be {value!r}"))
+    return findings
+
+
+def _check_forbidden_repo_artifacts(repo_root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    forbidden_suffixes = (".duckdb", ".duckdb.wal", ".duckdb.tmp", ".db", ".sqlite", ".sqlite3")
+    for path in repo_root.rglob("*"):
+        if not path.is_file() or IGNORED_PARTS.intersection(path.parts):
+            continue
+        if path.name.endswith(forbidden_suffixes):
+            findings.append(Finding(path, "formal or scratch database artifact is inside repo"))
+    for name in [".codex-tmp", "reports", "artifacts", "tmp", "temp"]:
+        path = repo_root / name
+        if path.exists():
+            findings.append(Finding(path, "generated cache/report artifact is inside repo root"))
+    return findings
+
+
+def _check_no_asteria_paths_in_plugin(repo_root: Path) -> list[Finding]:
+    findings: list[Finding] = []
+    plugin_root = repo_root / "plugins" / "malf-pas-workflow"
+    for path in plugin_root.rglob("*"):
+        if not path.is_file():
+            continue
+        text = path.read_text(encoding="utf-8")
+        if "H:/Asteria" in text or "H:\\Asteria" in text:
+            findings.append(Finding(path, "workflow plugin must not retain hard-coded Asteria paths"))
+    return findings
+
+
+def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    for raw_path in governance.get("required_registries", []):
+        registry = _load_toml(repo_root / raw_path, findings)
+        if registry is None:
+            continue
+        if registry.get("formal_db_mutation") not in {None, "no"}:
+            findings.append(Finding(repo_root / raw_path, "formal_db_mutation must remain no"))
+        if registry.get("broker_feasibility") not in {None, "deferred"}:
+            findings.append(Finding(repo_root / raw_path, "broker_feasibility must remain deferred"))
+    return findings
+
+
+def run_checks(repo_root: Path) -> list[Finding]:
+    root = repo_root.resolve()
+    findings: list[Finding] = []
+    governance = _project_governance(root, findings)
+    if governance:
+        findings.extend(_check_static_flags(root, governance))
+        _check_required_paths(root, list(governance.get("required_docs", [])), findings)
+        _check_required_paths(root, list(governance.get("required_plugin_files", [])), findings)
+        findings.extend(_check_registries(root, governance))
+    findings.extend(_check_forbidden_repo_artifacts(root))
+    findings.extend(_check_no_asteria_paths_in_plugin(root))
+    return findings

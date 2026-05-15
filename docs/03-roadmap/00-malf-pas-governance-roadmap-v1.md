@@ -27,7 +27,7 @@ no-legacy-code-migration
 | 顺序 | 卡 | 状态 | 目标 |
 |---:|---|---|---|
 | 1 | `governance-roadmap-freeze-card` | passed | 固定第一张路线图边界与命名口径 |
-| 2 | `repo-governance-environment-bootstrap-card` | planned | 从 Asteria 继承治理插件、脚本、环境与机器可读治理层的最小可重建边界 |
+| 2 | `repo-governance-environment-bootstrap-card` | passed | 从 Asteria 继承治理插件、脚本、环境与机器可读治理层的最小可重建边界 |
 | 3 | `system-mainline-module-ownership-card` | planned | 冻结 Data -> System 主线模块、语义所有权、自建/委外边界 |
 | 4 | `storage-engine-and-portability-decision-card` | planned | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
 | 5 | `historical-ledger-topology-protocol-card` | planned | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
@@ -79,6 +79,18 @@ clean ignore rules
 no copied virtualenv
 no copied business runtime
 ```
+
+本卡已落成的 repo-local 面：
+
+| 面 | 当前落点 |
+|---|---|
+| workflow hooks | `plugins/malf-pas-workflow` |
+| governance checks | `scripts/governance/check_project_governance.py` |
+| dev doctor | `scripts/dev/doctor.py` |
+| reproducible env config | `pyproject.toml` / `environment.yml` |
+| machine-readable governance skeleton | `governance/*.toml` |
+| Codex repo-local boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
+| boundary freeze doc | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` |
 
 ## 5. 系统主线与自建/委外边界
 

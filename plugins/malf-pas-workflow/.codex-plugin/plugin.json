@@ -1,0 +1,29 @@
+{
+  "name": "malf-pas-workflow",
+  "version": "0.1.0",
+  "description": "Malf-Pas governance-only workflow hooks and local checks for Codex.",
+  "author": {
+    "name": "Malf-Pas"
+  },
+  "keywords": [
+    "malf-pas",
+    "workflow",
+    "governance",
+    "hooks"
+  ],
+  "hooks": "./hooks.json",
+  "interface": {
+    "displayName": "Malf-Pas Workflow",
+    "shortDescription": "Use Malf-Pas governance hooks for repo work.",
+    "longDescription": "Adds Codex lifecycle reminders and repo-local governance checks when working in H:\\Malf-Pas.",
+    "developerName": "Malf-Pas",
+    "category": "Coding",
+    "capabilities": [
+      "Interactive"
+    ],
+    "defaultPrompt": [
+      "Follow Malf-Pas governance-only boundaries and verify repo-local authority before acting"
+    ],
+    "screenshots": []
+  }
+}

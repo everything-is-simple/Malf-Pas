@@ -1,0 +1,94 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "malf-pas"
+version = "0.1.0"
+description = "Malf-Pas governance-first reconstruction workspace."
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.10.0",
+    "pre-commit>=4.3.0",
+    "pytest>=9.0.0",
+    "ruff>=0.14.0",
+]
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/malf_pas"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "."]
+testpaths = ["tests"]
+addopts = "--import-mode=importlib --basetemp=H:/Malf-Pas-temp/pytest-tmp-default"
+cache_dir = "H:/Malf-Pas-temp/pytest-cache-default"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "scripts", "tests"]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "SIM"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+line-ending = "lf"
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+packages = ["malf_pas"]
+ignore_missing_imports = true
+warn_unused_configs = true
+warn_redundant_casts = true
+warn_unused_ignores = true
+strict_optional = true
+
+[tool.malf_pas.governance]
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+repo_roots = [
+    "H:/Malf-Pas",
+    "H:/Malf-Pas-data",
+    "H:/Asteria-Validated",
+]
+reference_roots = [
+    "H:/Asteria",
+    "G:/malf-history",
+    "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs",
+]
+formal_source_roots = ["src", "scripts", "tests", "governance", "plugins"]
+required_docs = [
+    "README.md",
+    "AGENTS.md",
+    "docs/00-governance/00-malf-pas-reconstruction-charter-v1.md",
+    "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md",
+    "docs/00-governance/02-execution-record-protocol-v1.md",
+    "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
+    "docs/01-architecture/00-mainline-authoritative-map-v1.md",
+    "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
+    "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
+    "docs/04-execution/00-conclusion-index-v1.md",
+]
+required_registries = [
+    "governance/repo_governance_registry.toml",
+    "governance/module_gate_registry.toml",
+    "governance/database_topology_registry.toml",
+    "governance/environment_bootstrap_registry.toml",
+]
+required_plugin_files = [
+    "plugins/malf-pas-workflow/.codex-plugin/plugin.json",
+    "plugins/malf-pas-workflow/hooks.json",
+    "plugins/malf-pas-workflow/scripts/malf_pas_codex_hook.ps1",
+]
+max_python_file_lines = 500
+max_script_file_lines = 240
+max_markdown_file_lines = 1200

@@ -1,0 +1,13 @@
+repos:
+  - repo: local
+    hooks:
+      - id: malf-pas-governance-check
+        name: Malf-Pas governance check
+        entry: python scripts/governance/check_project_governance.py
+        language: system
+        pass_filenames: false
+      - id: malf-pas-dev-doctor
+        name: Malf-Pas dev doctor
+        entry: python scripts/dev/doctor.py
+        language: system
+        pass_filenames: false

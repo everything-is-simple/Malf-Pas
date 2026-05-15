@@ -1,0 +1,52 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+
+[[surfaces]]
+surface = "plugins/malf-pas-workflow"
+source_reference = "H:/Asteria/plugins/asteria-workflow"
+decision = "adapt workflow shape only"
+status = "repo-local skeleton created"
+
+[[surfaces]]
+surface = "scripts/dev/doctor.py"
+source_reference = "H:/Asteria/scripts/dev/doctor.py"
+decision = "adapt environment readout only"
+status = "repo-local skeleton created"
+
+[[surfaces]]
+surface = "scripts/governance/check_project_governance.py"
+source_reference = "H:/Asteria/scripts/governance/check_project_governance.py"
+decision = "adapt governance checker only"
+status = "repo-local skeleton created"
+
+[[surfaces]]
+surface = "pyproject.toml"
+source_reference = "H:/Asteria/pyproject.toml"
+decision = "adapt tooling and governance config; no business dependencies"
+status = "repo-local skeleton created"
+
+[[surfaces]]
+surface = ".codex"
+source_reference = "H:/Asteria/.codex"
+decision = "document repo skill boundary only; no secret config"
+status = "repo-local README and skill created"
+
+[[surfaces]]
+surface = "governance/*.toml"
+source_reference = "H:/Asteria/governance"
+decision = "create placeholders for registry, gate, topology, and bootstrap decisions"
+status = "repo-local skeleton created"
+
+[[forbidden_migrations]]
+source = "H:/Asteria/.venv"
+reason = "virtual environments are local artifacts"
+
+[[forbidden_migrations]]
+source = "H:/Asteria/scripts/* business runners"
+reason = "runtime and module runners are outside first roadmap authorization"
+
+[[forbidden_migrations]]
+source = "H:/Asteria/governance module business semantics"
+reason = "module ownership and contracts are owned by later governance cards"

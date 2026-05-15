@@ -11,6 +11,7 @@
 5. `docs/01-architecture/01-malf-v1-4-anchor-position-v1.md`
 6. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
 7. `docs/04-execution/00-conclusion-index-v1.md`
+8. `governance/repo_governance_registry.toml`
 
 ## 当前权威资产
 
@@ -60,13 +61,23 @@ codebase-retrieval -> context7 -> fetch -> sequential-thinking -> codex apps
 - 没有四件套，不得宣告闭环完成。
 - blocked 卡也必须 truthful 落档，不得用 roadmap 代替结论。
 
+## repo-local 治理检查
+
+```powershell
+python scripts\dev\doctor.py
+python scripts\governance\check_project_governance.py
+python -m unittest discover -s tests -p "test_*.py"
+```
+
+`plugins/malf-pas-workflow` 是本仓库 workflow skeleton；任何 hook、脚本或技能规则都不得保留
+`H:\Asteria` 的执行路径。
+
 ## 当前阶段口径
 
 ```text
 stage = governance initialization
-live next = none
+live next = system-mainline-module-ownership-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = doc-first skeleton build
+repo status = repo governance environment bootstrap passed
 ```
-

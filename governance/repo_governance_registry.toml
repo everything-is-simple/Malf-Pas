@@ -1,0 +1,32 @@
+registry_version = "2026-05-15.v1"
+system_name = "Malf-Pas"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+local_repo = "H:/Malf-Pas"
+local_database_root = "H:/Malf-Pas-data"
+validated_root = "H:/Asteria-Validated"
+remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
+current_allowed_next_card = "system-mainline-module-ownership-card"
+conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
+
+required_authority_docs = [
+    "README.md",
+    "AGENTS.md",
+    "docs/00-governance/00-malf-pas-reconstruction-charter-v1.md",
+    "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md",
+    "docs/01-architecture/00-mainline-authoritative-map-v1.md",
+    "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
+    "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
+    "docs/04-execution/00-conclusion-index-v1.md",
+]
+
+hard_rules = [
+    "doc-first",
+    "governance-only",
+    "read-only-to-validated-assets",
+    "no-formal-db-mutation",
+    "no-broker",
+    "no-profit-claim",
+    "no-legacy-code-migration",
+]
