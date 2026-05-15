@@ -9,5 +9,5 @@ database topology
 historical ledger registries
 ```
 
-第一阶段不在此目录定义正式 runtime 合同，只保留入口位置。
-
+第一阶段不在此目录定义正式 runtime 合同。`module_ownership_registry.toml` 只冻结模块语义所有权，
+不授权 runtime、正式 DB mutation、broker 或收益证明。

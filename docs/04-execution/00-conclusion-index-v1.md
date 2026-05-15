@@ -10,9 +10,9 @@
 
 | route | run_id | status | scope | evidence entry |
 |---|---|---|---|---|
-| `governance` | `governance-roadmap-freeze-card-20260515-01` | `passed` | 首张治理路线图边界、命名口径与第一批治理卡已冻结 | `docs/04-execution/records/governance/governance-roadmap-freeze-card-20260515-01.conclusion.md` |
-| `governance` | `repo-governance-environment-bootstrap-card-20260515-01` | `passed` | 治理插件、脚本、环境与机器可读治理层最小可重建边界已冻结 | `docs/04-execution/records/governance/repo-governance-environment-bootstrap-card-20260515-01.conclusion.md` |
-| `governance` | `system-mainline-module-ownership-card` | `planned` | Data -> System 模块主线、自建/委外边界 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `governance-roadmap-freeze-card-20260515-01` | `passed` | 首张治理路线图边界、命名口径与第一批治理卡已冻结 | `docs/04-execution/records/governance/001-governance-roadmap-freeze-card-20260515-01.conclusion.md` |
+| `governance` | `repo-governance-environment-bootstrap-card-20260515-01` | `passed` | 治理插件、脚本、环境与机器可读治理层最小可重建边界已冻结 | `docs/04-execution/records/governance/002-repo-governance-environment-bootstrap-card-20260515-01.conclusion.md` |
+| `governance` | `system-mainline-module-ownership-card-20260515-01` | `passed` | Data -> System 模块主线、语义所有权、自建/委外边界已冻结 | `docs/04-execution/records/governance/003-system-mainline-module-ownership-card-20260515-01.conclusion.md` |
 | `governance` | `storage-engine-and-portability-decision-card` | `planned` | DuckDB / SQLite+Parquet / Go / Python 角色裁决 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
 | `governance` | `historical-ledger-topology-protocol-card` | `planned` | 历史大账本、子库共同键、run lineage | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
 | `governance` | `daily-incremental-and-resume-protocol-card` | `planned` | 每日增量、dirty scope、checkpoint、断点续传 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |

@@ -28,7 +28,7 @@ no-legacy-code-migration
 |---:|---|---|---|
 | 1 | `governance-roadmap-freeze-card` | passed | 固定第一张路线图边界与命名口径 |
 | 2 | `repo-governance-environment-bootstrap-card` | passed | 从 Asteria 继承治理插件、脚本、环境与机器可读治理层的最小可重建边界 |
-| 3 | `system-mainline-module-ownership-card` | planned | 冻结 Data -> System 主线模块、语义所有权、自建/委外边界 |
+| 3 | `system-mainline-module-ownership-card` | passed | 冻结 Data -> System 主线模块、语义所有权、自建/委外边界 |
 | 4 | `storage-engine-and-portability-decision-card` | planned | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
 | 5 | `historical-ledger-topology-protocol-card` | planned | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
 | 6 | `daily-incremental-and-resume-protocol-card` | planned | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
@@ -97,7 +97,7 @@ no copied business runtime
 
 ## 5. 系统主线与自建/委外边界
 
-`system-mainline-module-ownership-card` 必须把从 `Data` 到 `System` 的模块边界写清楚。
+`system-mainline-module-ownership-card-20260515-01` 已把从 `Data` 到 `System` 的模块边界冻结。
 
 | 模块 | 第一阶段裁决 | 说明 |
 |---|---|---|
@@ -111,6 +111,24 @@ no copied business runtime
 | `System Readout` | `self-owned readout` | 全链路读出、审计快照、回测汇总自建 |
 | `Pipeline` | `self-owned orchestration ledger` | 只调度、记录 run、checkpoint、manifest，不定义业务语义 |
 | 外部项目 | `adapter / engine only` | 可做 source、计算、回测、调度 adapter，不拥有业务语义 |
+
+本卡的正式冻结入口：
+
+```text
+docs/01-architecture/03-system-mainline-module-ownership-v1.md
+governance/module_ownership_registry.toml
+docs/04-execution/records/governance/003-system-mainline-module-ownership-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段主线裁决固定为：
+
+```text
+Data -> MALF v1.4 -> PAS -> Signal -> Position -> Portfolio Plan -> Trade -> System Readout
+Pipeline = orchestration ledger only
+External providers / projects = adapter or engine only
+Portfolio Plan = retained independent lightweight layer
+Runtime / formal DB / broker / profit claims = not authorized
+```
 
 ## 6. 存储引擎与便携性裁决范围
 

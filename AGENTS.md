@@ -57,6 +57,7 @@ codebase-retrieval -> context7 -> fetch -> sequential-thinking -> codex apps
 ## 执行闭环
 
 - 每张卡后续都必须具备 `card / evidence-index / record / conclusion` 四件套。
+- 四件套文件名必须使用三位 roadmap 顺序号前缀，例如 `001-<run_id>.card.md`。
 - `docs/04-execution/00-conclusion-index-v1.md` 是 repo 内结论索引入口。
 - 没有四件套，不得宣告闭环完成。
 - blocked 卡也必须 truthful 落档，不得用 roadmap 代替结论。
@@ -76,8 +77,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = system-mainline-module-ownership-card
+live next = storage-engine-and-portability-decision-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = repo governance environment bootstrap passed
+repo status = system mainline module ownership passed
 ```

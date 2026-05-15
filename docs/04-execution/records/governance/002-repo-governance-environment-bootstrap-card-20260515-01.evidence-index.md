@@ -15,7 +15,7 @@
 | 资产 | 路径 |
 |---|---|
 | report_dir | `not applicable` |
-| closeout | `docs/04-execution/records/governance/repo-governance-environment-bootstrap-card-20260515-01.conclusion.md` |
+| closeout | `docs/04-execution/records/governance/002-repo-governance-environment-bootstrap-card-20260515-01.conclusion.md` |
 | manifest | `not applicable` |
 | validated_asset | `not applicable` |
 | formal_db | `not applicable` |

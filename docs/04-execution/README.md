@@ -13,6 +13,17 @@
 
 没有这四件套，就不算 repo 内闭环完成。
 
+四件套文件名必须带三位路线图顺序号前缀：
+
+```text
+<NNN>-<run_id>.card.md
+<NNN>-<run_id>.evidence-index.md
+<NNN>-<run_id>.record.md
+<NNN>-<run_id>.conclusion.md
+```
+
+示例：`003-system-mainline-module-ownership-card-20260515-01.conclusion.md`。
+
 ## 2. 目录结构
 
 ```text
@@ -27,4 +38,3 @@ docs/04-execution/
 
 第一阶段治理卡允许 `report_dir / manifest / validated_asset / formal_db` 为 `not applicable`，
 但不允许缺失 `conclusion index registration`。
-

@@ -15,7 +15,7 @@
 | 资产 | 路径 |
 |---|---|
 | report_dir | `not applicable` |
-| closeout | `docs/04-execution/records/governance/governance-roadmap-freeze-card-20260515-01.conclusion.md` |
+| closeout | `docs/04-execution/records/governance/001-governance-roadmap-freeze-card-20260515-01.conclusion.md` |
 | manifest | `not applicable` |
 | validated_asset | `not applicable` |
 | formal_db | `not applicable` |

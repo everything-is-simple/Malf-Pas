@@ -6,8 +6,10 @@ Current status:
 
 ```text
 stage = governance-only
+module ownership = frozen
 runtime contracts = not frozen
 formal DB mutation = no
 ```
 
-Do not add business module contracts here before the owning governance card freezes the module boundary.
+The owning governance card has frozen module ownership, but formal runtime API contracts are still not
+authorized here until a later card explicitly opens that scope.

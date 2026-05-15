@@ -75,12 +75,14 @@ required_docs = [
     "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
     "docs/01-architecture/00-mainline-authoritative-map-v1.md",
     "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
+    "docs/01-architecture/03-system-mainline-module-ownership-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
 required_registries = [
     "governance/repo_governance_registry.toml",
     "governance/module_gate_registry.toml",
+    "governance/module_ownership_registry.toml",
     "governance/database_topology_registry.toml",
     "governance/environment_bootstrap_registry.toml",
 ]

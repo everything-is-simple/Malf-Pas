@@ -72,10 +72,11 @@ No broker or live-trading discussion is opened by this repo initialization.
 7. [主线权威图](docs/01-architecture/00-mainline-authoritative-map-v1.md)
 8. [MALF v1.4 锚点位置](docs/01-architecture/01-malf-v1-4-anchor-position-v1.md)
 9. [旧系统强项地图](docs/01-architecture/02-predecessor-strength-map-v1.md)
-10. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
-11. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
-12. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
-13. [执行区入口](docs/04-execution/README.md)
+10. [系统主线模块所有权](docs/01-architecture/03-system-mainline-module-ownership-v1.md)
+11. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
+12. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
+13. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
+14. [执行区入口](docs/04-execution/README.md)
 
 ## Python 环境
 

@@ -40,4 +40,4 @@
 - `docs/00-governance/00-malf-pas-reconstruction-charter-v1.md`
 - `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
 - `docs/04-execution/00-conclusion-index-v1.md`
-- `docs/04-execution/records/governance/governance-roadmap-freeze-card-20260515-01.*`
+- `docs/04-execution/records/governance/001-governance-roadmap-freeze-card-20260515-01.*`

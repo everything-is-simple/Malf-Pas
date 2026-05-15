@@ -38,11 +38,14 @@ docs/04-execution/
   templates/
   records/
     <module_or_route>/
-      <run_id>.card.md
-      <run_id>.evidence-index.md
-      <run_id>.record.md
-      <run_id>.conclusion.md
+      <NNN>-<run_id>.card.md
+      <NNN>-<run_id>.evidence-index.md
+      <NNN>-<run_id>.record.md
+      <NNN>-<run_id>.conclusion.md
 ```
+
+`NNN` 必须使用三位路线图顺序号，例如 `001-`、`002-`、`003-`。文件名前缀只表达
+roadmap 顺序，不进入 `run_id` 字段本身。
 
 ## 5. truthful 规则
 
@@ -50,4 +53,3 @@ docs/04-execution/
 - 没有 evidence-index 的 passed，不算 passed。
 - blocked 卡必须真实说明 blocked 原因，不得改写成 planned。
 - governance-only 卡不得伪装成 runtime 卡。
-

@@ -1,0 +1,93 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+ownership_status = "frozen-by-system-mainline-module-ownership-card-20260515-01"
+authority_doc = "docs/01-architecture/03-system-mainline-module-ownership-v1.md"
+
+[[modules]]
+order = 1
+module = "Data Foundation"
+semantic_owner = "source_fact_contract_owner"
+decision = "self-owned contract / adapter-fed"
+external_role = "source adapter only"
+runtime_authorized = false
+
+[[modules]]
+order = 2
+module = "MALF v1.4"
+semantic_owner = "structure_fact_owner"
+decision = "self-owned immutable authority"
+external_role = "validated asset read-only anchor"
+runtime_authorized = false
+
+[[modules]]
+order = 3
+module = "PAS"
+semantic_owner = "opportunity_interpreter"
+decision = "self-owned semantic core"
+external_role = "concept/reference input only"
+runtime_authorized = false
+
+[[modules]]
+order = 4
+module = "Signal"
+semantic_owner = "candidate_decision_ledger"
+decision = "self-owned decision ledger"
+external_role = "calculation engine may assist but cannot decide semantics"
+runtime_authorized = false
+
+[[modules]]
+order = 5
+module = "Position"
+semantic_owner = "management_semantics_owner"
+decision = "self-owned management semantics"
+external_role = "reference input only"
+runtime_authorized = false
+
+[[modules]]
+order = 6
+module = "Portfolio Plan"
+semantic_owner = "portfolio_plan_owner"
+decision = "self-owned lightweight layer"
+external_role = "none for semantic ownership"
+runtime_authorized = false
+
+[[modules]]
+order = 7
+module = "Trade"
+semantic_owner = "execution_ledger_boundary_owner"
+decision = "self-owned execution ledger boundary"
+external_role = "broker deferred"
+runtime_authorized = false
+
+[[modules]]
+order = 8
+module = "System Readout"
+semantic_owner = "readout_owner"
+decision = "self-owned readout"
+external_role = "reporting adapter may format outputs only"
+runtime_authorized = false
+
+[[modules]]
+order = 9
+module = "Pipeline"
+semantic_owner = "orchestration_ledger_owner"
+decision = "self-owned orchestration ledger"
+external_role = "scheduler adapter may assist but cannot define business semantics"
+runtime_authorized = false
+
+[[external_boundaries]]
+surface = "source providers"
+allowed_role = "source adapter"
+forbidden_role = "truth owner"
+
+[[external_boundaries]]
+surface = "open source compute engines"
+allowed_role = "engine / research adapter"
+forbidden_role = "semantic owner"
+
+[[external_boundaries]]
+surface = "historical repositories"
+allowed_role = "experience, samples, failure lessons"
+forbidden_role = "legacy code migration"
