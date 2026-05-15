@@ -15,7 +15,7 @@ historical_tradeoff_reference_root = "G:/malf-history"
 book_brainstorming_reference_root = "G:/《股市浮沉二十载》"
 pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
-current_allowed_next_card = "source-authority-and-non-migration-rule-card"
+current_allowed_next_card = "malf-v1-4-immutability-anchor-card"
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
 
 required_authority_docs = [

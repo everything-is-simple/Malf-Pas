@@ -35,7 +35,7 @@ no-legacy-code-migration
 | 5 | `historical-ledger-topology-protocol-card` | passed | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
 | 6 | `daily-incremental-and-resume-protocol-card` | passed | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
 | 7 | `backtest-window-and-holdout-protocol-card` | passed | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
-| 8 | `source-authority-and-non-migration-rule-card` | planned | 冻结来源分类与非迁移规则 |
+| 8 | `source-authority-and-non-migration-rule-card` | passed | 冻结来源分类与非迁移规则 |
 | 9 | `malf-v1-4-immutability-anchor-card` | planned | 锚定 MALF v1.4 的系统位置与不变量 |
 | 10 | `predecessor-strength-map-card` | planned | 盘点旧系统与历史资料的最出彩强项 |
 | 11 | `pas-axiomatic-state-machine-card` | planned | 冻结 PAS 最小状态机与七层语义 |
@@ -303,7 +303,41 @@ Reserved holdout segments = 2021..2023 / 2024..2026
 Runtime / formal DB / broker / profit claims = not authorized
 ```
 
-## 9. 通过标准
+## 9. 来源裁决与非迁移规则范围
+
+`source-authority-and-non-migration-rule-card-20260515-01` 已把第一阶段来源分类、
+非迁移规则、只读参考边界和 adapter 语义主权边界冻结。
+
+本卡已冻结的正式入口：
+
+```text
+docs/00-governance/01-source-authority-and-non-migration-rule-v1.md
+governance/source_authority_registry.toml
+docs/04-execution/records/governance/008-source-authority-and-non-migration-rule-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段来源裁决固定为：
+
+```text
+MALF v1.4 directory and zip = authority anchor
+Asteria_System_Design_Set_v1_0 = governance pattern reference
+MALF-system-history and G:\malf-history = historical tradeoff reference
+MALF-reference and selected historical repos = reference input only
+G:\《股市浮沉二十载》 = brainstorming source
+G:\《股市浮沉二十载》\2020.(Au)LanceBeggs = PAS concept source
+DuckDB / Arrow / Polars / vectorbt / backtesting.py / Qlib / baostock = adapter or research engine only
+AKShare = rejected for semantic ownership
+Legacy schema / runner / DuckDB surface migration = not authorized
+Runtime / formal DB / broker / profit claims = not authorized
+```
+
+第 8 卡通过后，live next 推进为：
+
+```text
+malf-v1-4-immutability-anchor-card
+```
+
+## 10. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -320,7 +354,7 @@ Runtime / formal DB / broker / profit claims = not authorized
 | `pas-axiomatic-state-machine-card` | lifecycle、七层语义、handoff 边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 10. 当前结论
+## 11. 当前结论
 
 ```text
 This roadmap is legislation-first.

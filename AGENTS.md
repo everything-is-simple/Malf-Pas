@@ -100,8 +100,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = source-authority-and-non-migration-rule-card
+live next = malf-v1-4-immutability-anchor-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = backtest window and holdout protocol passed
+repo status = source authority and non-migration rule passed
 ```

@@ -2,6 +2,8 @@
 
 日期：2026-05-15
 
+状态：frozen-by-source-authority-and-non-migration-rule-card-20260515-01
+
 ## 1. 目的
 
 本文件规定：哪些资料可以成为权威输入，哪些只能作为参考，哪些明确不能直接迁入新系统。
@@ -24,6 +26,10 @@
 | 来源 | 分类 | 裁决 |
 |---|---|---|
 | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | 结构事实、WavePosition、transition、boundary 的唯一上游锚点 |
+| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` | `authority_anchor` | MALF v1.4 锚点的归档副本；只作锚点校验和可恢复输入，不替代目录锚点 |
+| `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0` | `reference_input` | 治理范式、文档组织、门禁与 execution discipline 参考 |
+| `H:\Asteria-Validated\MALF-system-history` | `historical_tradeoff_reference` | MALF / PAS 演化历史、失败教训和 retained gap 来源；不得迁移旧语义 |
+| `H:\Asteria-Validated\MALF-reference` | `reference_input` | MALF / PAS 桥接、样本和验证线索参考 |
 | `G:\《股市浮沉二十载》` | `brainstorming_source` | 书籍参考与思路风暴的总来源；用于恢复 PAS 原始问题意识、交易语境与术语根 |
 | `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs` | `concept_source` | 提供 PAS 的 context、trigger、strength、lifecycle 与业务边界概念 |
 | `G:\malf-history` | `historical_tradeoff_reference` | 曾经做过但未完成的历史版本根；用于理解各版本、各模块为何这样实现及其权衡折衷 |
@@ -46,6 +52,8 @@
 4. 用历史策略收益、旧回测截图或经验描述替代 formal proof。
 5. 把 `G:\malf-history` 中任一未完成版本解释成当前系统的完成品。
 6. 把 `G:\《股市浮沉二十载》` 解释成 broker、仓位、订单、成交或收益承诺来源。
+7. 把 `H:\Asteria-Validated` 中的上一版 validated 资产解释成当前系统 runtime、正式 DB 或 broker proof。
+8. 把 DuckDB、Arrow、Polars、vectorbt、backtesting.py、Qlib、AKShare 或 baostock 提升为业务语义拥有者。
 
 ## 5. 允许的吸收方式
 
@@ -63,6 +71,8 @@
 3. `G:\malf-history` 是历史版本与模块取舍参考根；后续判断旧实现为何如此设计时，必须先把它视为经验输入。
 4. `G:\malf-history` 不得成为 legacy code migration、schema transplant、runner transplant 或正式 runtime 来源。
 5. 任何从书籍或历史版本吸收的内容，都必须经过本仓库文档、公理、contract 或执行四件套重新冻结。
+6. `H:\Asteria-Validated` 下的历史资产只能只读吸收 authority、范式、样本和失败教训；不得直接变成当前系统输出根。
+7. 外部 provider、开源项目和研究 engine 只能做 adapter / engine，不得取得 `MALF / PAS / Signal` 语义主权。
 
 ## 7. retained gaps
 
@@ -84,3 +94,15 @@
 | `Qlib` | 隔离研究参考 | 定义 MALF 或 PAS 语义 |
 | `baostock` | source adapter 候选 | 充当正式 truth owner |
 | `AKShare` | 参考或实验输入 | 进入正式 truth |
+
+## 9. 冻结不变量
+
+| invariant_id | invariant |
+|---|---|
+| `SOURCE-AUTHORITY-CLASSIFICATION-FROZEN` | 来源分类枚举与主要来源裁决已冻结 |
+| `MALF-V1-4-AUTHORITY-ANCHOR` | MALF v1.4 目录和归档只作为结构事实锚点，不授权下游重定义 |
+| `BOOK-ROOT-CONCEPT-ONLY` | 书籍根和 Lance Beggs 概念根只提供 PAS 概念、语境和术语来源 |
+| `HISTORY-REFERENCE-NO-MIGRATION` | 历史 repo 和历史 validated 资产只读参考，不得迁移旧 schema、runner、DuckDB 表面或业务语义 |
+| `ADAPTER-NO-SEMANTIC-OWNERSHIP` | 外部 provider、开源项目和 research engine 只能做 adapter / engine |
+| `NO-FORMAL-DB-MUTATION` | 当前阶段不得写入正式 DB 或正式数据根目录 |
+| `NO-BROKER-PROFIT-CLAIM` | 当前阶段不得输出 broker、订单、仓位、成交或收益承诺 |

@@ -135,7 +135,9 @@ def _check_no_asteria_paths_in_plugin(repo_root: Path) -> list[Finding]:
             continue
         text = path.read_text(encoding="utf-8")
         if "H:/Asteria" in text or "H:\\Asteria" in text:
-            findings.append(Finding(path, "workflow plugin must not retain hard-coded Asteria paths"))
+            findings.append(
+                Finding(path, "workflow plugin must not retain hard-coded Asteria paths")
+            )
     return findings
 
 
@@ -148,7 +150,9 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
         if registry.get("formal_db_mutation") not in {None, "no"}:
             findings.append(Finding(repo_root / raw_path, "formal_db_mutation must remain no"))
         if registry.get("broker_feasibility") not in {None, "deferred"}:
-            findings.append(Finding(repo_root / raw_path, "broker_feasibility must remain deferred"))
+            findings.append(
+                Finding(repo_root / raw_path, "broker_feasibility must remain deferred")
+            )
         if raw_path == "governance/root_directory_registry.toml":
             findings.extend(_check_root_directory_registry(repo_root / raw_path, registry))
         if raw_path == "governance/source_authority_registry.toml":
@@ -158,10 +162,43 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
 
 def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
+    if (
+        registry.get("policy_status")
+        != "frozen-by-source-authority-and-non-migration-rule-card-20260515-01"
+    ):
+        findings.append(
+            Finding(
+                path,
+                "policy_status must be frozen by "
+                "source-authority-and-non-migration-rule-card-20260515-01",
+            )
+        )
     expected_sources = {
+        "malf_v1_4_anchor": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
+            "authority_anchor",
+        ),
+        "malf_v1_4_anchor_zip": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+            "authority_anchor",
+        ),
+        "asteria_system_design_set_v1_0": (
+            "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0",
+            "reference_input",
+        ),
+        "malf_system_history": (
+            "H:/Asteria-Validated/MALF-system-history",
+            "historical_tradeoff_reference",
+        ),
+        "malf_reference": ("H:/Asteria-Validated/MALF-reference", "reference_input"),
         "lance_beggs_book_root": ("G:/《股市浮沉二十载》", "brainstorming_source"),
         "ytc_lance_beggs": ("G:/《股市浮沉二十载》/2020.(Au)LanceBeggs", "concept_source"),
         "malf_history_root": ("G:/malf-history", "historical_tradeoff_reference"),
+        "duckdb_arrow_polars": ("DuckDB / Arrow / Polars", "adapter_candidate"),
+        "vectorbt_backtesting_py": ("vectorbt / backtesting.py", "adapter_candidate"),
+        "qlib": ("Qlib", "adapter_candidate"),
+        "baostock": ("baostock", "adapter_candidate"),
+        "akshare": ("AKShare", "rejected_for_semantic_ownership"),
     }
     sources = {
         item.get("key"): item for item in registry.get("sources", []) if isinstance(item, dict)
@@ -188,6 +225,18 @@ def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> li
     for fragment in forbidden_fragments:
         if fragment not in forbidden_role:
             findings.append(Finding(path, f"malf_history_root must forbid {fragment!r}"))
+
+    semantic_owner_forbidden_keys = {
+        "duckdb_arrow_polars",
+        "vectorbt_backtesting_py",
+        "qlib",
+        "akshare",
+    }
+    for key in semantic_owner_forbidden_keys:
+        source = sources.get(key, {})
+        forbidden_role = str(source.get("forbidden_role", ""))
+        if "semantic" not in forbidden_role and "definition owner" not in forbidden_role:
+            findings.append(Finding(path, f"{key} must forbid semantic ownership"))
     return findings
 
 

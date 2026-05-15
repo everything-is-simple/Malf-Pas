@@ -3,7 +3,7 @@ stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 authority_doc = "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md"
-policy_status = "active-source-authority-and-reference-policy"
+policy_status = "frozen-by-source-authority-and-non-migration-rule-card-20260515-01"
 
 [[sources]]
 key = "malf_v1_4_anchor"
@@ -11,6 +11,34 @@ path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
 classification = "authority_anchor"
 allowed_role = "structure fact, WavePosition, transition, boundary authority anchor"
 forbidden_role = "downstream redefinition target"
+
+[[sources]]
+key = "malf_v1_4_anchor_zip"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
+classification = "authority_anchor"
+allowed_role = "recoverable archive copy for MALF v1.4 authority anchor verification"
+forbidden_role = "runtime artifact, migrated schema source, or downstream redefinition target"
+
+[[sources]]
+key = "asteria_system_design_set_v1_0"
+path = "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0"
+classification = "reference_input"
+allowed_role = "governance pattern, document structure, gate discipline, and execution record reference"
+forbidden_role = "current release state, runtime source, or semantic owner"
+
+[[sources]]
+key = "malf_system_history"
+path = "H:/Asteria-Validated/MALF-system-history"
+classification = "historical_tradeoff_reference"
+allowed_role = "MALF and PAS evolution history, retained gaps, and failure lessons"
+forbidden_role = "legacy code migration, schema transplant, runner transplant, or current semantic ownership"
+
+[[sources]]
+key = "malf_reference"
+path = "H:/Asteria-Validated/MALF-reference"
+classification = "reference_input"
+allowed_role = "MALF and PAS bridge, sample, and validation reference"
+forbidden_role = "runtime source, formal proof replacement, or semantic owner"
 
 [[sources]]
 key = "lance_beggs_book_root"
@@ -60,3 +88,38 @@ path = "G:/malf-history/lifespan-0.01"
 classification = "reference_input"
 allowed_role = "producer, runner, checkpoint, and ledger design experience"
 forbidden_role = "schema or runner transplant"
+
+[[sources]]
+key = "duckdb_arrow_polars"
+path = "DuckDB / Arrow / Polars"
+classification = "adapter_candidate"
+allowed_role = "research query, columnar processing, and data processing adapter capability"
+forbidden_role = "formal truth owner or MALF / PAS / Signal semantic owner"
+
+[[sources]]
+key = "vectorbt_backtesting_py"
+path = "vectorbt / backtesting.py"
+classification = "adapter_candidate"
+allowed_role = "research proof adapter candidate"
+forbidden_role = "formal trading ledger, broker proof, semantic owner, or candidate decision owner"
+
+[[sources]]
+key = "qlib"
+path = "Qlib"
+classification = "adapter_candidate"
+allowed_role = "isolated research reference"
+forbidden_role = "MALF or PAS semantic definition owner"
+
+[[sources]]
+key = "baostock"
+path = "baostock"
+classification = "adapter_candidate"
+allowed_role = "future source adapter candidate"
+forbidden_role = "formal truth owner"
+
+[[sources]]
+key = "akshare"
+path = "AKShare"
+classification = "rejected_for_semantic_ownership"
+allowed_role = "reference or experimental input only"
+forbidden_role = "formal truth owner or semantic owner"
