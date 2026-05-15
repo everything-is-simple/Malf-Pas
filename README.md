@@ -21,7 +21,8 @@ https://github.com/everything-is-simple/Malf-Pas
 | 路径 | 职责 |
 |---|---|
 | `H:\Malf-Pas` | 新系统代码、文档、治理入口 |
-| `H:\Malf-Pas-data` | 本地数据库根目录；后续历史大账本与子库落点，但当前阶段不得正式写入 |
+| `H:\Malf-Pas-data` | Malf-Pas 重构后当前系统本地数据库根目录；后续历史大账本与子库落点，但当前阶段不得正式写入 |
+| `H:\Asteria-data` | 上一版 Asteria 数据根；只读参考与 lineage 经验输入，不是 Malf-Pas 当前系统数据落点，也不得作为 scratch |
 | `H:\Asteria-Validated` | 已验证设计、MALF v1.4 权威资产、历史 formal 归档 |
 | `H:\Asteria` | 治理范式与文档结构参考，不是本仓库运行面 |
 | `G:\malf-history` | 历史系统经验与模块强项参考输入 |
@@ -75,10 +76,11 @@ No broker or live-trading discussion is opened by this repo initialization.
 10. [系统主线模块所有权](docs/01-architecture/03-system-mainline-module-ownership-v1.md)
 11. [存储引擎与便携性裁决](docs/01-architecture/04-storage-engine-and-portability-decision-v1.md)
 12. [历史大账本拓扑协议](docs/01-architecture/05-historical-ledger-topology-protocol-v1.md)
-13. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
-14. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
-15. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
-16. [执行区入口](docs/04-execution/README.md)
+13. [每日增量与断点续传协议](docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md)
+14. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
+15. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
+16. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
+17. [执行区入口](docs/04-execution/README.md)
 
 ## Python 环境
 

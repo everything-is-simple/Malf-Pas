@@ -81,8 +81,11 @@
 | `generated_by_run_id` | 生成 manifest 的 run |
 | `audit_status` | `pending / passed / blocked / failed` |
 
-`H:\Asteria-data` 的可吸收经验是：数据库根目录必须把 formal DB、working DB、report、validated archive 分开。
-在 `Malf-Pas` 中，`H:\Malf-Pas-data` 仍只是后续本地数据库根目录；当前不授权写入。
+`H:\Asteria-data` 是上一版 Asteria 数据根，只能作为只读参考与 lineage 经验输入；
+它不是 `Malf-Pas` 当前系统数据落点，也不得作为 scratch。
+
+在 `Malf-Pas` 中，`H:\Malf-Pas-data` 才是重构后当前系统的本地数据库根目录。
+当前阶段仍不授权写入正式 DB、不执行 schema migration、不授权 runtime build。
 
 ## 6. Run Lineage Protocol
 

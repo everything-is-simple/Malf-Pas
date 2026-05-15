@@ -3,6 +3,7 @@ stage = "governance-only"
 formal_root = "H:/Malf-Pas-data"
 validated_root = "H:/Asteria-Validated"
 read_only_reference_root = "H:/Asteria-data"
+read_only_reference_role = "previous Asteria data root; lineage experience only; not current Malf-Pas data root or scratch"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 topology_status = "frozen-by-historical-ledger-topology-protocol-card-20260515-01"
@@ -40,9 +41,8 @@ required_manifest_fields = [
 
 retained_gaps = [
     "formal DB topology implementation",
-    "daily incremental protocol",
-    "dirty scope algorithm",
-    "checkpoint and resume implementation",
+    "daily incremental implementation",
+    "checkpoint and resume runtime",
     "staging promote implementation",
     "runner contract",
 ]

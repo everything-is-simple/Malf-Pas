@@ -1,0 +1,104 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_root = "H:/Malf-Pas-data"
+read_only_reference_root = "H:/Asteria-data"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+protocol_status = "frozen-by-daily-incremental-and-resume-protocol-card-20260515-01"
+authority_doc = "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md"
+runtime_authorized = false
+schema_migration_authorized = false
+staging_promote_authorized_now = false
+
+dirty_scope_required_fields = [
+    "dirty_scope_id",
+    "ledger_role",
+    "symbol",
+    "timeframe",
+    "dirty_start_dt",
+    "dirty_end_dt",
+    "dirty_reason",
+    "source_manifest_hash",
+    "source_run_id",
+    "schema_version",
+    "rule_version",
+    "status",
+]
+
+checkpoint_required_fields = [
+    "checkpoint_key",
+    "run_id",
+    "batch_id",
+    "ledger_role",
+    "symbol",
+    "timeframe",
+    "dirty_scope_id",
+    "processed_start_dt",
+    "processed_end_dt",
+    "source_manifest_hash",
+    "source_run_id",
+    "schema_version",
+    "rule_version",
+    "status",
+    "audit_status",
+]
+
+resume_modes = [
+    "resume_strict",
+    "resume_replan",
+    "restart_from_manifest",
+    "audit_only",
+    "no_op_audited",
+]
+
+dirty_reasons = [
+    "source_changed",
+    "source_added",
+    "source_removed",
+    "rule_changed",
+    "schema_changed",
+    "lineage_gap",
+    "audit_failed",
+    "manual_review",
+]
+
+mainline_propagation = [
+    "source_fact",
+    "structure_fact",
+    "semantic_ledger",
+    "decision_ledger",
+    "management_ledger",
+    "portfolio_plan_ledger",
+    "execution_ledger",
+    "readout_ledger",
+]
+
+[[invariants]]
+id = "DAILY-INCREMENTAL-MANIFEST-FIRST"
+value = true
+description = "Daily incremental impact must be derived from source manifest and dirty scope."
+
+[[invariants]]
+id = "DIRTY-SCOPE-REPLAYS-FROM-EARLIEST-AFFECTED-DATE"
+value = true
+description = "Dirty scope must replay from the earliest affected date instead of only the dirty day."
+
+[[invariants]]
+id = "CHECKPOINT-BINDS-DIRTY-SCOPE"
+value = true
+description = "Checkpoint must bind dirty scope, manifest, schema, rule, and lineage."
+
+[[invariants]]
+id = "RESUME-CANNOT-SKIP-BLOCKED-UPSTREAM"
+value = true
+description = "Resume cannot skip blocked upstream, failed audit, or lineage gaps."
+
+[[invariants]]
+id = "STAGING-PROMOTE-REQUIRES-AUDIT-PASSED"
+value = true
+description = "Working facts can only promote after audit passed and complete lineage proof."
+
+[[invariants]]
+id = "NO-FORMAL-DB-MUTATION"
+value = true
+description = "Governance-only stage cannot write formal DB or formal data roots."

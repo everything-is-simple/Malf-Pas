@@ -62,6 +62,7 @@ repo_roots = [
 ]
 reference_roots = [
     "H:/Asteria",
+    "H:/Asteria-data",
     "G:/malf-history",
     "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs",
 ]
@@ -78,6 +79,7 @@ required_docs = [
     "docs/01-architecture/03-system-mainline-module-ownership-v1.md",
     "docs/01-architecture/04-storage-engine-and-portability-decision-v1.md",
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",
+    "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
@@ -87,6 +89,7 @@ required_registries = [
     "governance/module_ownership_registry.toml",
     "governance/storage_engine_registry.toml",
     "governance/database_topology_registry.toml",
+    "governance/daily_incremental_protocol_registry.toml",
     "governance/environment_bootstrap_registry.toml",
 ]
 required_plugin_files = [

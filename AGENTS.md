@@ -12,9 +12,10 @@
 6. `docs/01-architecture/03-system-mainline-module-ownership-v1.md`
 7. `docs/01-architecture/04-storage-engine-and-portability-decision-v1.md`
 8. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
-9. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-10. `docs/04-execution/00-conclusion-index-v1.md`
-11. `governance/repo_governance_registry.toml`
+9. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
+10. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+11. `docs/04-execution/00-conclusion-index-v1.md`
+12. `governance/repo_governance_registry.toml`
 
 ## 当前权威资产
 
@@ -81,8 +82,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = daily-incremental-and-resume-protocol-card
+live next = backtest-window-and-holdout-protocol-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = historical ledger topology protocol passed
+repo status = daily incremental and resume protocol passed
 ```

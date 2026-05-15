@@ -18,3 +18,6 @@ historical ledger registries
 
 `database_topology_registry.toml` 只冻结历史大账本、子库共同键、source manifest、run lineage 与分账本规则，
 不授权正式 DB mutation、schema migration、runtime、broker 或收益证明。
+
+`daily_incremental_protocol_registry.toml` 只冻结每日增量、dirty scope、checkpoint、resume 与
+staging promote 的治理协议，不授权正式 DB mutation、schema migration、runtime、broker 或收益证明。

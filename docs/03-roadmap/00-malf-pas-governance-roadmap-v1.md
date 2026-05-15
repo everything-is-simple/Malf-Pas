@@ -31,7 +31,7 @@ no-legacy-code-migration
 | 3 | `system-mainline-module-ownership-card` | passed | 冻结 Data -> System 主线模块、语义所有权、自建/委外边界 |
 | 4 | `storage-engine-and-portability-decision-card` | passed | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
 | 5 | `historical-ledger-topology-protocol-card` | passed | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
-| 6 | `daily-incremental-and-resume-protocol-card` | planned | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
+| 6 | `daily-incremental-and-resume-protocol-card` | passed | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
 | 7 | `backtest-window-and-holdout-protocol-card` | planned | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
 | 8 | `source-authority-and-non-migration-rule-card` | planned | 冻结来源分类与非迁移规则 |
 | 9 | `malf-v1-4-immutability-anchor-card` | planned | 锚定 MALF v1.4 的系统位置与不变量 |
@@ -211,6 +211,14 @@ governance/database_topology_registry.toml
 docs/04-execution/records/governance/005-historical-ledger-topology-protocol-card-20260515-01.conclusion.md
 ```
 
+`daily-incremental-and-resume-protocol-card-20260515-01` 已继续冻结第六卡协议：
+
+```text
+docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md
+governance/daily_incremental_protocol_registry.toml
+docs/04-execution/records/governance/006-daily-incremental-and-resume-protocol-card-20260515-01.conclusion.md
+```
+
 本卡通过后，第一阶段历史大账本拓扑固定为：
 
 ```text
@@ -221,6 +229,18 @@ Source manifest = required input ledger binding
 Run lineage = required direct-parent proof chain
 Cross-ledger consistency = lineage / manifest / audit first
 Cross-DB atomicity assumption = not allowed
+Runtime / formal DB / broker / profit claims = not authorized
+```
+
+本卡通过后，第一阶段每日增量与断点续传裁决固定为：
+
+```text
+Daily incremental = source manifest and dirty scope first
+Dirty scope = symbol / timeframe / date range / ledger role / reason / lineage bound
+Replay boundary = earliest affected date through target as-of date
+Checkpoint = batch progress only, bound to dirty scope / manifest / schema / rule / lineage
+Resume = resume_strict by default; blocked upstream, audit failed, or lineage gap cannot be skipped
+Staging promote = audit passed and lineage complete before formal promote
 Runtime / formal DB / broker / profit claims = not authorized
 ```
 

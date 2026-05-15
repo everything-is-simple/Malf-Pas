@@ -64,6 +64,7 @@ historical code transplant
 | `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0` | 治理范式参考 | 提供文档结构、门禁与 execution discipline 参考 |
 | `H:\Asteria-Validated\MALF-system-history` | 历史经验输入 | 提取 MALF/PAS 演化经验，不迁移旧语义 |
 | `H:\Asteria-Validated\MALF-reference` | 参考输入 | 提供桥接与验证线索 |
+| `H:\Asteria-data` | 上一版数据根只读参考 | 只吸收上一版 formal DB、semantic mirror、ledger topology 经验；不迁移 schema、runner 或 DuckDB 表面 |
 | `G:\malf-history` | 历史系统输入池 | 梳理各代系统最出彩模块与 retained gap |
 | `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs` | PAS 概念锚点 | 提取 context、trigger、strength、lifecycle、业务边界 |
 
