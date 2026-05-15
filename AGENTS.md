@@ -1,0 +1,72 @@
+# Malf-Pas Agent 规则
+
+本仓库是 `Malf-Pas` 新系统的治理先行工作区。
+
+修改任何文件前，每个 agent 必须先读：
+
+1. `README.md`
+2. `docs/00-governance/00-malf-pas-reconstruction-charter-v1.md`
+3. `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md`
+4. `docs/01-architecture/00-mainline-authoritative-map-v1.md`
+5. `docs/01-architecture/01-malf-v1-4-anchor-position-v1.md`
+6. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+7. `docs/04-execution/00-conclusion-index-v1.md`
+
+## 当前权威资产
+
+- `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`
+- `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip`
+- `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0`
+- `H:\Asteria-Validated\MALF-system-history`
+- `H:\Asteria-Validated\MALF-reference`
+- `G:\malf-history`
+- `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs`
+
+## 硬规则
+
+- 第一阶段是治理文档施工，不是业务模块施工。
+- `MALF v1.4` 是固定结构锚点；任何下游不得重定义 MALF。
+- 目标模块设计文档冻结前，不得把 legacy code 迁入主线。
+- 一次 construction turn 不得并行改写多个业务模块语义。
+- `PAS` 不得输出订单、仓位、成交、收益承诺或 broker 指令。
+- `Signal` 不得回写 `MALF` 或 `PAS` 定义。
+- 正式 DB mutation 当前固定为 `no`。
+- broker / live trading / paper-live 当前固定为 `deferred`。
+- `H:\Asteria-Validated` 只作 validated input，不作 scratch。
+- repo 根目录不得落缓存、临时 DB、临时报告或运行产物。
+
+## 工具顺序
+
+固定顺序为：
+
+```text
+codebase-retrieval -> context7 -> fetch -> sequential-thinking -> codex apps
+```
+
+本地 exact search 只在 repo 语义检索之后用于穷尽已知字符串。
+
+## 施工规则
+
+- doc-first：先写或修正文档，再谈实现。
+- governance-only：第一张 roadmap 期间只允许治理卡与说明文档施工。
+- read-only-to-validated-assets：可读 `H:\Asteria-Validated` 与历史资料，不得改写它们。
+- no-formal-db-mutation：不得写入 `*.duckdb`、`*.db`、`*.sqlite`。
+- no-legacy-code-migration：不得把历史 repo 代码原样搬入本仓库。
+
+## 执行闭环
+
+- 每张卡后续都必须具备 `card / evidence-index / record / conclusion` 四件套。
+- `docs/04-execution/00-conclusion-index-v1.md` 是 repo 内结论索引入口。
+- 没有四件套，不得宣告闭环完成。
+- blocked 卡也必须 truthful 落档，不得用 roadmap 代替结论。
+
+## 当前阶段口径
+
+```text
+stage = governance initialization
+live next = none
+formal DB mutation = no
+broker feasibility = deferred
+repo status = doc-first skeleton build
+```
+
