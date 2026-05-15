@@ -1,0 +1,72 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+policy_status = "active-root-directory-policy"
+authority_doc = "docs/00-governance/04-root-directory-policy-v1.md"
+
+[[current_roots]]
+key = "repo_root"
+path = "H:/Malf-Pas"
+role = "source repository, docs, governance entry"
+write_policy = "repo-tracked source only; no cache, report, temp, scratch, or database artifacts"
+
+[[current_roots]]
+key = "data_root"
+path = "H:/Malf-Pas-data"
+role = "current system data root for future historical ledger and sub-ledgers"
+write_policy = "no formal DB mutation in current stage"
+
+[[current_roots]]
+key = "backup_root"
+path = "H:/Malf-Pas-backup"
+role = "backup packages, delivery zips, recoverable snapshots"
+write_policy = "backup packages only; not historical experience or scratch"
+
+[[current_roots]]
+key = "validated_root"
+path = "H:/Malf-Pas-Validated"
+role = "Malf-Pas historical experience, authority material, experience index"
+write_policy = "historical experience only; not backup packages or runtime artifacts"
+
+[[current_roots]]
+key = "report_root"
+path = "H:/Malf-Pas-reprot"
+role = "reports, audit readouts, runtime report outputs"
+write_policy = "reports only; keep outside repo root"
+
+[[current_roots]]
+key = "temp_root"
+path = "H:/Malf-Pas-temp"
+role = "temporary outputs, caches, smoke-run scratch"
+write_policy = "temporary only; never promote as formal facts"
+
+[[previous_roots]]
+key = "previous_repo_root"
+path = "H:/Asteria"
+role = "previous system code and governance pattern reference"
+access_policy = "read-only reference"
+
+[[previous_roots]]
+key = "previous_data_root"
+path = "H:/Asteria-data"
+role = "previous Asteria data root and lineage experience input"
+access_policy = "read-only reference; not current data root or scratch"
+
+[[previous_roots]]
+key = "previous_validated_root"
+path = "H:/Asteria-Validated"
+role = "previous mixed validated, history, and backup input"
+access_policy = "read-only reference; not current backup root"
+
+[[previous_roots]]
+key = "previous_report_root"
+path = "H:/Asteria-report"
+role = "previous report root"
+access_policy = "read-only reference"
+
+[[previous_roots]]
+key = "previous_temp_root"
+path = "H:/Asteria-temp"
+role = "previous temp root"
+access_policy = "read-only reference; do not reuse for Malf-Pas"

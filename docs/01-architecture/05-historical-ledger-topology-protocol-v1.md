@@ -87,6 +87,11 @@
 在 `Malf-Pas` 中，`H:\Malf-Pas-data` 才是重构后当前系统的本地数据库根目录。
 当前阶段仍不授权写入正式 DB、不执行 schema migration、不授权 runtime build。
 
+当前系统根目录必须按 `docs/00-governance/04-root-directory-policy-v1.md` 拆分：
+`H:\Malf-Pas-data` 放未来正式数据，`H:\Malf-Pas-backup` 放备份包，
+`H:\Malf-Pas-Validated` 放本系统沉淀后的历史经验，`H:\Malf-Pas-reprot` 放报告，
+`H:\Malf-Pas-temp` 放临时产物。上一版 `H:\Asteria-*` 目录均不得作为当前 output root。
+
 ## 6. Run Lineage Protocol
 
 run lineage 是跨库一致性的第一证明链。

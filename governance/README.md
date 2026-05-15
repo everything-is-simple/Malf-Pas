@@ -8,6 +8,7 @@ storage engine registries
 API contracts
 database topology
 historical ledger registries
+root directory registries
 ```
 
 第一阶段不在此目录定义正式 runtime 合同。`module_ownership_registry.toml` 只冻结模块语义所有权，
@@ -21,3 +22,6 @@ historical ledger registries
 
 `daily_incremental_protocol_registry.toml` 只冻结每日增量、dirty scope、checkpoint、resume 与
 staging promote 的治理协议，不授权正式 DB mutation、schema migration、runtime、broker 或收益证明。
+
+`root_directory_registry.toml` 只冻结 `Malf-Pas` 六根目录和上一版 `Asteria` 只读参考边界，
+不授权创建 DB、写入正式数据根、迁移旧运行产物或复用上一版 scratch。

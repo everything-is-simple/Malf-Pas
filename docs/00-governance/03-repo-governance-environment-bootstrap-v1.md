@@ -21,6 +21,7 @@
 | ignore rules | 必须补齐缓存、DB、report、temp 忽略 | `.gitignore` |
 | agent rules | 允许继承治理纪律写法，但必须重写权威集与阶段真值 | `AGENTS.md` |
 | repo entry | 允许继承入口结构、关键路径、阅读入口写法，但不得复制 Asteria release state | `README.md` |
+| root directory policy | 必须冻结 Malf-Pas 六根目录，避免复用上一版混合目录 | `docs/00-governance/04-root-directory-policy-v1.md` / `governance/root_directory_registry.toml` |
 | Codex repo-local 规则 | 允许文档化技能边界；不得迁入秘密 | `.codex/` |
 | machine-readable governance | 允许建立 registry / topology / bootstrap placeholders | `governance/*.toml` |
 
@@ -32,6 +33,17 @@
 | `H:\Asteria\.gitignore` | `.gitignore` |
 | `H:\Asteria\AGENTS.md` | `AGENTS.md` |
 | `H:\Asteria\README.md` | `README.md` |
+
+上一版五根目录在 `Malf-Pas` 中不得原样复用。当前系统固定为六根目录：
+
+```text
+H:\Malf-Pas
+H:\Malf-Pas-data
+H:\Malf-Pas-backup
+H:\Malf-Pas-Validated
+H:\Malf-Pas-reprot
+H:\Malf-Pas-temp
+```
 
 `.venv` 的处理口径单独固定如下：
 
@@ -61,6 +73,7 @@ commit .venv into repo -> forbidden
 | `governance/module_gate_registry.toml` | 治理卡状态与下一张允许卡 |
 | `governance/database_topology_registry.toml` | formal root 与 DB mutation 禁令 |
 | `governance/environment_bootstrap_registry.toml` | 继承 / 不继承 surface 的机器可读裁决 |
+| `governance/root_directory_registry.toml` | 当前六根目录与上一版只读参考边界 |
 | `governance/module_api_contracts/README.md` | 后续模块合同目录占位；当前不冻结业务合同 |
 
 ## 5. 验证命令

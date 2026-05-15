@@ -13,12 +13,20 @@
 7. `docs/01-architecture/04-storage-engine-and-portability-decision-v1.md`
 8. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
 9. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
-10. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-11. `docs/04-execution/00-conclusion-index-v1.md`
-12. `governance/repo_governance_registry.toml`
+10. `docs/00-governance/04-root-directory-policy-v1.md`
+11. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+12. `docs/04-execution/00-conclusion-index-v1.md`
+13. `governance/repo_governance_registry.toml`
+14. `governance/root_directory_registry.toml`
 
 ## 当前权威资产
 
+- `H:\Malf-Pas`
+- `H:\Malf-Pas-data`
+- `H:\Malf-Pas-backup`
+- `H:\Malf-Pas-Validated`
+- `H:\Malf-Pas-reprot`
+- `H:\Malf-Pas-temp`
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip`
 - `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0`
@@ -37,7 +45,12 @@
 - `Signal` 不得回写 `MALF` 或 `PAS` 定义。
 - 正式 DB mutation 当前固定为 `no`。
 - broker / live trading / paper-live 当前固定为 `deferred`。
-- `H:\Asteria-Validated` 只作 validated input，不作 scratch。
+- `H:\Malf-Pas-data` 是当前系统唯一数据根；当前阶段仍不得正式写入。
+- `H:\Malf-Pas-backup` 只放备份包、交付 zip 与可恢复快照。
+- `H:\Malf-Pas-Validated` 只放本系统沉淀后的历史经验、权威材料与经验索引。
+- `H:\Malf-Pas-reprot` 只放 report、audit readout 与运行报告输出；当前目录名固定为 `reprot`。
+- `H:\Malf-Pas-temp` 只放临时产物、cache 与 smoke-run scratch。
+- 上一版 `H:\Asteria*` 目录只作只读参考，不得作为当前系统 output root 或 scratch。
 - repo 根目录不得落缓存、临时 DB、临时报告或运行产物。
 
 ## 工具顺序
@@ -54,7 +67,7 @@ codebase-retrieval -> context7 -> fetch -> sequential-thinking -> codex apps
 
 - doc-first：先写或修正文档，再谈实现。
 - governance-only：第一张 roadmap 期间只允许治理卡与说明文档施工。
-- read-only-to-validated-assets：可读 `H:\Asteria-Validated` 与历史资料，不得改写它们。
+- read-only-to-previous-assets：可读上一版 `H:\Asteria*` 与历史资料，不得改写它们。
 - no-formal-db-mutation：不得写入 `*.duckdb`、`*.db`、`*.sqlite`。
 - no-legacy-code-migration：不得把历史 repo 代码原样搬入本仓库。
 

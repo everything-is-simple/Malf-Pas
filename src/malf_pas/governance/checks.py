@@ -60,6 +60,55 @@ def _check_static_flags(repo_root: Path, governance: dict[str, Any]) -> list[Fin
     return findings
 
 
+def _check_governance_roots(repo_root: Path, governance: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    required_repo_roots = {
+        "H:/Malf-Pas",
+        "H:/Malf-Pas-data",
+        "H:/Malf-Pas-backup",
+        "H:/Malf-Pas-Validated",
+        "H:/Malf-Pas-reprot",
+        "H:/Malf-Pas-temp",
+    }
+    required_reference_roots = {
+        "H:/Asteria",
+        "H:/Asteria-data",
+        "H:/Asteria-Validated",
+        "H:/Asteria-report",
+        "H:/Asteria-temp",
+    }
+    repo_roots = set(governance.get("repo_roots", []))
+    reference_roots = set(governance.get("reference_roots", []))
+
+    missing_repo_roots = sorted(required_repo_roots - repo_roots)
+    if missing_repo_roots:
+        findings.append(
+            Finding(
+                repo_root / "pyproject.toml",
+                f"repo_roots missing current Malf-Pas roots: {missing_repo_roots}",
+            )
+        )
+
+    current_roots_in_reference = sorted(required_repo_roots & reference_roots)
+    if current_roots_in_reference:
+        findings.append(
+            Finding(
+                repo_root / "pyproject.toml",
+                f"reference_roots must not contain current roots: {current_roots_in_reference}",
+            )
+        )
+
+    missing_reference_roots = sorted(required_reference_roots - reference_roots)
+    if missing_reference_roots:
+        findings.append(
+            Finding(
+                repo_root / "pyproject.toml",
+                f"reference_roots missing previous Asteria roots: {missing_reference_roots}",
+            )
+        )
+    return findings
+
+
 def _check_forbidden_repo_artifacts(repo_root: Path) -> list[Finding]:
     findings: list[Finding] = []
     forbidden_suffixes = (".duckdb", ".duckdb.wal", ".duckdb.tmp", ".db", ".sqlite", ".sqlite3")
@@ -97,6 +146,40 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.append(Finding(repo_root / raw_path, "formal_db_mutation must remain no"))
         if registry.get("broker_feasibility") not in {None, "deferred"}:
             findings.append(Finding(repo_root / raw_path, "broker_feasibility must remain deferred"))
+        if raw_path == "governance/root_directory_registry.toml":
+            findings.extend(_check_root_directory_registry(repo_root / raw_path, registry))
+    return findings
+
+
+def _check_root_directory_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_current_roots = {
+        "repo_root": "H:/Malf-Pas",
+        "data_root": "H:/Malf-Pas-data",
+        "backup_root": "H:/Malf-Pas-backup",
+        "validated_root": "H:/Malf-Pas-Validated",
+        "report_root": "H:/Malf-Pas-reprot",
+        "temp_root": "H:/Malf-Pas-temp",
+    }
+    current_roots = {
+        item.get("key"): item.get("path")
+        for item in registry.get("current_roots", [])
+        if isinstance(item, dict)
+    }
+    for key, expected_path in expected_current_roots.items():
+        if current_roots.get(key) != expected_path:
+            findings.append(Finding(path, f"{key} must be {expected_path!r}"))
+
+    forbidden_current_paths = {
+        "H:/Asteria",
+        "H:/Asteria-data",
+        "H:/Asteria-Validated",
+        "H:/Asteria-report",
+        "H:/Asteria-temp",
+    }
+    for key, raw_path in current_roots.items():
+        if raw_path in forbidden_current_paths:
+            findings.append(Finding(path, f"{key} must not point to previous Asteria roots"))
     return findings
 
 
@@ -106,6 +189,7 @@ def run_checks(repo_root: Path) -> list[Finding]:
     governance = _project_governance(root, findings)
     if governance:
         findings.extend(_check_static_flags(root, governance))
+        findings.extend(_check_governance_roots(root, governance))
         _check_required_paths(root, list(governance.get("required_docs", [])), findings)
         _check_required_paths(root, list(governance.get("required_plugin_files", [])), findings)
         findings.extend(_check_registries(root, governance))

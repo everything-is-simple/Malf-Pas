@@ -117,6 +117,9 @@ promote 禁止：
 4. 把 `H:\Asteria-data` 当作 `Malf-Pas` 当前系统数据落点或 scratch。
 
 当前阶段仍不授权写入 `H:\Malf-Pas-data`，因此本协议只冻结未来 promote 的门禁条件。
+备份包、历史经验、报告和临时产物必须分别落在 `H:\Malf-Pas-backup`、
+`H:\Malf-Pas-Validated`、`H:\Malf-Pas-reprot`、`H:\Malf-Pas-temp`；
+上一版 `H:\Asteria-*` 目录只读参考，不得参与 staging promote。
 
 ## 7. Mainline Propagation
 

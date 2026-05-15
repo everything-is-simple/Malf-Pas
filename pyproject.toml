@@ -58,11 +58,17 @@ broker_feasibility = "deferred"
 repo_roots = [
     "H:/Malf-Pas",
     "H:/Malf-Pas-data",
-    "H:/Asteria-Validated",
+    "H:/Malf-Pas-backup",
+    "H:/Malf-Pas-Validated",
+    "H:/Malf-Pas-reprot",
+    "H:/Malf-Pas-temp",
 ]
 reference_roots = [
     "H:/Asteria",
     "H:/Asteria-data",
+    "H:/Asteria-Validated",
+    "H:/Asteria-report",
+    "H:/Asteria-temp",
     "G:/malf-history",
     "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs",
 ]
@@ -74,6 +80,7 @@ required_docs = [
     "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md",
     "docs/00-governance/02-execution-record-protocol-v1.md",
     "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
+    "docs/00-governance/04-root-directory-policy-v1.md",
     "docs/01-architecture/00-mainline-authoritative-map-v1.md",
     "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
     "docs/01-architecture/03-system-mainline-module-ownership-v1.md",
@@ -91,6 +98,7 @@ required_registries = [
     "governance/database_topology_registry.toml",
     "governance/daily_incremental_protocol_registry.toml",
     "governance/environment_bootstrap_registry.toml",
+    "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [
     "plugins/malf-pas-workflow/.codex-plugin/plugin.json",

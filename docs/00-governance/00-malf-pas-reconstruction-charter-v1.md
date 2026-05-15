@@ -10,6 +10,10 @@
 | 中文名 | `Malf-Pas 重构系统` |
 | 主落点 | `H:\Malf-Pas` |
 | 本地数据库根目录 | `H:\Malf-Pas-data` |
+| 备份包根目录 | `H:\Malf-Pas-backup` |
+| 历史经验根目录 | `H:\Malf-Pas-Validated` |
+| 报告根目录 | `H:\Malf-Pas-reprot` |
+| 临时产物根目录 | `H:\Malf-Pas-temp` |
 | 远端 | `https://github.com/everything-is-simple/Malf-Pas` |
 | 结构锚点 | `MALF v1.4` |
 | 当前重点 | `PAS axiomatic redesign` |
@@ -39,7 +43,7 @@
 ```text
 governance-only
 doc-first
-read-only-to-validated-assets
+read-only-to-previous-assets
 no-formal-db-mutation
 no-legacy-code-migration
 no-broker
@@ -65,8 +69,21 @@ historical code transplant
 | `H:\Asteria-Validated\MALF-system-history` | 历史经验输入 | 提取 MALF/PAS 演化经验，不迁移旧语义 |
 | `H:\Asteria-Validated\MALF-reference` | 参考输入 | 提供桥接与验证线索 |
 | `H:\Asteria-data` | 上一版数据根只读参考 | 只吸收上一版 formal DB、semantic mirror、ledger topology 经验；不迁移 schema、runner 或 DuckDB 表面 |
+| `H:\Asteria-report` | 上一版报告根只读参考 | 只吸收报告组织经验；不复用为当前 report root |
+| `H:\Asteria-temp` | 上一版临时根只读参考 | 只识别旧运行产物边界；不复用为当前 scratch |
 | `G:\malf-history` | 历史系统输入池 | 梳理各代系统最出彩模块与 retained gap |
 | `G:\《股市浮沉二十载》\2020.(Au)LanceBeggs` | PAS 概念锚点 | 提取 context、trigger、strength、lifecycle、业务边界 |
+
+当前 `Malf-Pas` 的 output root 必须按六根目录拆分：
+
+```text
+repo_root = H:\Malf-Pas
+data_root = H:\Malf-Pas-data
+backup_root = H:\Malf-Pas-backup
+validated_root = H:\Malf-Pas-Validated
+report_root = H:\Malf-Pas-reprot
+temp_root = H:\Malf-Pas-temp
+```
 
 ## 5. 主线裁决
 

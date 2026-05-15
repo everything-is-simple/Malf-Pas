@@ -15,7 +15,8 @@
 ```text
 governance-only
 doc-first
-read-only-to-validated-assets
+read-only-to-previous-assets
+six-root-directory-policy
 no-formal-db-mutation
 no-broker
 no-profit-claim
@@ -47,9 +48,16 @@ no-legacy-code-migration
 system_name = Malf-Pas
 local_repo = H:\Malf-Pas
 local_database_root = H:\Malf-Pas-data
+backup_root = H:\Malf-Pas-backup
+validated_root = H:\Malf-Pas-Validated
+report_root = H:\Malf-Pas-reprot
+temp_root = H:\Malf-Pas-temp
 remote_repo = https://github.com/everything-is-simple/Malf-Pas
 stage = governance-only / doc-first / no-formal-db-mutation
 ```
+
+上一版 `H:\Asteria`、`H:\Asteria-data`、`H:\Asteria-Validated`、`H:\Asteria-report`、
+`H:\Asteria-temp` 只作为只读参考，不得作为 `Malf-Pas` 当前 output root 或 scratch。
 
 `repo-governance-environment-bootstrap-card` 必须把上一版系统的治理环境经验纳入第一张路线图，
 但不能把上一版 runtime、正式 DB 或模块实现直接迁入。
@@ -94,6 +102,7 @@ no copied business runtime
 | repo entry | `README.md` |
 | Codex repo-local boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
 | boundary freeze doc | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` |
+| root directory policy | `docs/00-governance/04-root-directory-policy-v1.md` / `governance/root_directory_registry.toml` |
 
 ## 5. 系统主线与自建/委外边界
 
