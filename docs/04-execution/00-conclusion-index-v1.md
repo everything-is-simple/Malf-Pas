@@ -10,10 +10,15 @@
 
 | route | run_id | status | scope | evidence entry |
 |---|---|---|---|---|
-| `governance` | `governance-roadmap-freeze-card-20260515-01` | `initialized` | 首张治理路线图已建立 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `governance-roadmap-freeze-card-20260515-01` | `passed` | 首张治理路线图边界、命名口径与第一批治理卡已冻结 | `docs/04-execution/records/governance/governance-roadmap-freeze-card-20260515-01.conclusion.md` |
+| `governance` | `repo-governance-environment-bootstrap-card` | `planned` | 治理插件、脚本、环境与机器可读治理层准备 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `system-mainline-module-ownership-card` | `planned` | Data -> System 模块主线、自建/委外边界 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `storage-engine-and-portability-decision-card` | `planned` | DuckDB / SQLite+Parquet / Go / Python 角色裁决 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `historical-ledger-topology-protocol-card` | `planned` | 历史大账本、子库共同键、run lineage | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `daily-incremental-and-resume-protocol-card` | `planned` | 每日增量、dirty scope、checkpoint、断点续传 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `backtest-window-and-holdout-protocol-card` | `planned` | 十年回测、三年滚动、留出样本边界 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
 | `governance` | `source-authority-and-non-migration-rule-card` | `planned` | 来源裁决与非迁移规则 | `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md` |
 | `governance` | `malf-v1-4-immutability-anchor-card` | `planned` | MALF 锚点与不变量 | `docs/01-architecture/01-malf-v1-4-anchor-position-v1.md` |
 | `governance` | `predecessor-strength-map-card` | `planned` | 旧系统强项地图 | `docs/01-architecture/02-predecessor-strength-map-v1.md` |
 | `governance` | `pas-axiomatic-state-machine-card` | `planned` | PAS 状态机与语义层 | `docs/02-modules/01-pas-axiomatic-state-machine-v1.md` |
 | `governance` | `open-source-adapter-boundary-card` | `planned` | 开源 adapter 边界 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
-

@@ -9,6 +9,7 @@
 | 英文名 | `Malf-Pas` |
 | 中文名 | `Malf-Pas 重构系统` |
 | 主落点 | `H:\Malf-Pas` |
+| 本地数据库根目录 | `H:\Malf-Pas-data` |
 | 远端 | `https://github.com/everything-is-simple/Malf-Pas` |
 | 结构锚点 | `MALF v1.4` |
 | 当前重点 | `PAS axiomatic redesign` |
@@ -103,4 +104,3 @@ flowchart LR
 4. 冻结 PAS 公理化状态机最小集合。
 5. 固定开源适配器边界。
 6. 建立 execution 四件套模板和结论索引。
-
