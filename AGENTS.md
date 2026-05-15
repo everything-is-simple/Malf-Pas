@@ -13,12 +13,13 @@
 7. `docs/01-architecture/04-storage-engine-and-portability-decision-v1.md`
 8. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
 9. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
-10. `docs/00-governance/04-root-directory-policy-v1.md`
-11. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-12. `docs/04-execution/00-conclusion-index-v1.md`
-13. `governance/repo_governance_registry.toml`
-14. `governance/root_directory_registry.toml`
-15. `governance/source_authority_registry.toml`
+10. `docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md`
+11. `docs/00-governance/04-root-directory-policy-v1.md`
+12. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+13. `docs/04-execution/00-conclusion-index-v1.md`
+14. `governance/repo_governance_registry.toml`
+15. `governance/root_directory_registry.toml`
+16. `governance/source_authority_registry.toml`
 
 ## 当前权威资产
 
@@ -99,8 +100,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = backtest-window-and-holdout-protocol-card
+live next = source-authority-and-non-migration-rule-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = daily incremental and resume protocol passed
+repo status = backtest window and holdout protocol passed
 ```

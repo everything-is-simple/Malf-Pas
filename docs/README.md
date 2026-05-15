@@ -16,7 +16,7 @@ flowchart TD
 | 目录 | 职责 |
 |---|---|
 | `00-governance` | 重构总纲、来源裁决、执行纪律、repo 治理环境 bootstrap、根目录钢铁规则 |
-| `01-architecture` | 主线权威图、MALF 锚点位置、旧系统强项地图、系统主线模块所有权、存储引擎与便携性裁决、历史大账本拓扑协议、每日增量与断点续传协议 |
+| `01-architecture` | 主线权威图、MALF 锚点位置、旧系统强项地图、系统主线模块所有权、存储引擎与便携性裁决、历史大账本拓扑协议、每日增量与断点续传协议、回测窗口与留出样本协议 |
 | `02-modules` | 模块设计标准与 PAS 公理化定义 |
 | `03-roadmap` | 当前路线图与卡序列 |
 | `04-execution` | 执行四件套、模板、结论索引 |
@@ -37,6 +37,7 @@ Data and System boundaries stay self-owned.
 Storage switch requires independent proof.
 Historical ledger topology is one logical ledger with governed sub-ledgers.
 Daily incremental update is manifest-first, dirty-scope-bound, checkpointed, and audit-gated before promote.
+Backtest windows are 2012..2021 coverage with 2012..2020 selection, 2021..2023 / 2024..2026 reserved holdout, and no holdout leakage.
 Malf-Pas roots are split into repo / data / backup / validated / reprot / temp.
 Book-origin brainstorming comes from G:\《股市浮沉二十载》.
 Historical implementation tradeoff references come from G:\malf-history.

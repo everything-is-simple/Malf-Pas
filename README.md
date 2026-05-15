@@ -86,10 +86,11 @@ No broker or live-trading discussion is opened by this repo initialization.
 12. [存储引擎与便携性裁决](docs/01-architecture/04-storage-engine-and-portability-decision-v1.md)
 13. [历史大账本拓扑协议](docs/01-architecture/05-historical-ledger-topology-protocol-v1.md)
 14. [每日增量与断点续传协议](docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md)
-15. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
-16. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
-17. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
-18. [执行区入口](docs/04-execution/README.md)
+15. [回测窗口与留出样本协议](docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md)
+16. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
+17. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
+18. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
+19. [执行区入口](docs/04-execution/README.md)
 
 ## Python 环境
 

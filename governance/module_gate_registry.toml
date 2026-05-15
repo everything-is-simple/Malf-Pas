@@ -3,8 +3,8 @@ stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 active_route = "governance"
-active_card = "daily-incremental-and-resume-protocol-card-20260515-01"
-current_allowed_next_card = "backtest-window-and-holdout-protocol-card"
+active_card = "backtest-window-and-holdout-protocol-card-20260515-01"
+current_allowed_next_card = "source-authority-and-non-migration-rule-card"
 module_contract_freeze_required_before_runtime = true
 
 [[cards]]
@@ -52,6 +52,13 @@ conclusion = "docs/04-execution/records/governance/006-daily-incremental-and-res
 [[cards]]
 route = "governance"
 card_id = "backtest-window-and-holdout-protocol-card"
+run_id = "backtest-window-and-holdout-protocol-card-20260515-01"
+status = "passed"
+conclusion = "docs/04-execution/records/governance/007-backtest-window-and-holdout-protocol-card-20260515-01.conclusion.md"
+
+[[cards]]
+route = "governance"
+card_id = "source-authority-and-non-migration-rule-card"
 run_id = ""
 status = "planned"
-conclusion = "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md"
+conclusion = "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md"

@@ -24,6 +24,10 @@ source authority registries
 `daily_incremental_protocol_registry.toml` 只冻结每日增量、dirty scope、checkpoint、resume 与
 staging promote 的治理协议，不授权正式 DB mutation、schema migration、runtime、broker 或收益证明。
 
+`backtest_window_holdout_registry.toml` 只冻结 `2012..2021` 历史覆盖、`2012..2020` 选择窗口、
+三年滚动段、`2021..2023 / 2024..2026` reserved holdout 与 `2021` 用途隔离边界，
+不授权回测执行、正式 DB mutation、runtime、broker 或收益证明。
+
 `root_directory_registry.toml` 只冻结 `Malf-Pas` 六根目录和上一版 `Asteria` 只读参考边界，
 不授权创建 DB、写入正式数据根、迁移旧运行产物或复用上一版 scratch。
 

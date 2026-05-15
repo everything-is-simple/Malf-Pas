@@ -34,7 +34,7 @@ no-legacy-code-migration
 | 4 | `storage-engine-and-portability-decision-card` | passed | 裁决 DuckDB、SQLite+Parquet、Go 可携带运行与 Python 研究环境的关系 |
 | 5 | `historical-ledger-topology-protocol-card` | passed | 冻结系统大账本、子库共同键、run lineage、source manifest 与分账本规则 |
 | 6 | `daily-incremental-and-resume-protocol-card` | passed | 冻结每日增量、dirty scope、checkpoint、断点续传与 staging promote 规则 |
-| 7 | `backtest-window-and-holdout-protocol-card` | planned | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
+| 7 | `backtest-window-and-holdout-protocol-card` | passed | 冻结 2012-2021 十年历史窗口、三年滚动验证、2021-2023/2024-2026 预留样本边界 |
 | 8 | `source-authority-and-non-migration-rule-card` | planned | 冻结来源分类与非迁移规则 |
 | 9 | `malf-v1-4-immutability-anchor-card` | planned | 锚定 MALF v1.4 的系统位置与不变量 |
 | 10 | `predecessor-strength-map-card` | planned | 盘点旧系统与历史资料的最出彩强项 |
@@ -271,9 +271,17 @@ reserved rolling segment 1 = 2021..2023
 reserved rolling segment 2 = 2024..2026
 ```
 
-本卡必须特别裁决 `2021` 的边界，因为它同时是 `2012..2021` 十年历史窗口的最后一年，
-也是 `2021..2023` 第一个预留三年段的起点。边界裁决前，任何收益 proof 都不得混用训练 /
-选择窗口与预留窗口。
+本卡已裁决 `2021` 的边界：`2012..2021` 是十年历史覆盖和数据盘点口径，选择、调参和策略筛选
+默认只允许使用 `2012..2020`；`2021` 在验证 / 留出意义上归入 `2021..2023` reserved holdout。
+因此任何收益 proof 都不得混用训练 / 选择窗口与预留窗口。
+
+本卡已冻结的正式入口：
+
+```text
+docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md
+governance/backtest_window_holdout_registry.toml
+docs/04-execution/records/governance/007-backtest-window-and-holdout-protocol-card-20260515-01.conclusion.md
+```
 
 本卡通过后，后续回测必须在历史大账本上运行，并且遵守：
 
@@ -282,6 +290,17 @@ daily incremental update
 resume from checkpoint
 lineage-preserving rebuild
 no holdout leakage
+```
+
+本卡通过后，第一阶段回测窗口与留出样本裁决固定为：
+
+```text
+Historical coverage = 2012..2021
+Selection / tuning / strategy screening window = 2012..2020
+Historical rolling segments = 2012..2014 / 2015..2017 / 2018..2020
+Reserved holdout segments = 2021..2023 / 2024..2026
+2021 boundary = purpose-isolated, holdout side for validation
+Runtime / formal DB / broker / profit claims = not authorized
 ```
 
 ## 9. 通过标准

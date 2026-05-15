@@ -88,6 +88,7 @@ required_docs = [
     "docs/01-architecture/04-storage-engine-and-portability-decision-v1.md",
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",
     "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md",
+    "docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
@@ -99,6 +100,7 @@ required_registries = [
     "governance/storage_engine_registry.toml",
     "governance/database_topology_registry.toml",
     "governance/daily_incremental_protocol_registry.toml",
+    "governance/backtest_window_holdout_registry.toml",
     "governance/environment_bootstrap_registry.toml",
     "governance/root_directory_registry.toml",
 ]

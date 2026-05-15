@@ -15,7 +15,7 @@ historical_tradeoff_reference_root = "G:/malf-history"
 book_brainstorming_reference_root = "G:/《股市浮沉二十载》"
 pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
-current_allowed_next_card = "backtest-window-and-holdout-protocol-card"
+current_allowed_next_card = "source-authority-and-non-migration-rule-card"
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
 
 required_authority_docs = [
@@ -30,6 +30,7 @@ required_authority_docs = [
     "docs/01-architecture/04-storage-engine-and-portability-decision-v1.md",
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",
     "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md",
+    "docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
