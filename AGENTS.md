@@ -64,6 +64,7 @@ codebase-retrieval -> context7 -> fetch -> sequential-thinking -> codex apps
 - `docs/04-execution/00-conclusion-index-v1.md` 是 repo 内结论索引入口。
 - 没有四件套，不得宣告闭环完成。
 - blocked 卡也必须 truthful 落档，不得用 roadmap 代替结论。
+- 每张卡的 `conclusion` 必须固定包含一段 `人话版结论`，说明完成了什么、没做什么、下一步是什么。
 
 ## repo-local 治理检查
 
