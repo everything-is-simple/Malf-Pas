@@ -70,6 +70,9 @@
 - 首张治理 roadmap 收口后，后续工作必须新开独立 roadmap，不得继续占用 `none / terminal` 的路线图。
 - 每一张后续 roadmap 必须只对应一个模块数据库或一个模块账本边界。
 - 当前模块数据库未建好、未通过检查、未形成闭环前，不得开启下一张 roadmap。
+- 每张后续 roadmap 宣告 ready 前必须同时做到 `development_usable = true` 与 `daily_usable = true`；只够后续开发、不够日常使用，不得叫 ready。
+- `development_usable` 必须证明下游可稳定消费 contract、schema、manifest、lineage 和最小接口，不得靠临时 mock 或猜 schema。
+- `daily_usable` 必须证明本模块具备 ledger、daily incremental 或显式等价机制、dirty scope、checkpoint/resume、freshness/audit 闭环；若模块天然不需要 daily incremental，必须写明替代日常维护机制。
 - `Data` 之后的核心兵力优先投入 `MALF -> PAS -> Signal`。
 - 正式输入真值优先来自 `H:\tdx_offline_Data` 与 `H:\new_tdx64`。
 - `TuShare / baostock / AKShare` 不得成为正式 truth owner。

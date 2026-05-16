@@ -5,10 +5,12 @@ broker_feasibility = "deferred"
 policy_status = "adopted-after-first-governance-roadmap-terminal"
 authority_doc = "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md"
 current_repo_state = "first-governance-roadmap-terminal"
-discipline_count = 10
+discipline_count = 12
 post_terminal_separate_roadmap_required = true
 one_roadmap_one_module_db = true
 current_module_db_ready_before_next_roadmap = true
+development_usable_required_before_next_roadmap = true
+daily_usable_required_before_next_roadmap = true
 advance_only_after_checks_pass = true
 read_only_bootstrap_reference_root = "H:/Asteria-data"
 read_only_bootstrap_reference_role = "bootstrap reference and historical-ledger experience only; not current output root or scratch"
@@ -62,35 +64,45 @@ summary = "The next roadmap cannot open until the current module database is bui
 
 [[disciplines]]
 order = 4
+rule_id = "ROADMAP-READY-REQUIRES-DEVELOPMENT-USABLE"
+summary = "A module roadmap cannot be ready unless its module database is development-usable through stable contracts, schema, manifest, lineage, and minimum consumption surfaces."
+
+[[disciplines]]
+order = 5
+rule_id = "ROADMAP-READY-REQUIRES-DAILY-USABLE"
+summary = "A module roadmap cannot be ready unless its module database is daily-usable through ledger, daily incremental or an explicit equivalent, dirty scope, checkpoint/resume, freshness, and audit closure."
+
+[[disciplines]]
+order = 6
 rule_id = "POST-DATA-CORE-PRIORITY-MALF-PAS-SIGNAL"
 summary = "After Data Foundation, the system's irreplaceable core priority chain is MALF -> PAS -> Signal."
 
 [[disciplines]]
-order = 5
+order = 7
 rule_id = "LOCAL-TDX-FORMAL-TRUTH-SOURCE"
 summary = "Formal local truth sources must prioritize H:/tdx_offline_Data and H:/new_tdx64."
 
 [[disciplines]]
-order = 6
+order = 8
 rule_id = "NO-NETWORK-PROVIDER-FORMAL-TRUTH"
 summary = "TuShare, baostock, and AKShare cannot become formal truth owners."
 
 [[disciplines]]
-order = 7
+order = 9
 rule_id = "MOCK-ONLY-FOR-TESTS-AND-PROOF"
 summary = "Mock data is restricted to tests, contracts, and proof harnesses and cannot act as formal truth."
 
 [[disciplines]]
-order = 8
+order = 10
 rule_id = "ASTERIA-DATA-READ-ONLY-BOOTSTRAP-REFERENCE"
 summary = "H:/Asteria-data is read-only bootstrap reference input and historical-ledger experience only."
 
 [[disciplines]]
-order = 9
+order = 11
 rule_id = "MODULE-DBS-ARE-GOVERNED-SUB-LEDGERS"
 summary = "All future module databases are governed sub-ledgers inside one logical historical ledger."
 
 [[disciplines]]
-order = 10
+order = 12
 rule_id = "ADVANCE-ONLY-AFTER-CHECKS-PASS"
 summary = "A module roadmap can advance only after docs, registry, checks, and closure evidence pass."

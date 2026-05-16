@@ -24,6 +24,10 @@ source authority registries
 `daily_incremental_protocol_registry.toml` 只冻结每日增量、dirty scope、checkpoint、resume 与
 staging promote 的治理协议，不授权正式 DB mutation、schema migration、runtime、broker 或收益证明。
 
+`post_terminal_roadmap_discipline_registry.toml` 冻结首张治理 roadmap 收口后的后续路线纪律。
+每张模块 roadmap 宣告 ready 前，必须同时证明开发可用与日常可用；只够下游开发、不够日常增量、
+断点续传和 freshness/audit 的模块库，不得推进下一张 roadmap。
+
 `backtest_window_holdout_registry.toml` 只冻结 `2012..2021` 历史覆盖、`2012..2020` 选择窗口、
 三年滚动段、`2021..2023 / 2024..2026` reserved holdout 与 `2021` 用途隔离边界，
 不授权回测执行、正式 DB mutation、runtime、broker 或收益证明。

@@ -217,9 +217,15 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         findings.append(
             Finding(path, "required_authority_docs must include open-source adapter boundary doc")
         )
-    if "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md" not in required_docs:
+    post_terminal_discipline_doc = (
+        "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md"
+    )
+    if post_terminal_discipline_doc not in required_docs:
         findings.append(
-            Finding(path, "required_authority_docs must include post-terminal roadmap discipline doc")
+            Finding(
+                path,
+                "required_authority_docs must include post-terminal roadmap discipline doc",
+            )
         )
 
     if registry.get("formal_local_truth_roots") != ["H:/tdx_offline_Data", "H:/new_tdx64"]:
@@ -261,6 +267,8 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         "post-terminal-separate-roadmap-only",
         "one-roadmap-one-module-db",
         "current-module-db-ready-before-next-roadmap",
+        "roadmap-ready-requires-development-usable",
+        "roadmap-ready-requires-daily-usable",
         "post-data-core-priority-malf-pas-signal",
         "local-tdx-formal-truth-source",
         "no-network-provider-formal-truth",
@@ -285,12 +293,16 @@ def _check_post_terminal_roadmap_discipline_registry(
         "formal_db_mutation": "no",
         "broker_feasibility": "deferred",
         "policy_status": "adopted-after-first-governance-roadmap-terminal",
-        "authority_doc": "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md",
+        "authority_doc": (
+            "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md"
+        ),
         "current_repo_state": "first-governance-roadmap-terminal",
-        "discipline_count": 10,
+        "discipline_count": 12,
         "post_terminal_separate_roadmap_required": True,
         "one_roadmap_one_module_db": True,
         "current_module_db_ready_before_next_roadmap": True,
+        "development_usable_required_before_next_roadmap": True,
+        "daily_usable_required_before_next_roadmap": True,
         "advance_only_after_checks_pass": True,
         "read_only_bootstrap_reference_root": "H:/Asteria-data",
         "historical_ledger_rule": "one logical historical ledger with governed sub-ledgers",
@@ -339,14 +351,16 @@ def _check_post_terminal_roadmap_discipline_registry(
         )
 
     disciplines = registry.get("disciplines", [])
-    if len(disciplines) != 10:
-        findings.append(Finding(path, "disciplines must contain exactly 10 entries"))
+    if len(disciplines) != 12:
+        findings.append(Finding(path, "disciplines must contain exactly 12 entries"))
         return findings
 
     expected_rule_ids = [
         "POST-TERMINAL-SEPARATE-ROADMAP-ONLY",
         "ONE-ROADMAP-ONE-MODULE-DB",
         "CURRENT-MODULE-DB-READY-BEFORE-NEXT-ROADMAP",
+        "ROADMAP-READY-REQUIRES-DEVELOPMENT-USABLE",
+        "ROADMAP-READY-REQUIRES-DAILY-USABLE",
         "POST-DATA-CORE-PRIORITY-MALF-PAS-SIGNAL",
         "LOCAL-TDX-FORMAL-TRUTH-SOURCE",
         "NO-NETWORK-PROVIDER-FORMAL-TRUTH",
@@ -357,7 +371,9 @@ def _check_post_terminal_roadmap_discipline_registry(
     ]
     actual_rule_ids = [item.get("rule_id") for item in disciplines if isinstance(item, dict)]
     if actual_rule_ids != expected_rule_ids:
-        findings.append(Finding(path, "disciplines.rule_id sequence must match the 10 frozen rules"))
+        findings.append(
+            Finding(path, "disciplines.rule_id sequence must match the 12 frozen rules")
+        )
     return findings
 
 

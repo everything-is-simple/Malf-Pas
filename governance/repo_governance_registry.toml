@@ -73,6 +73,8 @@ hard_rules = [
     "post-terminal-separate-roadmap-only",
     "one-roadmap-one-module-db",
     "current-module-db-ready-before-next-roadmap",
+    "roadmap-ready-requires-development-usable",
+    "roadmap-ready-requires-daily-usable",
     "post-data-core-priority-malf-pas-signal",
     "local-tdx-formal-truth-source",
     "no-network-provider-formal-truth",

@@ -56,5 +56,7 @@ Historical implementation tradeoff references come from G:\malf-history.
 Open-source adapter boundary is now frozen.
 Current governance roadmap status is none / terminal.
 All post-terminal roadmaps must be one-roadmap-one-module-db and current-module-db-ready-first.
+Roadmap ready now requires both development usability and daily usability.
+Daily usability requires ledger, daily incremental or an explicit equivalent, dirty scope, checkpoint/resume, freshness, and audit closure.
 Formal local truth must prioritize H:\tdx_offline_Data and H:\new_tdx64.
 ```

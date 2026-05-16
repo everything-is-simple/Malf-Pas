@@ -42,6 +42,7 @@
 post-terminal work must open a separate roadmap
 one roadmap = one module db
 current module db ready before next roadmap
+roadmap ready = development usable + daily usable
 post-data core priority = MALF -> PAS -> Signal
 formal local truth source = H:\tdx_offline_Data + H:\new_tdx64
 ```
@@ -157,6 +158,9 @@ none / terminal
 1. 新开独立 roadmap。
 2. 每张 roadmap 只对应一个模块数据库。
 3. 当前模块数据库未 ready 前，不得开启下一张 roadmap。
-4. `Data` 之后的核心兵力优先投入 `MALF -> PAS -> Signal`。
-5. 正式输入真值优先使用 `H:\tdx_offline_Data` 与 `H:\new_tdx64`。
-6. `H:\Asteria-data` 只作 bootstrap 只读参考，不作当前系统输出根。
+4. 每张 roadmap 的 ready 必须同时满足开发可用和日常可用。
+5. 开发可用必须有稳定 contract、schema、manifest、lineage 和下游最小消费接口。
+6. 日常可用必须有 ledger、daily incremental 或显式等价机制、dirty scope、checkpoint/resume、freshness/audit 闭环。
+7. `Data` 之后的核心兵力优先投入 `MALF -> PAS -> Signal`。
+8. 正式输入真值优先使用 `H:\tdx_offline_Data` 与 `H:\new_tdx64`。
+9. `H:\Asteria-data` 只作 bootstrap 只读参考，不作当前系统输出根。
