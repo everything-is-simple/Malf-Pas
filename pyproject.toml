@@ -101,6 +101,7 @@ required_registries = [
     "governance/malf_v1_4_immutability_registry.toml",
     "governance/predecessor_strength_registry.toml",
     "governance/pas_axiomatic_state_machine_registry.toml",
+    "governance/malf_pas_revision_roadmap_registry.toml",
     "governance/module_gate_registry.toml",
     "governance/module_ownership_registry.toml",
     "governance/storage_engine_registry.toml",

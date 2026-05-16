@@ -162,7 +162,99 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
         if raw_path == "governance/predecessor_strength_registry.toml":
             findings.extend(_check_predecessor_strength_registry(repo_root / raw_path, registry))
         if raw_path == "governance/pas_axiomatic_state_machine_registry.toml":
-            findings.extend(_check_pas_axiomatic_state_machine_registry(repo_root / raw_path, registry))
+            findings.extend(
+                _check_pas_axiomatic_state_machine_registry(repo_root / raw_path, registry)
+            )
+        if raw_path == "governance/malf_pas_revision_roadmap_registry.toml":
+            findings.extend(
+                _check_malf_pas_revision_roadmap_registry(repo_root / raw_path, registry)
+            )
+    return findings
+
+
+def _check_malf_pas_revision_roadmap_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "policy_status": "frozen-by-malf-pas-revision-roadmap-card-20260516-01",
+        "authority_doc": "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
+        "run_id": "malf-pas-revision-roadmap-card-20260516-01",
+        "current_malf_v1_4_anchor": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+        ),
+        "current_pas_v1_1_design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
+        "planned_malf_v1_5_design_set": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+        ),
+        "planned_pas_v1_2_design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
+        "planned_scenario_atlas": "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0",
+        "previous_next_card": "open-source-adapter-boundary-card",
+        "next_card": "malf-v1-5-wave-behavior-snapshot-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    revision_principle = str(registry.get("revision_principle", ""))
+    for fragment in ["extend MALF structure facts", "PAS read-only"]:
+        if fragment not in revision_principle:
+            findings.append(Finding(path, f"revision_principle must include {fragment!r}"))
+
+    planned_cards = {
+        item.get("card_id"): item
+        for item in registry.get("planned_cards", [])
+        if isinstance(item, dict)
+    }
+    expected_cards = {
+        "malf-v1-5-wave-behavior-snapshot-card": (
+            13,
+            "MALF_Three_Part_Design_Set_v1_5",
+            "wave_behavior_snapshot",
+        ),
+        "pas-v1-2-strength-weakness-matrix-card": (
+            14,
+            "PAS__Three_Part_Design_Set_v1_2",
+            "strength_weakness_matrix",
+        ),
+        "malf-pas-scenario-atlas-card": (15, "MALF_PAS_Scenario_Atlas_v1_0", "diagrams"),
+        "open-source-adapter-boundary-card": (16, "open-source adapter boundary", "adapters"),
+    }
+    for card_id, (order, deliverable_fragment, purpose_fragment) in expected_cards.items():
+        card = planned_cards.get(card_id)
+        if card is None:
+            findings.append(Finding(path, f"{card_id} must be registered"))
+            continue
+        if card.get("order") != order:
+            findings.append(Finding(path, f"{card_id} order must be {order}"))
+        if deliverable_fragment not in str(card.get("deliverable", "")):
+            findings.append(
+                Finding(path, f"{card_id} deliverable must include {deliverable_fragment!r}")
+            )
+        if purpose_fragment not in str(card.get("purpose", "")):
+            findings.append(Finding(path, f"{card_id} purpose must include {purpose_fragment!r}"))
+        forbidden_scope = str(card.get("forbidden_scope", ""))
+        for fragment in ["broker", "profit"]:
+            if fragment not in forbidden_scope:
+                findings.append(Finding(path, f"{card_id} must forbid {fragment!r}"))
+
+    invariants = registry.get("invariants", {})
+    required_invariants = {
+        "malf_v1_4_remains_predecessor_authority",
+        "pas_v1_1_remains_predecessor_authority",
+        "malf_v1_5_must_be_new_directory",
+        "pas_v1_2_must_be_new_directory",
+        "pas_must_not_read_pricebar",
+        "pas_must_not_rewrite_malf",
+        "runtime_not_authorized",
+        "formal_db_mutation_not_authorized",
+        "broker_not_authorized",
+        "profit_claim_not_authorized",
+    }
+    for key in sorted(required_invariants):
+        if invariants.get(key) is not True:
+            findings.append(Finding(path, f"{key} invariant must be true"))
+
     return findings
 
 
@@ -208,7 +300,9 @@ def _check_pas_axiomatic_state_machine_registry(
         "Signal",
     ]
     if registry.get("semantic_chain") != expected_chain:
-        findings.append(Finding(path, "semantic_chain must remain MALF WavePosition -> PAS -> Signal"))
+        findings.append(
+            Finding(path, "semantic_chain must remain MALF WavePosition -> PAS -> Signal")
+        )
 
     expected_lifecycle_states = {
         "observing",

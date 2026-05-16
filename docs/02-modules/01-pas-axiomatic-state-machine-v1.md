@@ -143,3 +143,16 @@ governance/pas_axiomatic_state_machine_registry.toml
 3. PAS 输出的是候选和理由，不是交易承诺。
 4. 没有 MALF lineage，不得形成 formal PAS candidate。
 5. 同输入、同 MALF rule version、同 PAS rule version 必须可重放一致。
+
+## 11. 后续修订路线
+
+第 12 卡已裁决：PAS v1.1 仍是当前 predecessor authority；如果要把
+“跟随强势、拒绝弱势”写成更细的可审计规则，下一步必须先由 MALF 新建 v1.5 设计集，
+发布 `wave_behavior_snapshot`，再由 PAS 新建 v1.2 设计集消费该 MALF 输出。
+
+```text
+MALF v1.5 planned output = WavePosition + wave_behavior_snapshot
+PAS v1.2 planned input = MALF outputs only
+PAS v1.2 planned rule = strength_weakness_matrix
+PAS still does not read PriceBar or rewrite MALF
+```

@@ -31,6 +31,9 @@
 - `H:\Malf-Pas-temp`
 - `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4`
 - `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1`
+- `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5`（planned successor design set；尚未施工）
+- `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2`（planned successor design set；尚未施工）
+- `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0`（planned sandbox/chart atlas；尚未施工）
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`（predecessor/original reference）
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip`（predecessor/original archive）
 - `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0`
@@ -102,8 +105,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = open-source-adapter-boundary-card
+live next = malf-v1-5-wave-behavior-snapshot-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = PAS v1.1 design set passed
+repo status = MALF+PAS revision roadmap passed
 ```

@@ -7,7 +7,7 @@ flowchart TD
     A[Reconstruction Charter] --> B[Authority Rules]
     B --> C[Mainline Map]
     C --> D[PAS v1.1 Design Set]
-    D --> E[Governance Roadmap]
+    D --> E[MALF+PAS Revision Roadmap]
     E --> F[Execution Records]
 ```
 
@@ -35,6 +35,9 @@ H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4 (predecessor/original refer
 MALF defines structure facts.
 PAS interprets opportunity.
 PAS v1.1 starts from MALF WavePosition, identifies strength / weakness, rejects weakness, and joins strength.
+MALF v1.5 is planned to add wave_behavior_snapshot as MALF-owned structure behavior facts.
+PAS v1.2 is planned to add strength_weakness_matrix from MALF outputs, without PriceBar reinterpretation.
+MALF+PAS scenario atlas is planned for diagrams and sandbox cases, not alpha proof.
 Signal decides candidate acceptance.
 Data and System boundaries stay self-owned.
 Storage switch requires independent proof.

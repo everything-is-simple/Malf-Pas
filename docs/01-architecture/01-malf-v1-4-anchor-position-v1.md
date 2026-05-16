@@ -21,7 +21,7 @@ reference，用来证明来源、追溯和对照。
 
 | 规则 | 裁决 |
 |---|---|
-| MALF 是否继续演化 | 本仓库第一阶段不演化 |
+| MALF 是否继续演化 | v1.4 原目录不改写；第 13 卡允许新建 v1.5 successor design set |
 | MALF 是否可被 PAS 重写 | 否 |
 | MALF 是否可被 Signal / Position / Trade 重写 | 否 |
 | MALF 是否可被外部 adapter 定义 | 否 |
@@ -82,3 +82,11 @@ predecessor-strength-map-card
 ```text
 H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1
 ```
+
+第 12 卡进一步裁决：如果 MALF 需要补足 PAS 强弱识别所需的结构行为事实，必须新建：
+
+```text
+H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5
+```
+
+v1.5 只能作为 successor design set；不得回写、覆盖或伪装成 v1.4 原锚点。

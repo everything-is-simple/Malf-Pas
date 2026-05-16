@@ -24,7 +24,7 @@ no-profit-claim
 no-legacy-code-migration
 ```
 
-## 3. 十二张治理卡
+## 3. 十六张治理卡
 
 | 顺序 | 卡 | 状态 | 目标 |
 |---:|---|---|---|
@@ -39,7 +39,11 @@ no-legacy-code-migration
 | 9 | `malf-v1-4-immutability-anchor-card` | passed | 锚定 MALF v1.4 的系统位置与不变量 |
 | 10 | `predecessor-strength-map-card` | passed | 盘点旧系统与历史资料的最出彩强项 |
 | 11 | `pas-axiomatic-state-machine-card` | passed | 冻结 PAS v1.1 三件套正式设计集 |
-| 12 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
+| 12 | `malf-pas-revision-roadmap-card` | passed | 修订 MALF+PAS 后续路线与版本升级边界 |
+| 13 | `malf-v1-5-wave-behavior-snapshot-card` | planned | 新建 MALF v1.5，补足波内行为结构事实 |
+| 14 | `pas-v1-2-strength-weakness-matrix-card` | planned | 新建 PAS v1.2，冻结强弱识别矩阵 |
+| 15 | `malf-pas-scenario-atlas-card` | planned | 建立 MALF+PAS 沙盘模拟与图解案例集 |
+| 16 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
 
 ## 4. 治理环境准备范围
 
@@ -432,10 +436,42 @@ Runtime / formal DB / broker / profit claims = not authorized
 第 11 卡通过后，live next 推进为：
 
 ```text
-open-source-adapter-boundary-card
+malf-pas-revision-roadmap-card
 ```
 
-## 13. 通过标准
+## 13. MALF+PAS 修订路线范围
+
+`malf-pas-revision-roadmap-card-20260516-01` 已把原第 12 卡
+`open-source-adapter-boundary-card` 后移，并新增 MALF+PAS 细节打磨路线。
+
+本卡只记录 roadmap 与治理入口，不直接创建 MALF v1.5、PAS v1.2 或场景图谱正文。
+
+本卡已冻结的正式入口：
+
+```text
+docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md
+governance/malf_pas_revision_roadmap_registry.toml
+docs/04-execution/records/governance/012-malf-pas-revision-roadmap-card-20260516-01.conclusion.md
+```
+
+本卡通过后，后续路线固定为：
+
+```text
+MALF v1.4 / PAS v1.1 = predecessor authority references
+MALF v1.5 = planned successor design set for wave_behavior_snapshot
+PAS v1.2 = planned successor design set for strength_weakness_matrix
+Scenario Atlas v1.0 = planned sandbox and chart-view companion asset
+Open-source adapter boundary = deferred to card 16
+Runtime / formal DB / broker / profit claims = not authorized
+```
+
+第 12 卡通过后，live next 推进为：
+
+```text
+malf-v1-5-wave-behavior-snapshot-card
+```
+
+## 14. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -450,11 +486,16 @@ open-source-adapter-boundary-card
 | `malf-v1-4-immutability-anchor-card` | MALF 锚点与不变量列明 |
 | `predecessor-strength-map-card` | 每个主要来源都有可吸收强项与禁止迁移说明 |
 | `pas-axiomatic-state-machine-card` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service、handoff 边界冻结 |
+| `malf-pas-revision-roadmap-card` | MALF v1.5、PAS v1.2、场景图谱与 adapter 后移路线冻结 |
+| `malf-v1-5-wave-behavior-snapshot-card` | MALF v1.5 新目录、`wave_behavior_snapshot` 字段、lineage 与禁止越界边界冻结 |
+| `pas-v1-2-strength-weakness-matrix-card` | PAS v1.2 新目录、`strength_weakness_matrix`、强弱证据与 MALF-only 输入边界冻结 |
+| `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟、图解案例与无收益证明边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 14. 当前结论
+## 15. 当前结论
 
 ```text
 This roadmap is legislation-first.
 It does not authorize runtime, DB, broker, or strategy claims.
+Current live next is malf-v1-5-wave-behavior-snapshot-card.
 ```

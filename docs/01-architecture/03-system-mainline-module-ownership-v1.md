@@ -93,6 +93,10 @@ Data Foundation
 | `daily-incremental-and-resume-protocol-card` | 每日增量、dirty scope、checkpoint、resume、staging promote |
 | `backtest-window-and-holdout-protocol-card` | 2012..2021、三年滚动、留出样本边界 |
 | `pas-axiomatic-state-machine-card` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service |
+| `malf-pas-revision-roadmap-card` | MALF v1.5、PAS v1.2、场景图谱与 adapter 后移路线 |
+| `malf-v1-5-wave-behavior-snapshot-card` | MALF-owned `wave_behavior_snapshot` 结构行为事实 |
+| `pas-v1-2-strength-weakness-matrix-card` | PAS `strength_weakness_matrix` 与强弱证据规则 |
+| `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟与图解案例 |
 | `open-source-adapter-boundary-card` | 开源项目逐项 adapter 边界 |
 
 ## 8. 冻结结论

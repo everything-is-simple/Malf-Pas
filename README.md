@@ -1,6 +1,6 @@
 # Malf-Pas
 
-**Malf-Pas** 是一个以 `MALF v1.4` 为结构锚点、以 `PAS` 为机会解释层、以 `Signal` 为候选裁决层的新一代治理先行研究系统。
+**Malf-Pas** 是一个以 `MALF v1.4` 为当前结构锚点、以 `PAS` 为机会解释层、以 `Signal` 为候选裁决层的新一代治理先行研究系统。
 
 内部核心分工：
 
@@ -66,10 +66,14 @@ G:\《股市浮沉二十载》\2020.(Au)LanceBeggs
 当前裁决：
 
 ```text
-MALF v1.4 is immutable.
-PAS v1.1 design set is frozen from MALF WavePosition.
+MALF v1.4 is the current predecessor authority anchor.
+PAS v1.1 design set is the current predecessor PAS authority.
+MALF v1.5 is planned as a new design set for wave_behavior_snapshot.
+PAS v1.2 is planned as a new design set for strength_weakness_matrix.
+MALF_PAS_Scenario_Atlas_v1_0 is planned for sandbox charts and case analysis.
 No formal DB mutation is authorized.
 No broker or live-trading discussion is opened by this repo initialization.
+Current live next is malf-v1-5-wave-behavior-snapshot-card.
 ```
 
 ## 阅读入口

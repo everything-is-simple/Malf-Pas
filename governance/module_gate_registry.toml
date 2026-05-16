@@ -3,8 +3,8 @@ stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 active_route = "governance"
-active_card = "pas-axiomatic-state-machine-card-20260515-01"
-current_allowed_next_card = "open-source-adapter-boundary-card"
+active_card = "malf-pas-revision-roadmap-card-20260516-01"
+current_allowed_next_card = "malf-v1-5-wave-behavior-snapshot-card"
 module_contract_freeze_required_before_runtime = true
 
 [[cards]]
@@ -83,3 +83,10 @@ card_id = "pas-axiomatic-state-machine-card"
 run_id = "pas-axiomatic-state-machine-card-20260515-01"
 status = "passed"
 conclusion = "docs/04-execution/records/governance/011-pas-axiomatic-state-machine-card-20260515-01.conclusion.md"
+
+[[cards]]
+route = "governance"
+card_id = "malf-pas-revision-roadmap-card"
+run_id = "malf-pas-revision-roadmap-card-20260516-01"
+status = "passed"
+conclusion = "docs/04-execution/records/governance/012-malf-pas-revision-roadmap-card-20260516-01.conclusion.md"

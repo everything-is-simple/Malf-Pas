@@ -1,0 +1,62 @@
+registry_version = "2026-05-16.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md"
+policy_status = "frozen-by-malf-pas-revision-roadmap-card-20260516-01"
+run_id = "malf-pas-revision-roadmap-card-20260516-01"
+current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+current_pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+planned_malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+planned_pas_v1_2_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2"
+planned_scenario_atlas = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0"
+previous_next_card = "open-source-adapter-boundary-card"
+next_card = "malf-v1-5-wave-behavior-snapshot-card"
+
+revision_principle = "extend MALF structure facts; keep PAS read-only to MALF outputs"
+alpha_boundary = "alpha remains a testable hypothesis, not a design-set conclusion"
+
+[[planned_cards]]
+order = 13
+card_id = "malf-v1-5-wave-behavior-snapshot-card"
+status = "planned"
+deliverable = "MALF_Three_Part_Design_Set_v1_5"
+purpose = "publish wave_behavior_snapshot as MALF-owned structure behavior facts"
+forbidden_scope = "runtime, formal DB mutation, broker, order, position, fill, profit proof"
+
+[[planned_cards]]
+order = 14
+card_id = "pas-v1-2-strength-weakness-matrix-card"
+status = "planned"
+deliverable = "PAS__Three_Part_Design_Set_v1_2"
+purpose = "consume WavePosition plus wave_behavior_snapshot to freeze strength_weakness_matrix"
+forbidden_scope = "PriceBar reinterpretation, MALF rewrite, runtime, broker, order, position, fill, profit proof"
+
+[[planned_cards]]
+order = 15
+card_id = "malf-pas-scenario-atlas-card"
+status = "planned"
+deliverable = "MALF_PAS_Scenario_Atlas_v1_0"
+purpose = "sandbox MALF+PAS cases with diagrams and no hindsight proof claims"
+forbidden_scope = "strategy proof, formal backtest, broker, order, position, fill, profit proof"
+
+[[planned_cards]]
+order = 16
+card_id = "open-source-adapter-boundary-card"
+status = "planned"
+deliverable = "open-source adapter boundary"
+purpose = "freeze external projects as adapters or engines only"
+forbidden_scope = "semantic ownership by external projects, broker instruction, order owner, position owner, fill owner, or profit promise"
+
+[invariants]
+malf_v1_4_remains_predecessor_authority = true
+pas_v1_1_remains_predecessor_authority = true
+malf_v1_5_must_be_new_directory = true
+pas_v1_2_must_be_new_directory = true
+pas_must_not_read_pricebar = true
+pas_must_not_rewrite_malf = true
+signal_not_opened_by_this_card = true
+runtime_not_authorized = true
+formal_db_mutation_not_authorized = true
+broker_not_authorized = true
+profit_claim_not_authorized = true

@@ -21,4 +21,8 @@
 | `governance` | `malf-v1-4-immutability-anchor-card-20260515-01` | `passed` | MALF v1.4 锚点目录、归档、MANIFEST、系统位置与不可重定义不变量已冻结 | `docs/04-execution/records/governance/009-malf-v1-4-immutability-anchor-card-20260515-01.conclusion.md` |
 | `governance` | `predecessor-strength-map-card-20260515-01` | `passed` | 旧系统与历史资料强项地图、禁止迁移边界与后续使用边界已冻结 | `docs/04-execution/records/governance/010-predecessor-strength-map-card-20260515-01.conclusion.md` |
 | `governance` | `pas-axiomatic-state-machine-card-20260515-01` | `passed` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service 与 Signal handoff 边界已冻结 | `docs/04-execution/records/governance/011-pas-axiomatic-state-machine-card-20260515-01.conclusion.md` |
-| `governance` | `open-source-adapter-boundary-card` | `planned` | 开源 adapter 边界 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `malf-pas-revision-roadmap-card-20260516-01` | `passed` | MALF v1.5、PAS v1.2、场景图谱与 adapter 后移路线已冻结 | `docs/04-execution/records/governance/012-malf-pas-revision-roadmap-card-20260516-01.conclusion.md` |
+| `governance` | `malf-v1-5-wave-behavior-snapshot-card` | `planned` | 新建 MALF v1.5，补足 `wave_behavior_snapshot` 结构行为事实 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `pas-v1-2-strength-weakness-matrix-card` | `planned` | 新建 PAS v1.2，冻结 `strength_weakness_matrix` 与强弱证据规则 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `malf-pas-scenario-atlas-card` | `planned` | 建立 MALF+PAS 沙盘模拟与图解案例集 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `open-source-adapter-boundary-card` | `planned` | 开源 adapter 边界，已后移到第 16 卡 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
