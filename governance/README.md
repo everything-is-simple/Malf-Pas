@@ -1,5 +1,15 @@
 # Malf-Pas 机器可读治理层
 
+## Normative registry terms
+
+| registry | role |
+|---|---|
+| `environment_bootstrap_registry.toml` | freezes repo-local workflow skeleton, hook, script, virtualenv, and governance-environment bootstrap boundary |
+| `repo_governance_registry.toml` | freezes repo-wide stage, hard rules, required docs, required plugin files, and current governance-roadmap state |
+| `root_directory_registry.toml` | freezes the six current roots plus previous/external read-only root boundaries |
+| `source_authority_registry.toml` | freezes authority, predecessor, successor, companion, reference, and adapter-source roles plus non-migration boundaries |
+| `post_terminal_roadmap_discipline_registry.toml` | freezes post-terminal roadmap discipline, including development usable and daily usable ready gates |
+
 本目录预留给后续 machine-readable governance artifacts，例如：
 
 ```text

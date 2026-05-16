@@ -27,7 +27,7 @@ write_policy = "backup packages only; not historical experience or scratch"
 key = "validated_root"
 path = "H:/Malf-Pas-Validated"
 role = "Malf-Pas historical experience, authority material, experience index"
-write_policy = "historical experience only; not backup packages or runtime artifacts"
+write_policy = "historical experience and authority material only; authority zip copies may stay alongside design-set directories; recoverable snapshots belong in backup_root; no runtime artifacts"
 
 [[current_roots]]
 key = "report_root"

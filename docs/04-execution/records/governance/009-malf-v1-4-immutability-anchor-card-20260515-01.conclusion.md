@@ -13,7 +13,8 @@
 ## 2. 人话版结论
 
 这张卡把 MALF v1.4 在新系统里的位置钉住了：它就是结构事实锚点，目录是主锚点，
-zip 是可恢复归档副本，`MANIFEST.json` 只证明包边界，不证明运行结果。
+validated 根里的 zip 是随目录保留的 authority zip 副本，backup 根里的 snapshot 才是可恢复归档包；
+`MANIFEST.json` 只证明包边界，不证明运行结果。
 
 这张卡没有重写 MALF，没有创建新 schema，没有跑 runtime，没有写正式 DB，也没有打开 broker、
 仓位、订单、成交或收益证明。下一步不是继续改 MALF，而是进入第 10 卡，盘点旧系统和历史资料里
@@ -24,8 +25,10 @@ zip 是可恢复归档副本，`MANIFEST.json` 只证明包边界，不证明运
 | 项 | 影响 |
 |---|---|
 | live next | `predecessor-strength-map-card` |
-| MALF v1.4 anchor directory | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4 (read-only authority anchor)` |
-| MALF v1.4 anchor zip | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip (read-only recoverable archive copy)` |
+| MALF v1.4 anchor directory | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4 (current authority anchor)` |
+| MALF v1.4 current anchor zip | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4.zip (authority zip copy; SHA256 05B0C99170AAE5C1ECA36FC5981829CE397E721F93A5095E32586672D23BBFC7)` |
+| MALF v1.4 backup snapshot | `H:\Malf-Pas-backup\MALF_Three_Part_Design_Set_v1_4-snapshot-20260516-192716.zip (recoverable snapshot; SHA256 95C2613FCAA29AB81BD2C5C30A8E7323D22D098357CE210324325BA31F84209B)` |
+| MALF v1.4 predecessor reference | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4 (read-only predecessor/original reference)` |
 | MALF v1.4 MANIFEST | `package boundary evidence, not runtime proof` |
 | downstream MALF redefinition | `not authorized` |
 | adapter MALF semantic ownership | `not authorized` |

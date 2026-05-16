@@ -39,8 +39,8 @@
 - `H:\Malf-Pas-Validated`
 - `H:\Malf-Pas-reprot`
 - `H:\Malf-Pas-temp`
-- `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4`
-- `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1`
+- `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4`（current authority anchor）
+- `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1`（current PAS predecessor authority）
 - `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5`（successor authority design set；已由第13卡冻结）
 - `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2`（successor authority design set；已由第14卡冻结）
 - `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0`（frozen companion atlas；已由第15卡冻结）

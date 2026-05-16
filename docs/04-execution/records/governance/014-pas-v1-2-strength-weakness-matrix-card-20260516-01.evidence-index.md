@@ -17,6 +17,9 @@
 | authority_doc | `docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md` |
 | validated_design_set | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2` |
 | design_manifest | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2\MANIFEST.json` |
+| backup_snapshot_manifest | `H:\Malf-Pas-backup\PAS__Three_Part_Design_Set_v1_2-snapshot-20260516-151211.manifest.json` |
+| validated_assets_batch_manifest | `H:\Malf-Pas-backup\validated-core-algorithm-assets-batch-20260516-151211.manifest.json` |
+| standalone_zip_manifest | `H:\Malf-Pas-backup\PAS__Three_Part_Design_Set_v1_2.zip.manifest.json` |
 | machine_readable_registry | `governance/pas_v1_2_strength_weakness_matrix_registry.toml` |
 | current_malf_anchor | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` |
 | current_malf_v1_5 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` |

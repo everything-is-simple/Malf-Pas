@@ -1274,6 +1274,9 @@ def _check_malf_v1_4_immutability_registry(
         "anchor_manifest": (
             "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
         ),
+        "current_anchor_zip": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
+        ),
         "predecessor_original_directory": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
         ),
@@ -1334,6 +1337,10 @@ def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> li
             "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
             "authority_anchor",
         ),
+        "malf_v1_4_anchor_zip": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+            "authority_anchor_zip_copy",
+        ),
         "malf_v1_4_predecessor_original": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
             "authority_anchor",
@@ -1346,17 +1353,33 @@ def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> li
             "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
             "authority_anchor",
         ),
+        "pas_v1_1_design_set_zip": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1.zip",
+            "authority_anchor_zip_copy",
+        ),
         "malf_v1_5_design_set": (
             "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5",
             "successor_authority_definition",
+        ),
+        "malf_v1_5_design_set_zip": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5.zip",
+            "successor_authority_zip_copy",
         ),
         "pas_v1_2_design_set": (
             "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
             "successor_authority_definition",
         ),
+        "pas_v1_2_design_set_zip": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2.zip",
+            "successor_authority_zip_copy",
+        ),
         "malf_pas_scenario_atlas": (
             "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0",
             "companion_authority_asset",
+        ),
+        "malf_pas_scenario_atlas_zip": (
+            "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0.zip",
+            "companion_authority_zip_copy",
         ),
         "asteria_system_design_set_v1_0": (
             "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0",

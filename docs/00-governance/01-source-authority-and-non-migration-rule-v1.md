@@ -29,10 +29,15 @@
 | 来源 | 分类 | 裁决 |
 |---|---|---|
 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | 当前系统结构事实、WavePosition、transition、boundary 的唯一上游锚点 |
+| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4.zip` | `authority_anchor_zip_copy` | 随当前 anchor 目录保留的 authority zip 副本；可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` | `authority_anchor` | 当前 PAS v1.1 Core / Lifecycle / Service 权威设计集 |
+| `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1.zip` | `authority_anchor_zip_copy` | 随 PAS v1.1 目录保留的 authority zip 副本；可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` | `successor_authority_definition` | 第 13 卡已冻结；用于补足 `wave_behavior_snapshot`，不改写 v1.4 原目录 |
+| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5.zip` | `successor_authority_zip_copy` | 随 MALF v1.5 目录保留的 authority zip 副本；可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2` | `successor_authority_definition` | 第 14 卡已冻结；用于发布 `strength_weakness_matrix`，不改写 v1.1 原目录 |
+| `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2.zip` | `successor_authority_zip_copy` | 随 PAS v1.2 目录保留的 authority zip 副本；可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0` | `companion_authority_asset` | 第 15 卡已冻结；用于 MALF+PAS 沙盘模拟与图解案例，不作为收益证明 |
+| `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0.zip` | `companion_authority_zip_copy` | 随 Scenario Atlas 目录保留的 authority zip 副本；可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | predecessor/original source reference；只作来源追溯和对照 |
 | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` | `authority_anchor` | predecessor/original archive；只作锚点校验和可恢复输入 |
 | `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0` | `reference_input` | 治理范式、文档组织、门禁与 execution discipline 参考 |
@@ -110,6 +115,7 @@
 | `SOURCE-AUTHORITY-CLASSIFICATION-FROZEN` | 来源分类枚举与主要来源裁决已冻结 |
 | `MALF-V1-4-AUTHORITY-ANCHOR` | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` 是当前结构事实锚点，不授权下游重定义 |
 | `PAS-V1-1-DESIGN-SET` | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` 是当前 PAS Core / Lifecycle / Service 权威设计集 |
+| `AUTHORITY-ZIP-COPY-BOUNDARY` | `H:\Malf-Pas-Validated` 可保留随权威目录副本存在的 authority zip；正式可恢复 snapshot、batch manifest 与交付包归属 `H:\Malf-Pas-backup` |
 | `MALF-PAS-REVISION-ROADMAP` | MALF v1.5 与 PAS v1.2 已沉淀为 successor authority；Scenario Atlas 已沉淀为 companion authority asset，且都尚未成为 runtime 或 DB 事实 |
 | `BOOK-ROOT-CONCEPT-ONLY` | 书籍根和 Lance Beggs 概念根只提供 PAS 概念、语境和术语来源 |
 | `HISTORY-REFERENCE-NO-MIGRATION` | 历史 repo 和历史 validated 资产只读参考，不得迁移旧 schema、runner、DuckDB 表面或业务语义 |

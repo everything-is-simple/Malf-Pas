@@ -17,6 +17,8 @@
 | authority_doc | `docs/02-modules/04-malf-pas-scenario-atlas-v1.md` |
 | validated_atlas | `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0` |
 | atlas_manifest | `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0\MANIFEST.json` |
+| backup_snapshot_manifest | `H:\Malf-Pas-backup\MALF_PAS_Scenario_Atlas_v1_0-snapshot-20260516-151211.manifest.json` |
+| validated_assets_batch_manifest | `H:\Malf-Pas-backup\validated-core-algorithm-assets-batch-20260516-151211.manifest.json` |
 | machine_readable_registry | `governance/malf_pas_scenario_atlas_registry.toml` |
 | current_malf_anchor | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` |
 | current_malf_v1_5 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` |

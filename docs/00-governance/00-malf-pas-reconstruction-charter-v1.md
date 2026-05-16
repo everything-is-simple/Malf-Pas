@@ -76,7 +76,9 @@ historical code transplant
 | 资产 | 地位 | 用途 |
 |---|---|---|
 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` | 当前核心 authority anchor | 后续 PAS / Signal / Position / Trade / System 的结构输入基准 |
+| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4.zip` | current authority zip copy | 随当前 anchor 目录保留；正式可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` | PAS authority design set | 从 MALF WavePosition 出发冻结 PAS-Core / PAS-Lifecycle / PAS-Service |
+| `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1.zip` | PAS predecessor authority zip copy | 随 PAS v1.1 目录保留；正式可恢复 snapshot 归属 `H:\Malf-Pas-backup` |
 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` | successor authority design set | 第 13 卡已冻结；补足 `wave_behavior_snapshot`，不改写 v1.4 原目录 |
 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2` | successor authority design set | 第 14 卡已冻结；发布 `strength_weakness_matrix`，不改写 v1.1 原目录 |
 | `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0` | frozen companion atlas | 第 15 卡已冻结；用于逐案沙盘和图解，不作为收益证明 |

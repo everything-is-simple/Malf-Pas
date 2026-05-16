@@ -17,6 +17,9 @@
 | authority_doc | `docs/02-modules/01-pas-axiomatic-state-machine-v1.md` |
 | validated_design_set | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` |
 | design_manifest | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1\MANIFEST.json` |
+| current_authority_zip | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1.zip (SHA256 56B55A03DBE359CD5F718153EE590709CACA5456639DC90A5777FFB896C4664B)` |
+| backup_snapshot_manifest | `H:\Malf-Pas-backup\PAS__Three_Part_Design_Set_v1_1-snapshot-20260516-192716.manifest.json` |
+| backup_snapshot_zip | `H:\Malf-Pas-backup\PAS__Three_Part_Design_Set_v1_1-snapshot-20260516-192716.zip (SHA256 1D2776C30728DC6F8BC7AC26CFC231674C1AA58A3140EA49FB9D815A41287C23)` |
 | machine_readable_registry | `governance/pas_axiomatic_state_machine_registry.toml` |
 | current_malf_anchor | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` |
 | predecessor_malf_reference | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` |

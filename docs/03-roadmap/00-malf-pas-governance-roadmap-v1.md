@@ -118,13 +118,19 @@ no copied business runtime
 | agent rules | `AGENTS.md` |
 | repo entry | `README.md` |
 | Codex repo-local boundary | `.codex/README.md` / `.codex/skills/malf-pas-governance/SKILL.md` |
-| boundary freeze doc | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` |
+| environment bootstrap boundary | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` / `governance/environment_bootstrap_registry.toml` |
 | root directory policy | `docs/00-governance/04-root-directory-policy-v1.md` / `governance/root_directory_registry.toml` |
 | source authority policy | `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md` / `governance/source_authority_registry.toml` |
 | virtualenv policy | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` / `.gitignore` |
 | post-terminal roadmap discipline doc | `docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md` |
 | post-terminal roadmap discipline registry | `governance/post_terminal_roadmap_discipline_registry.toml` |
 | roadmap ready usability rules | `development_usable = true` + `daily_usable = true` before any subsequent roadmap can be ready |
+
+术语固定：`environment_bootstrap_registry.toml` 冻结 repo-local workflow skeleton / hook / script / virtualenv /
+governance-environment bootstrap 边界；`repo_governance_registry.toml` 冻结全仓阶段与硬规则；
+`root_directory_registry.toml` 冻结六根目录与只读参考根；`source_authority_registry.toml` 冻结 authority /
+predecessor / successor / companion / reference / adapter 来源角色；`post_terminal_roadmap_discipline_registry.toml`
+冻结 post-terminal roadmap 的 `development_usable + daily_usable` ready 门禁。
 
 ## 5. 系统主线与自建/委外边界
 

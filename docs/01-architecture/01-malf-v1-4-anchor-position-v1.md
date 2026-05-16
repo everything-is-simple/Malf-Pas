@@ -7,6 +7,8 @@
 ## 1. 定位
 
 `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` 是本系统当前长期 `authority_anchor`。
+`H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4.zip` 是随当前 anchor 目录保留的
+authority zip copy；正式可恢复 snapshot 归属 `H:\Malf-Pas-backup`。
 
 `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` 和
 `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` 是 predecessor/original source

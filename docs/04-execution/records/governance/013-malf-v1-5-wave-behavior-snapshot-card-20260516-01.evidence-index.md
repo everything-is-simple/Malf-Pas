@@ -17,6 +17,9 @@
 | authority_doc | `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md` |
 | validated_design_set | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` |
 | design_manifest | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5\MANIFEST.json` |
+| backup_snapshot_manifest | `H:\Malf-Pas-backup\MALF_Three_Part_Design_Set_v1_5-snapshot-20260516-151211.manifest.json` |
+| validated_assets_batch_manifest | `H:\Malf-Pas-backup\validated-core-algorithm-assets-batch-20260516-151211.manifest.json` |
+| standalone_zip_manifest | `H:\Malf-Pas-backup\MALF_Three_Part_Design_Set_v1_5.zip.manifest.json` |
 | machine_readable_registry | `governance/malf_v1_5_wave_behavior_snapshot_registry.toml` |
 | current_malf_anchor | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` |
 | predecessor_malf_reference | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` |
