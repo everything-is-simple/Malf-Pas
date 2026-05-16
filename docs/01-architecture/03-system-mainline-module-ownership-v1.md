@@ -99,7 +99,7 @@ Data Foundation
 | `malf-v1-5-wave-behavior-snapshot-card` | 已冻结 MALF-owned `wave_behavior_snapshot` 结构行为事实 |
 | `pas-v1-2-strength-weakness-matrix-card` | 已冻结 PAS `strength_weakness_matrix`、强弱证据规则与独立 matrix service surface |
 | `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟、图解案例与 companion atlas 资产（已冻结） |
-| `open-source-adapter-boundary-card` | 开源项目逐项 adapter 边界（当前下一卡） |
+| `open-source-adapter-boundary-card` | 开源项目逐项 adapter 边界（已闭环；首张 roadmap terminal） |
 
 ## 8. 冻结结论
 

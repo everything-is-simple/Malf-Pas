@@ -90,6 +90,7 @@ required_docs = [
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",
     "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md",
     "docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md",
+    "docs/01-architecture/08-open-source-adapter-boundary-v1.md",
     "docs/02-modules/00-module-design-document-standard-v1.md",
     "docs/02-modules/01-pas-axiomatic-state-machine-v1.md",
     "docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md",
@@ -115,6 +116,7 @@ required_registries = [
     "governance/daily_incremental_protocol_registry.toml",
     "governance/backtest_window_holdout_registry.toml",
     "governance/environment_bootstrap_registry.toml",
+    "governance/open_source_adapter_boundary_registry.toml",
     "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [

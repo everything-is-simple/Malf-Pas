@@ -155,5 +155,6 @@ PAS v1.2 frozen input boundary = MALF outputs only
 PAS v1.2 frozen rule = strength_weakness_matrix
 PAS still does not read PriceBar or rewrite MALF
 Scenario Atlas v1.0 is now frozen as a companion atlas
-Current live next = open-source-adapter-boundary-card
+Open-source adapter boundary is frozen.
+Current governance roadmap status = none / terminal
 ```

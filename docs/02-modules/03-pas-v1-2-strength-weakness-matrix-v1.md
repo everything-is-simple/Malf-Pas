@@ -141,8 +141,8 @@ candidate_reason
 第 14 卡已建立 PAS v1.2 successor design set，并把 `strength_weakness_matrix` 冻结为
 基于 MALF 输出的离散强弱识别层。
 
-下一卡才允许进入：
+首张治理 roadmap 现已收口为：
 
 ```text
-open-source-adapter-boundary-card
+none / terminal
 ```

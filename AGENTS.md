@@ -14,15 +14,16 @@
 8. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
 9. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
 10. `docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md`
-11. `docs/00-governance/04-root-directory-policy-v1.md`
-12. `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md`
-13. `docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md`
-14. `docs/02-modules/04-malf-pas-scenario-atlas-v1.md`
-15. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-16. `docs/04-execution/00-conclusion-index-v1.md`
-17. `governance/repo_governance_registry.toml`
-18. `governance/root_directory_registry.toml`
-19. `governance/source_authority_registry.toml`
+11. `docs/01-architecture/08-open-source-adapter-boundary-v1.md`
+12. `docs/00-governance/04-root-directory-policy-v1.md`
+13. `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md`
+14. `docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md`
+15. `docs/02-modules/04-malf-pas-scenario-atlas-v1.md`
+16. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+17. `docs/04-execution/00-conclusion-index-v1.md`
+18. `governance/repo_governance_registry.toml`
+19. `governance/root_directory_registry.toml`
+20. `governance/source_authority_registry.toml`
 
 ## 当前权威资产
 
@@ -108,8 +109,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = open-source-adapter-boundary-card
+live next = none / terminal
 formal DB mutation = no
 broker feasibility = deferred
-repo status = MALF+PAS scenario atlas passed
+repo status = first governance roadmap terminal
 ```

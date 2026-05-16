@@ -1,10 +1,10 @@
-registry_version = "2026-05-15.v1"
+registry_version = "2026-05-16.v1"
 stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 active_route = "governance"
-active_card = "malf-pas-scenario-atlas-card-20260516-01"
-current_allowed_next_card = "open-source-adapter-boundary-card"
+active_card = "open-source-adapter-boundary-card-20260516-01"
+current_allowed_next_card = ""
 module_contract_freeze_required_before_runtime = true
 
 [[cards]]
@@ -111,3 +111,10 @@ card_id = "malf-pas-scenario-atlas-card"
 run_id = "malf-pas-scenario-atlas-card-20260516-01"
 status = "passed"
 conclusion = "docs/04-execution/records/governance/015-malf-pas-scenario-atlas-card-20260516-01.conclusion.md"
+
+[[cards]]
+route = "governance"
+card_id = "open-source-adapter-boundary-card"
+run_id = "open-source-adapter-boundary-card-20260516-01"
+status = "passed"
+conclusion = "docs/04-execution/records/governance/016-open-source-adapter-boundary-card-20260516-01.conclusion.md"

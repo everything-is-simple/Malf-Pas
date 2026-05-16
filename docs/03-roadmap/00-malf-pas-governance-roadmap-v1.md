@@ -2,7 +2,7 @@
 
 日期：2026-05-16
 
-状态：active / governance-only roadmap
+状态：terminal / governance-only roadmap completed
 
 ## 1. 定位
 
@@ -43,7 +43,7 @@ no-legacy-code-migration
 | 13 | `malf-v1-5-wave-behavior-snapshot-card` | passed | 新建 MALF v1.5，补足波内行为结构事实 |
 | 14 | `pas-v1-2-strength-weakness-matrix-card` | passed | 新建 PAS v1.2，冻结强弱识别矩阵 |
 | 15 | `malf-pas-scenario-atlas-card` | passed | 建立 MALF+PAS 沙盘模拟与图解案例集 |
-| 16 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
+| 16 | `open-source-adapter-boundary-card` | passed | 固定开源项目的 adapter 边界 |
 
 ## 4. 治理环境准备范围
 
@@ -557,13 +557,39 @@ Historical references = reference only / not proof
 Runtime / formal DB / broker / profit claims = not authorized
 ```
 
-第 15 卡通过后，live next 推进为：
+第 15 卡通过后，live next 推进为第 16 卡；第 16 卡通过后，首张治理 roadmap 收口为：
 
 ```text
-open-source-adapter-boundary-card
+none / terminal
 ```
 
-## 17. 通过标准
+## 17. 开源 adapter 边界范围
+
+`open-source-adapter-boundary-card-20260516-01` 已把第 16 卡从 `planned` 推进为
+首张治理 roadmap 的 terminal closeout 卡。
+
+本卡已冻结的正式入口：
+
+```text
+docs/01-architecture/08-open-source-adapter-boundary-v1.md
+governance/open_source_adapter_boundary_registry.toml
+docs/04-execution/records/governance/016-open-source-adapter-boundary-card-20260516-01.conclusion.md
+```
+
+本卡通过后，当前路线固定为：
+
+```text
+DuckDB / Arrow / Polars = research_query_or_data_processing_adapter
+vectorbt / backtesting.py = research_proof_adapter
+Qlib = isolated_research_reference
+baostock = source_adapter
+AKShare = reference_or_experimental_input_only + rejected_for_semantic_ownership
+External projects = no semantic ownership, no formal truth ownership, no broker or profit authority
+Current governance roadmap status = none / terminal
+Next work must open a separate roadmap
+```
+
+## 18. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -584,10 +610,11 @@ open-source-adapter-boundary-card
 | `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟、图解案例、Markdown+SVG companion atlas 与无收益证明边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 18. 当前结论
+## 19. 当前结论
 
 ```text
 This roadmap is legislation-first.
 It does not authorize runtime, DB, broker, or strategy claims.
-Current live next is open-source-adapter-boundary-card.
+Open-source adapter boundary is frozen.
+Current governance roadmap status is none / terminal.
 ```

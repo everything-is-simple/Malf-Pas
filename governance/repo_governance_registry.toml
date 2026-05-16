@@ -1,4 +1,4 @@
-registry_version = "2026-05-15.v1"
+registry_version = "2026-05-16.v1"
 system_name = "Malf-Pas"
 stage = "governance-only"
 formal_db_mutation = "no"
@@ -18,6 +18,7 @@ malf_v1_5_wave_behavior_snapshot_registry = "governance/malf_v1_5_wave_behavior_
 pas_v1_2_strength_weakness_matrix_registry = "governance/pas_v1_2_strength_weakness_matrix_registry.toml"
 malf_pas_scenario_atlas_registry = "governance/malf_pas_scenario_atlas_registry.toml"
 malf_pas_revision_roadmap_registry = "governance/malf_pas_revision_roadmap_registry.toml"
+open_source_adapter_boundary_registry = "governance/open_source_adapter_boundary_registry.toml"
 current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
 malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
 pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
@@ -27,7 +28,7 @@ historical_tradeoff_reference_root = "G:/malf-history"
 book_brainstorming_reference_root = "G:/《股市浮沉二十载》"
 pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
-current_allowed_next_card = "open-source-adapter-boundary-card"
+current_allowed_next_card = ""
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
 
 required_authority_docs = [
@@ -44,6 +45,7 @@ required_authority_docs = [
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",
     "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md",
     "docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md",
+    "docs/01-architecture/08-open-source-adapter-boundary-v1.md",
     "docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md",
     "docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md",
     "docs/02-modules/04-malf-pas-scenario-atlas-v1.md",

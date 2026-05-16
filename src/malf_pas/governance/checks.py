@@ -157,6 +157,10 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(_check_root_directory_registry(repo_root / raw_path, registry))
         if raw_path == "governance/source_authority_registry.toml":
             findings.extend(_check_source_authority_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/repo_governance_registry.toml":
+            findings.extend(_check_repo_governance_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/module_gate_registry.toml":
+            findings.extend(_check_module_gate_registry(repo_root / raw_path, registry))
         if raw_path == "governance/malf_v1_4_immutability_registry.toml":
             findings.extend(_check_malf_v1_4_immutability_registry(repo_root / raw_path, registry))
         if raw_path == "governance/predecessor_strength_registry.toml":
@@ -179,6 +183,70 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_malf_pas_revision_roadmap_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/open_source_adapter_boundary_registry.toml":
+            findings.extend(
+                _check_open_source_adapter_boundary_registry(repo_root / raw_path, registry)
+            )
+    return findings
+
+
+def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "registry_version": "2026-05-16.v1",
+        "stage": "governance-only",
+        "formal_db_mutation": "no",
+        "broker_feasibility": "deferred",
+        "open_source_adapter_boundary_registry": (
+            "governance/open_source_adapter_boundary_registry.toml"
+        ),
+        "current_allowed_next_card": "",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    required_docs = set(registry.get("required_authority_docs", []))
+    if "docs/01-architecture/08-open-source-adapter-boundary-v1.md" not in required_docs:
+        findings.append(
+            Finding(path, "required_authority_docs must include open-source adapter boundary doc")
+        )
+    return findings
+
+
+def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "registry_version": "2026-05-16.v1",
+        "stage": "governance-only",
+        "active_route": "governance",
+        "active_card": "open-source-adapter-boundary-card-20260516-01",
+        "current_allowed_next_card": "",
+        "module_contract_freeze_required_before_runtime": True,
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    cards = {
+        item.get("card_id"): item for item in registry.get("cards", []) if isinstance(item, dict)
+    }
+    terminal_card = cards.get("open-source-adapter-boundary-card")
+    if terminal_card is None:
+        findings.append(Finding(path, "open-source-adapter-boundary-card must be registered"))
+        return findings
+    if terminal_card.get("run_id") != "open-source-adapter-boundary-card-20260516-01":
+        findings.append(
+            Finding(path, "open-source-adapter-boundary-card run_id must be card-20260516-01")
+        )
+    if terminal_card.get("status") != "passed":
+        findings.append(Finding(path, "open-source-adapter-boundary-card status must be passed"))
+    expected_conclusion = (
+        "docs/04-execution/records/governance/"
+        "016-open-source-adapter-boundary-card-20260516-01.conclusion.md"
+    )
+    if terminal_card.get("conclusion") != expected_conclusion:
+        findings.append(Finding(path, f"terminal card conclusion must be {expected_conclusion!r}"))
     return findings
 
 
@@ -265,6 +333,158 @@ def _check_malf_pas_revision_roadmap_registry(
         if invariants.get(key) is not True:
             findings.append(Finding(path, f"{key} invariant must be true"))
 
+    return findings
+
+
+def _check_open_source_adapter_boundary_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "registry_version": "2026-05-16.v1",
+        "stage": "governance-only",
+        "formal_db_mutation": "no",
+        "broker_feasibility": "deferred",
+        "authority_doc": "docs/01-architecture/08-open-source-adapter-boundary-v1.md",
+        "policy_status": "frozen-by-open-source-adapter-boundary-card-20260516-01",
+        "run_id": "open-source-adapter-boundary-card-20260516-01",
+        "source_authority_doc": (
+            "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md"
+        ),
+        "source_authority_registry": "governance/source_authority_registry.toml",
+        "terminal_on_pass": True,
+        "current_allowed_next_card_after_pass": "",
+        "doc_state_after_pass": "none / terminal",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    authority_doc = path.parents[1] / str(registry.get("authority_doc", ""))
+    if not authority_doc.exists():
+        findings.append(Finding(authority_doc, "open-source adapter authority doc is missing"))
+    else:
+        authority_text = authority_doc.read_text(encoding="utf-8")
+        for fragment in [
+            "source_adapter",
+            "research_query_or_data_processing_adapter",
+            "research_proof_adapter",
+            "isolated_research_reference",
+            "reference_or_experimental_input_only",
+            "DuckDB / Arrow / Polars",
+            "vectorbt / backtesting.py",
+            "Qlib",
+            "baostock",
+            "AKShare",
+            "rejected_for_semantic_ownership",
+            "none / terminal",
+        ]:
+            if fragment not in authority_text:
+                findings.append(Finding(authority_doc, f"authority doc must mention {fragment!r}"))
+
+    expected_roles = [
+        "source_adapter",
+        "research_query_or_data_processing_adapter",
+        "research_proof_adapter",
+        "isolated_research_reference",
+        "reference_or_experimental_input_only",
+    ]
+    if registry.get("role_enums") != expected_roles:
+        findings.append(Finding(path, "role_enums must match the five frozen adapter roles"))
+
+    forbidden_boundaries = set(registry.get("global_forbidden_boundaries", []))
+    required_forbidden = {
+        "MALF semantic ownership",
+        "PAS semantic ownership",
+        "Signal semantic ownership",
+        "Position semantic ownership",
+        "Trade semantic ownership",
+        "System Readout semantic ownership",
+        "Pipeline semantic ownership",
+        "formal truth owner",
+        "order owner",
+        "position owner",
+        "fill owner",
+        "broker instruction source",
+        "profit proof source",
+    }
+    missing_forbidden = sorted(required_forbidden - forbidden_boundaries)
+    if missing_forbidden:
+        findings.append(
+            Finding(path, f"global_forbidden_boundaries missing {missing_forbidden}")
+        )
+
+    projects = {
+        item.get("key"): item for item in registry.get("projects", []) if isinstance(item, dict)
+    }
+    expected_projects = {
+        "duckdb_arrow_polars": (
+            "DuckDB / Arrow / Polars",
+            "research_query_or_data_processing_adapter",
+            "adapter_candidate",
+            {"Data Foundation", "MALF", "PAS", "Signal", "Position", "Portfolio Plan",
+             "Trade", "System Readout", "Pipeline"},
+        ),
+        "vectorbt_backtesting_py": (
+            "vectorbt / backtesting.py",
+            "research_proof_adapter",
+            "adapter_candidate",
+            {"MALF", "PAS", "Signal", "Position", "Portfolio Plan", "Trade", "System Readout"},
+        ),
+        "qlib": (
+            "Qlib",
+            "isolated_research_reference",
+            "adapter_candidate",
+            {"PAS", "Signal", "Position", "Portfolio Plan", "Trade", "System Readout"},
+        ),
+        "baostock": (
+            "baostock",
+            "source_adapter",
+            "adapter_candidate",
+            {"Data Foundation"},
+        ),
+        "akshare": (
+            "AKShare",
+            "reference_or_experimental_input_only",
+            "rejected_for_semantic_ownership",
+            {"Data Foundation"},
+        ),
+    }
+    if set(projects) != set(expected_projects):
+        findings.append(Finding(path, "projects must contain exactly the five frozen entries"))
+
+    required_project_forbidden = {
+        "formal truth owner",
+        "order owner",
+        "position owner",
+        "fill owner",
+        "broker instruction source",
+        "profit proof source",
+    }
+    for key, (project_name, role, source_status, modules) in expected_projects.items():
+        project = projects.get(key)
+        if project is None:
+            findings.append(Finding(path, f"{key} project must be registered"))
+            continue
+        if project.get("project") != project_name:
+            findings.append(Finding(path, f"{key} project name must be {project_name!r}"))
+        if project.get("allowed_role") != role:
+            findings.append(Finding(path, f"{key} allowed_role must be {role!r}"))
+        if project.get("source_authority_status") != source_status:
+            findings.append(
+                Finding(path, f"{key} source_authority_status must be {source_status!r}")
+            )
+        if set(project.get("applicable_modules", [])) != modules:
+            findings.append(Finding(path, f"{key} applicable_modules must match frozen scope"))
+        project_forbidden = set(project.get("forbidden_boundaries", []))
+        missing_project_forbidden = sorted(required_project_forbidden - project_forbidden)
+        if missing_project_forbidden:
+            findings.append(
+                Finding(path, f"{key} forbidden_boundaries missing {missing_project_forbidden}")
+            )
+
+    if projects.get("akshare", {}).get("special_policy") != "rejected_for_semantic_ownership":
+        findings.append(Finding(path, "akshare special_policy must keep semantic-ownership reject"))
     return findings
 
 

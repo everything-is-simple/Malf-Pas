@@ -1,0 +1,191 @@
+registry_version = "2026-05-16.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/01-architecture/08-open-source-adapter-boundary-v1.md"
+policy_status = "frozen-by-open-source-adapter-boundary-card-20260516-01"
+run_id = "open-source-adapter-boundary-card-20260516-01"
+source_authority_doc = "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md"
+source_authority_registry = "governance/source_authority_registry.toml"
+terminal_on_pass = true
+current_allowed_next_card_after_pass = ""
+doc_state_after_pass = "none / terminal"
+
+role_enums = [
+    "source_adapter",
+    "research_query_or_data_processing_adapter",
+    "research_proof_adapter",
+    "isolated_research_reference",
+    "reference_or_experimental_input_only",
+]
+
+global_forbidden_boundaries = [
+    "MALF semantic ownership",
+    "PAS semantic ownership",
+    "Signal semantic ownership",
+    "Position semantic ownership",
+    "Trade semantic ownership",
+    "System Readout semantic ownership",
+    "Pipeline semantic ownership",
+    "formal truth owner",
+    "order owner",
+    "position owner",
+    "fill owner",
+    "broker instruction source",
+    "profit proof source",
+]
+
+[[projects]]
+key = "duckdb_arrow_polars"
+project = "DuckDB / Arrow / Polars"
+allowed_role = "research_query_or_data_processing_adapter"
+source_authority_status = "adapter_candidate"
+applicable_modules = [
+    "Data Foundation",
+    "MALF",
+    "PAS",
+    "Signal",
+    "Position",
+    "Portfolio Plan",
+    "Trade",
+    "System Readout",
+    "Pipeline",
+]
+forbidden_boundaries = [
+    "formal truth owner",
+    "MALF semantic ownership",
+    "PAS semantic ownership",
+    "Signal semantic ownership",
+    "Position semantic ownership",
+    "Trade semantic ownership",
+    "System Readout semantic ownership",
+    "Pipeline semantic ownership",
+    "order owner",
+    "position owner",
+    "fill owner",
+    "broker instruction source",
+    "profit proof source",
+]
+non_goals = [
+    "module-definition package",
+    "formal truth owner",
+    "frozen formal storage decision",
+]
+
+[[projects]]
+key = "vectorbt_backtesting_py"
+project = "vectorbt / backtesting.py"
+allowed_role = "research_proof_adapter"
+source_authority_status = "adapter_candidate"
+applicable_modules = [
+    "MALF",
+    "PAS",
+    "Signal",
+    "Position",
+    "Portfolio Plan",
+    "Trade",
+    "System Readout",
+]
+forbidden_boundaries = [
+    "formal truth owner",
+    "formal trading ledger",
+    "candidate decision owner",
+    "MALF semantic ownership",
+    "PAS semantic ownership",
+    "Signal semantic ownership",
+    "order owner",
+    "position owner",
+    "fill owner",
+    "broker instruction source",
+    "profit proof source",
+]
+non_goals = [
+    "mainline semantic owner",
+    "broker feasibility proof",
+    "profit promise source",
+]
+
+[[projects]]
+key = "qlib"
+project = "Qlib"
+allowed_role = "isolated_research_reference"
+source_authority_status = "adapter_candidate"
+applicable_modules = [
+    "PAS",
+    "Signal",
+    "Position",
+    "Portfolio Plan",
+    "Trade",
+    "System Readout",
+]
+forbidden_boundaries = [
+    "current authority chain entry",
+    "MALF semantic ownership",
+    "PAS semantic ownership",
+    "formal truth owner",
+    "order owner",
+    "position owner",
+    "fill owner",
+    "broker instruction source",
+    "profit proof source",
+]
+non_goals = [
+    "module-definition owner",
+    "formal proof replacement",
+    "legacy surface migration target",
+]
+
+[[projects]]
+key = "baostock"
+project = "baostock"
+allowed_role = "source_adapter"
+source_authority_status = "adapter_candidate"
+applicable_modules = [
+    "Data Foundation",
+]
+forbidden_boundaries = [
+    "formal truth owner",
+    "MALF semantic ownership",
+    "PAS semantic ownership",
+    "Signal semantic ownership",
+    "order owner",
+    "position owner",
+    "fill owner",
+    "broker instruction source",
+    "profit proof source",
+]
+non_goals = [
+    "source manifest replacement",
+    "formal source ledger owner",
+    "runtime authorization source",
+]
+
+[[projects]]
+key = "akshare"
+project = "AKShare"
+allowed_role = "reference_or_experimental_input_only"
+source_authority_status = "rejected_for_semantic_ownership"
+special_policy = "rejected_for_semantic_ownership"
+applicable_modules = [
+    "Data Foundation",
+]
+forbidden_boundaries = [
+    "formal truth owner",
+    "MALF semantic ownership",
+    "PAS semantic ownership",
+    "Signal semantic ownership",
+    "Position semantic ownership",
+    "Trade semantic ownership",
+    "System Readout semantic ownership",
+    "Pipeline semantic ownership",
+    "order owner",
+    "position owner",
+    "fill owner",
+    "broker instruction source",
+    "profit proof source",
+]
+non_goals = [
+    "formal source root",
+    "current mainline authorized input",
+    "module-definition owner",
+]

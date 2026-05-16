@@ -16,7 +16,7 @@
 | 临时产物根目录 | `H:\Malf-Pas-temp` |
 | 远端 | `https://github.com/everything-is-simple/Malf-Pas` |
 | 结构锚点 | `MALF v1.4` |
-| 当前重点 | `open-source adapter boundary freeze` |
+| 当前重点 | `first governance roadmap terminal closeout` |
 
 一句话定义：
 
@@ -129,5 +129,5 @@ flowchart LR
 3. 梳理旧系统强项地图。
 4. 冻结 PAS v1.1 三件套设计集。
 5. 完成 MALF v1.5 successor 设计集并冻结 `wave_behavior_snapshot`。
-6. 继续推进场景图谱与开源适配器边界。
+6. 完成场景图谱与开源适配器边界冻结。
 7. 建立 execution 四件套模板和结论索引。

@@ -26,7 +26,7 @@ H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0
 | PAS v1.2 | `current successor PAS authority definition` |
 | Scenario Atlas v1.0 | `companion authority asset for sandbox explanation` |
 | 当前 atlas | `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0` |
-| 下一卡 | `open-source-adapter-boundary-card` |
+| 当前路线图状态 | `none / terminal` |
 | 是否输出订单 / 仓位 / 成交 / broker 指令 / 收益承诺 | 否 |
 
 ## 3. 固定输入边界
@@ -102,7 +102,7 @@ atlas 不回答：
 3. atlas 的正式图解资产固定为 `Markdown + SVG`。
 4. atlas 不得伪装成 playbook、runtime contract、formal proof 或收益叙事。
 5. 同一案例 id、同一上游 frozen 输入边界，应保持可重复阅读的一致表达。
-6. atlas 关闭后，下一张授权卡推进为 `open-source-adapter-boundary-card`。
+6. atlas 所在的首张治理 roadmap 已由第 16 卡闭环收口为 `none / terminal`。
 
 ## 8. 当前闭环结论
 
@@ -115,8 +115,8 @@ reference-only historical side evidence
 no profit proof
 ```
 
-当前 live next 推进为：
+当前首张治理 roadmap 状态为：
 
 ```text
-open-source-adapter-boundary-card
+none / terminal
 ```

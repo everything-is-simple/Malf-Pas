@@ -76,7 +76,8 @@ PAS v1.2 is frozen as successor authority for strength_weakness_matrix.
 MALF_PAS_Scenario_Atlas_v1_0 is frozen as a companion atlas for sandbox charts and case analysis.
 No formal DB mutation is authorized.
 No broker or live-trading discussion is opened by this repo initialization.
-Current live next is open-source-adapter-boundary-card.
+Open-source adapter boundary is now frozen.
+Current governance roadmap status is none / terminal.
 ```
 
 ## 阅读入口
@@ -96,13 +97,14 @@ Current live next is open-source-adapter-boundary-card.
 13. [历史大账本拓扑协议](docs/01-architecture/05-historical-ledger-topology-protocol-v1.md)
 14. [每日增量与断点续传协议](docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md)
 15. [回测窗口与留出样本协议](docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md)
-16. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
-17. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
-18. [MALF v1.5 wave behavior snapshot](docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md)
-19. [PAS v1.2 strength weakness matrix](docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md)
-20. [MALF+PAS scenario atlas](docs/02-modules/04-malf-pas-scenario-atlas-v1.md)
-21. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
-22. [执行区入口](docs/04-execution/README.md)
+16. [开源 adapter 边界](docs/01-architecture/08-open-source-adapter-boundary-v1.md)
+17. [模块设计文档标准](docs/02-modules/00-module-design-document-standard-v1.md)
+18. [PAS 公理化状态机](docs/02-modules/01-pas-axiomatic-state-machine-v1.md)
+19. [MALF v1.5 wave behavior snapshot](docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md)
+20. [PAS v1.2 strength weakness matrix](docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md)
+21. [MALF+PAS scenario atlas](docs/02-modules/04-malf-pas-scenario-atlas-v1.md)
+22. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
+23. [执行区入口](docs/04-execution/README.md)
 
 ## Python 环境
 

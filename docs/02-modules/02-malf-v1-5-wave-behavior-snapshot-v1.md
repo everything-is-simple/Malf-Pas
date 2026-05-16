@@ -118,10 +118,10 @@ MALF-owned structure behavior facts。
 pas-v1-2-strength-weakness-matrix-card
 ```
 
-当前下一卡推进为：
+首张治理 roadmap 当前口径为：
 
 ```text
-open-source-adapter-boundary-card
+none / terminal
 ```
 
 PAS v1.2 已固定只消费：
