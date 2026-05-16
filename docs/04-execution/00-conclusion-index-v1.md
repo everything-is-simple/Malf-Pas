@@ -1,6 +1,6 @@
 # Malf-Pas 结论索引 v1
 
-日期：2026-05-15
+日期：2026-05-16
 
 ## 1. 说明
 
@@ -23,6 +23,6 @@
 | `governance` | `pas-axiomatic-state-machine-card-20260515-01` | `passed` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service 与 Signal handoff 边界已冻结 | `docs/04-execution/records/governance/011-pas-axiomatic-state-machine-card-20260515-01.conclusion.md` |
 | `governance` | `malf-pas-revision-roadmap-card-20260516-01` | `passed` | MALF v1.5、PAS v1.2、场景图谱与 adapter 后移路线已冻结 | `docs/04-execution/records/governance/012-malf-pas-revision-roadmap-card-20260516-01.conclusion.md` |
 | `governance` | `malf-v1-5-wave-behavior-snapshot-card-20260516-01` | `passed` | MALF v1.5 successor 设计集、`wave_behavior_snapshot` 六行为面与只读边界已冻结 | `docs/04-execution/records/governance/013-malf-v1-5-wave-behavior-snapshot-card-20260516-01.conclusion.md` |
-| `governance` | `pas-v1-2-strength-weakness-matrix-card` | `planned` | 新建 PAS v1.2，冻结 `strength_weakness_matrix` 与强弱证据规则 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
-| `governance` | `malf-pas-scenario-atlas-card` | `planned` | 建立 MALF+PAS 沙盘模拟与图解案例集 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |
+| `governance` | `pas-v1-2-strength-weakness-matrix-card-20260516-01` | `passed` | PAS v1.2 successor 设计集、`strength_weakness_matrix` 离散矩阵、matrix service surface 与 MALF-only 输入边界已冻结 | `docs/04-execution/records/governance/014-pas-v1-2-strength-weakness-matrix-card-20260516-01.conclusion.md` |
+| `governance` | `malf-pas-scenario-atlas-card-20260516-01` | `passed` | MALF+PAS 场景图谱 companion atlas、Markdown+SVG 图解、5 个标准案例与 reference-only 边界已冻结 | `docs/04-execution/records/governance/015-malf-pas-scenario-atlas-card-20260516-01.conclusion.md` |
 | `governance` | `open-source-adapter-boundary-card` | `planned` | 开源 adapter 边界，已后移到第 16 卡 | `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md` |

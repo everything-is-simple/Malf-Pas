@@ -14,7 +14,7 @@
 flowchart LR
     A["Data Foundation\nsource fact contract"] --> B["MALF v1.4\nstructure_fact_owner"]
     B --> B2["MALF v1.5\nwave_behavior_snapshot"]
-    B2 --> C["PAS\nopportunity_interpreter"]
+    B2 --> C["PAS\nopportunity_interpreter\n(v1.2 matrix frozen)"]
     C --> D["Signal\ncandidate_decision_ledger"]
     D --> E["Position\nmanagement semantics"]
     E --> F["Portfolio Plan\nlightweight portfolio semantics"]
@@ -31,7 +31,7 @@ flowchart LR
 | `Data Foundation` | 数据事实合同层 | 拥有 source manifest、ledger key、可交易事实、provider adapter 入口边界 |
 | `MALF v1.4` | 当前结构事实层 | 拥有波段、transition、boundary、WavePosition 语义 |
 | `MALF v1.5` | successor structure behavior fact layer | 已冻结 `wave_behavior_snapshot`，仍由 MALF 拥有结构行为事实 |
-| `PAS` | 机会解释层 | 拥有从 MALF WavePosition 出发的 context、trigger、strength / weakness、lifecycle、candidate 语义 |
+| `PAS` | 机会解释层 | 拥有从 MALF WavePosition 与 WaveBehaviorSnapshot 出发的 context、premise、strength_weakness_matrix、lifecycle、candidate 语义 |
 | `Signal` | 候选裁决层 | 拥有 accept / reject 决策账本语义 |
 | `Position` | 持仓管理语义层 | 拥有 T1/T2、保本、跟踪、entry / exit plan 语义 |
 | `Portfolio Plan` | 组合计划层 | 拥有组合准入、目标暴露、trim 语义；第一阶段保留轻量层 |
@@ -57,7 +57,8 @@ flowchart LR
 | governance-only docs construction | `authorized` |
 | PAS axiomatic design | `authorized` |
 | MALF v1.5 successor design set | `frozen` |
-| PAS v1.2 design revision | `authorized as roadmap-governed docs only` |
+| PAS v1.2 design revision | `frozen as successor authority definition` |
+| MALF+PAS scenario atlas | `frozen as companion authority asset` |
 | runtime implementation | `not authorized` |
 | formal DB mutation | `not authorized` |
 | broker feasibility | `deferred` |

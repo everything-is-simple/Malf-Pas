@@ -93,6 +93,8 @@ required_docs = [
     "docs/02-modules/00-module-design-document-standard-v1.md",
     "docs/02-modules/01-pas-axiomatic-state-machine-v1.md",
     "docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md",
+    "docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md",
+    "docs/02-modules/04-malf-pas-scenario-atlas-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
@@ -103,6 +105,8 @@ required_registries = [
     "governance/predecessor_strength_registry.toml",
     "governance/pas_axiomatic_state_machine_registry.toml",
     "governance/malf_v1_5_wave_behavior_snapshot_registry.toml",
+    "governance/pas_v1_2_strength_weakness_matrix_registry.toml",
+    "governance/malf_pas_scenario_atlas_registry.toml",
     "governance/malf_pas_revision_roadmap_registry.toml",
     "governance/module_gate_registry.toml",
     "governance/module_ownership_registry.toml",

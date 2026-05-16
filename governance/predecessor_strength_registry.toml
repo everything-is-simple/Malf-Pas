@@ -47,20 +47,20 @@ forbidden_role = "runtime proof, schema transplant, runner transplant, broker pr
 downstream_use = "next-card PAS v1.2 input boundary and successor authority reference"
 
 [[sources]]
-key = "planned_pas_v1_2_design_set"
+key = "pas_v1_2_design_set"
 path = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2"
-classification = "planned_successor_authority"
-absorbable_strength = "future PAS strength_weakness_matrix freeze that must consume MALF outputs only"
+classification = "successor_authority_definition"
+absorbable_strength = "PAS-owned discrete strength_weakness_matrix, matrix evidence, and MALF-output-only successor authority"
 forbidden_role = "PriceBar reinterpretation, MALF rewrite, runtime proof, broker proof, or premature semantic owner claim"
-downstream_use = "next planned PAS authority construction route"
+downstream_use = "current PAS successor authority and next scenario-atlas input boundary"
 
 [[sources]]
-key = "planned_malf_pas_scenario_atlas"
+key = "malf_pas_scenario_atlas"
 path = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0"
-classification = "planned_successor_authority"
-absorbable_strength = "future sandbox chart-view companion asset for MALF+PAS case explanation"
+classification = "companion_authority_asset"
+absorbable_strength = "frozen sandbox chart-view companion asset for MALF+PAS case explanation"
 forbidden_role = "strategy proof, broker proof, position action owner, or profit claim"
-downstream_use = "later scenario-atlas route only"
+downstream_use = "current case explanation companion asset"
 
 [[sources]]
 key = "asteria_system_design_set_v1_0"

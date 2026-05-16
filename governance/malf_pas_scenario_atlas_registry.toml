@@ -1,0 +1,89 @@
+registry_version = "2026-05-16.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/02-modules/04-malf-pas-scenario-atlas-v1.md"
+policy_status = "frozen-by-malf-pas-scenario-atlas-card-20260516-01"
+atlas_set = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0"
+atlas_manifest = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/MANIFEST.json"
+current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+current_malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+current_pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+current_pas_v1_2_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2"
+next_card = "open-source-adapter-boundary-card"
+delivery_mode = "companion_atlas"
+visual_format = "markdown_plus_svg"
+historical_reference_policy = "reference_only_not_proof"
+
+scenario_order = [
+    "strength_continuation_case",
+    "weakness_rejection_case",
+    "boundary_test_case",
+    "transition_unresolved_case",
+    "no_actionable_premise_case",
+]
+
+allowed_inputs = [
+    "MALF WavePosition",
+    "WaveBehaviorSnapshot",
+    "PAS Context",
+    "PAS Directional Premise",
+    "PAS StrengthWeaknessMatrix",
+]
+
+forbidden_outputs = [
+    "buy",
+    "sell",
+    "hold",
+    "order",
+    "position",
+    "fill",
+    "broker_instruction",
+    "alpha_proof",
+    "formal_backtest_proof",
+    "profit",
+]
+
+[principles]
+malf_owns_structure = true
+pas_owns_opportunity_interpretation = true
+atlas_is_companion_only = true
+historical_reference_is_not_proof = true
+runtime_not_authorized = true
+formal_db_mutation_not_authorized = true
+broker_not_authorized = true
+
+[[cases]]
+case_id = "strength_continuation_case"
+read_status = "strong"
+summary = "continuation-side MALF facts are read as strong continuation by PAS"
+markdown = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_10_Strength_Continuation_Case_v1_0.md"
+svg = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_10_Strength_Continuation_Case_v1_0.svg"
+
+[[cases]]
+case_id = "weakness_rejection_case"
+read_status = "weak"
+summary = "weakening or pressured MALF facts are read as weakness rejection by PAS"
+markdown = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_11_Weakness_Rejection_Case_v1_0.md"
+svg = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_11_Weakness_Rejection_Case_v1_0.svg"
+
+[[cases]]
+case_id = "boundary_test_case"
+read_status = "mixed"
+summary = "boundary-near MALF facts are read as mixed boundary-test evidence"
+markdown = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_12_Boundary_Test_Case_v1_0.md"
+svg = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_12_Boundary_Test_Case_v1_0.svg"
+
+[[cases]]
+case_id = "transition_unresolved_case"
+read_status = "ambiguous"
+summary = "transition-bound MALF facts are read as ambiguity-preserving unresolved transition"
+markdown = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_13_Transition_Unresolved_Case_v1_0.md"
+svg = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_13_Transition_Unresolved_Case_v1_0.svg"
+
+[[cases]]
+case_id = "no_actionable_premise_case"
+read_status = "not_applicable"
+summary = "insufficient MALF/PAS premise is frozen as no-actionable-premise"
+markdown = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_14_No_Actionable_Premise_Case_v1_0.md"
+svg = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/ATLAS_14_No_Actionable_Premise_Case_v1_0.svg"

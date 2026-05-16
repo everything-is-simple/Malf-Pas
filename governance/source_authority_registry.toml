@@ -41,17 +41,17 @@ allowed_role = "frozen card 13 design set for MALF-owned wave_behavior_snapshot"
 forbidden_role = "current runtime proof, schema source, DB mutation, broker instruction, order owner, position owner, fill owner, profit promise, or rewrite of MALF v1.4 original directory"
 
 [[sources]]
-key = "planned_pas_v1_2_design_set"
+key = "pas_v1_2_design_set"
 path = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2"
-classification = "planned_successor_authority"
-allowed_role = "planned card 14 design set for PAS strength_weakness_matrix from MALF outputs"
+classification = "successor_authority_definition"
+allowed_role = "frozen card 14 design set for PAS strength_weakness_matrix from MALF outputs"
 forbidden_role = "PriceBar reinterpretation, MALF rewrite, runtime proof, broker instruction, order owner, position owner, fill owner, or profit promise"
 
 [[sources]]
-key = "planned_malf_pas_scenario_atlas"
+key = "malf_pas_scenario_atlas"
 path = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0"
-classification = "planned_successor_authority"
-allowed_role = "planned card 15 sandbox and chart-view companion asset for MALF+PAS case analysis"
+classification = "companion_authority_asset"
+allowed_role = "frozen card 15 sandbox and chart-view companion asset for MALF+PAS case analysis"
 forbidden_role = "strategy proof, formal backtest proof, broker instruction, order owner, position owner, fill owner, or profit promise"
 
 [[sources]]

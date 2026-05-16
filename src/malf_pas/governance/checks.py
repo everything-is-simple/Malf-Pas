@@ -169,6 +169,12 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_malf_v1_5_wave_behavior_snapshot_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/pas_v1_2_strength_weakness_matrix_registry.toml":
+            findings.extend(
+                _check_pas_v1_2_strength_weakness_matrix_registry(repo_root / raw_path, registry)
+            )
+        if raw_path == "governance/malf_pas_scenario_atlas_registry.toml":
+            findings.extend(_check_malf_pas_scenario_atlas_registry(repo_root / raw_path, registry))
         if raw_path == "governance/malf_pas_revision_roadmap_registry.toml":
             findings.extend(
                 _check_malf_pas_revision_roadmap_registry(repo_root / raw_path, registry)
@@ -435,6 +441,256 @@ def _check_pas_axiomatic_state_machine_registry(
     return findings
 
 
+def _check_pas_v1_2_strength_weakness_matrix_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "policy_status": "frozen-by-pas-v1-2-strength-weakness-matrix-card-20260516-01",
+        "authority_doc": "docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md",
+        "design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
+        "design_manifest": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2/MANIFEST.json"
+        ),
+        "current_malf_v1_4_anchor": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
+        "current_malf_v1_5_design_set": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+        ),
+        "current_pas_v1_1_design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
+        "next_card": "malf-pas-scenario-atlas-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    expected_chain = [
+        "MALF WavePosition",
+        "MALF WaveBehaviorSnapshot",
+        "PAS-Core",
+        "PAS-StrengthWeaknessMatrix",
+        "PAS-Lifecycle",
+        "PAS-Service",
+        "Signal",
+    ]
+    if registry.get("semantic_chain") != expected_chain:
+        findings.append(
+            Finding(
+                path,
+                "semantic_chain must remain MALF WavePosition -> WaveBehaviorSnapshot -> "
+                "PAS-Core -> PAS-StrengthWeaknessMatrix -> PAS-Lifecycle -> PAS-Service "
+                "-> Signal",
+            )
+        )
+
+    expected_inputs = {
+        "MALF WavePosition",
+        "MALF Core trace",
+        "MALF transition trace",
+        "MALF Lifespan stats",
+        "MALF birth descriptors",
+        "MALF source lineage",
+        "WaveBehaviorSnapshot",
+        "PAS Context",
+        "PAS Directional Premise",
+    }
+    if set(registry.get("allowed_inputs", [])) != expected_inputs:
+        findings.append(Finding(path, "allowed_inputs must remain MALF + PAS-context only"))
+
+    expected_facets = {
+        "continuation_regime",
+        "stagnation_regime",
+        "transition_regime",
+        "birth_quality_regime",
+        "boundary_pressure_regime",
+        "directional_continuity_regime",
+    }
+    if set(registry.get("behavior_facets", [])) != expected_facets:
+        findings.append(Finding(path, "behavior_facets must remain the six frozen regimes"))
+
+    expected_statuses = {"strong", "weak", "mixed", "ambiguous", "not_applicable"}
+    if set(registry.get("matrix_read_statuses", [])) != expected_statuses:
+        findings.append(Finding(path, "matrix_read_statuses must remain the five frozen reads"))
+
+    expected_setup_postures = {"favored", "allowed", "deferred", "blocked"}
+    if set(registry.get("setup_postures", [])) != expected_setup_postures:
+        findings.append(Finding(path, "setup_postures must remain the four frozen postures"))
+
+    expected_setup_families = {"TST", "BOF", "BPB", "PB", "CPB"}
+    if set(registry.get("setup_families", [])) != expected_setup_families:
+        findings.append(Finding(path, "setup_families must remain the five PAS families"))
+
+    expected_surfaces = {
+        "PASStrengthWeaknessMatrix",
+        "PASStrengthWeaknessMatrixLatest",
+        "PASCandidate",
+        "PASCandidateLatest",
+        "PASLifecycleTrace",
+    }
+    if set(registry.get("service_surfaces", [])) != expected_surfaces:
+        findings.append(Finding(path, "service_surfaces must include matrix, candidate, and trace"))
+
+    forbidden_outputs = set(registry.get("forbidden_outputs", []))
+    required_forbidden_outputs = {
+        "strength_score",
+        "buy",
+        "sell",
+        "accept",
+        "reject",
+        "order",
+        "position",
+        "fill",
+        "broker_instruction",
+        "profit",
+    }
+    missing_forbidden = sorted(required_forbidden_outputs - forbidden_outputs)
+    if missing_forbidden:
+        findings.append(Finding(path, f"forbidden_outputs missing {missing_forbidden}"))
+
+    forbidden_inputs = " ".join(str(item) for item in registry.get("forbidden_inputs", []))
+    for fragment in [
+        "PriceBar",
+        "HH/HL/LL/LH",
+        "wave rewrite",
+        "WaveBehaviorSnapshot rewrite",
+    ]:
+        if fragment not in forbidden_inputs:
+            findings.append(Finding(path, f"forbidden_inputs must mention {fragment!r}"))
+
+    principles = registry.get("principles", {})
+    expected_principles = {
+        "malf_owns_structure": True,
+        "malf_v1_5_remains_behavior_source": True,
+        "pas_v1_1_remains_predecessor_authority": True,
+        "strength_weakness_matrix_is_discrete": True,
+        "pricebar_reinterpretation_for_pas": False,
+        "matrix_is_not_trade_signal": True,
+        "runtime_not_authorized": True,
+    }
+    for key, expected in expected_principles.items():
+        if principles.get(key) != expected:
+            findings.append(Finding(path, f"principles.{key} must be {expected!r}"))
+
+    return findings
+
+
+def _check_malf_pas_scenario_atlas_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "policy_status": "frozen-by-malf-pas-scenario-atlas-card-20260516-01",
+        "authority_doc": "docs/02-modules/04-malf-pas-scenario-atlas-v1.md",
+        "atlas_set": "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0",
+        "atlas_manifest": "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0/MANIFEST.json",
+        "current_malf_v1_4_anchor": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
+        "current_malf_v1_5_design_set": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5",
+        "current_pas_v1_1_design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
+        "current_pas_v1_2_design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
+        "next_card": "open-source-adapter-boundary-card",
+        "delivery_mode": "companion_atlas",
+        "visual_format": "markdown_plus_svg",
+        "historical_reference_policy": "reference_only_not_proof",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    expected_scenarios = [
+        "strength_continuation_case",
+        "weakness_rejection_case",
+        "boundary_test_case",
+        "transition_unresolved_case",
+        "no_actionable_premise_case",
+    ]
+    if registry.get("scenario_order") != expected_scenarios:
+        findings.append(Finding(path, "scenario_order must remain the five frozen atlas cases"))
+
+    expected_inputs = {
+        "MALF WavePosition",
+        "WaveBehaviorSnapshot",
+        "PAS Context",
+        "PAS Directional Premise",
+        "PAS StrengthWeaknessMatrix",
+    }
+    if set(registry.get("allowed_inputs", [])) != expected_inputs:
+        findings.append(Finding(path, "allowed_inputs must remain frozen MALF+PAS inputs only"))
+
+    forbidden_outputs = set(registry.get("forbidden_outputs", []))
+    required_forbidden_outputs = {
+        "buy",
+        "sell",
+        "hold",
+        "order",
+        "position",
+        "fill",
+        "broker_instruction",
+        "alpha_proof",
+        "formal_backtest_proof",
+        "profit",
+    }
+    missing_forbidden = sorted(required_forbidden_outputs - forbidden_outputs)
+    if missing_forbidden:
+        findings.append(Finding(path, f"forbidden_outputs missing {missing_forbidden}"))
+
+    expected_principles = {
+        "malf_owns_structure": True,
+        "pas_owns_opportunity_interpretation": True,
+        "atlas_is_companion_only": True,
+        "historical_reference_is_not_proof": True,
+        "runtime_not_authorized": True,
+        "formal_db_mutation_not_authorized": True,
+        "broker_not_authorized": True,
+    }
+    principles = registry.get("principles", {})
+    for key, expected in expected_principles.items():
+        if principles.get(key) != expected:
+            findings.append(Finding(path, f"principles.{key} must be {expected!r}"))
+
+    expected_cases = {
+        "strength_continuation_case": (
+            "strong",
+            "ATLAS_10_Strength_Continuation_Case_v1_0.md",
+            "ATLAS_10_Strength_Continuation_Case_v1_0.svg",
+        ),
+        "weakness_rejection_case": (
+            "weak",
+            "ATLAS_11_Weakness_Rejection_Case_v1_0.md",
+            "ATLAS_11_Weakness_Rejection_Case_v1_0.svg",
+        ),
+        "boundary_test_case": (
+            "mixed",
+            "ATLAS_12_Boundary_Test_Case_v1_0.md",
+            "ATLAS_12_Boundary_Test_Case_v1_0.svg",
+        ),
+        "transition_unresolved_case": (
+            "ambiguous",
+            "ATLAS_13_Transition_Unresolved_Case_v1_0.md",
+            "ATLAS_13_Transition_Unresolved_Case_v1_0.svg",
+        ),
+        "no_actionable_premise_case": (
+            "not_applicable",
+            "ATLAS_14_No_Actionable_Premise_Case_v1_0.md",
+            "ATLAS_14_No_Actionable_Premise_Case_v1_0.svg",
+        ),
+    }
+    registered_cases = {
+        item.get("case_id"): item for item in registry.get("cases", []) if isinstance(item, dict)
+    }
+    for case_id, (read_status, md_fragment, svg_fragment) in expected_cases.items():
+        case = registered_cases.get(case_id)
+        if case is None:
+            findings.append(Finding(path, f"{case_id} must be registered"))
+            continue
+        if case.get("read_status") != read_status:
+            findings.append(Finding(path, f"{case_id} read_status must be {read_status!r}"))
+        if md_fragment not in str(case.get("markdown", "")):
+            findings.append(Finding(path, f"{case_id} markdown must include {md_fragment!r}"))
+        if svg_fragment not in str(case.get("svg", "")):
+            findings.append(Finding(path, f"{case_id} svg must include {svg_fragment!r}"))
+
+    return findings
+
+
 def _check_predecessor_strength_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     expected_values = {
@@ -467,13 +723,13 @@ def _check_predecessor_strength_registry(path: Path, registry: dict[str, Any]) -
             "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5",
             "successor_authority_definition",
         ),
-        "planned_pas_v1_2_design_set": (
+        "pas_v1_2_design_set": (
             "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
-            "planned_successor_authority",
+            "successor_authority_definition",
         ),
-        "planned_malf_pas_scenario_atlas": (
+        "malf_pas_scenario_atlas": (
             "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0",
-            "planned_successor_authority",
+            "companion_authority_asset",
         ),
         "asteria_system_design_set_v1_0": (
             "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0",
@@ -620,6 +876,18 @@ def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> li
         "pas_v1_1_design_set": (
             "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
             "authority_anchor",
+        ),
+        "malf_v1_5_design_set": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5",
+            "successor_authority_definition",
+        ),
+        "pas_v1_2_design_set": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
+            "successor_authority_definition",
+        ),
+        "malf_pas_scenario_atlas": (
+            "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0",
+            "companion_authority_asset",
         ),
         "asteria_system_design_set_v1_0": (
             "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0",

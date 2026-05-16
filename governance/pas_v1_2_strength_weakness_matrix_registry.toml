@@ -1,0 +1,139 @@
+registry_version = "2026-05-16.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md"
+policy_status = "frozen-by-pas-v1-2-strength-weakness-matrix-card-20260516-01"
+design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2"
+design_manifest = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2/MANIFEST.json"
+current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+current_malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+current_pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+next_card = "malf-pas-scenario-atlas-card"
+
+semantic_chain = [
+    "MALF WavePosition",
+    "MALF WaveBehaviorSnapshot",
+    "PAS-Core",
+    "PAS-StrengthWeaknessMatrix",
+    "PAS-Lifecycle",
+    "PAS-Service",
+    "Signal",
+]
+
+allowed_inputs = [
+    "MALF WavePosition",
+    "MALF Core trace",
+    "MALF transition trace",
+    "MALF Lifespan stats",
+    "MALF birth descriptors",
+    "MALF source lineage",
+    "WaveBehaviorSnapshot",
+    "PAS Context",
+    "PAS Directional Premise",
+]
+
+behavior_facets = [
+    "continuation_regime",
+    "stagnation_regime",
+    "transition_regime",
+    "birth_quality_regime",
+    "boundary_pressure_regime",
+    "directional_continuity_regime",
+]
+
+matrix_read_statuses = [
+    "strong",
+    "weak",
+    "mixed",
+    "ambiguous",
+    "not_applicable",
+]
+
+setup_families = [
+    "TST",
+    "BOF",
+    "BPB",
+    "PB",
+    "CPB",
+]
+
+setup_postures = [
+    "favored",
+    "allowed",
+    "deferred",
+    "blocked",
+]
+
+service_surfaces = [
+    "PASStrengthWeaknessMatrix",
+    "PASStrengthWeaknessMatrixLatest",
+    "PASCandidate",
+    "PASCandidateLatest",
+    "PASLifecycleTrace",
+]
+
+forbidden_inputs = [
+    "raw PriceBar reinterpretation",
+    "direct HH/HL/LL/LH recalculation",
+    "direct wave rewrite",
+    "direct WaveBehaviorSnapshot rewrite",
+]
+
+forbidden_outputs = [
+    "strength_score",
+    "buy",
+    "sell",
+    "accept",
+    "reject",
+    "order",
+    "position",
+    "fill",
+    "broker_instruction",
+    "profit",
+]
+
+[principles]
+malf_owns_structure = true
+malf_v1_5_remains_behavior_source = true
+pas_v1_1_remains_predecessor_authority = true
+strength_weakness_matrix_is_discrete = true
+pricebar_reinterpretation_for_pas = false
+matrix_is_not_trade_signal = true
+runtime_not_authorized = true
+
+[[sources]]
+key = "current_malf_v1_4_anchor"
+path = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+role = "current immutable structure anchor and upstream lineage source"
+forbidden_role = "rewrite target, runtime authorization source, or successor replacement"
+
+[[sources]]
+key = "current_malf_v1_5_design_set"
+path = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+role = "current structural behavior fact package and sole behavior upstream"
+forbidden_role = "PAS-owned semantics, trade signal owner, or runtime authorization source"
+
+[[sources]]
+key = "current_pas_v1_1_design_set"
+path = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+role = "predecessor PAS Core / Lifecycle / Service authority reference"
+forbidden_role = "rewrite target for v1.1 original directory, runtime proof, or trade-action owner"
+
+[[sources]]
+key = "ytc_volume_2"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs/YTC卷2：市场和市场分析"
+role = "market context, support/resistance, trend, strength/weakness vocabulary, and future-path concept source"
+forbidden_role = "copied text corpus, runtime source, broker source, order owner, or profit promise"
+
+[[sources]]
+key = "ytc_volume_3"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs/YTC卷3：交易策略"
+role = "setup family, trigger, cancellation, modification, and reentry concept source"
+forbidden_role = "broker instruction, order instruction, position instruction, fill instruction, or profit promise"
+
+[[sources]]
+key = "ytc_volume_4"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs/YTC卷4：你的交易业务"
+role = "business boundary reminder only"
+forbidden_role = "PAS action owner, order owner, position owner, fill owner, broker instruction, or profit promise"

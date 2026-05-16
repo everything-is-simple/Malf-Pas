@@ -146,12 +146,14 @@ governance/pas_axiomatic_state_machine_registry.toml
 
 ## 11. 后续修订路线
 
-第 12 卡先裁决了修订路线，第 13 卡又进一步完成了 MALF v1.5 successor 设计集。
-因此当前下一步已经固定为：PAS v1.2 只能消费 MALF 输出，不得回头读 `PriceBar`。
+第 12 卡先裁决了修订路线，第 13 卡完成了 MALF v1.5 successor 设计集，第 14 卡又进一步
+把 PAS v1.2 successor 设计集冻结为离散矩阵层。
 
 ```text
 MALF v1.5 frozen output = WavePosition + wave_behavior_snapshot
 PAS v1.2 frozen input boundary = MALF outputs only
-PAS v1.2 planned rule = strength_weakness_matrix
+PAS v1.2 frozen rule = strength_weakness_matrix
 PAS still does not read PriceBar or rewrite MALF
+Scenario Atlas v1.0 is now frozen as a companion atlas
+Current live next = open-source-adapter-boundary-card
 ```

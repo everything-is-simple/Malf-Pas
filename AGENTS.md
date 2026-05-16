@@ -16,11 +16,13 @@
 10. `docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md`
 11. `docs/00-governance/04-root-directory-policy-v1.md`
 12. `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md`
-13. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-14. `docs/04-execution/00-conclusion-index-v1.md`
-15. `governance/repo_governance_registry.toml`
-16. `governance/root_directory_registry.toml`
-17. `governance/source_authority_registry.toml`
+13. `docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md`
+14. `docs/02-modules/04-malf-pas-scenario-atlas-v1.md`
+15. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+16. `docs/04-execution/00-conclusion-index-v1.md`
+17. `governance/repo_governance_registry.toml`
+18. `governance/root_directory_registry.toml`
+19. `governance/source_authority_registry.toml`
 
 ## 当前权威资产
 
@@ -33,8 +35,8 @@
 - `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4`
 - `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1`
 - `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5`（successor authority design set；已由第13卡冻结）
-- `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2`（planned successor design set；尚未施工）
-- `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0`（planned sandbox/chart atlas；尚未施工）
+- `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2`（successor authority design set；已由第14卡冻结）
+- `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0`（frozen companion atlas；已由第15卡冻结）
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`（predecessor/original reference）
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip`（predecessor/original archive）
 - `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0`
@@ -106,8 +108,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = pas-v1-2-strength-weakness-matrix-card
+live next = open-source-adapter-boundary-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = MALF v1.5 wave behavior snapshot passed
+repo status = MALF+PAS scenario atlas passed
 ```

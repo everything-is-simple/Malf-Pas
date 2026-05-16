@@ -96,3 +96,29 @@ WavePosition + wave_behavior_snapshot
 ```
 
 v1.5 只能作为 successor design set；不得回写、覆盖或伪装成 v1.4 原锚点。
+
+第 14 卡已继续把下游 PAS successor 冻结为：
+
+```text
+H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2
+```
+
+它只能消费：
+
+```text
+WavePosition + wave_behavior_snapshot
+```
+
+第 15 卡已继续把 companion 场景图谱冻结为：
+
+```text
+H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0
+```
+
+它只能用来解释：
+
+```text
+MALF v1.5 + PAS v1.2 frozen semantics
+```
+
+不得被解释成 runtime、formal backtest、broker 或 profit proof。

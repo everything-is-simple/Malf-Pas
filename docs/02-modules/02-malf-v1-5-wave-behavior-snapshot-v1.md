@@ -112,13 +112,19 @@ governance/malf_v1_5_wave_behavior_snapshot_registry.toml
 第 13 卡已建立 MALF v1.5 successor design set，并把 `wave_behavior_snapshot` 冻结为
 MALF-owned structure behavior facts。
 
-下一卡才允许进入：
+第 14 卡已经完成：
 
 ```text
 pas-v1-2-strength-weakness-matrix-card
 ```
 
-届时 PAS v1.2 只能消费：
+当前下一卡推进为：
+
+```text
+open-source-adapter-boundary-card
+```
+
+PAS v1.2 已固定只消费：
 
 ```text
 WavePosition + wave_behavior_snapshot
