@@ -12,7 +12,8 @@ flowchart TD
     F --> G[PAS v1.2 Successor]
     G --> H[MALF+PAS Scenario Atlas]
     H --> I[Open-Source Adapter Boundary]
-    I --> J[Execution Records]
+    I --> J[Roadmap 2 Data Foundation]
+    J --> K[Execution Records]
 ```
 
 ## 文件分层
@@ -59,4 +60,5 @@ All post-terminal roadmaps must be one-roadmap-one-module-db and current-module-
 Roadmap ready now requires both development usability and daily usability.
 Daily usability requires ledger, daily incremental or an explicit equivalent, dirty scope, checkpoint/resume, freshness, and audit closure.
 Formal local truth must prioritize H:\tdx_offline_Data and H:\new_tdx64.
+Roadmap 2 is docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md and is Data Foundation only.
 ```

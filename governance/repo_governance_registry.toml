@@ -42,6 +42,8 @@ required_authority_docs = [
     "AGENTS.md",
     "docs/00-governance/00-malf-pas-reconstruction-charter-v1.md",
     "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md",
+    "docs/00-governance/02-execution-record-protocol-v1.md",
+    "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
     "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md",
     "docs/00-governance/04-root-directory-policy-v1.md",
     "docs/01-architecture/00-mainline-authoritative-map-v1.md",
@@ -57,6 +59,8 @@ required_authority_docs = [
     "docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md",
     "docs/02-modules/04-malf-pas-scenario-atlas-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
+    "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+    "docs/04-execution/README.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
 

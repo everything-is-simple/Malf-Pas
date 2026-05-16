@@ -8,6 +8,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from malf_pas.governance.checks import (
+    _check_governance_roadmap_doc,
     _check_malf_pas_scenario_atlas_registry,
     _check_pas_v1_2_strength_weakness_matrix_registry,
     _check_post_terminal_roadmap_discipline_registry,
@@ -94,6 +95,34 @@ class GovernanceChecksTest(unittest.TestCase):
             ],
         )
 
+    def test_repo_registry_keeps_second_roadmap_and_execution_docs_required(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        repo_registry_path = repo_root / "governance" / "repo_governance_registry.toml"
+
+        with repo_registry_path.open("rb") as handle:
+            repo_registry = tomllib.load(handle)
+
+        required_docs = set(repo_registry.get("required_authority_docs", []))
+        self.assertTrue(
+            {
+                "docs/00-governance/02-execution-record-protocol-v1.md",
+                "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
+                "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+                "docs/04-execution/README.md",
+            }.issubset(required_docs)
+        )
+
+        findings = _check_repo_governance_registry(repo_registry_path, repo_registry)
+
+        self.assertEqual(findings, [])
+
+    def test_first_governance_roadmap_records_card_17_and_roadmap_2_handoff(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+
+        findings = _check_governance_roadmap_doc(repo_root)
+
+        self.assertEqual(findings, [])
+
     def test_governance_checks_fail_without_roadmap_ready_usability_rules(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]
         repo_registry_path = repo_root / "governance" / "repo_governance_registry.toml"
@@ -154,6 +183,37 @@ class GovernanceChecksTest(unittest.TestCase):
                 "development_usable_required_before_next_roadmap" in item.message
                 for item in discipline_findings
             )
+        )
+
+    def test_governance_checks_fail_without_second_roadmap_required_docs(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        repo_registry_path = repo_root / "governance" / "repo_governance_registry.toml"
+
+        with repo_registry_path.open("rb") as handle:
+            repo_registry = tomllib.load(handle)
+
+        stripped_registry = {
+            **repo_registry,
+            "required_authority_docs": [
+                item
+                for item in repo_registry.get("required_authority_docs", [])
+                if item
+                not in {
+                    "docs/00-governance/02-execution-record-protocol-v1.md",
+                    "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
+                    "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+                    "docs/04-execution/README.md",
+                }
+            ],
+        }
+
+        findings = _check_repo_governance_registry(repo_registry_path, stripped_registry)
+
+        self.assertTrue(
+            any("system second Data Foundation roadmap" in item.message for item in findings)
+        )
+        self.assertTrue(
+            any("execution record protocol doc" in item.message for item in findings)
         )
 
 

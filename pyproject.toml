@@ -98,6 +98,8 @@ required_docs = [
     "docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md",
     "docs/02-modules/04-malf-pas-scenario-atlas-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
+    "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+    "docs/04-execution/README.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]
 required_registries = [

@@ -213,20 +213,29 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
             findings.append(Finding(path, f"{key} must be {expected!r}"))
 
     required_docs = set(registry.get("required_authority_docs", []))
-    if "docs/01-architecture/08-open-source-adapter-boundary-v1.md" not in required_docs:
-        findings.append(
-            Finding(path, "required_authority_docs must include open-source adapter boundary doc")
-        )
-    post_terminal_discipline_doc = (
-        "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md"
-    )
-    if post_terminal_discipline_doc not in required_docs:
-        findings.append(
-            Finding(
-                path,
-                "required_authority_docs must include post-terminal roadmap discipline doc",
+    required_authority_docs = {
+        "docs/00-governance/02-execution-record-protocol-v1.md": (
+            "execution record protocol doc"
+        ),
+        "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md": (
+            "repo governance environment bootstrap doc"
+        ),
+        "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md": (
+            "post-terminal roadmap discipline doc"
+        ),
+        "docs/01-architecture/08-open-source-adapter-boundary-v1.md": (
+            "open-source adapter boundary doc"
+        ),
+        "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md": (
+            "system second Data Foundation roadmap"
+        ),
+        "docs/04-execution/README.md": "execution area entry doc",
+    }
+    for required_doc, description in required_authority_docs.items():
+        if required_doc not in required_docs:
+            findings.append(
+                Finding(path, f"required_authority_docs must include {description}")
             )
-        )
 
     if registry.get("formal_local_truth_roots") != ["H:/tdx_offline_Data", "H:/new_tdx64"]:
         findings.append(Finding(path, "formal_local_truth_roots must be the two local TDX roots"))
@@ -280,6 +289,37 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
     missing_rules = sorted(required_rules - hard_rules)
     if missing_rules:
         findings.append(Finding(path, f"hard_rules missing {missing_rules}"))
+    return findings
+
+
+def _check_governance_roadmap_doc(repo_root: Path) -> list[Finding]:
+    path = repo_root / "docs" / "03-roadmap" / "00-malf-pas-governance-roadmap-v1.md"
+    if not path.exists():
+        return [Finding(path, "first governance roadmap doc is missing")]
+
+    text = path.read_text(encoding="utf-8")
+    required_fragments = {
+        "## 3. 十七张治理卡": "roadmap 1 must say it has 17 governance cards",
+        "roadmap-ready-development-daily-usability-discipline-card": (
+            "roadmap 1 must include card 17 in the main card table and pass criteria"
+        ),
+        "development_usable + daily_usable": (
+            "roadmap 1 must carry the post-terminal dual ready discipline"
+        ),
+        "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md": (
+            "roadmap 1 must point to the system second Data Foundation roadmap"
+        ),
+        "H:\\Asteria\\.venv": (
+            "roadmap 1 must keep the previous virtualenv decision trail visible"
+        ),
+        "H:\\Malf-Pas\\.venv": (
+            "roadmap 1 must record that Malf-Pas virtualenv is recreated locally"
+        ),
+    }
+    findings: list[Finding] = []
+    for fragment, message in required_fragments.items():
+        if fragment not in text:
+            findings.append(Finding(path, message))
     return findings
 
 
@@ -1418,6 +1458,7 @@ def run_checks(repo_root: Path) -> list[Finding]:
         _check_required_paths(root, list(governance.get("required_docs", [])), findings)
         _check_required_paths(root, list(governance.get("required_plugin_files", [])), findings)
         findings.extend(_check_registries(root, governance))
+    findings.extend(_check_governance_roadmap_doc(root))
     findings.extend(_check_forbidden_repo_artifacts(root))
     findings.extend(_check_no_asteria_paths_in_plugin(root))
     return findings

@@ -22,9 +22,15 @@ no-formal-db-mutation
 no-broker
 no-profit-claim
 no-legacy-code-migration
+development-usable-required-for-subsequent-roadmaps
+daily-usable-required-for-subsequent-roadmaps
 ```
 
-## 3. 十六张治理卡
+## 3. 十七张治理卡
+
+首张治理 roadmap 的 terminal closeout 由第 16 卡完成；第 17 卡是在 terminal closeout 后追加的
+governance discipline 修正卡，只用于把后续 roadmap 的 ready 标准永久升级为
+`development_usable + daily_usable`，不重开第一张 roadmap 的 live next。
 
 | 顺序 | 卡 | 状态 | 目标 |
 |---:|---|---|---|
@@ -44,6 +50,7 @@ no-legacy-code-migration
 | 14 | `pas-v1-2-strength-weakness-matrix-card` | passed | 新建 PAS v1.2，冻结强弱识别矩阵 |
 | 15 | `malf-pas-scenario-atlas-card` | passed | 建立 MALF+PAS 沙盘模拟与图解案例集 |
 | 16 | `open-source-adapter-boundary-card` | passed | 固定开源项目的 adapter 边界 |
+| 17 | `roadmap-ready-development-daily-usability-discipline-card` | passed | 永久化后续 roadmap ready 的开发可用 + 日常可用双重门禁 |
 
 ## 4. 治理环境准备范围
 
@@ -69,6 +76,9 @@ stage = governance-only / doc-first / no-formal-db-mutation
 `repo-governance-environment-bootstrap-card` 必须把上一版系统的治理环境经验纳入第一张路线图，
 但不能把上一版 runtime、正式 DB 或模块实现直接迁入。
 
+下表所有 `H:\Asteria*` 行都只是只读历史决策轨迹；当前已经没有“继续迁移”的选项，只保留
+“经验可读、旧路径不复用、旧 runtime / schema / runner 不迁入”的冻结结论。
+
 | Asteria 来源 | Malf-Pas 第一阶段裁决 |
 |---|---|
 | `H:\Asteria\plugins` | 评估是否建立 `plugins/`，并只迁入治理 workflow 插件形态 |
@@ -79,8 +89,8 @@ stage = governance-only / doc-first / no-formal-db-mutation
 | `H:\Asteria\pyproject.toml` | 建立 Malf-Pas 自己的 package、test、ruff、mypy、governance 配置 |
 | `H:\Asteria\environment.yml` | 建立可重建环境说明；`.venv` 本身不得提交 |
 | `H:\Asteria\.gitignore` | 补齐缓存、DB、report、temp 产物忽略规则 |
-| `H:\Asteria\.codex` | 只迁入本仓库需要的 Codex 配置/技能规则；不得迁入个人秘密或绝对旧路径 |
-| `H:\Asteria\.venv` | 只作为依赖可行性参考，不复制进 repo |
+| `H:\Asteria\.codex` | 已落定为 `.codex/README.md` 与 `.codex/skills/malf-pas-governance/SKILL.md` 的 repo-local 边界；不得迁入个人秘密或绝对旧路径 |
+| `H:\Asteria\.venv` | 已落定为只读依赖可行性参考；`H:\Malf-Pas\.venv` 必须本地重建，`.venv` 不入 git |
 | `H:\Asteria\governance` | 迁入机器可读治理层的最小结构，如 registry、contract、topology 的占位与校验规则 |
 
 本卡通过后，本仓库应具备：
@@ -111,6 +121,10 @@ no copied business runtime
 | boundary freeze doc | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` |
 | root directory policy | `docs/00-governance/04-root-directory-policy-v1.md` / `governance/root_directory_registry.toml` |
 | source authority policy | `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md` / `governance/source_authority_registry.toml` |
+| virtualenv policy | `docs/00-governance/03-repo-governance-environment-bootstrap-v1.md` / `.gitignore` |
+| post-terminal roadmap discipline doc | `docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md` |
+| post-terminal roadmap discipline registry | `governance/post_terminal_roadmap_discipline_registry.toml` |
+| roadmap ready usability rules | `development_usable = true` + `daily_usable = true` before any subsequent roadmap can be ready |
 
 ## 5. 系统主线与自建/委外边界
 
@@ -569,6 +583,7 @@ none / terminal
 Next work must open a separate roadmap.
 One roadmap must correspond to one module DB.
 Current module DB ready and checks passed before the next roadmap opens.
+Subsequent roadmap ready must prove development_usable + daily_usable.
 ```
 
 ## 17. 开源 adapter 边界范围
@@ -617,6 +632,8 @@ Next work must open a separate roadmap
 | `pas-v1-2-strength-weakness-matrix-card` | PAS v1.2 新目录、`strength_weakness_matrix`、强弱证据与 MALF-only 输入边界冻结 |
 | `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟、图解案例、Markdown+SVG companion atlas 与无收益证明边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
+| `roadmap-ready-development-daily-usability-discipline-card` | 后续 roadmap ready 的 `development_usable + daily_usable` 双重门禁、`discipline_count = 12` 与负向治理检查冻结 |
+| subsequent roadmap pass criterion | 任何后续模块 roadmap 都必须同时证明 `development_usable = true`、`daily_usable = true`、repo-local checks passed、execution 四件套齐全 |
 
 ## 19. 当前结论
 
@@ -626,4 +643,6 @@ It does not authorize runtime, DB, broker, or strategy claims.
 Open-source adapter boundary is frozen.
 Current governance roadmap status is none / terminal.
 Next work must open a separate roadmap and obey one-roadmap-one-module-db discipline.
+Card 17 added the development_usable + daily_usable ready discipline after terminal closeout without reopening live next.
+Roadmap 2 = docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md (planned, post-terminal separate roadmap, Data Foundation only).
 ```

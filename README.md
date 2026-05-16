@@ -111,7 +111,8 @@ Current governance roadmap status is none / terminal.
 21. [PAS v1.2 strength weakness matrix](docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md)
 22. [MALF+PAS scenario atlas](docs/02-modules/04-malf-pas-scenario-atlas-v1.md)
 23. [首张治理路线图](docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md)
-24. [执行区入口](docs/04-execution/README.md)
+24. [系统第二张 Data Foundation 路线图](docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md)
+25. [执行区入口](docs/04-execution/README.md)
 
 ## Python 环境
 
