@@ -5,20 +5,21 @@
 ```mermaid
 flowchart TD
     A[Reconstruction Charter] --> B[Authority Rules]
-    B --> C[Mainline Map]
-    C --> D[PAS v1.1 Design Set]
-    D --> E[MALF v1.5 Successor]
-    E --> F[PAS v1.2 Successor]
-    F --> G[MALF+PAS Scenario Atlas]
-    G --> H[Open-Source Adapter Boundary]
-    H --> I[Execution Records]
+    B --> C[Post-Terminal Discipline]
+    C --> D[Mainline Map]
+    D --> E[PAS v1.1 Design Set]
+    E --> F[MALF v1.5 Successor]
+    F --> G[PAS v1.2 Successor]
+    G --> H[MALF+PAS Scenario Atlas]
+    H --> I[Open-Source Adapter Boundary]
+    I --> J[Execution Records]
 ```
 
 ## 文件分层
 
 | 目录 | 职责 |
 |---|---|
-| `00-governance` | 重构总纲、来源裁决、执行纪律、repo 治理环境 bootstrap、根目录钢铁规则 |
+| `00-governance` | 重构总纲、来源裁决、执行纪律、repo 治理环境 bootstrap、根目录钢铁规则、post-terminal roadmap 与模块库纪律 |
 | `01-architecture` | 主线权威图、MALF 锚点位置、旧系统强项地图、系统主线模块所有权、存储引擎与便携性裁决、历史大账本拓扑协议、每日增量与断点续传协议、回测窗口与留出样本协议、开源 adapter 边界 |
 | `02-modules` | 模块设计标准、PAS 公理化定义、MALF v1.5 successor、PAS v1.2 successor 与 Scenario Atlas authority 设计 |
 | `03-roadmap` | 当前路线图与卡序列 |
@@ -54,4 +55,6 @@ Book-origin brainstorming comes from G:\《股市浮沉二十载》.
 Historical implementation tradeoff references come from G:\malf-history.
 Open-source adapter boundary is now frozen.
 Current governance roadmap status is none / terminal.
+All post-terminal roadmaps must be one-roadmap-one-module-db and current-module-db-ready-first.
+Formal local truth must prioritize H:\tdx_offline_Data and H:\new_tdx64.
 ```

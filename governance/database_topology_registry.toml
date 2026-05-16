@@ -7,6 +7,10 @@ report_root = "H:/Malf-Pas-reprot"
 temp_root = "H:/Malf-Pas-temp"
 read_only_reference_root = "H:/Asteria-data"
 read_only_reference_role = "previous Asteria data root; lineage experience only; not current Malf-Pas data root or scratch"
+formal_local_truth_roots = ["H:/tdx_offline_Data", "H:/new_tdx64"]
+network_provider_formal_truth_disallowed = ["TuShare", "baostock", "AKShare"]
+next_module_db_requires_current_db_ready = true
+module_db_progression = ["Data Foundation", "MALF v1.5", "PAS v1.2", "Signal"]
 previous_validated_root = "H:/Asteria-Validated"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
@@ -152,3 +156,13 @@ description = "Cross-ledger consistency depends on lineage, manifest, and audit 
 id = "NO-FORMAL-DB-MUTATION"
 value = true
 description = "Governance-only stage cannot write formal DuckDB, SQLite, db, parquet, or sqlite artifacts."
+
+[[invariants]]
+id = "ONE-ROADMAP-ONE-MODULE-DB"
+value = true
+description = "After the first governance roadmap reaches terminal, each next roadmap may advance only one module DB or governed module-ledger boundary."
+
+[[invariants]]
+id = "NEXT-ROADMAP-REQUIRES-CURRENT-MODULE-DB-READY"
+value = true
+description = "The next roadmap cannot open until the current module DB is ready, checked, and closed truthfully."

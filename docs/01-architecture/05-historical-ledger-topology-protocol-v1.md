@@ -16,6 +16,12 @@
 `Malf-Pas` 后续所有事实库、语义账本和读出账本必须被视为同一个历史大账本的分区，
 而不是一组互不相干的散库。
 
+首张治理 roadmap 收口后，后续每张模块 roadmap 还必须遵守：
+
+1. 一张 roadmap 只对应一个模块数据库或一个模块账本边界。
+2. 当前模块数据库未 ready、未通过检查前，不得开启下一张 roadmap。
+3. 后续模块数据库都只是同一个历史大账本里的受治理分账本。
+
 | 原则 | 裁决 |
 |---|---|
 | ledger model | `one logical historical ledger with multiple governed sub-ledgers` |
@@ -86,6 +92,15 @@
 
 在 `Malf-Pas` 中，`H:\Malf-Pas-data` 才是重构后当前系统的本地数据库根目录。
 当前阶段仍不授权写入正式 DB、不执行 schema migration、不授权 runtime build。
+
+首选正式 truth source 根当前进一步收紧为：
+
+```text
+H:\tdx_offline_Data
+H:\new_tdx64
+```
+
+`TuShare / baostock / AKShare` 不得成为正式 truth owner；mock 也不得冒充正式输入真值。
 
 当前系统根目录必须按 `docs/00-governance/04-root-directory-policy-v1.md` 拆分：
 `H:\Malf-Pas-data` 放未来正式数据，`H:\Malf-Pas-backup` 放备份包，
@@ -161,3 +176,5 @@ staging promote
 | `RUN-LINEAGE-REQUIRED` | 派生事实必须保留 `run_id` 与 `source_run_id` |
 | `NO-CROSS-DB-ATOMICITY-ASSUMPTION` | 跨库一致性靠 lineage、manifest 和 audit，不靠隐含事务原子性 |
 | `NO-FORMAL-DB-MUTATION` | 当前阶段不得写入正式 DB 或正式数据根目录 |
+| `ONE-ROADMAP-ONE-MODULE-DB` | 首张治理 roadmap 收口后，后续每张 roadmap 只允许推进一个模块数据库 |
+| `NEXT-ROADMAP-REQUIRES-CURRENT-MODULE-DB-READY` | 当前模块数据库未 ready、未通过检查前，不得开启下一张 roadmap |

@@ -82,6 +82,7 @@ required_docs = [
     "docs/00-governance/02-execution-record-protocol-v1.md",
     "docs/00-governance/03-repo-governance-environment-bootstrap-v1.md",
     "docs/00-governance/04-root-directory-policy-v1.md",
+    "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md",
     "docs/01-architecture/00-mainline-authoritative-map-v1.md",
     "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
     "docs/01-architecture/02-predecessor-strength-map-v1.md",
@@ -117,6 +118,7 @@ required_registries = [
     "governance/backtest_window_holdout_registry.toml",
     "governance/environment_bootstrap_registry.toml",
     "governance/open_source_adapter_boundary_registry.toml",
+    "governance/post_terminal_roadmap_discipline_registry.toml",
     "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [

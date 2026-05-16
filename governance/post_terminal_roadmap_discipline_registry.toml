@@ -1,0 +1,96 @@
+registry_version = "2026-05-16.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+policy_status = "adopted-after-first-governance-roadmap-terminal"
+authority_doc = "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md"
+current_repo_state = "first-governance-roadmap-terminal"
+discipline_count = 10
+post_terminal_separate_roadmap_required = true
+one_roadmap_one_module_db = true
+current_module_db_ready_before_next_roadmap = true
+advance_only_after_checks_pass = true
+read_only_bootstrap_reference_root = "H:/Asteria-data"
+read_only_bootstrap_reference_role = "bootstrap reference and historical-ledger experience only; not current output root or scratch"
+
+formal_local_truth_roots = [
+    "H:/tdx_offline_Data",
+    "H:/new_tdx64",
+]
+
+network_provider_formal_truth_disallowed = [
+    "TuShare",
+    "baostock",
+    "AKShare",
+]
+
+mock_allowed_scopes = [
+    "unit_test",
+    "contract_test",
+    "proof_harness",
+]
+
+post_data_priority_chain = [
+    "MALF",
+    "PAS",
+    "Signal",
+]
+
+module_db_progression = [
+    "Data Foundation",
+    "MALF v1.5",
+    "PAS v1.2",
+    "Signal",
+]
+
+historical_ledger_rule = "one logical historical ledger with governed sub-ledgers"
+
+[[disciplines]]
+order = 1
+rule_id = "POST-TERMINAL-SEPARATE-ROADMAP-ONLY"
+summary = "After the first governance roadmap reaches none / terminal, all follow-up work must open a separate roadmap."
+
+[[disciplines]]
+order = 2
+rule_id = "ONE-ROADMAP-ONE-MODULE-DB"
+summary = "Each new roadmap must correspond to exactly one module database or one governed module-ledger boundary."
+
+[[disciplines]]
+order = 3
+rule_id = "CURRENT-MODULE-DB-READY-BEFORE-NEXT-ROADMAP"
+summary = "The next roadmap cannot open until the current module database is built, checked, and closed truthfully."
+
+[[disciplines]]
+order = 4
+rule_id = "POST-DATA-CORE-PRIORITY-MALF-PAS-SIGNAL"
+summary = "After Data Foundation, the system's irreplaceable core priority chain is MALF -> PAS -> Signal."
+
+[[disciplines]]
+order = 5
+rule_id = "LOCAL-TDX-FORMAL-TRUTH-SOURCE"
+summary = "Formal local truth sources must prioritize H:/tdx_offline_Data and H:/new_tdx64."
+
+[[disciplines]]
+order = 6
+rule_id = "NO-NETWORK-PROVIDER-FORMAL-TRUTH"
+summary = "TuShare, baostock, and AKShare cannot become formal truth owners."
+
+[[disciplines]]
+order = 7
+rule_id = "MOCK-ONLY-FOR-TESTS-AND-PROOF"
+summary = "Mock data is restricted to tests, contracts, and proof harnesses and cannot act as formal truth."
+
+[[disciplines]]
+order = 8
+rule_id = "ASTERIA-DATA-READ-ONLY-BOOTSTRAP-REFERENCE"
+summary = "H:/Asteria-data is read-only bootstrap reference input and historical-ledger experience only."
+
+[[disciplines]]
+order = 9
+rule_id = "MODULE-DBS-ARE-GOVERNED-SUB-LEDGERS"
+summary = "All future module databases are governed sub-ledgers inside one logical historical ledger."
+
+[[disciplines]]
+order = 10
+rule_id = "ADVANCE-ONLY-AFTER-CHECKS-PASS"
+summary = "A module roadmap can advance only after docs, registry, checks, and closure evidence pass."

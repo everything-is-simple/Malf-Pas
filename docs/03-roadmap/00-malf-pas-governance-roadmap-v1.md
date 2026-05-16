@@ -563,6 +563,14 @@ Runtime / formal DB / broker / profit claims = not authorized
 none / terminal
 ```
 
+首张治理 roadmap 收口后的新纪律：
+
+```text
+Next work must open a separate roadmap.
+One roadmap must correspond to one module DB.
+Current module DB ready and checks passed before the next roadmap opens.
+```
+
 ## 17. 开源 adapter 边界范围
 
 `open-source-adapter-boundary-card-20260516-01` 已把第 16 卡从 `planned` 推进为
@@ -617,4 +625,5 @@ This roadmap is legislation-first.
 It does not authorize runtime, DB, broker, or strategy claims.
 Open-source adapter boundary is frozen.
 Current governance roadmap status is none / terminal.
+Next work must open a separate roadmap and obey one-roadmap-one-module-db discipline.
 ```

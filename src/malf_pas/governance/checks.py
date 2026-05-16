@@ -183,9 +183,15 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_malf_pas_revision_roadmap_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/database_topology_registry.toml":
+            findings.extend(_check_database_topology_registry(repo_root / raw_path, registry))
         if raw_path == "governance/open_source_adapter_boundary_registry.toml":
             findings.extend(
                 _check_open_source_adapter_boundary_registry(repo_root / raw_path, registry)
+            )
+        if raw_path == "governance/post_terminal_roadmap_discipline_registry.toml":
+            findings.extend(
+                _check_post_terminal_roadmap_discipline_registry(repo_root / raw_path, registry)
             )
     return findings
 
@@ -211,6 +217,193 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         findings.append(
             Finding(path, "required_authority_docs must include open-source adapter boundary doc")
         )
+    if "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md" not in required_docs:
+        findings.append(
+            Finding(path, "required_authority_docs must include post-terminal roadmap discipline doc")
+        )
+
+    if registry.get("formal_local_truth_roots") != ["H:/tdx_offline_Data", "H:/new_tdx64"]:
+        findings.append(Finding(path, "formal_local_truth_roots must be the two local TDX roots"))
+
+    if registry.get("network_provider_formal_truth_disallowed") != [
+        "TuShare",
+        "baostock",
+        "AKShare",
+    ]:
+        findings.append(
+            Finding(
+                path,
+                "network_provider_formal_truth_disallowed must be TuShare, baostock, AKShare",
+            )
+        )
+
+    if registry.get("read_only_bootstrap_reference_root") != "H:/Asteria-data":
+        findings.append(Finding(path, "read_only_bootstrap_reference_root must be H:/Asteria-data"))
+
+    if registry.get("post_data_priority_chain") != ["MALF", "PAS", "Signal"]:
+        findings.append(Finding(path, "post_data_priority_chain must be MALF -> PAS -> Signal"))
+
+    if registry.get("module_db_progression") != [
+        "Data Foundation",
+        "MALF v1.5",
+        "PAS v1.2",
+        "Signal",
+    ]:
+        findings.append(
+            Finding(
+                path,
+                "module_db_progression must be Data Foundation -> MALF v1.5 -> PAS v1.2 -> Signal",
+            )
+        )
+
+    hard_rules = set(registry.get("hard_rules", []))
+    required_rules = {
+        "post-terminal-separate-roadmap-only",
+        "one-roadmap-one-module-db",
+        "current-module-db-ready-before-next-roadmap",
+        "post-data-core-priority-malf-pas-signal",
+        "local-tdx-formal-truth-source",
+        "no-network-provider-formal-truth",
+        "mock-only-for-tests-and-proof",
+        "asteria-data-read-only-bootstrap-reference",
+        "module-dbs-are-governed-sub-ledgers",
+        "advance-only-after-checks-pass",
+    }
+    missing_rules = sorted(required_rules - hard_rules)
+    if missing_rules:
+        findings.append(Finding(path, f"hard_rules missing {missing_rules}"))
+    return findings
+
+
+def _check_post_terminal_roadmap_discipline_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values: dict[str, Any] = {
+        "registry_version": "2026-05-16.v1",
+        "stage": "governance-only",
+        "formal_db_mutation": "no",
+        "broker_feasibility": "deferred",
+        "policy_status": "adopted-after-first-governance-roadmap-terminal",
+        "authority_doc": "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md",
+        "current_repo_state": "first-governance-roadmap-terminal",
+        "discipline_count": 10,
+        "post_terminal_separate_roadmap_required": True,
+        "one_roadmap_one_module_db": True,
+        "current_module_db_ready_before_next_roadmap": True,
+        "advance_only_after_checks_pass": True,
+        "read_only_bootstrap_reference_root": "H:/Asteria-data",
+        "historical_ledger_rule": "one logical historical ledger with governed sub-ledgers",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    if registry.get("formal_local_truth_roots") != ["H:/tdx_offline_Data", "H:/new_tdx64"]:
+        findings.append(Finding(path, "formal_local_truth_roots must be the two local TDX roots"))
+
+    if registry.get("network_provider_formal_truth_disallowed") != [
+        "TuShare",
+        "baostock",
+        "AKShare",
+    ]:
+        findings.append(
+            Finding(
+                path,
+                "network_provider_formal_truth_disallowed must be TuShare, baostock, AKShare",
+            )
+        )
+
+    if registry.get("mock_allowed_scopes") != ["unit_test", "contract_test", "proof_harness"]:
+        findings.append(
+            Finding(
+                path,
+                "mock_allowed_scopes must be unit_test, contract_test, proof_harness",
+            )
+        )
+
+    if registry.get("post_data_priority_chain") != ["MALF", "PAS", "Signal"]:
+        findings.append(Finding(path, "post_data_priority_chain must be MALF -> PAS -> Signal"))
+
+    if registry.get("module_db_progression") != [
+        "Data Foundation",
+        "MALF v1.5",
+        "PAS v1.2",
+        "Signal",
+    ]:
+        findings.append(
+            Finding(
+                path,
+                "module_db_progression must be Data Foundation -> MALF v1.5 -> PAS v1.2 -> Signal",
+            )
+        )
+
+    disciplines = registry.get("disciplines", [])
+    if len(disciplines) != 10:
+        findings.append(Finding(path, "disciplines must contain exactly 10 entries"))
+        return findings
+
+    expected_rule_ids = [
+        "POST-TERMINAL-SEPARATE-ROADMAP-ONLY",
+        "ONE-ROADMAP-ONE-MODULE-DB",
+        "CURRENT-MODULE-DB-READY-BEFORE-NEXT-ROADMAP",
+        "POST-DATA-CORE-PRIORITY-MALF-PAS-SIGNAL",
+        "LOCAL-TDX-FORMAL-TRUTH-SOURCE",
+        "NO-NETWORK-PROVIDER-FORMAL-TRUTH",
+        "MOCK-ONLY-FOR-TESTS-AND-PROOF",
+        "ASTERIA-DATA-READ-ONLY-BOOTSTRAP-REFERENCE",
+        "MODULE-DBS-ARE-GOVERNED-SUB-LEDGERS",
+        "ADVANCE-ONLY-AFTER-CHECKS-PASS",
+    ]
+    actual_rule_ids = [item.get("rule_id") for item in disciplines if isinstance(item, dict)]
+    if actual_rule_ids != expected_rule_ids:
+        findings.append(Finding(path, "disciplines.rule_id sequence must match the 10 frozen rules"))
+    return findings
+
+
+def _check_database_topology_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    if registry.get("formal_local_truth_roots") != ["H:/tdx_offline_Data", "H:/new_tdx64"]:
+        findings.append(
+            Finding(path, "formal_local_truth_roots must be H:/tdx_offline_Data and H:/new_tdx64")
+        )
+    if registry.get("network_provider_formal_truth_disallowed") != [
+        "TuShare",
+        "baostock",
+        "AKShare",
+    ]:
+        findings.append(
+            Finding(
+                path,
+                "network_provider_formal_truth_disallowed must be TuShare, baostock, AKShare",
+            )
+        )
+    if registry.get("next_module_db_requires_current_db_ready") is not True:
+        findings.append(Finding(path, "next_module_db_requires_current_db_ready must be true"))
+    if registry.get("module_db_progression") != [
+        "Data Foundation",
+        "MALF v1.5",
+        "PAS v1.2",
+        "Signal",
+    ]:
+        findings.append(
+            Finding(
+                path,
+                "module_db_progression must be Data Foundation -> MALF v1.5 -> PAS v1.2 -> Signal",
+            )
+        )
+
+    invariants = {
+        item.get("id"): item.get("value")
+        for item in registry.get("invariants", [])
+        if isinstance(item, dict)
+    }
+    for invariant_id in [
+        "ONE-ROADMAP-ONE-MODULE-DB",
+        "NEXT-ROADMAP-REQUIRES-CURRENT-MODULE-DB-READY",
+    ]:
+        if invariants.get(invariant_id) is not True:
+            findings.append(Finding(path, f"{invariant_id} invariant must be true"))
     return findings
 
 

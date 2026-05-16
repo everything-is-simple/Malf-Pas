@@ -36,6 +36,16 @@
 | 第一阶段是否讨论 broker | 否 |
 | 谁是当前真正要重做的核心 | `PAS` |
 
+首张治理 roadmap 收口后的新增纪律：
+
+```text
+post-terminal work must open a separate roadmap
+one roadmap = one module db
+current module db ready before next roadmap
+post-data core priority = MALF -> PAS -> Signal
+formal local truth source = H:\tdx_offline_Data + H:\new_tdx64
+```
+
 ## 3. 第一阶段边界
 
 当前阶段固定为：
@@ -131,3 +141,22 @@ flowchart LR
 5. 完成 MALF v1.5 successor 设计集并冻结 `wave_behavior_snapshot`。
 6. 完成场景图谱与开源适配器边界冻结。
 7. 建立 execution 四件套模板和结论索引。
+
+## 8. 首张治理 roadmap 收口后的推进纪律
+
+首张治理 roadmap 已收口为：
+
+```text
+none / terminal
+```
+
+因此后续推进不再允许“沿着同一张治理路线图继续加卡”。
+
+后续路线必须遵守：
+
+1. 新开独立 roadmap。
+2. 每张 roadmap 只对应一个模块数据库。
+3. 当前模块数据库未 ready 前，不得开启下一张 roadmap。
+4. `Data` 之后的核心兵力优先投入 `MALF -> PAS -> Signal`。
+5. 正式输入真值优先使用 `H:\tdx_offline_Data` 与 `H:\new_tdx64`。
+6. `H:\Asteria-data` 只作 bootstrap 只读参考，不作当前系统输出根。

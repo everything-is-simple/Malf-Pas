@@ -7,23 +7,25 @@
 1. `README.md`
 2. `docs/00-governance/00-malf-pas-reconstruction-charter-v1.md`
 3. `docs/00-governance/01-source-authority-and-non-migration-rule-v1.md`
-4. `docs/01-architecture/00-mainline-authoritative-map-v1.md`
-5. `docs/01-architecture/01-malf-v1-4-anchor-position-v1.md`
-6. `docs/01-architecture/03-system-mainline-module-ownership-v1.md`
-7. `docs/01-architecture/04-storage-engine-and-portability-decision-v1.md`
-8. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
-9. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
-10. `docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md`
-11. `docs/01-architecture/08-open-source-adapter-boundary-v1.md`
-12. `docs/00-governance/04-root-directory-policy-v1.md`
-13. `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md`
-14. `docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md`
-15. `docs/02-modules/04-malf-pas-scenario-atlas-v1.md`
-16. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-17. `docs/04-execution/00-conclusion-index-v1.md`
-18. `governance/repo_governance_registry.toml`
-19. `governance/root_directory_registry.toml`
-20. `governance/source_authority_registry.toml`
+4. `docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md`
+5. `docs/01-architecture/00-mainline-authoritative-map-v1.md`
+6. `docs/01-architecture/01-malf-v1-4-anchor-position-v1.md`
+7. `docs/01-architecture/03-system-mainline-module-ownership-v1.md`
+8. `docs/01-architecture/04-storage-engine-and-portability-decision-v1.md`
+9. `docs/01-architecture/05-historical-ledger-topology-protocol-v1.md`
+10. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
+11. `docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md`
+12. `docs/01-architecture/08-open-source-adapter-boundary-v1.md`
+13. `docs/00-governance/04-root-directory-policy-v1.md`
+14. `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md`
+15. `docs/02-modules/03-pas-v1-2-strength-weakness-matrix-v1.md`
+16. `docs/02-modules/04-malf-pas-scenario-atlas-v1.md`
+17. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+18. `docs/04-execution/00-conclusion-index-v1.md`
+19. `governance/repo_governance_registry.toml`
+20. `governance/root_directory_registry.toml`
+21. `governance/source_authority_registry.toml`
+22. `governance/post_terminal_roadmap_discipline_registry.toml`
 
 ## 当前权威资产
 
@@ -65,6 +67,16 @@
 - 上一版 `H:\Asteria*` 目录只作只读参考，不得作为当前系统 output root 或 scratch。
 - `G:\《股市浮沉二十载》` 是 PAS 概念、思路风暴、context/trigger/strength/lifecycle 的来源根；不得解释成运行代码、正式数据或交易指令来源。
 - `G:\malf-history` 是曾经做过但未完成的历史版本与模块取舍参考根；可读实现理由、权衡折衷、样本和失败教训，不得迁移旧 schema、runner 或代码表面。
+- 首张治理 roadmap 收口后，后续工作必须新开独立 roadmap，不得继续占用 `none / terminal` 的路线图。
+- 每一张后续 roadmap 必须只对应一个模块数据库或一个模块账本边界。
+- 当前模块数据库未建好、未通过检查、未形成闭环前，不得开启下一张 roadmap。
+- `Data` 之后的核心兵力优先投入 `MALF -> PAS -> Signal`。
+- 正式输入真值优先来自 `H:\tdx_offline_Data` 与 `H:\new_tdx64`。
+- `TuShare / baostock / AKShare` 不得成为正式 truth owner。
+- mock 只能用于 `unit test / contract test / proof harness`，不得冒充正式 truth。
+- `H:\Asteria-data` 只能作为 `Data Foundation` bootstrap 只读参考，不得成为当前 output root 或 scratch。
+- 后续各模块数据库都属于同一个历史大账本的受治理分账本，不得被理解成散库集合。
+- 任何模块 roadmap 都必须先通过 doc / registry / doctor / governance / unittest 检查，才能推进下一步。
 - repo 根目录不得落缓存、临时 DB、临时报告或运行产物。
 
 ## 工具顺序

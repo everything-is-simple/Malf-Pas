@@ -19,6 +19,7 @@ pas_v1_2_strength_weakness_matrix_registry = "governance/pas_v1_2_strength_weakn
 malf_pas_scenario_atlas_registry = "governance/malf_pas_scenario_atlas_registry.toml"
 malf_pas_revision_roadmap_registry = "governance/malf_pas_revision_roadmap_registry.toml"
 open_source_adapter_boundary_registry = "governance/open_source_adapter_boundary_registry.toml"
+post_terminal_roadmap_discipline_registry = "governance/post_terminal_roadmap_discipline_registry.toml"
 current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
 malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
 pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
@@ -30,12 +31,18 @@ pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
 current_allowed_next_card = ""
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
+formal_local_truth_roots = ["H:/tdx_offline_Data", "H:/new_tdx64"]
+network_provider_formal_truth_disallowed = ["TuShare", "baostock", "AKShare"]
+read_only_bootstrap_reference_root = "H:/Asteria-data"
+post_data_priority_chain = ["MALF", "PAS", "Signal"]
+module_db_progression = ["Data Foundation", "MALF v1.5", "PAS v1.2", "Signal"]
 
 required_authority_docs = [
     "README.md",
     "AGENTS.md",
     "docs/00-governance/00-malf-pas-reconstruction-charter-v1.md",
     "docs/00-governance/01-source-authority-and-non-migration-rule-v1.md",
+    "docs/00-governance/05-post-terminal-roadmap-and-module-db-discipline-v1.md",
     "docs/00-governance/04-root-directory-policy-v1.md",
     "docs/01-architecture/00-mainline-authoritative-map-v1.md",
     "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
@@ -63,4 +70,14 @@ hard_rules = [
     "no-legacy-code-migration",
     "six-root-directory-policy",
     "book-and-history-reference-policy",
+    "post-terminal-separate-roadmap-only",
+    "one-roadmap-one-module-db",
+    "current-module-db-ready-before-next-roadmap",
+    "post-data-core-priority-malf-pas-signal",
+    "local-tdx-formal-truth-source",
+    "no-network-provider-formal-truth",
+    "mock-only-for-tests-and-proof",
+    "asteria-data-read-only-bootstrap-reference",
+    "module-dbs-are-governed-sub-ledgers",
+    "advance-only-after-checks-pass",
 ]
