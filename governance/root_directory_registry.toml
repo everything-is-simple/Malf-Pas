@@ -22,6 +22,7 @@ key = "backup_root"
 path = "H:/Malf-Pas-backup"
 role = "backup packages, delivery zips, recoverable snapshots"
 write_policy = "backup packages only; not historical experience or scratch"
+archive_layout_convention = "snapshot packages use a single top-level directory named after the snapshot; standalone authority zip copies use flat layout with files at zip root; both layouts are valid; the sibling manifest preferred_recoverable_copy field identifies the canonical snapshot"
 
 [[current_roots]]
 key = "validated_root"
