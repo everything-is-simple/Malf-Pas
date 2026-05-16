@@ -6,7 +6,7 @@
 flowchart TD
     A[Reconstruction Charter] --> B[Authority Rules]
     B --> C[Mainline Map]
-    C --> D[PAS State Machine]
+    C --> D[PAS v1.1 Design Set]
     D --> E[Governance Roadmap]
     E --> F[Execution Records]
 ```
@@ -24,7 +24,9 @@ flowchart TD
 ## 外部权威锚点
 
 ```text
-H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4
+H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4
+H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1
+H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4 (predecessor/original reference)
 ```
 
 当前定位：
@@ -32,6 +34,7 @@ H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4
 ```text
 MALF defines structure facts.
 PAS interprets opportunity.
+PAS v1.1 starts from MALF WavePosition, identifies strength / weakness, rejects weakness, and joins strength.
 Signal decides candidate acceptance.
 Data and System boundaries stay self-owned.
 Storage switch requires independent proof.

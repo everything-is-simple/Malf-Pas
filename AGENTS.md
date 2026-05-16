@@ -29,8 +29,10 @@
 - `H:\Malf-Pas-Validated`
 - `H:\Malf-Pas-reprot`
 - `H:\Malf-Pas-temp`
-- `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`
-- `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip`
+- `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4`
+- `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1`
+- `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`（predecessor/original reference）
+- `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip`（predecessor/original archive）
 - `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0`
 - `H:\Asteria-Validated\MALF-system-history`
 - `H:\Asteria-Validated\MALF-reference`
@@ -100,8 +102,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = pas-axiomatic-state-machine-card
+live next = open-source-adapter-boundary-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = predecessor strength map passed
+repo status = PAS v1.1 design set passed
 ```

@@ -8,19 +8,35 @@ next_card = "pas-axiomatic-state-machine-card"
 
 [[sources]]
 key = "malf_v1_4_anchor"
-path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+path = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
 classification = "authority_anchor"
-absorbable_strength = "MALF v1.4 structure fact, WavePosition, transition, boundary, and authority package discipline"
+absorbable_strength = "current MALF v1.4 structure fact, WavePosition, transition, boundary, and authority package discipline"
 forbidden_role = "downstream redefinition, runtime proof, schema transplant, runner transplant, or broker proof"
 downstream_use = "immutable structure input for PAS, Signal, Position, Portfolio Plan, Trade, and System Readout"
 
 [[sources]]
-key = "malf_v1_4_anchor_zip"
+key = "malf_v1_4_predecessor_original"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+classification = "authority_anchor"
+absorbable_strength = "predecessor/original MALF v1.4 authority source and lineage reference"
+forbidden_role = "current output root, downstream redefinition, runtime proof, schema transplant, runner transplant, or broker proof"
+downstream_use = "authority lineage and predecessor comparison only"
+
+[[sources]]
+key = "malf_v1_4_predecessor_original_zip"
 path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
 classification = "authority_anchor"
-absorbable_strength = "recoverable archive copy for MALF v1.4 authority package boundary"
-forbidden_role = "replacement for directory anchor, migrated schema source, runner source, or runtime artifact"
+absorbable_strength = "recoverable predecessor archive copy for MALF v1.4 authority package boundary"
+forbidden_role = "replacement for current directory anchor, migrated schema source, runner source, or runtime artifact"
 downstream_use = "archive boundary verification only"
+
+[[sources]]
+key = "pas_v1_1_design_set"
+path = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+classification = "authority_anchor"
+absorbable_strength = "PAS v1.1 Core / Lifecycle / Service structure built from MALF WavePosition"
+forbidden_role = "runtime proof, schema transplant, runner transplant, broker proof, order instruction, position instruction, fill instruction, or profit promise"
+downstream_use = "current PAS authority input for Signal candidate handoff"
 
 [[sources]]
 key = "asteria_system_design_set_v1_0"

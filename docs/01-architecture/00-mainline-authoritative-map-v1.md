@@ -29,7 +29,7 @@ flowchart LR
 |---|---|---|
 | `Data Foundation` | 数据事实合同层 | 拥有 source manifest、ledger key、可交易事实、provider adapter 入口边界 |
 | `MALF v1.4` | 结构事实层 | 拥有波段、transition、boundary、WavePosition 语义 |
-| `PAS` | 机会解释层 | 拥有 context、trigger、strength、lifecycle、historical rank 语义 |
+| `PAS` | 机会解释层 | 拥有从 MALF WavePosition 出发的 context、trigger、strength / weakness、lifecycle、candidate 语义 |
 | `Signal` | 候选裁决层 | 拥有 accept / reject 决策账本语义 |
 | `Position` | 持仓管理语义层 | 拥有 T1/T2、保本、跟踪、entry / exit plan 语义 |
 | `Portfolio Plan` | 组合计划层 | 拥有组合准入、目标暴露、trim 语义；第一阶段保留轻量层 |

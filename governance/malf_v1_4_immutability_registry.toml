@@ -4,9 +4,11 @@ formal_db_mutation = "no"
 broker_feasibility = "deferred"
 authority_doc = "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md"
 policy_status = "frozen-by-malf-v1-4-immutability-anchor-card-20260515-01"
-anchor_directory = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
-anchor_zip = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
-anchor_manifest = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
+anchor_directory = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+anchor_manifest = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
+predecessor_original_directory = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+predecessor_original_zip = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
+predecessor_original_manifest = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
 runtime_authorized = false
 formal_db_mutation_authorized = false
 downstream_redefinition_authorized = false
@@ -14,7 +16,7 @@ legacy_schema_migration_authorized = false
 
 [[invariants]]
 invariant_id = "MALF-V1-4-ANCHOR"
-invariant = "MALF v1.4 is the only structure anchor for this reconstruction stage."
+invariant = "MALF v1.4 in H:/Malf-Pas-Validated is the current system structure anchor; H:/Asteria-Validated is predecessor/original reference."
 required = true
 
 [[invariants]]
@@ -51,4 +53,3 @@ required = true
 invariant_id = "MANIFEST-IS-BOUNDARY-EVIDENCE"
 invariant = "MANIFEST.json proves the v1.4 package boundary, not runtime execution."
 required = true
-

@@ -6,9 +6,12 @@
 
 ## 1. 定位
 
-`H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` 是本系统的长期 `authority_anchor`。
+`H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` 是本系统当前长期 `authority_anchor`。
 
-`H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` 是该锚点的可恢复归档副本。
+`H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` 和
+`H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` 是 predecessor/original source
+reference，用来证明来源、追溯和对照。
+
 目录内 `MANIFEST.json` 是锚点包的文件清单、边界说明和禁止解释入口。
 
 三者只能用于确认 MALF v1.4 的结构事实、WavePosition、transition、boundary 与操作边界。
@@ -41,7 +44,7 @@ flowchart TD
 
 | invariant_id | invariant |
 |---|---|
-| `MALF-V1-4-ANCHOR` | MALF v1.4 是唯一结构锚点 |
+| `MALF-V1-4-ANCHOR` | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` 是当前唯一结构锚点 |
 | `STRUCTURE-FIRST` | 所有机会解释必须建立在 MALF 结构事实上 |
 | `NO-PAS-REWRITE` | PAS 不得重写 MALF 定义 |
 | `NO-SIGNAL-REWRITE` | Signal 不得回写或重写 MALF 定义 |
@@ -72,4 +75,10 @@ docs/04-execution/records/governance/009-malf-v1-4-immutability-anchor-card-2026
 
 ```text
 predecessor-strength-map-card
+```
+
+第 11 卡已在当前 authority surface 中进一步把 PAS v1.1 设计集锚定为：
+
+```text
+H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1
 ```

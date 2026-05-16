@@ -92,7 +92,7 @@ Data Foundation
 | `historical-ledger-topology-protocol-card` | 历史大账本、子库共同键、run lineage、source manifest 规则 |
 | `daily-incremental-and-resume-protocol-card` | 每日增量、dirty scope、checkpoint、resume、staging promote |
 | `backtest-window-and-holdout-protocol-card` | 2012..2021、三年滚动、留出样本边界 |
-| `pas-axiomatic-state-machine-card` | PAS 最小状态机与七层语义 |
+| `pas-axiomatic-state-machine-card` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service |
 | `open-source-adapter-boundary-card` | 开源项目逐项 adapter 边界 |
 
 ## 8. 冻结结论

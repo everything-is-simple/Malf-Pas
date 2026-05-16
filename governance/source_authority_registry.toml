@@ -7,17 +7,31 @@ policy_status = "frozen-by-source-authority-and-non-migration-rule-card-20260515
 
 [[sources]]
 key = "malf_v1_4_anchor"
-path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+path = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
 classification = "authority_anchor"
-allowed_role = "structure fact, WavePosition, transition, boundary authority anchor"
+allowed_role = "current system structure fact, WavePosition, transition, boundary authority anchor"
 forbidden_role = "downstream redefinition target"
 
 [[sources]]
-key = "malf_v1_4_anchor_zip"
+key = "malf_v1_4_predecessor_original"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+classification = "authority_anchor"
+allowed_role = "predecessor/original source reference for MALF v1.4 authority lineage"
+forbidden_role = "current output root, runtime artifact, migrated schema source, or downstream redefinition target"
+
+[[sources]]
+key = "malf_v1_4_predecessor_original_zip"
 path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip"
 classification = "authority_anchor"
-allowed_role = "recoverable archive copy for MALF v1.4 authority anchor verification"
+allowed_role = "recoverable predecessor archive copy for MALF v1.4 authority lineage"
 forbidden_role = "runtime artifact, migrated schema source, or downstream redefinition target"
+
+[[sources]]
+key = "pas_v1_1_design_set"
+path = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+classification = "authority_anchor"
+allowed_role = "current PAS v1.1 Core / Lifecycle / Service authority design set"
+forbidden_role = "runtime proof, schema source, runner source, broker instruction, order owner, position owner, fill owner, or profit promise"
 
 [[sources]]
 key = "asteria_system_design_set_v1_0"

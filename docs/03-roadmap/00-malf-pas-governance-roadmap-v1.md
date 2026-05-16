@@ -38,7 +38,7 @@ no-legacy-code-migration
 | 8 | `source-authority-and-non-migration-rule-card` | passed | 冻结来源分类与非迁移规则 |
 | 9 | `malf-v1-4-immutability-anchor-card` | passed | 锚定 MALF v1.4 的系统位置与不变量 |
 | 10 | `predecessor-strength-map-card` | passed | 盘点旧系统与历史资料的最出彩强项 |
-| 11 | `pas-axiomatic-state-machine-card` | planned | 冻结 PAS 最小状态机与七层语义 |
+| 11 | `pas-axiomatic-state-machine-card` | passed | 冻结 PAS v1.1 三件套正式设计集 |
 | 12 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
 
 ## 4. 治理环境准备范围
@@ -401,7 +401,41 @@ Runtime / formal DB / broker / profit claims = not authorized
 pas-axiomatic-state-machine-card
 ```
 
-## 12. 通过标准
+## 12. PAS v1.1 三件套设计集范围
+
+`pas-axiomatic-state-machine-card-20260515-01` 已把第 11 卡从“最小状态机”升级为
+PAS v1.1 三件套正式设计集冻结。
+
+本卡已冻结的正式入口：
+
+```text
+H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1
+docs/02-modules/01-pas-axiomatic-state-machine-v1.md
+governance/pas_axiomatic_state_machine_registry.toml
+docs/04-execution/records/governance/011-pas-axiomatic-state-machine-card-20260515-01.conclusion.md
+```
+
+本卡通过后，第一阶段 PAS 裁决固定为：
+
+```text
+PAS v1.1 starts from MALF WavePosition, not PriceBar
+MALF owns structure
+PAS owns opportunity interpretation
+Signal owns accept/reject
+Position / Trade own management and action
+PAS purpose = identify strength / weakness, reject weakness, join strength
+PAS output = PASCandidate / PASCandidateLatest / PASLifecycleTrace
+PAS forbidden outputs = order / position / fill / profit / broker instruction
+Runtime / formal DB / broker / profit claims = not authorized
+```
+
+第 11 卡通过后，live next 推进为：
+
+```text
+open-source-adapter-boundary-card
+```
+
+## 13. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -415,10 +449,10 @@ pas-axiomatic-state-machine-card
 | `source-authority-and-non-migration-rule-card` | 分类枚举与非迁移规则冻结 |
 | `malf-v1-4-immutability-anchor-card` | MALF 锚点与不变量列明 |
 | `predecessor-strength-map-card` | 每个主要来源都有可吸收强项与禁止迁移说明 |
-| `pas-axiomatic-state-machine-card` | lifecycle、七层语义、handoff 边界冻结 |
+| `pas-axiomatic-state-machine-card` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service、handoff 边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 13. 当前结论
+## 14. 当前结论
 
 ```text
 This roadmap is legislation-first.

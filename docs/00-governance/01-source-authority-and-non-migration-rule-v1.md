@@ -25,8 +25,10 @@
 
 | 来源 | 分类 | 裁决 |
 |---|---|---|
-| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | 结构事实、WavePosition、transition、boundary 的唯一上游锚点 |
-| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` | `authority_anchor` | MALF v1.4 锚点的归档副本；只作锚点校验和可恢复输入，不替代目录锚点 |
+| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | 当前系统结构事实、WavePosition、transition、boundary 的唯一上游锚点 |
+| `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` | `authority_anchor` | 当前 PAS v1.1 Core / Lifecycle / Service 权威设计集 |
+| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | predecessor/original source reference；只作来源追溯和对照 |
+| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4.zip` | `authority_anchor` | predecessor/original archive；只作锚点校验和可恢复输入 |
 | `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0` | `reference_input` | 治理范式、文档组织、门禁与 execution discipline 参考 |
 | `H:\Asteria-Validated\MALF-system-history` | `historical_tradeoff_reference` | MALF / PAS 演化历史、失败教训和 retained gap 来源；不得迁移旧语义 |
 | `H:\Asteria-Validated\MALF-reference` | `reference_input` | MALF / PAS 桥接、样本和验证线索参考 |
@@ -100,7 +102,8 @@
 | invariant_id | invariant |
 |---|---|
 | `SOURCE-AUTHORITY-CLASSIFICATION-FROZEN` | 来源分类枚举与主要来源裁决已冻结 |
-| `MALF-V1-4-AUTHORITY-ANCHOR` | MALF v1.4 目录和归档只作为结构事实锚点，不授权下游重定义 |
+| `MALF-V1-4-AUTHORITY-ANCHOR` | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` 是当前结构事实锚点，不授权下游重定义 |
+| `PAS-V1-1-DESIGN-SET` | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` 是当前 PAS Core / Lifecycle / Service 权威设计集 |
 | `BOOK-ROOT-CONCEPT-ONLY` | 书籍根和 Lance Beggs 概念根只提供 PAS 概念、语境和术语来源 |
 | `HISTORY-REFERENCE-NO-MIGRATION` | 历史 repo 和历史 validated 资产只读参考，不得迁移旧 schema、runner、DuckDB 表面或业务语义 |
 | `ADAPTER-NO-SEMANTIC-OWNERSHIP` | 外部 provider、开源项目和 research engine 只能做 adapter / engine |

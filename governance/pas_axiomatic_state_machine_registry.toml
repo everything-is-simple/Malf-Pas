@@ -1,0 +1,106 @@
+registry_version = "2026-05-15.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/02-modules/01-pas-axiomatic-state-machine-v1.md"
+policy_status = "frozen-by-pas-axiomatic-state-machine-card-20260515-01"
+design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
+design_manifest = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1/MANIFEST.json"
+current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+predecessor_malf_v1_4_reference = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+next_card = "open-source-adapter-boundary-card"
+
+semantic_chain = [
+    "MALF WavePosition",
+    "PAS-Core",
+    "PAS-Lifecycle",
+    "PAS-Service",
+    "Signal",
+]
+
+allowed_inputs = [
+    "MALF WavePosition",
+    "MALF Core trace",
+    "MALF transition trace",
+    "MALF Lifespan stats",
+    "MALF birth descriptors",
+    "MALF source lineage",
+]
+
+forbidden_inputs = [
+    "raw PriceBar reinterpretation",
+    "direct HH/HL/LL/LH recalculation",
+    "direct wave rewrite",
+    "direct break rewrite",
+    "direct transition rewrite",
+    "direct lifespan rank rewrite",
+]
+
+setup_families = [
+    "TST",
+    "BOF",
+    "BPB",
+    "PB",
+    "CPB",
+]
+
+lifecycle_states = [
+    "observing",
+    "forming",
+    "waiting",
+    "triggered",
+    "cancelled",
+    "modified",
+    "invalidated",
+    "reentry_candidate",
+    "submitted_to_signal",
+    "accepted_by_signal",
+    "rejected_by_signal",
+]
+
+service_surfaces = [
+    "PASCandidate",
+    "PASCandidateLatest",
+    "PASLifecycleTrace",
+]
+
+forbidden_outputs = [
+    "buy",
+    "sell",
+    "order",
+    "order_intent",
+    "position",
+    "position_size",
+    "target_exposure",
+    "portfolio_allocation",
+    "fill",
+    "execution",
+    "broker_instruction",
+    "profit",
+    "account_state",
+]
+
+[principles]
+malf_owns_structure = true
+pas_owns_opportunity_interpretation = true
+signal_owns_accept_reject = true
+position_trade_own_action = true
+religion = "identify strength / weakness; reject weakness; join strength"
+
+[[sources]]
+key = "ytc_volume_2"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs/YTC卷2：市场和市场分析"
+role = "market context, S/R, trend, strength/weakness, and future path concept source"
+forbidden_role = "copied text corpus, runtime source, broker source, profit promise, or action owner"
+
+[[sources]]
+key = "ytc_volume_3"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs/YTC卷3：交易策略"
+role = "setup family, trigger, cancel, modify, and reentry lifecycle concept source"
+forbidden_role = "broker instruction, order instruction, position instruction, fill instruction, or profit promise"
+
+[[sources]]
+key = "ytc_volume_4"
+path = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs/YTC卷4：你的交易业务"
+role = "business boundary reminder only"
+forbidden_role = "PAS output action, order owner, position owner, fill owner, broker instruction, or profit promise"

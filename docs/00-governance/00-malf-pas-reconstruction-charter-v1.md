@@ -64,7 +64,9 @@ historical code transplant
 
 | 资产 | 地位 | 用途 |
 |---|---|---|
-| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | 核心 authority anchor | 后续 PAS / Signal / Position / Trade / System 的结构输入基准 |
+| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` | 当前核心 authority anchor | 后续 PAS / Signal / Position / Trade / System 的结构输入基准 |
+| `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` | PAS authority design set | 从 MALF WavePosition 出发冻结 PAS-Core / PAS-Lifecycle / PAS-Service |
+| `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | predecessor/original reference | 证明 MALF v1.4 来源、追溯和对照，不作为当前 output root |
 | `H:\Asteria-Validated\Asteria_System_Design_Set_v1_0` | 治理范式参考 | 提供文档结构、门禁与 execution discipline 参考 |
 | `H:\Asteria-Validated\MALF-system-history` | 历史经验输入 | 提取 MALF/PAS 演化经验，不迁移旧语义 |
 | `H:\Asteria-Validated\MALF-reference` | 参考输入 | 提供桥接与验证线索 |
@@ -122,6 +124,6 @@ flowchart LR
 1. 固定来源裁决与非迁移规则。
 2. 固定 MALF v1.4 在系统中的锚点位置。
 3. 梳理旧系统强项地图。
-4. 冻结 PAS 公理化状态机最小集合。
+4. 冻结 PAS v1.1 三件套设计集。
 5. 固定开源适配器边界。
 6. 建立 execution 四件套模板和结论索引。

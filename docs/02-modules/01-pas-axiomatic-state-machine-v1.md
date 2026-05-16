@@ -2,69 +2,100 @@
 
 日期：2026-05-15
 
-状态：draft / governance-frozen-state-surface
+状态：frozen-by-pas-axiomatic-state-machine-card-20260515-01
 
 ## 1. 目标
 
-本文件冻结 PAS 在治理阶段必须先拥有的最小状态机和语义层。
+本文件冻结 PAS v1.1 在 `Malf-Pas` 当前治理阶段的权威设计面。
+
+正式 validated 设计集：
+
+```text
+H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1
+```
+
+PAS v1.1 不是从 `PriceBar` 出发，而是从 MALF v1.4 `WavePosition` 出发。
+
+```text
+MALF WavePosition
+-> PAS-Core
+-> PAS-Lifecycle
+-> PAS-Service
+-> Signal
+```
 
 ## 2. 系统定位
 
 | 项 | 裁决 |
 |---|---|
 | PAS 角色 | `opportunity_interpreter` |
-| 上游 | `MALF v1.4` |
+| 当前 PAS 设计集 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` |
+| 当前 MALF 锚点 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` |
+| predecessor MALF reference | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` |
+| 上游 | `MALF v1.4 WavePosition / Core trace / Lifespan stats / transition trace / birth descriptors` |
 | 下游 | `Signal` |
 | 是否输出订单 | 否 |
 | 是否输出仓位 | 否 |
 | 是否输出成交 | 否 |
+| 是否输出收益承诺 | 否 |
+| 是否输出 broker 指令 | 否 |
 
-## 3. 七层语义
+## 3. 三层结构
 
 | layer | 作用 |
 |---|---|
-| `pas_market_context` | 解释当前处于什么结构与边界位置 |
-| `pas_trigger_event` | 记录 setup 是否在当时触发 |
-| `pas_strength_profile` | 基于已完成波段比较强弱与回撤质量 |
-| `pas_in_flight_state` | 记录当前演进对预期的支持、削弱或失效 |
-| `pas_candidate_lifecycle` | 记录候选等待、触发、取消、修改、重入、失效、接受、拒绝 |
-| `pas_historical_rank_profile` | 记录同类 setup 的历史分位、样本量与稀疏性 |
-| `pas_formal_candidate` | 供 Signal 消费的正式候选表面 |
+| `PAS-Core` | 从 MALF WavePosition 推导 context、premise、strength / weakness、opportunity zone 与 setup family |
+| `PAS-Lifecycle` | 记录候选 observing、forming、waiting、triggered、cancelled、modified、invalidated、reentry 与 Signal handoff |
+| `PAS-Service` | 只读发布 `PASCandidate`、`PASCandidateLatest`、`PASLifecycleTrace` |
 
-## 4. 总状态流
+铁律：
 
-```mermaid
-stateDiagram-v2
-    [*] --> waiting
-    waiting --> triggered
-    waiting --> cancelled
-    triggered --> modified
-    triggered --> invalidated
-    invalidated --> reentry_candidate
-    modified --> reentry_candidate
-    reentry_candidate --> triggered
-    triggered --> accepted_by_signal
-    triggered --> rejected_by_signal
-    modified --> rejected_by_signal
-    invalidated --> rejected_by_signal
+```text
+MALF owns structure.
+PAS owns opportunity interpretation.
+Signal owns accept/reject.
+Position and Trade own management/action.
 ```
 
-## 5. 生命周期定义
+## 4. PAS 宗旨
 
-| state | 含义 |
-|---|---|
-| `waiting` | setup 已形成，但尚未触发 |
-| `triggered` | 当时可见事实下触发成立 |
-| `cancelled` | setup 前提在触发前被破坏 |
-| `modified` | 上下文改变，候选解释被修正 |
-| `reentry_candidate` | 取消或失败后重新出现可审计机会 |
-| `invalidated` | 当前结构事实使原候选失效 |
-| `accepted_by_signal` | Signal 接受候选 |
-| `rejected_by_signal` | Signal 拒绝候选 |
+PAS v1.1 的宗旨是：
 
-## 6. setup family
+```text
+identify strength / weakness
+reject weakness
+join strength
+```
 
-当前 PAS 继续使用五族入口，但只作为 setup family，不自动等于交易信号：
+这句话只表示机会解释原则：
+
+- 识别 MALF 波段事实中的强势 / 弱势。
+- 拒绝弱势、失效、不被支持或 lineage 不完整的候选。
+- 在 MALF 结构强势被证明且 PAS context 支持时，形成可交给 Signal 的机会候选。
+
+它不表示买卖、仓位、成交或收益承诺。
+
+## 5. Lifecycle 状态集合
+
+```text
+observing
+forming
+waiting
+triggered
+cancelled
+modified
+invalidated
+reentry_candidate
+submitted_to_signal
+accepted_by_signal
+rejected_by_signal
+```
+
+`triggered` 不等于交易信号，`accepted_by_signal` 不等于订单。
+
+## 6. Setup Family
+
+当前 PAS v1.1 固定五族 setup family：
 
 ```text
 TST
@@ -74,34 +105,41 @@ PB
 CPB
 ```
 
-## 7. YTC 第 5 章实例吸收口径
+五族只表示 opportunity setup family，不自动等于交易信号。
 
-书中的实例在本系统中只吸收到 lifecycle 与 handoff 语义，不直接复制成交易动作：
+## 7. 来源边界
 
-| 实例语义 | PAS 吸收方式 |
-|---|---|
-| 触发前等待 | `waiting` |
-| 触发成立 | `triggered` |
-| 触发前取消 | `cancelled` |
-| 条件变化后重判 | `modified` |
-| 失败后重新形成机会 | `reentry_candidate` |
-| 结构失效 | `invalidated` |
-| 候选被正式放行 | `accepted_by_signal` |
-| 候选被正式拒绝 | `rejected_by_signal` |
+| 来源 | PAS 吸收方式 | 禁止解释 |
+|---|---|---|
+| `MALF v1.4` | 结构事实锚点，提供 WavePosition | 不得被 PAS 重写 |
+| YTC 卷 2 | context、S/R、trend、strength / weakness、future path | 不复制正文，不变成 runtime |
+| YTC 卷 3 | setup family、trigger、cancel、modify、reentry | 不变成订单或仓位 |
+| YTC 卷 4 | 业务流程边界提醒 | T1/T2、止损、仓位、执行不进入 PAS |
 
 ## 8. 明确 handoff 边界
 
-以下内容属于后续 `Position / Trade`，不属于 PAS 输出动作：
+PAS 只输出候选、状态、理由和 MALF lineage。
 
-- T1 / T2 分批
-- 保本处理
-- 跟踪止损
-- 撤单与真实执行
-- 收益统计与账户状态
+以下内容属于后续 `Position / Trade / Portfolio Plan`，不属于 PAS 输出：
 
-## 9. 不变量
+- T1 / T2 分批。
+- 保本处理。
+- 跟踪止损。
+- 撤单与真实执行。
+- 仓位大小。
+- 组合目标暴露。
+- 收益统计与账户状态。
+
+## 9. 机器可读入口
+
+```text
+governance/pas_axiomatic_state_machine_registry.toml
+```
+
+## 10. 不变量
 
 1. PAS 只能消费 MALF 已确认或当时可见的事实。
-2. 当前进行中的波段只能进入 `pas_in_flight_state`，不能伪装成 completed baseline。
+2. PAS 不得重写 wave、break、transition、candidate guard、confirmation 或 lifespan rank。
 3. PAS 输出的是候选和理由，不是交易承诺。
-
+4. 没有 MALF lineage，不得形成 formal PAS candidate。
+5. 同输入、同 MALF rule version、同 PAS rule version 必须可重放一致。

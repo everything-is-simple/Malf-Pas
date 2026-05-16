@@ -161,6 +161,115 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(_check_malf_v1_4_immutability_registry(repo_root / raw_path, registry))
         if raw_path == "governance/predecessor_strength_registry.toml":
             findings.extend(_check_predecessor_strength_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/pas_axiomatic_state_machine_registry.toml":
+            findings.extend(_check_pas_axiomatic_state_machine_registry(repo_root / raw_path, registry))
+    return findings
+
+
+def _check_pas_axiomatic_state_machine_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "policy_status": "frozen-by-pas-axiomatic-state-machine-card-20260515-01",
+        "authority_doc": "docs/02-modules/01-pas-axiomatic-state-machine-v1.md",
+        "design_set": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
+        "design_manifest": "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1/MANIFEST.json",
+        "current_malf_v1_4_anchor": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
+        "predecessor_malf_v1_4_reference": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+        ),
+        "next_card": "open-source-adapter-boundary-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    principles = registry.get("principles", {})
+    expected_principles = {
+        "malf_owns_structure",
+        "pas_owns_opportunity_interpretation",
+        "signal_owns_accept_reject",
+        "position_trade_own_action",
+    }
+    for key in sorted(expected_principles):
+        if principles.get(key) is not True:
+            findings.append(Finding(path, f"{key} principle must be true"))
+    religion = str(principles.get("religion", ""))
+    for fragment in ["identify strength / weakness", "reject weakness", "join strength"]:
+        if fragment not in religion:
+            findings.append(Finding(path, f"principles.religion must include {fragment!r}"))
+
+    expected_chain = [
+        "MALF WavePosition",
+        "PAS-Core",
+        "PAS-Lifecycle",
+        "PAS-Service",
+        "Signal",
+    ]
+    if registry.get("semantic_chain") != expected_chain:
+        findings.append(Finding(path, "semantic_chain must remain MALF WavePosition -> PAS -> Signal"))
+
+    expected_lifecycle_states = {
+        "observing",
+        "forming",
+        "waiting",
+        "triggered",
+        "cancelled",
+        "modified",
+        "invalidated",
+        "reentry_candidate",
+        "submitted_to_signal",
+        "accepted_by_signal",
+        "rejected_by_signal",
+    }
+    lifecycle_states = set(registry.get("lifecycle_states", []))
+    missing_states = sorted(expected_lifecycle_states - lifecycle_states)
+    if missing_states:
+        findings.append(Finding(path, f"lifecycle_states missing {missing_states}"))
+
+    expected_setup_families = {"TST", "BOF", "BPB", "PB", "CPB"}
+    setup_families = set(registry.get("setup_families", []))
+    missing_families = sorted(expected_setup_families - setup_families)
+    if missing_families:
+        findings.append(Finding(path, f"setup_families missing {missing_families}"))
+
+    expected_surfaces = {"PASCandidate", "PASCandidateLatest", "PASLifecycleTrace"}
+    service_surfaces = set(registry.get("service_surfaces", []))
+    missing_surfaces = sorted(expected_surfaces - service_surfaces)
+    if missing_surfaces:
+        findings.append(Finding(path, f"service_surfaces missing {missing_surfaces}"))
+
+    forbidden_outputs = set(registry.get("forbidden_outputs", []))
+    required_forbidden_outputs = {
+        "order",
+        "position",
+        "fill",
+        "profit",
+        "broker_instruction",
+    }
+    missing_forbidden = sorted(required_forbidden_outputs - forbidden_outputs)
+    if missing_forbidden:
+        findings.append(Finding(path, f"forbidden_outputs missing {missing_forbidden}"))
+
+    forbidden_inputs = " ".join(str(item) for item in registry.get("forbidden_inputs", []))
+    for fragment in ["PriceBar", "HH/HL/LL/LH", "wave rewrite", "lifespan rank"]:
+        if fragment not in forbidden_inputs:
+            findings.append(Finding(path, f"forbidden_inputs must mention {fragment!r}"))
+
+    expected_sources = {"ytc_volume_2", "ytc_volume_3", "ytc_volume_4"}
+    sources = {
+        item.get("key"): item for item in registry.get("sources", []) if isinstance(item, dict)
+    }
+    for key in sorted(expected_sources):
+        source = sources.get(key)
+        if source is None:
+            findings.append(Finding(path, f"{key} source must be registered"))
+            continue
+        forbidden_role = str(source.get("forbidden_role", ""))
+        if "broker" not in forbidden_role or "profit" not in forbidden_role:
+            findings.append(Finding(path, f"{key} must forbid broker and profit use"))
+
     return findings
 
 
@@ -177,11 +286,19 @@ def _check_predecessor_strength_registry(path: Path, registry: dict[str, Any]) -
 
     expected_sources = {
         "malf_v1_4_anchor": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
+            "authority_anchor",
+        ),
+        "malf_v1_4_predecessor_original": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
             "authority_anchor",
         ),
-        "malf_v1_4_anchor_zip": (
+        "malf_v1_4_predecessor_original_zip": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+            "authority_anchor",
+        ),
+        "pas_v1_1_design_set": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
             "authority_anchor",
         ),
         "asteria_system_design_set_v1_0": (
@@ -254,9 +371,15 @@ def _check_malf_v1_4_immutability_registry(
     expected_values: dict[str, Any] = {
         "policy_status": "frozen-by-malf-v1-4-immutability-anchor-card-20260515-01",
         "authority_doc": "docs/01-architecture/01-malf-v1-4-anchor-position-v1.md",
-        "anchor_directory": "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
-        "anchor_zip": "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+        "anchor_directory": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
         "anchor_manifest": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
+        ),
+        "predecessor_original_directory": (
+            "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+        ),
+        "predecessor_original_zip": "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+        "predecessor_original_manifest": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4/MANIFEST.json"
         ),
         "runtime_authorized": False,
@@ -309,11 +432,19 @@ def _check_source_authority_registry(path: Path, registry: dict[str, Any]) -> li
         )
     expected_sources = {
         "malf_v1_4_anchor": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
+            "authority_anchor",
+        ),
+        "malf_v1_4_predecessor_original": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
             "authority_anchor",
         ),
-        "malf_v1_4_anchor_zip": (
+        "malf_v1_4_predecessor_original_zip": (
             "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4.zip",
+            "authority_anchor",
+        ),
+        "pas_v1_1_design_set": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
             "authority_anchor",
         ),
         "asteria_system_design_set_v1_0": (
