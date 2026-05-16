@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import tempfile
 import tomllib
 import unittest
 from pathlib import Path
@@ -13,6 +14,7 @@ from malf_pas.governance.checks import (
     _check_pas_v1_2_strength_weakness_matrix_registry,
     _check_post_terminal_roadmap_discipline_registry,
     _check_repo_governance_registry,
+    _check_second_roadmap_doc,
     run_checks,
 )
 
@@ -123,6 +125,13 @@ class GovernanceChecksTest(unittest.TestCase):
 
         self.assertEqual(findings, [])
 
+    def test_second_roadmap_freezes_data_foundation_risk_boundaries(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+
+        findings = _check_second_roadmap_doc(repo_root)
+
+        self.assertEqual(findings, [])
+
     def test_governance_checks_fail_without_roadmap_ready_usability_rules(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]
         repo_registry_path = repo_root / "governance" / "repo_governance_registry.toml"
@@ -214,6 +223,56 @@ class GovernanceChecksTest(unittest.TestCase):
         )
         self.assertTrue(
             any("execution record protocol doc" in item.message for item in findings)
+        )
+
+    def test_second_roadmap_check_fails_without_inventory_contract_and_validator_fragments(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        roadmap_path = repo_root / "docs" / "03-roadmap" / "01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+
+        findings = _check_second_roadmap_doc(repo_root)
+        self.assertEqual(findings, [])
+
+        roadmap_text = roadmap_path.read_text(encoding="utf-8")
+        stripped_text = (
+            roadmap_text.replace("week/month direct source 可用性结论", "")
+            .replace("tradability 来源可用性结论", "")
+            .replace("`raw_market.ingest_run` 与 `data_control.run_ledger` 的关系", "")
+            .replace("Data validator 最小骨架", "")
+            .replace(
+                "orchestration table families 与 freshness/readout table families 分离边界",
+                "",
+            )
+        )
+
+        self.assertNotEqual(stripped_text, roadmap_text)
+
+        with tempfile.TemporaryDirectory() as temp_dir:
+            temp_repo = Path(temp_dir)
+            temp_roadmap = (
+                temp_repo
+                / "docs"
+                / "03-roadmap"
+                / "01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+            )
+            temp_roadmap.parent.mkdir(parents=True, exist_ok=True)
+            temp_roadmap.write_text(stripped_text, encoding="utf-8")
+
+            simulated_findings = _check_second_roadmap_doc(temp_repo)
+
+        self.assertTrue(
+            any("week/month direct-source availability conclusion" in item.message for item in simulated_findings)
+        )
+        self.assertTrue(
+            any("tradability source availability conclusion" in item.message for item in simulated_findings)
+        )
+        self.assertTrue(
+            any("raw ingest audit vs data_control run-ledger relationship" in item.message for item in simulated_findings)
+        )
+        self.assertTrue(
+            any("Data validator minimum skeleton" in item.message for item in simulated_findings)
+        )
+        self.assertTrue(
+            any("orchestration and readout table families separated" in item.message for item in simulated_findings)
         )
 
 

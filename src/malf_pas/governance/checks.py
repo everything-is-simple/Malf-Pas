@@ -323,6 +323,41 @@ def _check_governance_roadmap_doc(repo_root: Path) -> list[Finding]:
     return findings
 
 
+def _check_second_roadmap_doc(repo_root: Path) -> list[Finding]:
+    path = (
+        repo_root
+        / "docs"
+        / "03-roadmap"
+        / "01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+    )
+    if not path.exists():
+        return [Finding(path, "second Data Foundation roadmap doc is missing")]
+
+    text = path.read_text(encoding="utf-8")
+    required_fragments = {
+        "week/month direct source 可用性结论": (
+            "roadmap 2 must freeze week/month direct-source availability conclusion"
+        ),
+        "tradability 来源可用性结论": (
+            "roadmap 2 must freeze tradability source availability conclusion"
+        ),
+        "`raw_market.ingest_run` 与 `data_control.run_ledger` 的关系": (
+            "roadmap 2 must define the raw ingest audit vs data_control run-ledger relationship"
+        ),
+        "Data validator 最小骨架": (
+            "roadmap 2 must freeze the Data validator minimum skeleton before closeout"
+        ),
+        "orchestration table families 与 freshness/readout table families 分离边界": (
+            "roadmap 2 must keep orchestration and readout table families separated in data_control"
+        ),
+    }
+    findings: list[Finding] = []
+    for fragment, message in required_fragments.items():
+        if fragment not in text:
+            findings.append(Finding(path, message))
+    return findings
+
+
 def _check_post_terminal_roadmap_discipline_registry(
     path: Path, registry: dict[str, Any]
 ) -> list[Finding]:
@@ -1482,6 +1517,7 @@ def run_checks(repo_root: Path) -> list[Finding]:
         _check_required_paths(root, list(governance.get("required_plugin_files", [])), findings)
         findings.extend(_check_registries(root, governance))
     findings.extend(_check_governance_roadmap_doc(root))
+    findings.extend(_check_second_roadmap_doc(root))
     findings.extend(_check_forbidden_repo_artifacts(root))
     findings.extend(_check_no_asteria_paths_in_plugin(root))
     return findings

@@ -153,9 +153,12 @@ G:\malf-history\MarketLifespan-Quant
 | `market_base_week.duckdb` | `source_fact_base_week_ledger` | week 基础行情事实、latest pointer、dirty scope、direct source 或 day raw 派生 lineage |
 | `market_base_month.duckdb` | `source_fact_base_month_ledger` | month 基础行情事实、latest pointer、dirty scope、direct source 或 day raw 派生 lineage |
 | `market_meta.duckdb` | `source_fact_meta_ledger` | symbol master、calendar、tradability、industry/block relation、source manifest |
-| `data_control.duckdb` | `data_orchestration_control_ledger` | Data run ledger、dirty queue、checkpoint、resume state、freshness audit、readout |
+| `data_control.duckdb` | `data_orchestration_control_ledger` | Data run ledger、dirty queue、checkpoint、resume state、audit state；freshness audit/readout 必须以独立表族表达 |
 
 这些库是同一个逻辑历史大账本的 Data 受治理分账本，不得被理解成散库集合。
+
+`data_control.duckdb` 允许同时承载 orchestration control facts 与 Data freshness/readout surface，
+但必须用独立表族表达，不得把 run ledger、checkpoint、resume state、freshness readout 混写进单一万能控制表。
 
 ## 8. 数据范围
 
@@ -220,12 +223,12 @@ checkpoint_key
 | 顺序 | 卡 | 目标 | 通过口径 |
 |---:|---|---|---|
 | 18 | `data-foundation-roadmap-freeze-card` | 冻结系统第 2 张 roadmap、Data-only mutation 授权、与第 1 张 terminal roadmap 的接力关系 | roadmap 文档、Data-only scope、禁止下游范围同步 |
-| 19 | `local-tdx-source-inventory-card` | 只读盘点两个本地 TDX truth roots | source family、file family、fingerprint、manifest 规则冻结 |
-| 20 | `data-module-db-contract-card` | 冻结 Data 六库 contract、表族、自然键、共同治理键、lineage | schema/manifest/lineage/minimal consumer contract 冻结 |
+| 19 | `local-tdx-source-inventory-card` | 只读盘点两个本地 TDX truth roots | source family、file family、fingerprint、week/month direct source 可用性结论、tradability 来源可用性结论、manifest 规则冻结 |
+| 20 | `data-module-db-contract-card` | 冻结 Data 六库 contract、表族、自然键、共同治理键、lineage | schema/manifest/lineage/minimal consumer contract、Data validator 最小骨架、`raw_market.ingest_run` 与 `data_control.run_ledger` 的关系冻结 |
 | 21 | `raw-market-full-build-ledger-card` | 建立 `raw_market` 文件级历史账本 | source file、raw bar、ingest run、reject audit、skipped/failed 记录通过 |
 | 22 | `market-base-day-week-month-build-card` | 建立 day/week/month base 物化账本 | bar/latest/run/dirty_scope、自然键唯一、lineage 完整 |
-| 23 | `market-meta-tradability-calendar-card` | 建立 `market_meta` 基础事实账本 | symbol master、calendar、tradability、industry/block relation 通过 |
-| 24 | `data-control-run-ledger-checkpoint-card` | 建立 `data_control` 控制账本 | run ledger、dirty queue、checkpoint、resume state、audit state 通过 |
+| 23 | `market-meta-tradability-calendar-card` | 建立 `market_meta` 基础事实账本 | symbol master、calendar、tradability、industry/block relation、tradability 来源边界通过 |
+| 24 | `data-control-run-ledger-checkpoint-card` | 建立 `data_control` 控制账本 | run ledger、dirty queue、checkpoint、resume state、audit state、orchestration/readout 表族边界通过 |
 | 25 | `data-daily-incremental-resume-card` | 建立 Data daily runner 和续跑闭环 | manifest diff、dirty scope、resume_strict、idempotence 通过 |
 | 26 | `data-freshness-audit-readout-card` | 建立 freshness audit/readout | source/base 最新日、lag、missing、stale、blocked reason 可读 |
 | 27 | `data-foundation-release-audit-closeout-card` | 对 Data 六库做 release audit 并收口 | repo-local checks、Data validator、四件套、conclusion index 全部通过 |
@@ -255,13 +258,23 @@ checkpoint_key
 2. 只读盘点 `H:\new_tdx64`。
 3. 冻结 stock/index/block 与 day/week/month 的 source family。
 4. 冻结 file fingerprint 策略：path、size、mtime、content hash、source root、source revision。
-5. 产出 source inventory readout。
+5. 产出 week/month direct source 可用性结论。
+6. 产出 tradability 来源可用性结论。
+7. 产出 source inventory readout。
 
 禁止：
 
 1. 写入 `H:\Malf-Pas-data`。
 2. 修改 TDX 源目录。
 3. 用网络 provider 补正式 truth。
+
+通过标准：
+
+1. source family、file family 与 fingerprint 规则可读、可审计。
+2. week/month direct source 可用性结论必须明确写成 `direct / day-derived / blocked` 之一，不得保持隐含假设。
+3. 若 week/month direct source 不完整或不可用，必须登记 day-derived 所需的 direct parent、manifest 与 rule version 输入边界。
+4. tradability 来源可用性结论必须明确写出 `TDX direct / authorized source_adapter / blocked`。
+5. 若 tradability 需要 adapter 补充，必须同时登记 gap 范围，不得把 adapter 默认升级为 formal truth owner。
 
 ### 12.3 `020-data-module-db-contract-card`
 
@@ -271,12 +284,24 @@ checkpoint_key
 2. 冻结业务自然键与治理键。
 3. 冻结 source manifest、schema_version、rule_version、lineage 字段。
 4. 冻结下游最小消费接口，第一消费者为 `MALF v1.5`。
+5. 冻结 `raw_market.ingest_run` 与 `data_control.run_ledger` 的关系：前者是 source ingest 局部审计，后者是 module-level orchestration 审计。
+6. 冻结 `data_control` 内 orchestration table families 与 freshness/readout table families 分离边界。
+7. 冻结 tradability 来源登记 contract；若需 adapter 补充，必须以 authorized `source_adapter` 角色显式登记。
+8. 交付 Data validator 最小骨架：entrypoint、contract assertions、fixture boundary。
 
 禁止：
 
 1. 让 Data 输出 MALF/PAS/Signal 语义。
 2. 让 run_id 成为业务事实自然键。
 3. 迁移历史 repo schema。
+
+通过标准：
+
+1. 六库 contract、自然键、治理键、schema_version、rule_version、source manifest 与 lineage 字段全部冻结。
+2. `raw_market.ingest_run` 与 `data_control.run_ledger` 的关系写实，不允许后续以“迁移 audit 语义”掩盖边界不清。
+3. `data_control` 的 orchestration table families 与 freshness/readout table families 分离边界写实。
+4. tradability 来源登记 contract 明确到字段与 source role，不允许留空或默认为本地 truth。
+5. Data validator 最小骨架在本卡冻结，并可被后续卡直接接入 contract / validator / fixture tests。
 
 ### 12.4 `021-raw-market-full-build-ledger-card`
 
@@ -294,6 +319,7 @@ checkpoint_key
 2. raw natural key 唯一。
 3. failed/rejected source 有审计记录。
 4. 同输入重跑不重复写业务事实。
+5. raw ingest run audit 只证明 source ingest 局部审计，不替代 `data_control.run_ledger` 的 module-level orchestration 审计。
 
 ### 12.5 `022-market-base-day-week-month-build-card`
 
@@ -326,6 +352,7 @@ checkpoint_key
 
 1. `market_meta` 可回答“这个标的是什么、哪天能不能交易、属于什么基础分类”。
 2. 不输出交易动作、仓位、订单或收益语义。
+3. tradability fact 的 source manifest 必须显式登记来源；若非本地 TDX direct 给出，必须指向已授权 `source_adapter`，不得留空。
 
 ### 12.7 `024-data-control-run-ledger-checkpoint-card`
 
@@ -336,12 +363,14 @@ checkpoint_key
 3. 建立 checkpoint。
 4. 建立 resume state。
 5. 建立 audit state。
+6. 建立 orchestration table families 与 freshness/readout table families 的分离边界。
 
 通过标准：
 
 1. checkpoint 必须绑定 dirty scope、manifest、schema、rule 与 lineage。
 2. checkpoint 只能证明批次进度，不能替代 audit。
 3. failed/blocked batch 不得被 resume 跳过。
+4. `data_control` 即使与 freshness/readout 同库，也必须保持 orchestration table families 与 freshness/readout table families 分离。
 
 ### 12.8 `025-data-daily-incremental-resume-card`
 
@@ -400,6 +429,9 @@ conclusion index synced
 ```
 
 ## 13. Data validator 必须检查
+
+Data validator 最小 entrypoint、contract assertions 与 fixture boundary 必须在 `020-data-module-db-contract-card`
+冻结，并在后续 Data runtime 卡中持续可运行。
 
 Data validator 至少必须证明：
 
