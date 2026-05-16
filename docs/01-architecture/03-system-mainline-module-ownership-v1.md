@@ -16,6 +16,7 @@
 ```text
 Data Foundation
 -> MALF v1.4
+-> MALF v1.5
 -> PAS
 -> Signal
 -> Position
@@ -32,13 +33,14 @@ Data Foundation
 |---:|---|---|---|---|
 | 1 | `Data Foundation` | `source_fact_contract_owner` | source manifest、ledger key、tradeable facts、数据质量规则 | provider 只能做 source adapter；不得成为 truth owner |
 | 2 | `MALF v1.4` | `structure_fact_owner` | wave、transition、boundary、WavePosition 结构语义 | validated asset 只读；下游不得重定义 |
-| 3 | `PAS` | `opportunity_interpreter` | context、trigger、strength、lifecycle、historical rank | 概念来源可参考；不得输出订单、仓位、成交或 broker 指令 |
-| 4 | `Signal` | `candidate_decision_ledger` | candidate accept / reject、decision reason、candidate ledger | 可用 engine 辅助计算；不得回写 MALF / PAS 定义 |
-| 5 | `Position` | `management_semantics_owner` | entry / exit plan、T1/T2、保本、跟踪、分批语义 | 不生成成交事实，不修改上游机会定义 |
-| 6 | `Portfolio Plan` | `portfolio_plan_owner` | 组合准入、目标暴露、trim 语义 | 第一阶段轻量保留；不得被 Position 或 Trade 吞并 |
-| 7 | `Trade` | `execution_ledger_boundary_owner` | order intent / fill / rejection 的账本边界 | broker / live trading / paper-live 固定 deferred |
-| 8 | `System Readout` | `readout_owner` | 全链路读出、审计快照、回测汇总读出 | 只读出和汇总，不替上游做语义定义 |
-| 9 | `Pipeline` | `orchestration_ledger_owner` | run、checkpoint、manifest、resume trace | 只编排，不拥有业务语义 |
+| 3 | `MALF v1.5` | `structure_behavior_fact_owner` | `wave_behavior_snapshot` 六个行为面与审计理由 | 只能消费 MALF 输出；不得变成 PAS 强弱解释 |
+| 4 | `PAS` | `opportunity_interpreter` | context、trigger、strength、lifecycle、historical rank | 概念来源可参考；不得输出订单、仓位、成交或 broker 指令 |
+| 5 | `Signal` | `candidate_decision_ledger` | candidate accept / reject、decision reason、candidate ledger | 可用 engine 辅助计算；不得回写 MALF / PAS 定义 |
+| 6 | `Position` | `management_semantics_owner` | entry / exit plan、T1/T2、保本、跟踪、分批语义 | 不生成成交事实，不修改上游机会定义 |
+| 7 | `Portfolio Plan` | `portfolio_plan_owner` | 组合准入、目标暴露、trim 语义 | 第一阶段轻量保留；不得被 Position 或 Trade 吞并 |
+| 8 | `Trade` | `execution_ledger_boundary_owner` | order intent / fill / rejection 的账本边界 | broker / live trading / paper-live 固定 deferred |
+| 9 | `System Readout` | `readout_owner` | 全链路读出、审计快照、回测汇总读出 | 只读出和汇总，不替上游做语义定义 |
+| 10 | `Pipeline` | `orchestration_ledger_owner` | run、checkpoint、manifest、resume trace | 只编排，不拥有业务语义 |
 
 ## 4. 自建 / 委外裁决
 
@@ -46,7 +48,7 @@ Data Foundation
 |---|---|
 | 业务语义 | 必须自建，不能交给 provider、开源项目、历史 repo 或 engine |
 | 数据来源接入 | 可委外为 adapter 输入，但 source manifest、ledger key、可交易事实规则自建 |
-| 结构事实 | `MALF v1.4` 是 immutable authority；本仓库第一阶段不演化 MALF |
+| 结构事实 | `MALF v1.4` 是 immutable authority；`MALF v1.5` 只允许追加只读结构行为事实，不回写 v1.4 |
 | PAS 机会解释 | 必须重新公理化；不能复制历史系统旧语义 |
 | 候选裁决 | `Signal` 自建决策账本；不得让回测框架替代 accept / reject 语义 |
 | 组合计划 | `Portfolio Plan` 保留独立轻量层；早期可少字段，但不可取消 |
@@ -94,8 +96,8 @@ Data Foundation
 | `backtest-window-and-holdout-protocol-card` | 2012..2021、三年滚动、留出样本边界 |
 | `pas-axiomatic-state-machine-card` | PAS v1.1 三件套设计集、MALF-first Core / Lifecycle / Service |
 | `malf-pas-revision-roadmap-card` | MALF v1.5、PAS v1.2、场景图谱与 adapter 后移路线 |
-| `malf-v1-5-wave-behavior-snapshot-card` | MALF-owned `wave_behavior_snapshot` 结构行为事实 |
-| `pas-v1-2-strength-weakness-matrix-card` | PAS `strength_weakness_matrix` 与强弱证据规则 |
+| `malf-v1-5-wave-behavior-snapshot-card` | 已冻结 MALF-owned `wave_behavior_snapshot` 结构行为事实 |
+| `pas-v1-2-strength-weakness-matrix-card` | PAS `strength_weakness_matrix` 与强弱证据规则（当前下一卡） |
 | `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟与图解案例 |
 | `open-source-adapter-boundary-card` | 开源项目逐项 adapter 边界 |
 

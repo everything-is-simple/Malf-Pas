@@ -21,7 +21,7 @@ reference，用来证明来源、追溯和对照。
 
 | 规则 | 裁决 |
 |---|---|
-| MALF 是否继续演化 | v1.4 原目录不改写；第 13 卡允许新建 v1.5 successor design set |
+| MALF 是否继续演化 | v1.4 原目录不改写；第 13 卡已新建 v1.5 successor design set |
 | MALF 是否可被 PAS 重写 | 否 |
 | MALF 是否可被 Signal / Position / Trade 重写 | 否 |
 | MALF 是否可被外部 adapter 定义 | 否 |
@@ -87,6 +87,12 @@ H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1
 
 ```text
 H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5
+```
+
+第 13 卡已把该目录冻结为 successor authority definition，用于只读发布：
+
+```text
+WavePosition + wave_behavior_snapshot
 ```
 
 v1.5 只能作为 successor design set；不得回写、覆盖或伪装成 v1.4 原锚点。

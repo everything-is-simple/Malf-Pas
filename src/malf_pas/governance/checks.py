@@ -165,6 +165,10 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_pas_axiomatic_state_machine_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/malf_v1_5_wave_behavior_snapshot_registry.toml":
+            findings.extend(
+                _check_malf_v1_5_wave_behavior_snapshot_registry(repo_root / raw_path, registry)
+            )
         if raw_path == "governance/malf_pas_revision_roadmap_registry.toml":
             findings.extend(
                 _check_malf_pas_revision_roadmap_registry(repo_root / raw_path, registry)
@@ -254,6 +258,70 @@ def _check_malf_pas_revision_roadmap_registry(
     for key in sorted(required_invariants):
         if invariants.get(key) is not True:
             findings.append(Finding(path, f"{key} invariant must be true"))
+
+    return findings
+
+
+def _check_malf_v1_5_wave_behavior_snapshot_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "policy_status": "frozen-by-malf-v1-5-wave-behavior-snapshot-card-20260516-01",
+        "authority_doc": "docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md",
+        "current_malf_v1_4_anchor": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4",
+        "predecessor_original_reference": "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4",
+        "design_set": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5",
+        "design_manifest": "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5/MANIFEST.json",
+        "next_card": "pas-v1-2-strength-weakness-matrix-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    expected_inputs = {
+        "MALF WavePosition",
+        "MALF Core trace",
+        "MALF transition trace",
+        "MALF Lifespan stats",
+        "MALF birth descriptors",
+        "MALF source lineage",
+    }
+    if set(registry.get("allowed_inputs", [])) != expected_inputs:
+        findings.append(Finding(path, "allowed_inputs must remain MALF-output-only"))
+
+    expected_facets = {
+        "continuation_regime",
+        "stagnation_regime",
+        "transition_regime",
+        "birth_quality_regime",
+        "boundary_pressure_regime",
+        "directional_continuity_regime",
+    }
+    if set(registry.get("behavior_facets", [])) != expected_facets:
+        findings.append(Finding(path, "behavior_facets must remain the six frozen regimes"))
+
+    expected_surfaces = {"WaveBehaviorSnapshot", "WaveBehaviorSnapshotLatest"}
+    if set(registry.get("service_surfaces", [])) != expected_surfaces:
+        findings.append(Finding(path, "service_surfaces must remain WaveBehaviorSnapshot pair"))
+
+    forbidden_outputs = set(registry.get("forbidden_outputs", []))
+    for expected in {"strength_score", "setup_family", "accept", "order", "profit"}:
+        if expected not in forbidden_outputs:
+            findings.append(Finding(path, f"forbidden_outputs must include {expected!r}"))
+
+    principles = registry.get("principles", {})
+    expected_principles = {
+        "malf_v1_4_remains_anchor": True,
+        "malf_v1_5_is_successor_definition": True,
+        "wave_behavior_snapshot_is_structural": True,
+        "pas_reads_malf_outputs_only": True,
+        "pricebar_reinterpretation_for_pas": False,
+        "runtime_not_authorized": True,
+    }
+    for key, expected in expected_principles.items():
+        if principles.get(key) != expected:
+            findings.append(Finding(path, f"principles.{key} must be {expected!r}"))
 
     return findings
 
@@ -394,6 +462,18 @@ def _check_predecessor_strength_registry(path: Path, registry: dict[str, Any]) -
         "pas_v1_1_design_set": (
             "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1",
             "authority_anchor",
+        ),
+        "malf_v1_5_design_set": (
+            "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5",
+            "successor_authority_definition",
+        ),
+        "planned_pas_v1_2_design_set": (
+            "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2",
+            "planned_successor_authority",
+        ),
+        "planned_malf_pas_scenario_atlas": (
+            "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0",
+            "planned_successor_authority",
         ),
         "asteria_system_design_set_v1_0": (
             "H:/Asteria-Validated/Asteria_System_Design_Set_v1_0",

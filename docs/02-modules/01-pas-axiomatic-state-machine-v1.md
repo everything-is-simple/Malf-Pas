@@ -146,13 +146,12 @@ governance/pas_axiomatic_state_machine_registry.toml
 
 ## 11. 后续修订路线
 
-第 12 卡已裁决：PAS v1.1 仍是当前 predecessor authority；如果要把
-“跟随强势、拒绝弱势”写成更细的可审计规则，下一步必须先由 MALF 新建 v1.5 设计集，
-发布 `wave_behavior_snapshot`，再由 PAS 新建 v1.2 设计集消费该 MALF 输出。
+第 12 卡先裁决了修订路线，第 13 卡又进一步完成了 MALF v1.5 successor 设计集。
+因此当前下一步已经固定为：PAS v1.2 只能消费 MALF 输出，不得回头读 `PriceBar`。
 
 ```text
-MALF v1.5 planned output = WavePosition + wave_behavior_snapshot
-PAS v1.2 planned input = MALF outputs only
+MALF v1.5 frozen output = WavePosition + wave_behavior_snapshot
+PAS v1.2 frozen input boundary = MALF outputs only
 PAS v1.2 planned rule = strength_weakness_matrix
 PAS still does not read PriceBar or rewrite MALF
 ```

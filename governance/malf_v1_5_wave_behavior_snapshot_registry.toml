@@ -1,0 +1,80 @@
+registry_version = "2026-05-16.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md"
+policy_status = "frozen-by-malf-v1-5-wave-behavior-snapshot-card-20260516-01"
+current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+predecessor_original_reference = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
+design_manifest = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5/MANIFEST.json"
+next_card = "pas-v1-2-strength-weakness-matrix-card"
+
+allowed_inputs = [
+    "MALF WavePosition",
+    "MALF Core trace",
+    "MALF transition trace",
+    "MALF Lifespan stats",
+    "MALF birth descriptors",
+    "MALF source lineage",
+]
+
+behavior_facets = [
+    "continuation_regime",
+    "stagnation_regime",
+    "transition_regime",
+    "birth_quality_regime",
+    "boundary_pressure_regime",
+    "directional_continuity_regime",
+]
+
+service_surfaces = [
+    "WaveBehaviorSnapshot",
+    "WaveBehaviorSnapshotLatest",
+]
+
+forbidden_outputs = [
+    "strength_score",
+    "strength_bucket",
+    "setup_family",
+    "trigger",
+    "accept",
+    "reject",
+    "order",
+    "position",
+    "fill",
+    "broker_instruction",
+    "profit",
+]
+
+[principles]
+malf_v1_4_remains_anchor = true
+malf_v1_5_is_successor_definition = true
+wave_behavior_snapshot_is_structural = true
+pas_reads_malf_outputs_only = true
+pricebar_reinterpretation_for_pas = false
+runtime_not_authorized = true
+
+[[sources]]
+key = "current_malf_v1_4_anchor"
+path = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+role = "current structure-fact anchor and sole direct upstream"
+forbidden_role = "rewrite target or runtime authorization source"
+
+[[sources]]
+key = "predecessor_original_reference"
+path = "H:/Asteria-Validated/MALF_Three_Part_Design_Set_v1_4"
+role = "predecessor/original lineage and difference reference"
+forbidden_role = "current output root or schema migration source"
+
+[[sources]]
+key = "malf_system_history"
+path = "H:/Asteria-Validated/MALF-system-history"
+role = "historical tradeoff and retained-gap reference"
+forbidden_role = "legacy code migration, schema transplant, runner transplant, or semantic owner"
+
+[[sources]]
+key = "malf_reference"
+path = "H:/Asteria-Validated/MALF-reference"
+role = "bridge wording and chart-view reference"
+forbidden_role = "current semantic owner or runtime source"

@@ -20,6 +20,7 @@
 | `adapter_candidate` | 可提供通用能力，但不拥有语义定义权 |
 | `retained_gap` | 目前已识别但未被解决的缺口 |
 | `planned_successor_authority` | 已纳入 roadmap 但尚未施工完成的新版本权威资产 |
+| `successor_authority_definition` | 已施工完成、但不替代当前锚点的新版本权威资产 |
 | `rejected_for_semantic_ownership` | 不允许拥有本系统语义定义权 |
 
 ## 3. 来源裁决
@@ -28,7 +29,7 @@
 |---|---|---|
 | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | 当前系统结构事实、WavePosition、transition、boundary 的唯一上游锚点 |
 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` | `authority_anchor` | 当前 PAS v1.1 Core / Lifecycle / Service 权威设计集 |
-| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` | `planned_successor_authority` | 第 13 卡计划新建；用于补足 `wave_behavior_snapshot`，不改写 v1.4 原目录 |
+| `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5` | `successor_authority_definition` | 第 13 卡已冻结；用于补足 `wave_behavior_snapshot`，不改写 v1.4 原目录 |
 | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2` | `planned_successor_authority` | 第 14 卡计划新建；用于冻结 `strength_weakness_matrix`，不改写 v1.1 原目录 |
 | `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0` | `planned_successor_authority` | 第 15 卡计划新建；用于 MALF+PAS 沙盘模拟与图解案例，不作为收益证明 |
 | `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4` | `authority_anchor` | predecessor/original source reference；只作来源追溯和对照 |
@@ -108,7 +109,7 @@
 | `SOURCE-AUTHORITY-CLASSIFICATION-FROZEN` | 来源分类枚举与主要来源裁决已冻结 |
 | `MALF-V1-4-AUTHORITY-ANCHOR` | `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4` 是当前结构事实锚点，不授权下游重定义 |
 | `PAS-V1-1-DESIGN-SET` | `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1` 是当前 PAS Core / Lifecycle / Service 权威设计集 |
-| `MALF-PAS-REVISION-ROADMAP` | MALF v1.5、PAS v1.2 与场景图谱已进入后续 roadmap，但尚未成为当前 runtime 或 DB 事实 |
+| `MALF-PAS-REVISION-ROADMAP` | MALF v1.5 已沉淀为 successor authority；PAS v1.2 与场景图谱仍处于后续 roadmap，且都尚未成为 runtime 或 DB 事实 |
 | `BOOK-ROOT-CONCEPT-ONLY` | 书籍根和 Lance Beggs 概念根只提供 PAS 概念、语境和术语来源 |
 | `HISTORY-REFERENCE-NO-MIGRATION` | 历史 repo 和历史 validated 资产只读参考，不得迁移旧 schema、runner、DuckDB 表面或业务语义 |
 | `ADAPTER-NO-SEMANTIC-OWNERSHIP` | 外部 provider、开源项目和 research engine 只能做 adapter / engine |

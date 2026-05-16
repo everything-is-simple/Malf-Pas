@@ -34,10 +34,10 @@ allowed_role = "current PAS v1.1 Core / Lifecycle / Service authority design set
 forbidden_role = "runtime proof, schema source, runner source, broker instruction, order owner, position owner, fill owner, or profit promise"
 
 [[sources]]
-key = "planned_malf_v1_5_design_set"
+key = "malf_v1_5_design_set"
 path = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
-classification = "planned_successor_authority"
-allowed_role = "planned card 13 design set for MALF-owned wave_behavior_snapshot"
+classification = "successor_authority_definition"
+allowed_role = "frozen card 13 design set for MALF-owned wave_behavior_snapshot"
 forbidden_role = "current runtime proof, schema source, DB mutation, broker instruction, order owner, position owner, fill owner, profit promise, or rewrite of MALF v1.4 original directory"
 
 [[sources]]

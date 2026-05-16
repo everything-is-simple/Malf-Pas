@@ -14,17 +14,18 @@ source_authority_registry = "governance/source_authority_registry.toml"
 malf_v1_4_immutability_registry = "governance/malf_v1_4_immutability_registry.toml"
 predecessor_strength_registry = "governance/predecessor_strength_registry.toml"
 pas_axiomatic_state_machine_registry = "governance/pas_axiomatic_state_machine_registry.toml"
+malf_v1_5_wave_behavior_snapshot_registry = "governance/malf_v1_5_wave_behavior_snapshot_registry.toml"
 malf_pas_revision_roadmap_registry = "governance/malf_pas_revision_roadmap_registry.toml"
 current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
+malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
 pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
-planned_malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
 planned_pas_v1_2_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_2"
 planned_malf_pas_scenario_atlas = "H:/Malf-Pas-Validated/MALF_PAS_Scenario_Atlas_v1_0"
 historical_tradeoff_reference_root = "G:/malf-history"
 book_brainstorming_reference_root = "G:/《股市浮沉二十载》"
 pas_concept_reference_root = "G:/《股市浮沉二十载》/2020.(Au)LanceBeggs"
 remote_repo = "https://github.com/everything-is-simple/Malf-Pas"
-current_allowed_next_card = "malf-v1-5-wave-behavior-snapshot-card"
+current_allowed_next_card = "pas-v1-2-strength-weakness-matrix-card"
 conclusion_index = "docs/04-execution/00-conclusion-index-v1.md"
 
 required_authority_docs = [
@@ -41,6 +42,7 @@ required_authority_docs = [
     "docs/01-architecture/05-historical-ledger-topology-protocol-v1.md",
     "docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md",
     "docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md",
+    "docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md",
     "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
     "docs/04-execution/00-conclusion-index-v1.md",
 ]

@@ -40,7 +40,7 @@ no-legacy-code-migration
 | 10 | `predecessor-strength-map-card` | passed | 盘点旧系统与历史资料的最出彩强项 |
 | 11 | `pas-axiomatic-state-machine-card` | passed | 冻结 PAS v1.1 三件套正式设计集 |
 | 12 | `malf-pas-revision-roadmap-card` | passed | 修订 MALF+PAS 后续路线与版本升级边界 |
-| 13 | `malf-v1-5-wave-behavior-snapshot-card` | planned | 新建 MALF v1.5，补足波内行为结构事实 |
+| 13 | `malf-v1-5-wave-behavior-snapshot-card` | passed | 新建 MALF v1.5，补足波内行为结构事实 |
 | 14 | `pas-v1-2-strength-weakness-matrix-card` | planned | 新建 PAS v1.2，冻结强弱识别矩阵 |
 | 15 | `malf-pas-scenario-atlas-card` | planned | 建立 MALF+PAS 沙盘模拟与图解案例集 |
 | 16 | `open-source-adapter-boundary-card` | planned | 固定开源项目的 adapter 边界 |
@@ -471,7 +471,37 @@ Runtime / formal DB / broker / profit claims = not authorized
 malf-v1-5-wave-behavior-snapshot-card
 ```
 
-## 14. 通过标准
+## 14. MALF v1.5 wave behavior snapshot 范围
+
+`malf-v1-5-wave-behavior-snapshot-card-20260516-01` 已把第 13 卡从“planned successor”推进为
+“已冻结 successor authority definition”。
+
+本卡已冻结的正式入口：
+
+```text
+H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5
+docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md
+governance/malf_v1_5_wave_behavior_snapshot_registry.toml
+docs/04-execution/records/governance/013-malf-v1-5-wave-behavior-snapshot-card-20260516-01.conclusion.md
+```
+
+本卡通过后，当前路线固定为：
+
+```text
+MALF v1.4 = immutable authority anchor
+MALF v1.5 = successor wave_behavior_snapshot package
+PAS v1.2 = next consumer of MALF outputs only
+Scenario Atlas v1.0 = still planned
+Runtime / formal DB / broker / profit claims = not authorized
+```
+
+第 13 卡通过后，live next 推进为：
+
+```text
+pas-v1-2-strength-weakness-matrix-card
+```
+
+## 15. 通过标准
 
 | 卡 | 通过标准 |
 |---|---|
@@ -492,10 +522,10 @@ malf-v1-5-wave-behavior-snapshot-card
 | `malf-pas-scenario-atlas-card` | MALF+PAS 沙盘模拟、图解案例与无收益证明边界冻结 |
 | `open-source-adapter-boundary-card` | 每个主要开源项目都有允许角色与禁止越界说明 |
 
-## 15. 当前结论
+## 16. 当前结论
 
 ```text
 This roadmap is legislation-first.
 It does not authorize runtime, DB, broker, or strategy claims.
-Current live next is malf-v1-5-wave-behavior-snapshot-card.
+Current live next is pas-v1-2-strength-weakness-matrix-card.
 ```

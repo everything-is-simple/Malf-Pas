@@ -15,11 +15,12 @@
 9. `docs/01-architecture/06-daily-incremental-and-resume-protocol-v1.md`
 10. `docs/01-architecture/07-backtest-window-and-holdout-protocol-v1.md`
 11. `docs/00-governance/04-root-directory-policy-v1.md`
-12. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
-13. `docs/04-execution/00-conclusion-index-v1.md`
-14. `governance/repo_governance_registry.toml`
-15. `governance/root_directory_registry.toml`
-16. `governance/source_authority_registry.toml`
+12. `docs/02-modules/02-malf-v1-5-wave-behavior-snapshot-v1.md`
+13. `docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md`
+14. `docs/04-execution/00-conclusion-index-v1.md`
+15. `governance/repo_governance_registry.toml`
+16. `governance/root_directory_registry.toml`
+17. `governance/source_authority_registry.toml`
 
 ## 当前权威资产
 
@@ -31,7 +32,7 @@
 - `H:\Malf-Pas-temp`
 - `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_4`
 - `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_1`
-- `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5`（planned successor design set；尚未施工）
+- `H:\Malf-Pas-Validated\MALF_Three_Part_Design_Set_v1_5`（successor authority design set；已由第13卡冻结）
 - `H:\Malf-Pas-Validated\PAS__Three_Part_Design_Set_v1_2`（planned successor design set；尚未施工）
 - `H:\Malf-Pas-Validated\MALF_PAS_Scenario_Atlas_v1_0`（planned sandbox/chart atlas；尚未施工）
 - `H:\Asteria-Validated\MALF_Three_Part_Design_Set_v1_4`（predecessor/original reference）
@@ -105,8 +106,8 @@ python -m unittest discover -s tests -p "test_*.py"
 
 ```text
 stage = governance initialization
-live next = malf-v1-5-wave-behavior-snapshot-card
+live next = pas-v1-2-strength-weakness-matrix-card
 formal DB mutation = no
 broker feasibility = deferred
-repo status = MALF+PAS revision roadmap passed
+repo status = MALF v1.5 wave behavior snapshot passed
 ```
