@@ -159,6 +159,42 @@ class GovernanceChecksTest(unittest.TestCase):
 
         self.assertEqual(findings, [])
 
+    def test_data_foundation_roadmap_freeze_card_has_registry_and_closure(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        registry_path = repo_root / "governance" / "data_foundation_roadmap_registry.toml"
+        conclusion_index_path = repo_root / "docs" / "04-execution" / "00-conclusion-index-v1.md"
+        record_root = repo_root / "docs" / "04-execution" / "records" / "data-foundation"
+        run_id = "data-foundation-roadmap-freeze-card-20260517-01"
+
+        self.assertTrue(registry_path.exists())
+        with registry_path.open("rb") as handle:
+            registry = tomllib.load(handle)
+
+        self.assertEqual(registry.get("run_id"), run_id)
+        self.assertEqual(registry.get("roadmap_order"), 2)
+        self.assertEqual(registry.get("roadmap_status"), "frozen-by-card-018")
+        self.assertEqual(registry.get("module_db_boundary"), "Data Foundation")
+        self.assertEqual(registry.get("formal_db_mutation"), "no")
+        self.assertEqual(
+            registry.get("data_mutation_scope_after_later_authorization"),
+            "Data Foundation only",
+        )
+        self.assertEqual(
+            registry.get("next_data_foundation_card"),
+            "local-tdx-source-inventory-card",
+        )
+        self.assertEqual(registry.get("downstream_runtime_authorized"), False)
+
+        for suffix in ("card", "evidence-index", "record", "conclusion"):
+            self.assertTrue((record_root / f"018-{run_id}.{suffix}.md").exists())
+
+        conclusion_index = conclusion_index_path.read_text(encoding="utf-8")
+        self.assertIn(run_id, conclusion_index)
+        self.assertIn(
+            "018-data-foundation-roadmap-freeze-card-20260517-01.conclusion.md",
+            conclusion_index,
+        )
+
     def test_governance_checks_fail_without_roadmap_ready_usability_rules(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]
         repo_registry_path = repo_root / "governance" / "repo_governance_registry.toml"
@@ -252,9 +288,16 @@ class GovernanceChecksTest(unittest.TestCase):
             any("execution record protocol doc" in item.message for item in findings)
         )
 
-    def test_second_roadmap_check_fails_without_inventory_contract_and_validator_fragments(self) -> None:
+    def test_second_roadmap_check_fails_without_inventory_contract_fragments(
+        self,
+    ) -> None:
         repo_root = Path(__file__).resolve().parents[2]
-        roadmap_path = repo_root / "docs" / "03-roadmap" / "01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+        roadmap_path = (
+            repo_root
+            / "docs"
+            / "03-roadmap"
+            / "01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+        )
 
         findings = _check_second_roadmap_doc(repo_root)
         self.assertEqual(findings, [])
@@ -287,19 +330,31 @@ class GovernanceChecksTest(unittest.TestCase):
             simulated_findings = _check_second_roadmap_doc(temp_repo)
 
         self.assertTrue(
-            any("week/month direct-source availability conclusion" in item.message for item in simulated_findings)
+            any(
+                "week/month direct-source availability conclusion" in item.message
+                for item in simulated_findings
+            )
         )
         self.assertTrue(
-            any("tradability source availability conclusion" in item.message for item in simulated_findings)
+            any(
+                "tradability source availability conclusion" in item.message
+                for item in simulated_findings
+            )
         )
         self.assertTrue(
-            any("raw ingest audit vs data_control run-ledger relationship" in item.message for item in simulated_findings)
+            any(
+                "raw ingest audit vs data_control run-ledger relationship" in item.message
+                for item in simulated_findings
+            )
         )
         self.assertTrue(
             any("Data validator minimum skeleton" in item.message for item in simulated_findings)
         )
         self.assertTrue(
-            any("orchestration and readout table families separated" in item.message for item in simulated_findings)
+            any(
+                "orchestration and readout table families separated" in item.message
+                for item in simulated_findings
+            )
         )
 
 

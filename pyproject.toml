@@ -121,6 +121,7 @@ required_registries = [
     "governance/environment_bootstrap_registry.toml",
     "governance/open_source_adapter_boundary_registry.toml",
     "governance/post_terminal_roadmap_discipline_registry.toml",
+    "governance/data_foundation_roadmap_registry.toml",
     "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [

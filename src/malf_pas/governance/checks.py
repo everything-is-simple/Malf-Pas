@@ -193,6 +193,8 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_post_terminal_roadmap_discipline_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/data_foundation_roadmap_registry.toml":
+            findings.extend(_check_data_foundation_roadmap_registry(repo_root / raw_path, registry))
     return findings
 
 
@@ -206,6 +208,7 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         "open_source_adapter_boundary_registry": (
             "governance/open_source_adapter_boundary_registry.toml"
         ),
+        "data_foundation_roadmap_registry": "governance/data_foundation_roadmap_registry.toml",
         "current_allowed_next_card": "",
     }
     for key, expected in expected_values.items():
@@ -492,6 +495,74 @@ def _check_database_topology_registry(path: Path, registry: dict[str, Any]) -> l
     for invariant_id in [
         "ONE-ROADMAP-ONE-MODULE-DB",
         "NEXT-ROADMAP-REQUIRES-CURRENT-MODULE-DB-READY",
+    ]:
+        if invariants.get(invariant_id) is not True:
+            findings.append(Finding(path, f"{invariant_id} invariant must be true"))
+    return findings
+
+
+def _check_data_foundation_roadmap_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values: dict[str, Any] = {
+        "registry_version": "2026-05-17.v1",
+        "stage": "governance-only",
+        "formal_db_mutation": "no",
+        "broker_feasibility": "deferred",
+        "authority_doc": (
+            "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+        ),
+        "policy_status": "frozen-by-data-foundation-roadmap-freeze-card-20260517-01",
+        "run_id": "data-foundation-roadmap-freeze-card-20260517-01",
+        "roadmap_order": 2,
+        "roadmap_status": "frozen-by-card-018",
+        "previous_roadmap": "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
+        "previous_roadmap_status": "none / terminal",
+        "post_terminal_separate_roadmap": True,
+        "module_db_boundary": "Data Foundation",
+        "one_roadmap_one_module_db": True,
+        "data_root": "H:/Malf-Pas-data",
+        "data_mutation_scope_after_later_authorization": "Data Foundation only",
+        "current_card_creates_db": False,
+        "current_card_writes_data_root": False,
+        "downstream_runtime_authorized": False,
+        "malf_pas_signal_authorized": False,
+        "broker_feasibility_opened": False,
+        "profit_claim_authorized": False,
+        "legacy_code_migration_authorized": False,
+        "next_data_foundation_card": "local-tdx-source-inventory-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    required_db_names = {
+        "raw_market.duckdb",
+        "market_base_day.duckdb",
+        "market_base_week.duckdb",
+        "market_base_month.duckdb",
+        "market_meta.duckdb",
+        "data_control.duckdb",
+    }
+    if set(registry.get("allowed_later_authorization_scope", [])) != required_db_names:
+        findings.append(Finding(path, "Data Foundation later authorization scope is incomplete"))
+
+    forbidden_scope = set(registry.get("forbidden_scope", []))
+    for forbidden in ["MALF", "PAS", "Signal", "broker", "backtest", "profit proof"]:
+        if forbidden not in forbidden_scope:
+            findings.append(Finding(path, f"{forbidden} must remain out of card 18 scope"))
+
+    invariants = {
+        item.get("id"): item.get("value")
+        for item in registry.get("invariants", [])
+        if isinstance(item, dict)
+    }
+    for invariant_id in [
+        "ROADMAP-2-HANDOFF-FROM-TERMINAL-ROADMAP-1",
+        "DATA-FOUNDATION-ONLY-MODULE-DB",
+        "CARD-018-NO-DB-CREATION",
+        "NO-DOWNSTREAM-SCOPE-SYNC",
     ]:
         if invariants.get(invariant_id) is not True:
             findings.append(Finding(path, f"{invariant_id} invariant must be true"))

@@ -1,0 +1,68 @@
+registry_version = "2026-05-17.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+policy_status = "frozen-by-data-foundation-roadmap-freeze-card-20260517-01"
+run_id = "data-foundation-roadmap-freeze-card-20260517-01"
+roadmap_order = 2
+roadmap_status = "frozen-by-card-018"
+previous_roadmap = "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md"
+previous_roadmap_status = "none / terminal"
+post_terminal_separate_roadmap = true
+module_db_boundary = "Data Foundation"
+one_roadmap_one_module_db = true
+data_root = "H:/Malf-Pas-data"
+data_mutation_scope_after_later_authorization = "Data Foundation only"
+current_card_creates_db = false
+current_card_writes_data_root = false
+downstream_runtime_authorized = false
+malf_pas_signal_authorized = false
+broker_feasibility_opened = false
+profit_claim_authorized = false
+legacy_code_migration_authorized = false
+next_data_foundation_card = "local-tdx-source-inventory-card"
+
+allowed_later_authorization_scope = [
+    "raw_market.duckdb",
+    "market_base_day.duckdb",
+    "market_base_week.duckdb",
+    "market_base_month.duckdb",
+    "market_meta.duckdb",
+    "data_control.duckdb",
+]
+
+forbidden_scope = [
+    "MALF",
+    "PAS",
+    "Signal",
+    "Position",
+    "Portfolio Plan",
+    "Trade",
+    "System Readout",
+    "Pipeline runtime",
+    "broker",
+    "paper-live",
+    "backtest",
+    "profit proof",
+]
+
+[[invariants]]
+id = "ROADMAP-2-HANDOFF-FROM-TERMINAL-ROADMAP-1"
+value = true
+description = "Roadmap 2 is a post-terminal separate roadmap and does not reopen the first governance roadmap."
+
+[[invariants]]
+id = "DATA-FOUNDATION-ONLY-MODULE-DB"
+value = true
+description = "Roadmap 2 corresponds only to the Data Foundation module database boundary."
+
+[[invariants]]
+id = "CARD-018-NO-DB-CREATION"
+value = true
+description = "Card 18 freezes the roadmap and authorization boundary but does not create or mutate any formal DB."
+
+[[invariants]]
+id = "NO-DOWNSTREAM-SCOPE-SYNC"
+value = true
+description = "Card 18 does not authorize MALF, PAS, Signal, runtime, broker, backtest, or profit-proof work."

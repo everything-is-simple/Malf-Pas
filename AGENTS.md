@@ -127,11 +127,12 @@ python -m unittest discover -s tests -p "test_*.py"
 ## 当前阶段口径
 
 ```text
-stage = post-terminal roadmap 2 planning
+stage = post-terminal roadmap 2 frozen
 live next = none / terminal
 formal DB mutation = no
 broker feasibility = deferred
 repo status = first governance roadmap terminal
 first day work = closed
-next roadmap = docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md
+current roadmap = docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md
+next Data Foundation card = local-tdx-source-inventory-card
 ```

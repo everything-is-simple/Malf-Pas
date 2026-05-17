@@ -2,7 +2,7 @@
 
 日期：2026-05-16
 
-状态：planned / post-terminal separate roadmap
+状态：frozen-by-card-018 / post-terminal separate roadmap
 
 ## 1. 定位
 
@@ -41,7 +41,7 @@ Data Foundation
 | 系统路线 | 文档 | 状态 | 作用 |
 |---:|---|---|---|
 | Roadmap 1 | `00-malf-pas-governance-roadmap-v1.md` | `terminal / governance-only completed` | 立法、锚点、模块所有权、历史大账本协议、日更协议、adapter 边界 |
-| Roadmap 2 | `01-local-tdx-data-foundation-module-db-roadmap-v1.md` | `planned` | 建设 Data Foundation 模块库与日常维护闭环 |
+| Roadmap 2 | `01-local-tdx-data-foundation-module-db-roadmap-v1.md` | `frozen-by-card-018` | 建设 Data Foundation 模块库与日常维护闭环 |
 | Roadmap 3 | 待 Data closeout passed 后新开 | `not opened` | `MALF v1.5` 模块数据库路线 |
 
 Roadmap 2 完成前，不得开启 Roadmap 3。
@@ -222,7 +222,7 @@ checkpoint_key
 
 | 顺序 | 卡 | 目标 | 通过口径 |
 |---:|---|---|---|
-| 18 | `data-foundation-roadmap-freeze-card` | 冻结系统第 2 张 roadmap、Data-only mutation 授权、与第 1 张 terminal roadmap 的接力关系 | roadmap 文档、Data-only scope、禁止下游范围同步 |
+| 18 | `data-foundation-roadmap-freeze-card` | 冻结系统第 2 张 roadmap、Data-only mutation 授权、与第 1 张 terminal roadmap 的接力关系 | roadmap 文档、Data-only scope、禁止下游范围同步、registry 与四件套闭环 |
 | 19 | `local-tdx-source-inventory-card` | 只读盘点两个本地 TDX truth roots | source family、file family、fingerprint、week/month direct source 可用性结论、tradability 来源可用性结论、manifest 规则冻结 |
 | 20 | `data-module-db-contract-card` | 冻结 Data 六库 contract、表族、自然键、共同治理键、lineage | schema/manifest/lineage/minimal consumer contract、Data validator 最小骨架、`raw_market.ingest_run` 与 `data_control.run_ledger` 的关系冻结 |
 | 21 | `raw-market-full-build-ledger-card` | 建立 `raw_market` 文件级历史账本 | source file、raw bar、ingest run、reject audit、skipped/failed 记录通过 |
@@ -249,6 +249,18 @@ checkpoint_key
 1. 创建 Data DB。
 2. 打开 MALF / PAS / Signal runtime。
 3. 宣告 Data ready。
+
+闭环结果：
+
+```text
+run_id = data-foundation-roadmap-freeze-card-20260517-01
+status = passed
+registry = governance/data_foundation_roadmap_registry.toml
+next_data_foundation_card = local-tdx-source-inventory-card
+```
+
+本卡通过后，只表示 Roadmap 2 和 Data-only 授权边界已冻结；不表示 `H:\Malf-Pas-data`
+已经写入，也不表示 Data Foundation 已经 development usable 或 daily usable。
 
 ### 12.2 `019-local-tdx-source-inventory-card`
 

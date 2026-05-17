@@ -84,7 +84,8 @@ No formal DB mutation is authorized.
 No broker or live-trading discussion is opened by this repo initialization.
 Open-source adapter boundary is now frozen.
 Current governance roadmap status is none / terminal.
-First-day governance work is closed; the next active roadmap is the Data Foundation roadmap.
+First-day governance work is closed; Roadmap 2 is frozen as the Data Foundation roadmap by card 18.
+Next Data Foundation card is local-tdx-source-inventory-card.
 ```
 
 ## 阅读入口

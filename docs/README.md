@@ -56,6 +56,7 @@ Book-origin brainstorming comes from G:\《股市浮沉二十载》.
 Historical implementation tradeoff references come from G:\malf-history.
 Open-source adapter boundary is now frozen.
 Current governance roadmap status is none / terminal.
+Roadmap 2 is frozen as Data Foundation only; next Data Foundation card is local-tdx-source-inventory-card.
 All post-terminal roadmaps must be one-roadmap-one-module-db and current-module-db-ready-first.
 Roadmap ready now requires both development usability and daily usability.
 Daily usability requires ledger, daily incremental or an explicit equivalent, dirty scope, checkpoint/resume, freshness, and audit closure.

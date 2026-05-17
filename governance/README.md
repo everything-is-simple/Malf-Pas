@@ -9,6 +9,7 @@
 | `root_directory_registry.toml` | freezes the six current roots plus previous/external read-only root boundaries |
 | `source_authority_registry.toml` | freezes authority, predecessor, successor, companion, reference, and adapter-source roles plus non-migration boundaries |
 | `post_terminal_roadmap_discipline_registry.toml` | freezes post-terminal roadmap discipline, including development usable and daily usable ready gates |
+| `data_foundation_roadmap_registry.toml` | freezes Roadmap 2 handoff, Data Foundation-only scope, and card 18 no-downstream authorization boundary |
 
 本目录预留给后续 machine-readable governance artifacts，例如：
 
@@ -37,6 +38,10 @@ staging promote 的治理协议，不授权正式 DB mutation、schema migration
 `post_terminal_roadmap_discipline_registry.toml` 冻结首张治理 roadmap 收口后的后续路线纪律。
 每张模块 roadmap 宣告 ready 前，必须同时证明开发可用与日常可用；只够下游开发、不够日常增量、
 断点续传和 freshness/audit 的模块库，不得推进下一张 roadmap。
+
+`data_foundation_roadmap_registry.toml` 冻结系统第二张 roadmap 的接力关系：第一张治理 roadmap
+保持 `none / terminal`，第二张 roadmap 只对应 `Data Foundation` 模块数据库边界。第 18 卡不创建 DB，
+不写入 `H:\Malf-Pas-data`，只把后续 Data 卡可申请的范围收窄为 `Data Foundation only`。
 
 `backtest_window_holdout_registry.toml` 只冻结 `2012..2021` 历史覆盖、`2012..2020` 选择窗口、
 三年滚动段、`2021..2023 / 2024..2026` reserved holdout 与 `2021` 用途隔离边界，

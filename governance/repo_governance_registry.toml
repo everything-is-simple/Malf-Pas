@@ -20,6 +20,7 @@ malf_pas_scenario_atlas_registry = "governance/malf_pas_scenario_atlas_registry.
 malf_pas_revision_roadmap_registry = "governance/malf_pas_revision_roadmap_registry.toml"
 open_source_adapter_boundary_registry = "governance/open_source_adapter_boundary_registry.toml"
 post_terminal_roadmap_discipline_registry = "governance/post_terminal_roadmap_discipline_registry.toml"
+data_foundation_roadmap_registry = "governance/data_foundation_roadmap_registry.toml"
 current_malf_v1_4_anchor = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_4"
 malf_v1_5_design_set = "H:/Malf-Pas-Validated/MALF_Three_Part_Design_Set_v1_5"
 pas_v1_1_design_set = "H:/Malf-Pas-Validated/PAS__Three_Part_Design_Set_v1_1"
