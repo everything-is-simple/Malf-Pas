@@ -3,8 +3,11 @@ stage = "governance-only"
 formal_db_mutation = "no"
 broker_feasibility = "deferred"
 active_route = "governance"
-active_card = "open-source-adapter-boundary-card-20260516-01"
+active_card = ""
 current_allowed_next_card = ""
+last_closed_card = "open-source-adapter-boundary-card-20260516-01"
+roadmap_status = "none / terminal"
+first_day_work_status = "closed"
 module_contract_freeze_required_before_runtime = true
 
 [[cards]]

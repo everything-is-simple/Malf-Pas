@@ -84,6 +84,7 @@ No formal DB mutation is authorized.
 No broker or live-trading discussion is opened by this repo initialization.
 Open-source adapter boundary is now frozen.
 Current governance roadmap status is none / terminal.
+First-day governance work is closed; the next active roadmap is the Data Foundation roadmap.
 ```
 
 ## 阅读入口

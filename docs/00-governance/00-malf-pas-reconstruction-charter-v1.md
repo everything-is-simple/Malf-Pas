@@ -16,7 +16,7 @@
 | 临时产物根目录 | `H:\Malf-Pas-temp` |
 | 远端 | `https://github.com/everything-is-simple/Malf-Pas` |
 | 结构锚点 | `MALF v1.4` |
-| 当前重点 | `first governance roadmap terminal closeout` |
+| 当前重点 | `post-terminal Data Foundation roadmap planning` |
 
 一句话定义：
 

@@ -504,8 +504,11 @@ def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Fi
         "registry_version": "2026-05-16.v1",
         "stage": "governance-only",
         "active_route": "governance",
-        "active_card": "open-source-adapter-boundary-card-20260516-01",
+        "active_card": "",
         "current_allowed_next_card": "",
+        "last_closed_card": "open-source-adapter-boundary-card-20260516-01",
+        "roadmap_status": "none / terminal",
+        "first_day_work_status": "closed",
         "module_contract_freeze_required_before_runtime": True,
     }
     for key, expected in expected_values.items():
@@ -616,6 +619,27 @@ def _check_malf_pas_revision_roadmap_registry(
     for key in sorted(required_invariants):
         if invariants.get(key) is not True:
             findings.append(Finding(path, f"{key} invariant must be true"))
+
+    closeout = registry.get("first_day_closeout")
+    if not isinstance(closeout, dict):
+        findings.append(Finding(path, "first_day_closeout must be registered"))
+        return findings
+
+    expected_closeout = {
+        "status": "closed",
+        "closed_date": "2026-05-16",
+        "governance_roadmap_status": "none / terminal",
+        "completed_governance_card_count": 17,
+        "malf_v1_5_status": "frozen-successor-authority",
+        "pas_v1_2_status": "frozen-successor-authority",
+        "scenario_atlas_status": "frozen-companion-authority",
+        "open_source_adapter_boundary_status": "frozen-terminal-card",
+        "next_roadmap": "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+        "next_roadmap_scope": "Data Foundation only",
+    }
+    for key, expected in expected_closeout.items():
+        if closeout.get(key) != expected:
+            findings.append(Finding(path, f"first_day_closeout.{key} must be {expected!r}"))
 
     return findings
 

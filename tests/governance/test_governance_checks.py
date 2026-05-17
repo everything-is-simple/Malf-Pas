@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from malf_pas.governance.checks import (
     _check_governance_roadmap_doc,
+    _check_malf_pas_revision_roadmap_registry,
     _check_malf_pas_scenario_atlas_registry,
     _check_pas_v1_2_strength_weakness_matrix_registry,
     _check_post_terminal_roadmap_discipline_registry,
@@ -66,7 +67,33 @@ class GovernanceChecksTest(unittest.TestCase):
             repo_registry = tomllib.load(handle)
 
         self.assertEqual(module_gate.get("current_allowed_next_card"), "")
+        self.assertEqual(module_gate.get("active_card"), "")
+        self.assertEqual(
+            module_gate.get("last_closed_card"),
+            "open-source-adapter-boundary-card-20260516-01",
+        )
+        self.assertEqual(module_gate.get("roadmap_status"), "none / terminal")
+        self.assertEqual(module_gate.get("first_day_work_status"), "closed")
         self.assertEqual(repo_registry.get("current_allowed_next_card"), "")
+
+    def test_malf_pas_revision_registry_records_first_day_closeout(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        registry_path = repo_root / "governance" / "malf_pas_revision_roadmap_registry.toml"
+
+        with registry_path.open("rb") as handle:
+            registry = tomllib.load(handle)
+
+        findings = _check_malf_pas_revision_roadmap_registry(registry_path, registry)
+        closeout = registry.get("first_day_closeout", {})
+
+        self.assertEqual(findings, [])
+        self.assertEqual(closeout.get("status"), "closed")
+        self.assertEqual(closeout.get("completed_governance_card_count"), 17)
+        self.assertEqual(
+            closeout.get("next_roadmap"),
+            "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+        )
+        self.assertEqual(closeout.get("next_roadmap_scope"), "Data Foundation only")
 
     def test_roadmap_ready_requires_development_and_daily_usability_rules(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]

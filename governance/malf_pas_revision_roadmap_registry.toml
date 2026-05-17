@@ -60,3 +60,15 @@ runtime_not_authorized = true
 formal_db_mutation_not_authorized = true
 broker_not_authorized = true
 profit_claim_not_authorized = true
+
+[first_day_closeout]
+status = "closed"
+closed_date = "2026-05-16"
+governance_roadmap_status = "none / terminal"
+completed_governance_card_count = 17
+malf_v1_5_status = "frozen-successor-authority"
+pas_v1_2_status = "frozen-successor-authority"
+scenario_atlas_status = "frozen-companion-authority"
+open_source_adapter_boundary_status = "frozen-terminal-card"
+next_roadmap = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+next_roadmap_scope = "Data Foundation only"
