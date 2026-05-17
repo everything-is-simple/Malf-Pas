@@ -1,0 +1,61 @@
+registry_version = "2026-05-17.v1"
+stage = "data-foundation"
+formal_db_mutation = "Data Foundation only"
+broker_feasibility = "deferred"
+authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+run_id = "market-base-day-week-month-build-card-20260517-01"
+roadmap_order = 22
+card_status = "passed"
+raw_market_db_path = "H:/Malf-Pas-data/raw_market.duckdb"
+day_db_path = "H:/Malf-Pas-data/market_base_day.duckdb"
+week_db_path = "H:/Malf-Pas-data/market_base_week.duckdb"
+month_db_path = "H:/Malf-Pas-data/market_base_month.duckdb"
+report_dir = "H:/Malf-Pas-reprot/data-foundation/market-base-day-week-month-build-card-20260517-01"
+full_report_dir = "H:/Malf-Pas-reprot/data-foundation/market-base-day-week-month-build-card-20260517-01/full"
+full_rerun_report_dir = "H:/Malf-Pas-reprot/data-foundation/market-base-day-week-month-build-card-20260517-01/full-rerun"
+source_manifest_hash = "24b15d9e77c922da7a90a098a9035a57bbd8d0b9b7f0d22a9f7273bee99aa280"
+raw_source_run_id = "raw-market-full-build-ledger-card-20260517-01"
+day_run_id = "market-base-day-week-month-build-card-20260517-01:day"
+week_run_id = "market-base-day-week-month-build-card-20260517-01:week"
+month_run_id = "market-base-day-week-month-build-card-20260517-01:month"
+analysis_price_line = "backward"
+week_month_availability_status = "day-derived"
+authorized_db_scope = [
+    "market_base_day.duckdb",
+    "market_base_week.duckdb",
+    "market_base_month.duckdb",
+]
+next_data_foundation_card = "market-meta-tradability-calendar-card"
+
+day_row_count = 28649022
+week_row_count = 6071205
+month_row_count = 1454045
+day_symbol_count = 12194
+week_symbol_count = 12194
+month_symbol_count = 12194
+day_min_bar_dt = "1990-12-19"
+day_max_bar_dt = "2026-04-23"
+week_min_bar_dt = "1990-12-20"
+week_max_bar_dt = "2026-04-23"
+month_min_bar_dt = "1990-12-25"
+month_max_bar_dt = "2026-04-23"
+day_latest_pointer_count = 12194
+week_latest_pointer_count = 12194
+month_latest_pointer_count = 12194
+day_dirty_scope_count = 12194
+week_dirty_scope_count = 12194
+month_dirty_scope_count = 12194
+
+day_natural_key_unique = true
+week_natural_key_unique = true
+month_natural_key_unique = true
+day_latest_pointer_unique = true
+week_latest_pointer_unique = true
+month_latest_pointer_unique = true
+day_lineage_complete = true
+week_lineage_complete = true
+month_lineage_complete = true
+
+day_source_run_id = "raw-market-full-build-ledger-card-20260517-01"
+week_source_run_id = "market-base-day-week-month-build-card-20260517-01:day"
+month_source_run_id = "market-base-day-week-month-build-card-20260517-01:day"

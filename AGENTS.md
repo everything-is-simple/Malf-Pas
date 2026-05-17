@@ -61,9 +61,9 @@
 - 一次 construction turn 不得并行改写多个业务模块语义。
 - `PAS` 不得输出订单、仓位、成交、收益承诺或 broker 指令。
 - `Signal` 不得回写 `MALF` 或 `PAS` 定义。
-- 正式 DB mutation 当前固定为 `Data Foundation only`，且 live write scope 只到 `H:\Malf-Pas-data\raw_market.duckdb`。
+- 正式 DB mutation 当前固定为 `Data Foundation only`，且 live write scope 只到 `H:\Malf-Pas-data\market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb`。
 - broker / live trading / paper-live 当前固定为 `deferred`。
-- `H:\Malf-Pas-data` 是当前系统唯一数据根；当前 live 授权只允许写入 `raw_market.duckdb`，其他正式 DB 仍不得写入。
+- `H:\Malf-Pas-data` 是当前系统唯一数据根；当前 live 授权只允许写入 `market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb`，其他正式 DB 仍不得写入。
 - `H:\Malf-Pas-backup` 只放备份包、交付 zip 与可恢复快照。
 - `H:\Malf-Pas-Validated` 只放本系统沉淀后的历史经验、权威材料与经验索引。
 - `H:\Malf-Pas-reprot` 只放 report、audit readout 与运行报告输出；当前目录名固定为 `reprot`。
@@ -101,7 +101,7 @@ codebase-retrieval -> context7 -> fetch -> sequential-thinking -> codex apps
 - doc-first：先写或修正文档，再谈实现。
 - governance-only：第一张 roadmap 期间只允许治理卡与说明文档施工。
 - read-only-to-previous-assets：可读上一版 `H:\Asteria*` 与历史资料，不得改写它们。
-- data-foundation-only-formal-db-mutation：当前只允许第 21 卡范围内的 `H:\Malf-Pas-data\raw_market.duckdb`；其他 `*.duckdb`、`*.db`、`*.sqlite` 仍不得写入。
+- data-foundation-only-formal-db-mutation：当前只允许第 22 卡范围内的 `H:\Malf-Pas-data\market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb`；其他 `*.duckdb`、`*.db`、`*.sqlite` 仍不得写入。
 - no-legacy-code-migration：不得把历史 repo 代码原样搬入本仓库。
 
 ## 执行闭环
@@ -127,12 +127,12 @@ python -m unittest discover -s tests -p "test_*.py"
 ## 当前阶段口径
 
 ```text
-stage = post-terminal roadmap 2 data-foundation card 21 closed
-live next = market-base-day-week-month-build-card
+stage = post-terminal roadmap 2 data-foundation card 22 closed
+live next = market-meta-tradability-calendar-card
 formal DB mutation = Data Foundation only
 broker feasibility = deferred
-repo status = roadmap 1 terminal + roadmap 2 active-after-card-021
+repo status = roadmap 1 terminal + roadmap 2 active-after-card-022
 first day work = closed
 current roadmap = docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md
-next Data Foundation card = market-base-day-week-month-build-card
+next Data Foundation card = market-meta-tradability-calendar-card
 ```

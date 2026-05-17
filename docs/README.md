@@ -56,10 +56,11 @@ Book-origin brainstorming comes from G:\《股市浮沉二十载》.
 Historical implementation tradeoff references come from G:\malf-history.
 Open-source adapter boundary is now frozen.
 First governance roadmap status remains none / terminal.
-Roadmap 2 is active-after-card-021 on the `data-foundation` live route.
-Formal DB mutation is narrowed to `Data Foundation only`, and current live write scope is `H:\Malf-Pas-data\raw_market.duckdb` only.
+Roadmap 2 is active-after-card-022 on the `data-foundation` live route.
+Formal DB mutation is narrowed to `Data Foundation only`, and current live write scope is `H:\Malf-Pas-data\market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb` only.
 Card 21 is closed; `raw_market.duckdb` has been created with `source_file / raw_bar / ingest_run / reject_audit / source_manifest / schema_version`.
-Next Data Foundation card is market-base-day-week-month-build-card.
+Card 22 is closed; `market_base_day/week/month.duckdb` have been created with `base_bar / latest_pointer / base_run / dirty_scope / source_manifest / schema_version`.
+Next Data Foundation card is market-meta-tradability-calendar-card.
 All post-terminal roadmaps must be one-roadmap-one-module-db and current-module-db-ready-first.
 Roadmap ready now requires both development usability and daily usability.
 Daily usability requires ledger, daily incremental or an explicit equivalent, dirty scope, checkpoint/resume, freshness, and audit closure.

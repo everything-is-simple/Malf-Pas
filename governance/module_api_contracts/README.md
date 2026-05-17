@@ -7,8 +7,8 @@ Current status:
 ```text
 stage = data-foundation
 module ownership = frozen
-runtime contracts = Data Foundation only / raw_market surface open
-formal DB mutation = Data Foundation only (raw_market.duckdb only)
+runtime contracts = Data Foundation only / market_base day-week-month surface open
+formal DB mutation = Data Foundation only (market_base_day/week/month.duckdb only)
 ```
 
 The owning governance card has frozen module ownership, but formal runtime API contracts are still not

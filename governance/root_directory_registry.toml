@@ -1,6 +1,6 @@
-registry_version = "2026-05-15.v1"
-stage = "governance-only"
-formal_db_mutation = "no"
+registry_version = "2026-05-17.v2"
+stage = "data-foundation"
+formal_db_mutation = "Data Foundation only"
 broker_feasibility = "deferred"
 policy_status = "active-root-directory-policy"
 authority_doc = "docs/00-governance/04-root-directory-policy-v1.md"
@@ -15,7 +15,7 @@ write_policy = "repo-tracked source only; no cache, report, temp, scratch, or da
 key = "data_root"
 path = "H:/Malf-Pas-data"
 role = "current system data root for future historical ledger and sub-ledgers"
-write_policy = "no formal DB mutation in current stage"
+write_policy = "current live authorization writes only market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb"
 
 [[current_roots]]
 key = "backup_root"

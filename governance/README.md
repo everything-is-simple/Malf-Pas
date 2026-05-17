@@ -12,6 +12,7 @@
 | `data_foundation_roadmap_registry.toml` | freezes Roadmap 2 handoff, Data Foundation-only scope, and card 18 no-downstream authorization boundary |
 | `data_module_db_contract_registry.toml` | freezes Data Foundation six-DB contract, table families, natural keys, lineage, and validator skeleton boundary |
 | `raw_market_full_build_registry.toml` | records card 21 raw-market full-build closeout, formal DB path, report root, and live counts for source/raw/audit tables |
+| `market_base_day_week_month_registry.toml` | records card 22 market-base day/week/month closeout, three formal DB paths, report root, and live counts / uniqueness / lineage status |
 
 本目录预留给后续 machine-readable governance artifacts，例如：
 
@@ -52,6 +53,10 @@ staging promote 的治理协议，不授权正式 DB mutation、schema migration
 `raw_market_full_build_registry.toml` 冻结第 21 卡的 `raw_market` 文件级历史账本闭环结果。
 它登记 canonical root、secondary audit root、`raw_market.duckdb` 正式路径、报告路径、full build
 与 daily incremental 的 manifest/hash 结果，以及 `source_file / raw_bar / reject_audit` 的 live row counts。
+
+`market_base_day_week_month_registry.toml` 冻结第 22 卡的 `market_base_day/week/month` 物化账本闭环结果。
+它登记三库正式路径、报告路径、row count、symbol count、date span、natural key / latest pointer 唯一性，
+以及 week/month 当前仍为 `day-derived` 的 lineage 结论。
 
 `backtest_window_holdout_registry.toml` 只冻结 `2012..2021` 历史覆盖、`2012..2020` 选择窗口、
 三年滚动段、`2021..2023 / 2024..2026` reserved holdout 与 `2021` 用途隔离边界，

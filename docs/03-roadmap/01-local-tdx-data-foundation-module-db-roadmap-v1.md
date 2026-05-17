@@ -2,7 +2,7 @@
 
 日期：2026-05-16
 
-状态：active-after-card-021 / post-terminal separate roadmap
+状态：active-after-card-022 / post-terminal separate roadmap
 
 ## 1. 定位
 
@@ -41,7 +41,7 @@ Data Foundation
 | 系统路线 | 文档 | 状态 | 作用 |
 |---:|---|---|---|
 | Roadmap 1 | `00-malf-pas-governance-roadmap-v1.md` | `terminal / governance-only completed` | 立法、锚点、模块所有权、历史大账本协议、日更协议、adapter 边界 |
-| Roadmap 2 | `01-local-tdx-data-foundation-module-db-roadmap-v1.md` | `active-after-card-021` | 建设 Data Foundation 模块库与日常维护闭环 |
+| Roadmap 2 | `01-local-tdx-data-foundation-module-db-roadmap-v1.md` | `active-after-card-022` | 建设 Data Foundation 模块库与日常维护闭环 |
 | Roadmap 3 | 待 Data closeout passed 后新开 | `not opened` | `MALF v1.5` 模块数据库路线 |
 
 Roadmap 2 完成前，不得开启 Roadmap 3。
@@ -387,8 +387,11 @@ source_manifest / schema_version` 已经形成闭环，并证明 `daily_incremen
 1. 建立 `market_base_day.duckdb`。
 2. 建立 `market_base_week.duckdb`。
 3. 建立 `market_base_month.duckdb`。
-4. 建立 `market_base_bar`、`market_base_latest`、`market_base_run`、`market_base_dirty_scope`。
+4. 建立 `base_bar`、`latest_pointer`、`base_run`、`dirty_scope`、`source_manifest`、`schema_version`。
 5. 冻结 `analysis_price_line = backward` 的下游分析口径。
+6. 固定 `week / month` 当前仍为 `derived_from_timeframe = day`，不提前宣告 direct source。
+
+本卡不打开 `data_control` 与 `market_meta`。
 
 通过标准：
 
@@ -396,6 +399,8 @@ source_manifest / schema_version` 已经形成闭环，并证明 `daily_incremen
 2. latest pointer 唯一。
 3. 自然键唯一。
 4. week/month 的 direct 或 derived lineage 可解释。
+5. `market_base_day.base_bar` 固定包含 `analysis_price_line = backward`。
+6. `market_base_week/month.base_bar` 固定包含 `derived_from_timeframe = day`，且 `source_run_id` 直接指向本次 `:day` 子 run。
 
 ### 12.6 `023-market-meta-tradability-calendar-card`
 

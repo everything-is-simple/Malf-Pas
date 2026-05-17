@@ -127,6 +127,7 @@ required_registries = [
     "governance/local_tdx_source_inventory_registry.toml",
     "governance/data_module_db_contract_registry.toml",
     "governance/raw_market_full_build_registry.toml",
+    "governance/market_base_day_week_month_registry.toml",
     "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [

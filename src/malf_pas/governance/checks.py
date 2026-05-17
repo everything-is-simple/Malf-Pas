@@ -203,13 +203,17 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(_check_data_module_db_contract_registry(repo_root / raw_path, registry))
         if raw_path == "governance/raw_market_full_build_registry.toml":
             findings.extend(_check_raw_market_full_build_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/market_base_day_week_month_registry.toml":
+            findings.extend(
+                _check_market_base_day_week_month_registry(repo_root / raw_path, registry)
+            )
     return findings
 
 
 def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     expected_values = {
-        "registry_version": "2026-05-17.v1",
+        "registry_version": "2026-05-17.v3",
         "stage": "data-foundation",
         "formal_db_mutation": "Data Foundation only",
         "broker_feasibility": "deferred",
@@ -224,11 +228,12 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
             "governance/data_module_db_contract_registry.toml"
         ),
         "raw_market_full_build_registry": "governance/raw_market_full_build_registry.toml",
+        "market_base_day_week_month_registry": "governance/market_base_day_week_month_registry.toml",
         "current_route": "data-foundation",
         "current_roadmap": "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
         "current_live_card": "",
-        "last_closed_card": "raw-market-full-build-ledger-card-20260517-01",
-        "current_allowed_next_card": "market-base-day-week-month-build-card",
+        "last_closed_card": "market-base-day-week-month-build-card-20260517-01",
+        "current_allowed_next_card": "market-meta-tradability-calendar-card",
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -371,6 +376,15 @@ def _check_second_roadmap_doc(repo_root: Path) -> list[Finding]:
         ),
         "orchestration table families 与 freshness/readout table families 分离边界": (
             "roadmap 2 must keep orchestration and readout table families separated in data_control"
+        ),
+        "analysis_price_line = backward": (
+            "roadmap 2 card 22 must freeze backward analysis price line for market_base_day"
+        ),
+        "derived_from_timeframe = day": (
+            "roadmap 2 card 22 must keep week/month lineage day-derived"
+        ),
+        "本卡不打开 `data_control` 与 `market_meta`": (
+            "roadmap 2 card 22 must keep market_meta and data_control out of scope"
         ),
     }
     findings: list[Finding] = []
@@ -525,17 +539,17 @@ def _check_data_foundation_roadmap_registry(
 ) -> list[Finding]:
     findings: list[Finding] = []
     expected_values: dict[str, Any] = {
-        "registry_version": "2026-05-17.v2",
+        "registry_version": "2026-05-17.v3",
         "stage": "data-foundation",
         "formal_db_mutation": "Data Foundation only",
         "broker_feasibility": "deferred",
         "authority_doc": (
             "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
         ),
-        "policy_status": "active-after-raw-market-full-build-ledger-card-20260517-01",
+        "policy_status": "active-after-market-base-day-week-month-build-card-20260517-01",
         "run_id": "data-foundation-roadmap-freeze-card-20260517-01",
         "roadmap_order": 2,
-        "roadmap_status": "active-after-card-021",
+        "roadmap_status": "active-after-card-022",
         "previous_roadmap": "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
         "previous_roadmap_status": "none / terminal",
         "post_terminal_separate_roadmap": True,
@@ -550,11 +564,14 @@ def _check_data_foundation_roadmap_registry(
         "broker_feasibility_opened": False,
         "profit_claim_authorized": False,
         "legacy_code_migration_authorized": False,
-        "next_data_foundation_card": "market-base-day-week-month-build-card",
-        "last_closed_data_foundation_card": "raw-market-full-build-ledger-card-20260517-01",
+        "next_data_foundation_card": "market-meta-tradability-calendar-card",
+        "last_closed_data_foundation_card": "market-base-day-week-month-build-card-20260517-01",
         "current_live_route": "data-foundation",
         "current_live_card": "",
         "raw_market_full_build_registry": "governance/raw_market_full_build_registry.toml",
+        "market_base_day_week_month_registry": (
+            "governance/market_base_day_week_month_registry.toml"
+        ),
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -589,6 +606,14 @@ def _check_data_foundation_roadmap_registry(
     ]:
         if invariants.get(invariant_id) is not True:
             findings.append(Finding(path, f"{invariant_id} invariant must be true"))
+    if set(registry.get("authorized_db_scope", [])) != {
+        "market_base_day.duckdb",
+        "market_base_week.duckdb",
+        "market_base_month.duckdb",
+    }:
+        findings.append(
+            Finding(path, "authorized_db_scope must switch to market_base day/week/month only")
+        )
     return findings
 
 
@@ -731,8 +756,8 @@ def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Fi
         "formal_db_mutation": "Data Foundation only",
         "active_route": "data-foundation",
         "active_card": "",
-        "current_allowed_next_card": "market-base-day-week-month-build-card",
-        "last_closed_card": "raw-market-full-build-ledger-card-20260517-01",
+        "current_allowed_next_card": "market-meta-tradability-calendar-card",
+        "last_closed_card": "market-base-day-week-month-build-card-20260517-01",
         "roadmap_status": "roadmap-2-active",
         "first_day_work_status": "closed",
         "module_contract_freeze_required_before_runtime": True,
@@ -798,6 +823,69 @@ def _check_raw_market_full_build_registry(path: Path, registry: dict[str, Any]) 
         findings.append(Finding(path, "natural_key_unique must be true"))
     if "source ingest local audit" not in str(registry.get("ingest_run_audit_role", "")):
         findings.append(Finding(path, "ingest_run_audit_role must preserve the card-20 audit boundary"))
+    return findings
+
+
+def _check_market_base_day_week_month_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "registry_version": "2026-05-17.v1",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
+        "broker_feasibility": "deferred",
+        "run_id": "market-base-day-week-month-build-card-20260517-01",
+        "roadmap_order": 22,
+        "card_status": "passed",
+        "raw_market_db_path": "H:/Malf-Pas-data/raw_market.duckdb",
+        "day_db_path": "H:/Malf-Pas-data/market_base_day.duckdb",
+        "week_db_path": "H:/Malf-Pas-data/market_base_week.duckdb",
+        "month_db_path": "H:/Malf-Pas-data/market_base_month.duckdb",
+        "report_dir": (
+            "H:/Malf-Pas-reprot/data-foundation/market-base-day-week-month-build-card-20260517-01"
+        ),
+        "analysis_price_line": "backward",
+        "week_month_availability_status": "day-derived",
+        "next_data_foundation_card": "market-meta-tradability-calendar-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    if set(registry.get("authorized_db_scope", [])) != {
+        "market_base_day.duckdb",
+        "market_base_week.duckdb",
+        "market_base_month.duckdb",
+    }:
+        findings.append(
+            Finding(path, "authorized_db_scope must include market_base day/week/month only")
+        )
+
+    for key in [
+        "day_row_count",
+        "week_row_count",
+        "month_row_count",
+        "day_symbol_count",
+        "week_symbol_count",
+        "month_symbol_count",
+    ]:
+        if registry.get(key, 0) <= 0:
+            findings.append(Finding(path, f"{key} must be positive"))
+
+    for key in [
+        "day_natural_key_unique",
+        "week_natural_key_unique",
+        "month_natural_key_unique",
+        "day_latest_pointer_unique",
+        "week_latest_pointer_unique",
+        "month_latest_pointer_unique",
+        "day_lineage_complete",
+        "week_lineage_complete",
+        "month_lineage_complete",
+    ]:
+        if registry.get(key) is not True:
+            findings.append(Finding(path, f"{key} must be true"))
     return findings
 
 

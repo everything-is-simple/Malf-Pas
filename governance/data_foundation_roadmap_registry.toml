@@ -1,12 +1,12 @@
-registry_version = "2026-05-17.v2"
+registry_version = "2026-05-17.v3"
 stage = "data-foundation"
 formal_db_mutation = "Data Foundation only"
 broker_feasibility = "deferred"
 authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
-policy_status = "active-after-raw-market-full-build-ledger-card-20260517-01"
+policy_status = "active-after-market-base-day-week-month-build-card-20260517-01"
 run_id = "data-foundation-roadmap-freeze-card-20260517-01"
 roadmap_order = 2
-roadmap_status = "active-after-card-021"
+roadmap_status = "active-after-card-022"
 previous_roadmap = "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md"
 previous_roadmap_status = "none / terminal"
 post_terminal_separate_roadmap = true
@@ -21,12 +21,13 @@ malf_pas_signal_authorized = false
 broker_feasibility_opened = false
 profit_claim_authorized = false
 legacy_code_migration_authorized = false
-last_closed_data_foundation_card = "raw-market-full-build-ledger-card-20260517-01"
-next_data_foundation_card = "market-base-day-week-month-build-card"
+last_closed_data_foundation_card = "market-base-day-week-month-build-card-20260517-01"
+next_data_foundation_card = "market-meta-tradability-calendar-card"
 current_live_route = "data-foundation"
 current_live_card = ""
 raw_market_full_build_registry = "governance/raw_market_full_build_registry.toml"
-authorized_db_scope = ["raw_market.duckdb"]
+market_base_day_week_month_registry = "governance/market_base_day_week_month_registry.toml"
+authorized_db_scope = ["market_base_day.duckdb", "market_base_week.duckdb", "market_base_month.duckdb"]
 
 allowed_later_authorization_scope = [
     "raw_market.duckdb",
