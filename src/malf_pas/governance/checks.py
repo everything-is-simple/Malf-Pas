@@ -207,6 +207,10 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_market_base_day_week_month_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/market_meta_tradability_calendar_registry.toml":
+            findings.extend(
+                _check_market_meta_tradability_calendar_registry(repo_root / raw_path, registry)
+            )
     return findings
 
 
@@ -229,11 +233,14 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         ),
         "raw_market_full_build_registry": "governance/raw_market_full_build_registry.toml",
         "market_base_day_week_month_registry": "governance/market_base_day_week_month_registry.toml",
+        "market_meta_tradability_calendar_registry": (
+            "governance/market_meta_tradability_calendar_registry.toml"
+        ),
         "current_route": "data-foundation",
         "current_roadmap": "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
         "current_live_card": "",
-        "last_closed_card": "market-base-day-week-month-build-card-20260517-01",
-        "current_allowed_next_card": "market-meta-tradability-calendar-card",
+        "last_closed_card": "market-meta-tradability-calendar-card-20260517-01",
+        "current_allowed_next_card": "data-control-run-ledger-checkpoint-card",
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -546,10 +553,10 @@ def _check_data_foundation_roadmap_registry(
         "authority_doc": (
             "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
         ),
-        "policy_status": "active-after-market-base-day-week-month-build-card-20260517-01",
+        "policy_status": "active-after-market-meta-tradability-calendar-card-20260517-01",
         "run_id": "data-foundation-roadmap-freeze-card-20260517-01",
         "roadmap_order": 2,
-        "roadmap_status": "active-after-card-022",
+        "roadmap_status": "active-after-card-023",
         "previous_roadmap": "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
         "previous_roadmap_status": "none / terminal",
         "post_terminal_separate_roadmap": True,
@@ -564,13 +571,16 @@ def _check_data_foundation_roadmap_registry(
         "broker_feasibility_opened": False,
         "profit_claim_authorized": False,
         "legacy_code_migration_authorized": False,
-        "next_data_foundation_card": "market-meta-tradability-calendar-card",
-        "last_closed_data_foundation_card": "market-base-day-week-month-build-card-20260517-01",
+        "next_data_foundation_card": "data-control-run-ledger-checkpoint-card",
+        "last_closed_data_foundation_card": "market-meta-tradability-calendar-card-20260517-01",
         "current_live_route": "data-foundation",
         "current_live_card": "",
         "raw_market_full_build_registry": "governance/raw_market_full_build_registry.toml",
         "market_base_day_week_month_registry": (
             "governance/market_base_day_week_month_registry.toml"
+        ),
+        "market_meta_tradability_calendar_registry": (
+            "governance/market_meta_tradability_calendar_registry.toml"
         ),
     }
     for key, expected in expected_values.items():
@@ -610,9 +620,13 @@ def _check_data_foundation_roadmap_registry(
         "market_base_day.duckdb",
         "market_base_week.duckdb",
         "market_base_month.duckdb",
+        "market_meta.duckdb",
     }:
         findings.append(
-            Finding(path, "authorized_db_scope must switch to market_base day/week/month only")
+            Finding(
+                path,
+                "authorized_db_scope must switch to market_base day/week/month plus market_meta",
+            )
         )
     return findings
 
@@ -756,8 +770,8 @@ def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Fi
         "formal_db_mutation": "Data Foundation only",
         "active_route": "data-foundation",
         "active_card": "",
-        "current_allowed_next_card": "market-meta-tradability-calendar-card",
-        "last_closed_card": "market-base-day-week-month-build-card-20260517-01",
+        "current_allowed_next_card": "data-control-run-ledger-checkpoint-card",
+        "last_closed_card": "market-meta-tradability-calendar-card-20260517-01",
         "roadmap_status": "roadmap-2-active",
         "first_day_work_status": "closed",
         "module_contract_freeze_required_before_runtime": True,
@@ -786,6 +800,32 @@ def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Fi
     if raw_market_card.get("conclusion") != expected_conclusion:
         findings.append(
             Finding(path, f"raw-market-full-build card conclusion must be {expected_conclusion!r}")
+        )
+    market_meta_card = cards.get("market-meta-tradability-calendar-card")
+    if market_meta_card is None:
+        findings.append(Finding(path, "market-meta-tradability-calendar-card must be registered"))
+        return findings
+    if market_meta_card.get("run_id") != "market-meta-tradability-calendar-card-20260517-01":
+        findings.append(
+            Finding(
+                path,
+                "market-meta-tradability-calendar-card run_id must be card-20260517-01",
+            )
+        )
+    if market_meta_card.get("status") != "passed":
+        findings.append(
+            Finding(path, "market-meta-tradability-calendar-card status must be passed")
+        )
+    expected_market_meta_conclusion = (
+        "docs/04-execution/records/data-foundation/"
+        "023-market-meta-tradability-calendar-card-20260517-01.conclusion.md"
+    )
+    if market_meta_card.get("conclusion") != expected_market_meta_conclusion:
+        findings.append(
+            Finding(
+                path,
+                f"market-meta-tradability-calendar card conclusion must be {expected_market_meta_conclusion!r}",
+            )
         )
     return findings
 
@@ -886,6 +926,84 @@ def _check_market_base_day_week_month_registry(
     ]:
         if registry.get(key) is not True:
             findings.append(Finding(path, f"{key} must be true"))
+    return findings
+
+
+def _check_market_meta_tradability_calendar_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "registry_version": "2026-05-17.v1",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
+        "broker_feasibility": "deferred",
+        "authority_doc": "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+        "run_id": "market-meta-tradability-calendar-card-20260517-01",
+        "roadmap_order": 23,
+        "card_status": "passed",
+        "raw_market_db_path": "H:/Malf-Pas-data/raw_market.duckdb",
+        "day_db_path": "H:/Malf-Pas-data/market_base_day.duckdb",
+        "meta_db_path": "H:/Malf-Pas-data/market_meta.duckdb",
+        "report_dir": (
+            "H:/Malf-Pas-reprot/data-foundation/market-meta-tradability-calendar-card-20260517-01"
+        ),
+        "next_data_foundation_card": "data-control-run-ledger-checkpoint-card",
+        "tradability_source_role": "tdx_direct_only",
+        "negative_fact_policy": "no_inferred_negative_facts",
+        "industry_block_snapshot_mode": "current-snapshot-only",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    if set(registry.get("authorized_db_scope", [])) != {
+        "market_base_day.duckdb",
+        "market_base_week.duckdb",
+        "market_base_month.duckdb",
+        "market_meta.duckdb",
+    }:
+        findings.append(
+            Finding(
+                path,
+                "authorized_db_scope must include market_base day/week/month plus market_meta",
+            )
+        )
+
+    for key in [
+        "instrument_row_count",
+        "trade_calendar_row_count",
+        "tradability_row_count",
+        "industry_block_relation_row_count",
+        "source_manifest_row_count",
+        "schema_version_row_count",
+        "tradability_direct_covered_row_count",
+    ]:
+        if registry.get(key, 0) <= 0:
+            findings.append(Finding(path, f"{key} must be positive"))
+
+    for key in [
+        "instrument_master_natural_key_unique",
+        "trade_calendar_natural_key_unique",
+        "tradability_fact_natural_key_unique",
+        "industry_block_relation_natural_key_unique",
+        "lineage_complete",
+        "non_empty_supporting_tables",
+    ]:
+        if registry.get(key) is not True:
+            findings.append(Finding(path, f"{key} must be true"))
+
+    for key in ["source_manifest_hash", "raw_source_run_id", "day_source_run_id"]:
+        if not str(registry.get(key, "")).strip():
+            findings.append(Finding(path, f"{key} must be recorded"))
+
+    if registry.get("tradability_unresolved_gap_count", -1) < 0:
+        findings.append(Finding(path, "tradability_unresolved_gap_count must be zero or positive"))
+    if registry.get("tradability_unresolved_symbol_count", -1) < 0:
+        findings.append(
+            Finding(path, "tradability_unresolved_symbol_count must be zero or positive")
+        )
+
     return findings
 
 

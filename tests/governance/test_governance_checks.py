@@ -75,11 +75,11 @@ class GovernanceChecksTest(unittest.TestCase):
         self.assertEqual(module_gate.get("active_card"), "")
         self.assertEqual(
             module_gate.get("current_allowed_next_card"),
-            "market-meta-tradability-calendar-card",
+            "data-control-run-ledger-checkpoint-card",
         )
         self.assertEqual(
             module_gate.get("last_closed_card"),
-            "market-base-day-week-month-build-card-20260517-01",
+            "market-meta-tradability-calendar-card-20260517-01",
         )
         self.assertEqual(module_gate.get("roadmap_status"), "roadmap-2-active")
         self.assertEqual(module_gate.get("first_day_work_status"), "closed")
@@ -88,7 +88,7 @@ class GovernanceChecksTest(unittest.TestCase):
         self.assertEqual(repo_registry.get("current_route"), "data-foundation")
         self.assertEqual(
             repo_registry.get("current_allowed_next_card"),
-            "market-meta-tradability-calendar-card",
+            "data-control-run-ledger-checkpoint-card",
         )
 
     def test_malf_pas_revision_registry_records_first_day_closeout(self) -> None:
@@ -187,7 +187,7 @@ class GovernanceChecksTest(unittest.TestCase):
 
         self.assertEqual(registry.get("run_id"), run_id)
         self.assertEqual(registry.get("roadmap_order"), 2)
-        self.assertEqual(registry.get("roadmap_status"), "active-after-card-022")
+        self.assertEqual(registry.get("roadmap_status"), "active-after-card-023")
         self.assertEqual(registry.get("module_db_boundary"), "Data Foundation")
         self.assertEqual(registry.get("formal_db_mutation"), "Data Foundation only")
         self.assertEqual(
@@ -196,11 +196,11 @@ class GovernanceChecksTest(unittest.TestCase):
         )
         self.assertEqual(
             registry.get("next_data_foundation_card"),
-            "market-meta-tradability-calendar-card",
+            "data-control-run-ledger-checkpoint-card",
         )
         self.assertEqual(
             registry.get("last_closed_data_foundation_card"),
-            "market-base-day-week-month-build-card-20260517-01",
+            "market-meta-tradability-calendar-card-20260517-01",
         )
         self.assertEqual(registry.get("downstream_runtime_authorized"), False)
         self.assertEqual(registry.get("current_live_route"), "data-foundation")
@@ -213,6 +213,19 @@ class GovernanceChecksTest(unittest.TestCase):
             registry.get("market_base_day_week_month_registry"),
             "governance/market_base_day_week_month_registry.toml",
         )
+        self.assertEqual(
+            registry.get("market_meta_tradability_calendar_registry"),
+            "governance/market_meta_tradability_calendar_registry.toml",
+        )
+        self.assertEqual(
+            registry.get("authorized_db_scope"),
+            [
+                "market_base_day.duckdb",
+                "market_base_week.duckdb",
+                "market_base_month.duckdb",
+                "market_meta.duckdb",
+            ],
+        )
 
         for suffix in ("card", "evidence-index", "record", "conclusion"):
             self.assertTrue((record_root / f"018-{run_id}.{suffix}.md").exists())
@@ -221,6 +234,60 @@ class GovernanceChecksTest(unittest.TestCase):
         self.assertIn(run_id, conclusion_index)
         self.assertIn(
             "018-data-foundation-roadmap-freeze-card-20260517-01.conclusion.md",
+            conclusion_index,
+        )
+
+    def test_market_meta_tradability_calendar_registry_records_card_23_closeout(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        registry_path = repo_root / "governance" / "market_meta_tradability_calendar_registry.toml"
+        record_root = repo_root / "docs" / "04-execution" / "records" / "data-foundation"
+        conclusion_index_path = repo_root / "docs" / "04-execution" / "00-conclusion-index-v1.md"
+        run_id = "market-meta-tradability-calendar-card-20260517-01"
+
+        self.assertTrue(registry_path.exists())
+        with registry_path.open("rb") as handle:
+            registry = tomllib.load(handle)
+
+        check_registry = getattr(
+            governance_checks,
+            "_check_market_meta_tradability_calendar_registry",
+            None,
+        )
+        if check_registry is None:
+            self.fail("missing _check_market_meta_tradability_calendar_registry in governance checks")
+
+        findings = check_registry(registry_path, registry)
+
+        self.assertEqual(findings, [])
+        self.assertEqual(registry.get("stage"), "data-foundation")
+        self.assertEqual(registry.get("formal_db_mutation"), "Data Foundation only")
+        self.assertEqual(registry.get("run_id"), run_id)
+        self.assertEqual(registry.get("roadmap_order"), 23)
+        self.assertEqual(registry.get("card_status"), "passed")
+        self.assertEqual(
+            registry.get("authorized_db_scope"),
+            [
+                "market_base_day.duckdb",
+                "market_base_week.duckdb",
+                "market_base_month.duckdb",
+                "market_meta.duckdb",
+            ],
+        )
+        self.assertEqual(
+            registry.get("next_data_foundation_card"),
+            "data-control-run-ledger-checkpoint-card",
+        )
+        self.assertEqual(registry.get("tradability_source_role"), "tdx_direct_only")
+        self.assertEqual(registry.get("negative_fact_policy"), "no_inferred_negative_facts")
+        self.assertEqual(registry.get("industry_block_snapshot_mode"), "current-snapshot-only")
+
+        for suffix in ("card", "evidence-index", "record", "conclusion"):
+            self.assertTrue((record_root / f"023-{run_id}.{suffix}.md").exists())
+
+        conclusion_index = conclusion_index_path.read_text(encoding="utf-8")
+        self.assertIn(run_id, conclusion_index)
+        self.assertIn(
+            "023-market-meta-tradability-calendar-card-20260517-01.conclusion.md",
             conclusion_index,
         )
 

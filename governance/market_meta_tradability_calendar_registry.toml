@@ -1,0 +1,65 @@
+registry_version = "2026-05-17.v1"
+stage = "data-foundation"
+formal_db_mutation = "Data Foundation only"
+broker_feasibility = "deferred"
+authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+run_id = "market-meta-tradability-calendar-card-20260517-01"
+roadmap_order = 23
+card_status = "passed"
+raw_market_db_path = "H:/Malf-Pas-data/raw_market.duckdb"
+day_db_path = "H:/Malf-Pas-data/market_base_day.duckdb"
+meta_db_path = "H:/Malf-Pas-data/market_meta.duckdb"
+report_dir = "H:/Malf-Pas-reprot/data-foundation/market-meta-tradability-calendar-card-20260517-01"
+bounded_report_dir = "H:/Malf-Pas-reprot/data-foundation/market-meta-tradability-calendar-card-20260517-01/bounded"
+source_manifest_hash = "fab73a6078b5571cca76306ad28cc076587d8c9c741f4404e2e47e1ba22903d8"
+raw_source_manifest_hash = "24b15d9e77c922da7a90a098a9035a57bbd8d0b9b7f0d22a9f7273bee99aa280"
+day_source_manifest_hash = "24b15d9e77c922da7a90a098a9035a57bbd8d0b9b7f0d22a9f7273bee99aa280"
+raw_source_run_id = "raw-market-full-build-ledger-card-20260517-01"
+day_source_run_id = "raw-market-full-build-ledger-card-20260517-01"
+hq_cache_root = "H:/new_tdx64/T0002/hq_cache"
+blocknew_root = "H:/new_tdx64/T0002/blocknew"
+hq_cache_hash = "07c171ff5d2b7d31cbd5647dcb50d0054864a4ef5906e8881cea013c2cf3a439"
+blocknew_hash = "795b7a6a582b6eb20df51ebc64df8ae47f47f676d4564e5a0953bcf4fbd8b0e6"
+authorized_db_scope = [
+    "market_base_day.duckdb",
+    "market_base_week.duckdb",
+    "market_base_month.duckdb",
+    "market_meta.duckdb",
+]
+next_data_foundation_card = "data-control-run-ledger-checkpoint-card"
+tradability_source_role = "tdx_direct_only"
+negative_fact_policy = "no_inferred_negative_facts"
+industry_block_snapshot_mode = "current-snapshot-only"
+instrument_row_count = 7669
+trade_calendar_row_count = 18676
+tradability_row_count = 19212175
+industry_block_relation_row_count = 7898
+source_manifest_row_count = 1
+schema_version_row_count = 1
+tradability_direct_covered_row_count = 19212175
+tradability_unresolved_symbol_count = 7669
+tradability_unresolved_gap_count = 44854914
+instrument_master_natural_key_unique = true
+trade_calendar_natural_key_unique = true
+tradability_fact_natural_key_unique = true
+industry_block_relation_natural_key_unique = true
+lineage_complete = true
+non_empty_supporting_tables = true
+trade_calendar_min_dt = "1990-12-19"
+trade_calendar_max_dt = "2026-04-23"
+instrument_list_dt_min = "1990-12-01"
+instrument_list_dt_max = "2026-04-03"
+bounded_symbol_scope = ["bj920000", "bj920001", "bj920002", "bj920003", "bj920005"]
+bounded_instrument_row_count = 5
+bounded_trade_calendar_row_count = 18676
+bounded_tradability_row_count = 2777
+bounded_relation_row_count = 5
+bounded_unresolved_gap_count = 4178
+
+[[relation_counts]]
+relation_type = "block"
+row_count = 2390
+
+[[relation_counts]]
+relation_type = "industry"
+row_count = 5508

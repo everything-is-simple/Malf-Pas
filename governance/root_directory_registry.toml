@@ -15,7 +15,7 @@ write_policy = "repo-tracked source only; no cache, report, temp, scratch, or da
 key = "data_root"
 path = "H:/Malf-Pas-data"
 role = "current system data root for future historical ledger and sub-ledgers"
-write_policy = "current live authorization writes only market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb"
+write_policy = "current live authorization writes market_base_day.duckdb / market_base_week.duckdb / market_base_month.duckdb / market_meta.duckdb"
 
 [[current_roots]]
 key = "backup_root"
