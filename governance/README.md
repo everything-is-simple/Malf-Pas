@@ -11,6 +11,7 @@
 | `post_terminal_roadmap_discipline_registry.toml` | freezes post-terminal roadmap discipline, including development usable and daily usable ready gates |
 | `data_foundation_roadmap_registry.toml` | freezes Roadmap 2 handoff, Data Foundation-only scope, and card 18 no-downstream authorization boundary |
 | `data_module_db_contract_registry.toml` | freezes Data Foundation six-DB contract, table families, natural keys, lineage, and validator skeleton boundary |
+| `raw_market_full_build_registry.toml` | records card 21 raw-market full-build closeout, formal DB path, report root, and live counts for source/raw/audit tables |
 
 本目录预留给后续 machine-readable governance artifacts，例如：
 
@@ -47,6 +48,10 @@ staging promote 的治理协议，不授权正式 DB mutation、schema migration
 `data_module_db_contract_registry.toml` 冻结第 20 卡的 Data 六库 contract、表族、自然键、
 共同治理键、manifest / lineage 和最小 validator 骨架。本 registry 不创建 DB，不写入
 `H:\Malf-Pas-data`，也不授权 MALF / PAS / Signal runtime。
+
+`raw_market_full_build_registry.toml` 冻结第 21 卡的 `raw_market` 文件级历史账本闭环结果。
+它登记 canonical root、secondary audit root、`raw_market.duckdb` 正式路径、报告路径、full build
+与 daily incremental 的 manifest/hash 结果，以及 `source_file / raw_bar / reject_audit` 的 live row counts。
 
 `backtest_window_holdout_registry.toml` 只冻结 `2012..2021` 历史覆盖、`2012..2020` 选择窗口、
 三年滚动段、`2021..2023 / 2024..2026` reserved holdout 与 `2021` 用途隔离边界，

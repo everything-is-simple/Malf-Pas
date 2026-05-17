@@ -58,7 +58,7 @@ class GovernanceChecksTest(unittest.TestCase):
 
         self.assertTrue(registry_path.exists())
 
-    def test_governance_route_is_terminal_after_card_16(self) -> None:
+    def test_live_route_points_to_data_foundation_after_card_21(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]
         module_gate_path = repo_root / "governance" / "module_gate_registry.toml"
         repo_registry_path = repo_root / "governance" / "repo_governance_registry.toml"
@@ -68,15 +68,27 @@ class GovernanceChecksTest(unittest.TestCase):
         with repo_registry_path.open("rb") as handle:
             repo_registry = tomllib.load(handle)
 
-        self.assertEqual(module_gate.get("current_allowed_next_card"), "")
+        self.assertEqual(module_gate.get("stage"), "data-foundation")
+        self.assertEqual(module_gate.get("formal_db_mutation"), "Data Foundation only")
+        self.assertEqual(module_gate.get("active_route"), "data-foundation")
         self.assertEqual(module_gate.get("active_card"), "")
         self.assertEqual(
-            module_gate.get("last_closed_card"),
-            "open-source-adapter-boundary-card-20260516-01",
+            module_gate.get("current_allowed_next_card"),
+            "market-base-day-week-month-build-card",
         )
-        self.assertEqual(module_gate.get("roadmap_status"), "none / terminal")
+        self.assertEqual(
+            module_gate.get("last_closed_card"),
+            "raw-market-full-build-ledger-card-20260517-01",
+        )
+        self.assertEqual(module_gate.get("roadmap_status"), "roadmap-2-active")
         self.assertEqual(module_gate.get("first_day_work_status"), "closed")
-        self.assertEqual(repo_registry.get("current_allowed_next_card"), "")
+        self.assertEqual(repo_registry.get("stage"), "data-foundation")
+        self.assertEqual(repo_registry.get("formal_db_mutation"), "Data Foundation only")
+        self.assertEqual(repo_registry.get("current_route"), "data-foundation")
+        self.assertEqual(
+            repo_registry.get("current_allowed_next_card"),
+            "market-base-day-week-month-build-card",
+        )
 
     def test_malf_pas_revision_registry_records_first_day_closeout(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]
@@ -174,22 +186,28 @@ class GovernanceChecksTest(unittest.TestCase):
 
         self.assertEqual(registry.get("run_id"), run_id)
         self.assertEqual(registry.get("roadmap_order"), 2)
-        self.assertEqual(registry.get("roadmap_status"), "frozen-by-card-018")
+        self.assertEqual(registry.get("roadmap_status"), "active-after-card-021")
         self.assertEqual(registry.get("module_db_boundary"), "Data Foundation")
-        self.assertEqual(registry.get("formal_db_mutation"), "no")
+        self.assertEqual(registry.get("formal_db_mutation"), "Data Foundation only")
         self.assertEqual(
             registry.get("data_mutation_scope_after_later_authorization"),
             "Data Foundation only",
         )
         self.assertEqual(
             registry.get("next_data_foundation_card"),
-            "raw-market-full-build-ledger-card",
+            "market-base-day-week-month-build-card",
         )
         self.assertEqual(
             registry.get("last_closed_data_foundation_card"),
-            "data-module-db-contract-card-20260517-01",
+            "raw-market-full-build-ledger-card-20260517-01",
         )
         self.assertEqual(registry.get("downstream_runtime_authorized"), False)
+        self.assertEqual(registry.get("current_live_route"), "data-foundation")
+        self.assertEqual(registry.get("current_live_card"), "")
+        self.assertEqual(
+            registry.get("raw_market_full_build_registry"),
+            "governance/raw_market_full_build_registry.toml",
+        )
 
         for suffix in ("card", "evidence-index", "record", "conclusion"):
             self.assertTrue((record_root / f"018-{run_id}.{suffix}.md").exists())
@@ -252,6 +270,44 @@ class GovernanceChecksTest(unittest.TestCase):
 
         for suffix in ("card", "evidence-index", "record", "conclusion"):
             self.assertTrue((record_root / f"020-{run_id}.{suffix}.md").exists())
+
+    def test_raw_market_full_build_registry_records_card_21_closeout(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        registry_path = repo_root / "governance" / "raw_market_full_build_registry.toml"
+        record_root = repo_root / "docs" / "04-execution" / "records" / "data-foundation"
+        conclusion_index_path = repo_root / "docs" / "04-execution" / "00-conclusion-index-v1.md"
+        run_id = "raw-market-full-build-ledger-card-20260517-01"
+
+        self.assertTrue(registry_path.exists())
+        with registry_path.open("rb") as handle:
+            registry = tomllib.load(handle)
+
+        self.assertEqual(registry.get("stage"), "data-foundation")
+        self.assertEqual(registry.get("formal_db_mutation"), "Data Foundation only")
+        self.assertEqual(registry.get("run_id"), run_id)
+        self.assertEqual(registry.get("roadmap_order"), 21)
+        self.assertEqual(registry.get("card_status"), "passed")
+        self.assertEqual(registry.get("canonical_raw_bar_root"), "H:/tdx_offline_Data")
+        self.assertEqual(
+            registry.get("next_data_foundation_card"),
+            "market-base-day-week-month-build-card",
+        )
+        self.assertEqual(registry.get("formal_db_path"), "H:/Malf-Pas-data/raw_market.duckdb")
+        self.assertTrue(
+            str(registry.get("report_dir", "")).startswith(
+                "H:/Malf-Pas-reprot/data-foundation/raw-market-full-build-ledger-card-20260517-01"
+            )
+        )
+
+        for suffix in ("card", "evidence-index", "record", "conclusion"):
+            self.assertTrue((record_root / f"021-{run_id}.{suffix}.md").exists())
+
+        conclusion_index = conclusion_index_path.read_text(encoding="utf-8")
+        self.assertIn(run_id, conclusion_index)
+        self.assertIn(
+            "021-raw-market-full-build-ledger-card-20260517-01.conclusion.md",
+            conclusion_index,
+        )
 
     def test_data_module_db_contract_registry_rejects_missing_database(self) -> None:
         registry_path = Path("governance/data_module_db_contract_registry.toml")

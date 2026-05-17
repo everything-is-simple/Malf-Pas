@@ -1,12 +1,12 @@
-registry_version = "2026-05-16.v1"
-stage = "governance-only"
-formal_db_mutation = "no"
+registry_version = "2026-05-17.v1"
+stage = "data-foundation"
+formal_db_mutation = "Data Foundation only"
 broker_feasibility = "deferred"
-active_route = "governance"
+active_route = "data-foundation"
 active_card = ""
-current_allowed_next_card = ""
-last_closed_card = "open-source-adapter-boundary-card-20260516-01"
-roadmap_status = "none / terminal"
+current_allowed_next_card = "market-base-day-week-month-build-card"
+last_closed_card = "raw-market-full-build-ledger-card-20260517-01"
+roadmap_status = "roadmap-2-active"
 first_day_work_status = "closed"
 module_contract_freeze_required_before_runtime = true
 
@@ -121,3 +121,31 @@ card_id = "open-source-adapter-boundary-card"
 run_id = "open-source-adapter-boundary-card-20260516-01"
 status = "passed"
 conclusion = "docs/04-execution/records/governance/016-open-source-adapter-boundary-card-20260516-01.conclusion.md"
+
+[[cards]]
+route = "data-foundation"
+card_id = "data-foundation-roadmap-freeze-card"
+run_id = "data-foundation-roadmap-freeze-card-20260517-01"
+status = "passed"
+conclusion = "docs/04-execution/records/data-foundation/018-data-foundation-roadmap-freeze-card-20260517-01.conclusion.md"
+
+[[cards]]
+route = "data-foundation"
+card_id = "local-tdx-source-inventory-card"
+run_id = "local-tdx-source-inventory-card-20260517-01"
+status = "passed"
+conclusion = "docs/04-execution/records/data-foundation/019-local-tdx-source-inventory-card-20260517-01.conclusion.md"
+
+[[cards]]
+route = "data-foundation"
+card_id = "data-module-db-contract-card"
+run_id = "data-module-db-contract-card-20260517-01"
+status = "passed"
+conclusion = "docs/04-execution/records/data-foundation/020-data-module-db-contract-card-20260517-01.conclusion.md"
+
+[[cards]]
+route = "data-foundation"
+card_id = "raw-market-full-build-ledger-card"
+run_id = "raw-market-full-build-ledger-card-20260517-01"
+status = "passed"
+conclusion = "docs/04-execution/records/data-foundation/021-raw-market-full-build-ledger-card-20260517-01.conclusion.md"

@@ -2,7 +2,7 @@
 
 日期：2026-05-16
 
-状态：frozen-by-card-018 / post-terminal separate roadmap
+状态：active-after-card-021 / post-terminal separate roadmap
 
 ## 1. 定位
 
@@ -41,7 +41,7 @@ Data Foundation
 | 系统路线 | 文档 | 状态 | 作用 |
 |---:|---|---|---|
 | Roadmap 1 | `00-malf-pas-governance-roadmap-v1.md` | `terminal / governance-only completed` | 立法、锚点、模块所有权、历史大账本协议、日更协议、adapter 边界 |
-| Roadmap 2 | `01-local-tdx-data-foundation-module-db-roadmap-v1.md` | `frozen-by-card-018` | 建设 Data Foundation 模块库与日常维护闭环 |
+| Roadmap 2 | `01-local-tdx-data-foundation-module-db-roadmap-v1.md` | `active-after-card-021` | 建设 Data Foundation 模块库与日常维护闭环 |
 | Roadmap 3 | 待 Data closeout passed 后新开 | `not opened` | `MALF v1.5` 模块数据库路线 |
 
 Roadmap 2 完成前，不得开启 Roadmap 3。
@@ -364,6 +364,21 @@ next_data_foundation_card = raw-market-full-build-ledger-card
 3. failed/rejected source 有审计记录。
 4. 同输入重跑不重复写业务事实。
 5. raw ingest run audit 只证明 source ingest 局部审计，不替代 `data_control.run_ledger` 的 module-level orchestration 审计。
+
+闭环结果：
+
+```text
+run_id = raw-market-full-build-ledger-card-20260517-01
+status = passed
+registry = governance/raw_market_full_build_registry.toml
+formal_db = H:\Malf-Pas-data\raw_market.duckdb
+report_root = H:\Malf-Pas-reprot\data-foundation\raw-market-full-build-ledger-card-20260517-01
+next_data_foundation_card = market-base-day-week-month-build-card
+```
+
+本卡通过后，只表示 `raw_market` 文件级历史账本已经建立，`source_file / raw_bar / ingest_run / reject_audit /
+source_manifest / schema_version` 已经形成闭环，并证明 `daily_incremental` 的 `skipped_unchanged` 审计可用；
+不表示 `market_base_*`、`market_meta`、`data_control` 或整个 Data Foundation 已经 ready。
 
 ### 12.5 `022-market-base-day-week-month-build-card`
 

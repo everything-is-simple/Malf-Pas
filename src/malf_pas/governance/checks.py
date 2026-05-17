@@ -52,8 +52,8 @@ def _check_required_paths(repo_root: Path, raw_paths: list[str], findings: list[
 def _check_static_flags(repo_root: Path, governance: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     expected = {
-        "stage": "governance-only",
-        "formal_db_mutation": "no",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
         "broker_feasibility": "deferred",
     }
     for key, value in expected.items():
@@ -149,8 +149,6 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
         registry = _load_toml(repo_root / raw_path, findings)
         if registry is None:
             continue
-        if registry.get("formal_db_mutation") not in {None, "no"}:
-            findings.append(Finding(repo_root / raw_path, "formal_db_mutation must remain no"))
         if registry.get("broker_feasibility") not in {None, "deferred"}:
             findings.append(
                 Finding(repo_root / raw_path, "broker_feasibility must remain deferred")
@@ -203,15 +201,17 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             )
         if raw_path == "governance/data_module_db_contract_registry.toml":
             findings.extend(_check_data_module_db_contract_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/raw_market_full_build_registry.toml":
+            findings.extend(_check_raw_market_full_build_registry(repo_root / raw_path, registry))
     return findings
 
 
 def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     expected_values = {
-        "registry_version": "2026-05-16.v1",
-        "stage": "governance-only",
-        "formal_db_mutation": "no",
+        "registry_version": "2026-05-17.v1",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
         "broker_feasibility": "deferred",
         "open_source_adapter_boundary_registry": (
             "governance/open_source_adapter_boundary_registry.toml"
@@ -223,7 +223,12 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         "data_module_db_contract_registry": (
             "governance/data_module_db_contract_registry.toml"
         ),
-        "current_allowed_next_card": "",
+        "raw_market_full_build_registry": "governance/raw_market_full_build_registry.toml",
+        "current_route": "data-foundation",
+        "current_roadmap": "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+        "current_live_card": "",
+        "last_closed_card": "raw-market-full-build-ledger-card-20260517-01",
+        "current_allowed_next_card": "market-base-day-week-month-build-card",
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -520,17 +525,17 @@ def _check_data_foundation_roadmap_registry(
 ) -> list[Finding]:
     findings: list[Finding] = []
     expected_values: dict[str, Any] = {
-        "registry_version": "2026-05-17.v1",
-        "stage": "governance-only",
-        "formal_db_mutation": "no",
+        "registry_version": "2026-05-17.v2",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
         "broker_feasibility": "deferred",
         "authority_doc": (
             "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
         ),
-        "policy_status": "frozen-by-data-foundation-roadmap-freeze-card-20260517-01",
+        "policy_status": "active-after-raw-market-full-build-ledger-card-20260517-01",
         "run_id": "data-foundation-roadmap-freeze-card-20260517-01",
         "roadmap_order": 2,
-        "roadmap_status": "frozen-by-card-018",
+        "roadmap_status": "active-after-card-021",
         "previous_roadmap": "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md",
         "previous_roadmap_status": "none / terminal",
         "post_terminal_separate_roadmap": True,
@@ -545,8 +550,11 @@ def _check_data_foundation_roadmap_registry(
         "broker_feasibility_opened": False,
         "profit_claim_authorized": False,
         "legacy_code_migration_authorized": False,
-        "next_data_foundation_card": "raw-market-full-build-ledger-card",
-        "last_closed_data_foundation_card": "data-module-db-contract-card-20260517-01",
+        "next_data_foundation_card": "market-base-day-week-month-build-card",
+        "last_closed_data_foundation_card": "raw-market-full-build-ledger-card-20260517-01",
+        "current_live_route": "data-foundation",
+        "current_live_card": "",
+        "raw_market_full_build_registry": "governance/raw_market_full_build_registry.toml",
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -718,13 +726,14 @@ def _check_local_tdx_source_inventory_registry(
 def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
     findings: list[Finding] = []
     expected_values = {
-        "registry_version": "2026-05-16.v1",
-        "stage": "governance-only",
-        "active_route": "governance",
+        "registry_version": "2026-05-17.v1",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
+        "active_route": "data-foundation",
         "active_card": "",
-        "current_allowed_next_card": "",
-        "last_closed_card": "open-source-adapter-boundary-card-20260516-01",
-        "roadmap_status": "none / terminal",
+        "current_allowed_next_card": "market-base-day-week-month-build-card",
+        "last_closed_card": "raw-market-full-build-ledger-card-20260517-01",
+        "roadmap_status": "roadmap-2-active",
         "first_day_work_status": "closed",
         "module_contract_freeze_required_before_runtime": True,
     }
@@ -735,22 +744,60 @@ def _check_module_gate_registry(path: Path, registry: dict[str, Any]) -> list[Fi
     cards = {
         item.get("card_id"): item for item in registry.get("cards", []) if isinstance(item, dict)
     }
-    terminal_card = cards.get("open-source-adapter-boundary-card")
-    if terminal_card is None:
-        findings.append(Finding(path, "open-source-adapter-boundary-card must be registered"))
+    raw_market_card = cards.get("raw-market-full-build-ledger-card")
+    if raw_market_card is None:
+        findings.append(Finding(path, "raw-market-full-build-ledger-card must be registered"))
         return findings
-    if terminal_card.get("run_id") != "open-source-adapter-boundary-card-20260516-01":
+    if raw_market_card.get("run_id") != "raw-market-full-build-ledger-card-20260517-01":
         findings.append(
-            Finding(path, "open-source-adapter-boundary-card run_id must be card-20260516-01")
+            Finding(path, "raw-market-full-build-ledger-card run_id must be card-20260517-01")
         )
-    if terminal_card.get("status") != "passed":
-        findings.append(Finding(path, "open-source-adapter-boundary-card status must be passed"))
+    if raw_market_card.get("status") != "passed":
+        findings.append(Finding(path, "raw-market-full-build-ledger-card status must be passed"))
     expected_conclusion = (
-        "docs/04-execution/records/governance/"
-        "016-open-source-adapter-boundary-card-20260516-01.conclusion.md"
+        "docs/04-execution/records/data-foundation/"
+        "021-raw-market-full-build-ledger-card-20260517-01.conclusion.md"
     )
-    if terminal_card.get("conclusion") != expected_conclusion:
-        findings.append(Finding(path, f"terminal card conclusion must be {expected_conclusion!r}"))
+    if raw_market_card.get("conclusion") != expected_conclusion:
+        findings.append(
+            Finding(path, f"raw-market-full-build card conclusion must be {expected_conclusion!r}")
+        )
+    return findings
+
+
+def _check_raw_market_full_build_registry(path: Path, registry: dict[str, Any]) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values = {
+        "registry_version": "2026-05-17.v1",
+        "stage": "data-foundation",
+        "formal_db_mutation": "Data Foundation only",
+        "broker_feasibility": "deferred",
+        "run_id": "raw-market-full-build-ledger-card-20260517-01",
+        "roadmap_order": 21,
+        "card_status": "passed",
+        "canonical_raw_bar_root": "H:/tdx_offline_Data",
+        "secondary_audit_root": "H:/new_tdx64",
+        "formal_db_path": "H:/Malf-Pas-data/raw_market.duckdb",
+        "next_data_foundation_card": "market-base-day-week-month-build-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    if "raw_market.duckdb" not in str(registry.get("authorized_db_scope", "")):
+        findings.append(Finding(path, "authorized_db_scope must include raw_market.duckdb only"))
+    if str(registry.get("report_dir", "")).startswith(
+        "H:/Malf-Pas-reprot/data-foundation/raw-market-full-build-ledger-card-20260517-01"
+    ) is False:
+        findings.append(Finding(path, "report_dir must stay under the fixed Malf-Pas report root"))
+    if registry.get("raw_bar_row_count", 0) <= 0:
+        findings.append(Finding(path, "raw_bar_row_count must be positive"))
+    if registry.get("source_file_row_count", 0) <= 0:
+        findings.append(Finding(path, "source_file_row_count must be positive"))
+    if registry.get("natural_key_unique") is not True:
+        findings.append(Finding(path, "natural_key_unique must be true"))
+    if "source ingest local audit" not in str(registry.get("ingest_run_audit_role", "")):
+        findings.append(Finding(path, "ingest_run_audit_role must preserve the card-20 audit boundary"))
     return findings
 
 

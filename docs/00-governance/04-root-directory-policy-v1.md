@@ -16,7 +16,7 @@
 | root_key | 路径 | 职责 | 当前阶段规则 |
 |---|---|---|---|
 | `repo_root` | `H:\Malf-Pas` | 新系统代码、文档、治理入口 | repo 根目录不得落缓存、临时 DB、report artifacts 或 scratch |
-| `data_root` | `H:\Malf-Pas-data` | 当前系统本地数据库根目录；后续历史大账本与子库落点 | 当前 `formal DB mutation = no`，不得正式写入 |
+| `data_root` | `H:\Malf-Pas-data` | 当前系统本地数据库根目录；后续历史大账本与子库落点 | 当前 live 授权只允许写入 `raw_market.duckdb`；其余正式 DB 仍不得写入 |
 | `backup_root` | `H:\Malf-Pas-backup` | 备份包、交付 zip、可恢复快照 | 不承载历史经验定义，不作 scratch；snapshot package 使用单层顶级目录，standalone authority zip copy 允许 flat layout，canonical recoverable copy 由 sibling manifest 的 `preferred_recoverable_copy` 指定 |
 | `validated_root` | `H:\Malf-Pas-Validated` | 本系统沉淀后的历史经验、权威材料、经验索引 | 只承载权威材料目录、经验索引与随目录副本保留的 authority zip；不承载通用备份包或运行产物 |
 | `report_root` | `H:\Malf-Pas-reprot` | report、audit readout、运行报告输出根 | 目录名按当前环境固定为 `reprot`；不得写入 repo 根 |
@@ -36,7 +36,7 @@
 
 ## 4. 硬规则
 
-1. `H:\Malf-Pas-data` 是当前系统唯一数据根，但当前阶段不得正式写入。
+1. `H:\Malf-Pas-data` 是当前系统唯一数据根；当前 live 授权只允许写入 `raw_market.duckdb`，其余正式 DB 仍不得写入。
 2. `H:\Malf-Pas-backup` 只放备份包和可恢复快照；snapshot package 使用单层顶级目录，standalone authority zip copy 允许 flat layout，canonical recoverable copy 由 sibling manifest 的 `preferred_recoverable_copy` 指定。
 3. `H:\Malf-Pas-Validated` 只放本系统沉淀后的历史经验、权威材料、经验索引，以及随权威目录副本保留的 authority zip；可恢复 snapshot 的正式归属仍是 `H:\Malf-Pas-backup`。
 4. `H:\Malf-Pas-reprot` 只放报告与 audit readout。

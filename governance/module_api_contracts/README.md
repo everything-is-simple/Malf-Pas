@@ -5,10 +5,10 @@ This directory is reserved for future machine-readable module API contracts.
 Current status:
 
 ```text
-stage = governance-only
+stage = data-foundation
 module ownership = frozen
-runtime contracts = not frozen
-formal DB mutation = no
+runtime contracts = Data Foundation only / raw_market surface open
+formal DB mutation = Data Foundation only (raw_market.duckdb only)
 ```
 
 The owning governance card has frozen module ownership, but formal runtime API contracts are still not

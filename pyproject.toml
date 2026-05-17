@@ -8,7 +8,9 @@ version = "0.1.0"
 description = "Malf-Pas governance-first reconstruction workspace."
 readme = "README.md"
 requires-python = ">=3.11,<3.13"
-dependencies = []
+dependencies = [
+    "duckdb>=1.5.2",
+]
 
 [project.optional-dependencies]
 dev = [
@@ -52,8 +54,8 @@ warn_unused_ignores = true
 strict_optional = true
 
 [tool.malf_pas.governance]
-stage = "governance-only"
-formal_db_mutation = "no"
+stage = "data-foundation"
+formal_db_mutation = "Data Foundation only"
 broker_feasibility = "deferred"
 repo_roots = [
     "H:/Malf-Pas",
@@ -124,6 +126,7 @@ required_registries = [
     "governance/data_foundation_roadmap_registry.toml",
     "governance/local_tdx_source_inventory_registry.toml",
     "governance/data_module_db_contract_registry.toml",
+    "governance/raw_market_full_build_registry.toml",
     "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [

@@ -1,12 +1,12 @@
-registry_version = "2026-05-17.v1"
-stage = "governance-only"
-formal_db_mutation = "no"
+registry_version = "2026-05-17.v2"
+stage = "data-foundation"
+formal_db_mutation = "Data Foundation only"
 broker_feasibility = "deferred"
 authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
-policy_status = "frozen-by-data-foundation-roadmap-freeze-card-20260517-01"
+policy_status = "active-after-raw-market-full-build-ledger-card-20260517-01"
 run_id = "data-foundation-roadmap-freeze-card-20260517-01"
 roadmap_order = 2
-roadmap_status = "frozen-by-card-018"
+roadmap_status = "active-after-card-021"
 previous_roadmap = "docs/03-roadmap/00-malf-pas-governance-roadmap-v1.md"
 previous_roadmap_status = "none / terminal"
 post_terminal_separate_roadmap = true
@@ -21,8 +21,12 @@ malf_pas_signal_authorized = false
 broker_feasibility_opened = false
 profit_claim_authorized = false
 legacy_code_migration_authorized = false
-last_closed_data_foundation_card = "data-module-db-contract-card-20260517-01"
-next_data_foundation_card = "raw-market-full-build-ledger-card"
+last_closed_data_foundation_card = "raw-market-full-build-ledger-card-20260517-01"
+next_data_foundation_card = "market-base-day-week-month-build-card"
+current_live_route = "data-foundation"
+current_live_card = ""
+raw_market_full_build_registry = "governance/raw_market_full_build_registry.toml"
+authorized_db_scope = ["raw_market.duckdb"]
 
 allowed_later_authorization_scope = [
     "raw_market.duckdb",
