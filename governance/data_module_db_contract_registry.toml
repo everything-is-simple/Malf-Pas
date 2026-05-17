@@ -1,0 +1,425 @@
+registry_version = "2026-05-17.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+run_id = "data-module-db-contract-card-20260517-01"
+roadmap_order = 20
+card_status = "passed"
+data_root = "H:/Malf-Pas-data"
+previous_reference_root = "H:/Asteria-data"
+previous_reference_role = "reference_baseline_only"
+current_card_creates_db = false
+current_card_writes_data_root = false
+formal_db_created = false
+downstream_runtime_authorized = false
+legacy_schema_migration_authorized = false
+week_month_availability_status = "day-derived"
+week_month_rule_version = "data-foundation-week-month-from-day-v1"
+tradability_availability_status = "blocked"
+tradability_source_role = "blocked"
+authorized_tradability_adapter_required = true
+first_consumer = "MALF v1.5"
+next_data_foundation_card = "raw-market-full-build-ledger-card"
+
+common_governance_keys = [
+    "symbol",
+    "asset_type",
+    "timeframe",
+    "bar_dt",
+    "trade_dt",
+    "run_id",
+    "source_run_id",
+    "schema_version",
+    "rule_version",
+    "source_manifest_hash",
+    "checkpoint_key",
+]
+
+audit_lineage_keys = [
+    "run_id",
+    "source_run_id",
+    "source_manifest_hash",
+    "checkpoint_key",
+]
+
+business_natural_key_forbidden_fields = ["run_id"]
+forbidden_downstream_semantics = ["MALF", "PAS", "Signal", "Position", "broker", "order", "profit"]
+
+[[databases]]
+logical_name = "raw_market"
+file_name = "raw_market.duckdb"
+ledger_role = "source_fact_raw_ledger"
+purpose = "raw TDX source file registry, raw bars, local ingest audit, reject audit, source manifest"
+
+[[databases.table_families]]
+family = "source_file"
+table_name = "raw_market.source_file"
+table_group = "source_fact"
+required_fields = ["source_file_id", "source_root", "source_path", "asset_type", "timeframe", "source_revision", "size", "mtime", "content_hash", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["source_root", "source_path", "source_revision"]
+governance_keys = ["asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "raw_bar"
+table_name = "raw_market.raw_bar"
+table_group = "source_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "bar_dt", "open", "high", "low", "close", "volume", "amount", "source_file_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe", "bar_dt"]
+governance_keys = ["symbol", "asset_type", "timeframe", "bar_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "ingest_run"
+table_name = "raw_market.ingest_run"
+table_group = "audit"
+required_fields = ["run_id", "source_root", "ingest_mode", "started_at", "finished_at", "audit_status", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["run_id"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "reject_audit"
+table_name = "raw_market.reject_audit"
+table_group = "audit"
+required_fields = ["reject_id", "run_id", "source_file_id", "reject_reason", "audit_status", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["reject_id"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "source_manifest"
+table_name = "raw_market.source_manifest"
+table_group = "manifest"
+required_fields = ["manifest_id", "source_manifest_hash", "source_root", "provider_role", "dataset_scope", "input_version", "generated_by_run_id", "audit_status", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["source_manifest_hash"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "schema_version"
+table_name = "raw_market.schema_version"
+table_group = "schema"
+required_fields = ["schema_version", "rule_version", "effective_from", "registered_by_run_id", "source_manifest_hash", "source_run_id"]
+natural_key = ["schema_version", "rule_version"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases]]
+logical_name = "market_base_day"
+file_name = "market_base_day.duckdb"
+ledger_role = "source_fact_base_day_ledger"
+purpose = "day base market facts, latest pointer, dirty scope, and day lineage"
+
+[[databases.table_families]]
+family = "base_bar"
+table_name = "market_base_day.base_bar"
+table_group = "base_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "bar_dt", "trade_dt", "open", "high", "low", "close", "volume", "amount", "analysis_price_line", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe", "bar_dt", "analysis_price_line"]
+governance_keys = ["symbol", "asset_type", "timeframe", "bar_dt", "trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "latest_pointer"
+table_name = "market_base_day.latest_pointer"
+table_group = "base_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "latest_bar_dt", "latest_trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "base_run"
+table_name = "market_base_day.base_run"
+table_group = "audit"
+required_fields = ["run_id", "source_run_id", "timeframe", "rule_version", "schema_version", "source_manifest_hash", "audit_status"]
+natural_key = ["run_id"]
+governance_keys = ["run_id", "source_run_id", "timeframe", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "dirty_scope"
+table_name = "market_base_day.dirty_scope"
+table_group = "audit"
+required_fields = ["dirty_scope_id", "symbol", "asset_type", "timeframe", "dirty_start_dt", "dirty_end_dt", "dirty_reason", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["dirty_scope_id"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "source_manifest"
+table_name = "market_base_day.source_manifest"
+table_group = "manifest"
+required_fields = ["manifest_id", "source_manifest_hash", "dataset_scope", "generated_by_run_id", "source_run_id", "schema_version", "rule_version", "audit_status"]
+natural_key = ["source_manifest_hash"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "schema_version"
+table_name = "market_base_day.schema_version"
+table_group = "schema"
+required_fields = ["schema_version", "rule_version", "effective_from", "registered_by_run_id", "source_manifest_hash", "source_run_id"]
+natural_key = ["schema_version", "rule_version"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases]]
+logical_name = "market_base_week"
+file_name = "market_base_week.duckdb"
+ledger_role = "source_fact_base_week_ledger"
+purpose = "week base facts derived from day source until direct proof exists"
+
+[[databases.table_families]]
+family = "base_bar"
+table_name = "market_base_week.base_bar"
+table_group = "base_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "bar_dt", "trade_dt", "open", "high", "low", "close", "volume", "amount", "derived_from_timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe", "bar_dt"]
+governance_keys = ["symbol", "asset_type", "timeframe", "bar_dt", "trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "latest_pointer"
+table_name = "market_base_week.latest_pointer"
+table_group = "base_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "latest_bar_dt", "latest_trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "base_run"
+table_name = "market_base_week.base_run"
+table_group = "audit"
+required_fields = ["run_id", "source_run_id", "timeframe", "rule_version", "schema_version", "source_manifest_hash", "audit_status"]
+natural_key = ["run_id"]
+governance_keys = ["run_id", "source_run_id", "timeframe", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "dirty_scope"
+table_name = "market_base_week.dirty_scope"
+table_group = "audit"
+required_fields = ["dirty_scope_id", "symbol", "asset_type", "timeframe", "dirty_start_dt", "dirty_end_dt", "dirty_reason", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["dirty_scope_id"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "source_manifest"
+table_name = "market_base_week.source_manifest"
+table_group = "manifest"
+required_fields = ["manifest_id", "source_manifest_hash", "dataset_scope", "generated_by_run_id", "source_run_id", "schema_version", "rule_version", "audit_status"]
+natural_key = ["source_manifest_hash"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "schema_version"
+table_name = "market_base_week.schema_version"
+table_group = "schema"
+required_fields = ["schema_version", "rule_version", "effective_from", "registered_by_run_id", "source_manifest_hash", "source_run_id"]
+natural_key = ["schema_version", "rule_version"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases]]
+logical_name = "market_base_month"
+file_name = "market_base_month.duckdb"
+ledger_role = "source_fact_base_month_ledger"
+purpose = "month base facts derived from day source until direct proof exists"
+
+[[databases.table_families]]
+family = "base_bar"
+table_name = "market_base_month.base_bar"
+table_group = "base_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "bar_dt", "trade_dt", "open", "high", "low", "close", "volume", "amount", "derived_from_timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe", "bar_dt"]
+governance_keys = ["symbol", "asset_type", "timeframe", "bar_dt", "trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "latest_pointer"
+table_name = "market_base_month.latest_pointer"
+table_group = "base_fact"
+required_fields = ["symbol", "asset_type", "timeframe", "latest_bar_dt", "latest_trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "timeframe"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "base_run"
+table_name = "market_base_month.base_run"
+table_group = "audit"
+required_fields = ["run_id", "source_run_id", "timeframe", "rule_version", "schema_version", "source_manifest_hash", "audit_status"]
+natural_key = ["run_id"]
+governance_keys = ["run_id", "source_run_id", "timeframe", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "dirty_scope"
+table_name = "market_base_month.dirty_scope"
+table_group = "audit"
+required_fields = ["dirty_scope_id", "symbol", "asset_type", "timeframe", "dirty_start_dt", "dirty_end_dt", "dirty_reason", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["dirty_scope_id"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "source_manifest"
+table_name = "market_base_month.source_manifest"
+table_group = "manifest"
+required_fields = ["manifest_id", "source_manifest_hash", "dataset_scope", "generated_by_run_id", "source_run_id", "schema_version", "rule_version", "audit_status"]
+natural_key = ["source_manifest_hash"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "schema_version"
+table_name = "market_base_month.schema_version"
+table_group = "schema"
+required_fields = ["schema_version", "rule_version", "effective_from", "registered_by_run_id", "source_manifest_hash", "source_run_id"]
+natural_key = ["schema_version", "rule_version"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases]]
+logical_name = "market_meta"
+file_name = "market_meta.duckdb"
+ledger_role = "source_fact_meta_ledger"
+purpose = "instrument master, trade calendar, tradability registration, and industry/block relation"
+
+[[databases.table_families]]
+family = "instrument_master"
+table_name = "market_meta.instrument_master"
+table_group = "meta_fact"
+required_fields = ["symbol", "asset_type", "exchange", "name", "list_dt", "delist_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type"]
+governance_keys = ["symbol", "asset_type", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "trade_calendar"
+table_name = "market_meta.trade_calendar"
+table_group = "meta_fact"
+required_fields = ["exchange", "trade_dt", "is_open", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["exchange", "trade_dt"]
+governance_keys = ["trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "tradability_fact"
+table_name = "market_meta.tradability_fact"
+table_group = "meta_fact"
+required_fields = ["symbol", "asset_type", "trade_dt", "tradability_status", "blocked_reason", "source_role", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "trade_dt"]
+governance_keys = ["symbol", "asset_type", "trade_dt", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "industry_block_relation"
+table_name = "market_meta.industry_block_relation"
+table_group = "meta_fact"
+required_fields = ["symbol", "asset_type", "relation_type", "relation_code", "effective_from", "effective_to", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+natural_key = ["symbol", "asset_type", "relation_type", "relation_code", "effective_from"]
+governance_keys = ["symbol", "asset_type", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "source_manifest"
+table_name = "market_meta.source_manifest"
+table_group = "manifest"
+required_fields = ["manifest_id", "source_manifest_hash", "dataset_scope", "generated_by_run_id", "source_run_id", "schema_version", "rule_version", "audit_status"]
+natural_key = ["source_manifest_hash"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "schema_version"
+table_name = "market_meta.schema_version"
+table_group = "schema"
+required_fields = ["schema_version", "rule_version", "effective_from", "registered_by_run_id", "source_manifest_hash", "source_run_id"]
+natural_key = ["schema_version", "rule_version"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases]]
+logical_name = "data_control"
+file_name = "data_control.duckdb"
+ledger_role = "data_orchestration_control_ledger"
+purpose = "Data module orchestration run ledger, dirty queue, checkpoint/resume, audit state, freshness/readout"
+
+[[databases.table_families]]
+family = "run_ledger"
+table_name = "data_control.run_ledger"
+table_group = "orchestration"
+required_fields = ["run_id", "run_mode", "target_as_of_dt", "started_at", "finished_at", "run_status", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["run_id"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "dirty_queue"
+table_name = "data_control.dirty_queue"
+table_group = "orchestration"
+required_fields = ["dirty_scope_id", "ledger_role", "symbol", "asset_type", "timeframe", "dirty_start_dt", "dirty_end_dt", "dirty_reason", "status", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["dirty_scope_id"]
+governance_keys = ["symbol", "asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "checkpoint"
+table_name = "data_control.checkpoint"
+table_group = "orchestration"
+required_fields = ["checkpoint_key", "run_id", "batch_id", "ledger_role", "symbol", "asset_type", "timeframe", "dirty_scope_id", "processed_start_dt", "processed_end_dt", "source_manifest_hash", "source_run_id", "schema_version", "rule_version", "status", "audit_status"]
+natural_key = ["checkpoint_key"]
+governance_keys = ["symbol", "asset_type", "timeframe", "run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash", "checkpoint_key"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "resume_state"
+table_name = "data_control.resume_state"
+table_group = "orchestration"
+required_fields = ["resume_state_id", "run_id", "resume_mode", "checkpoint_key", "resume_status", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["resume_state_id"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash", "checkpoint_key"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "audit_state"
+table_name = "data_control.audit_state"
+table_group = "orchestration"
+required_fields = ["audit_id", "run_id", "ledger_role", "audit_status", "blocked_reason", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["audit_id"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "freshness_audit"
+table_name = "data_control.freshness_audit"
+table_group = "freshness_readout"
+required_fields = ["freshness_id", "ledger_role", "asset_type", "timeframe", "latest_source_dt", "latest_base_dt", "lag_days", "stale_status", "blocked_reason", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["freshness_id"]
+governance_keys = ["asset_type", "timeframe", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "data_readout"
+table_name = "data_control.data_readout"
+table_group = "freshness_readout"
+required_fields = ["readout_id", "run_id", "readout_type", "readout_status", "source_manifest_hash", "source_run_id", "schema_version", "rule_version"]
+natural_key = ["readout_id"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+
+[[databases.table_families]]
+family = "schema_version"
+table_name = "data_control.schema_version"
+table_group = "orchestration"
+required_fields = ["schema_version", "rule_version", "effective_from", "registered_by_run_id", "source_manifest_hash", "source_run_id"]
+natural_key = ["schema_version", "rule_version"]
+governance_keys = ["run_id", "source_run_id", "schema_version", "rule_version", "source_manifest_hash"]
+lineage_fields = ["source_run_id", "schema_version", "rule_version", "source_manifest_hash"]

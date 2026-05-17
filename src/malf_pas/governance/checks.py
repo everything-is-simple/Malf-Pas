@@ -5,6 +5,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
+from malf_pas.data_foundation.contract import validate_contract_registry
+
 
 @dataclass(frozen=True)
 class Finding:
@@ -199,6 +201,8 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             findings.extend(
                 _check_local_tdx_source_inventory_registry(repo_root / raw_path, registry)
             )
+        if raw_path == "governance/data_module_db_contract_registry.toml":
+            findings.extend(_check_data_module_db_contract_registry(repo_root / raw_path, registry))
     return findings
 
 
@@ -215,6 +219,9 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
         "data_foundation_roadmap_registry": "governance/data_foundation_roadmap_registry.toml",
         "local_tdx_source_inventory_registry": (
             "governance/local_tdx_source_inventory_registry.toml"
+        ),
+        "data_module_db_contract_registry": (
+            "governance/data_module_db_contract_registry.toml"
         ),
         "current_allowed_next_card": "",
     }
@@ -538,8 +545,8 @@ def _check_data_foundation_roadmap_registry(
         "broker_feasibility_opened": False,
         "profit_claim_authorized": False,
         "legacy_code_migration_authorized": False,
-        "next_data_foundation_card": "data-module-db-contract-card",
-        "last_closed_data_foundation_card": "local-tdx-source-inventory-card-20260517-01",
+        "next_data_foundation_card": "raw-market-full-build-ledger-card",
+        "last_closed_data_foundation_card": "data-module-db-contract-card-20260517-01",
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -574,6 +581,42 @@ def _check_data_foundation_roadmap_registry(
     ]:
         if invariants.get(invariant_id) is not True:
             findings.append(Finding(path, f"{invariant_id} invariant must be true"))
+    return findings
+
+
+def _check_data_module_db_contract_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings = [
+        Finding(item.path, item.message)
+        for item in validate_contract_registry(path, registry)
+    ]
+    required_db_names = {
+        "raw_market",
+        "market_base_day",
+        "market_base_week",
+        "market_base_month",
+        "market_meta",
+        "data_control",
+    }
+    databases = {
+        item.get("logical_name"): item
+        for item in registry.get("databases", [])
+        if isinstance(item, dict)
+    }
+    missing_dbs = sorted(required_db_names - set(databases))
+    if missing_dbs:
+        findings.append(Finding(path, f"missing Data database contracts: {missing_dbs}"))
+
+    data_control = databases.get("data_control", {})
+    table_families = {
+        item.get("family"): item
+        for item in data_control.get("table_families", [])
+        if isinstance(item, dict)
+    }
+    if "run_ledger" not in table_families:
+        findings.append(Finding(path, "data_control must include run_ledger"))
+
     return findings
 
 

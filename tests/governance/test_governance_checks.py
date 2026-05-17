@@ -9,6 +9,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from malf_pas.governance.checks import (
+    _check_data_module_db_contract_registry,
     _check_governance_roadmap_doc,
     _check_local_tdx_source_inventory_registry,
     _check_malf_pas_revision_roadmap_registry,
@@ -182,11 +183,11 @@ class GovernanceChecksTest(unittest.TestCase):
         )
         self.assertEqual(
             registry.get("next_data_foundation_card"),
-            "data-module-db-contract-card",
+            "raw-market-full-build-ledger-card",
         )
         self.assertEqual(
             registry.get("last_closed_data_foundation_card"),
-            "local-tdx-source-inventory-card-20260517-01",
+            "data-module-db-contract-card-20260517-01",
         )
         self.assertEqual(registry.get("downstream_runtime_authorized"), False)
 
@@ -226,6 +227,63 @@ class GovernanceChecksTest(unittest.TestCase):
 
         for suffix in ("card", "evidence-index", "record", "conclusion"):
             self.assertTrue((record_root / f"019-{run_id}.{suffix}.md").exists())
+
+    def test_data_module_db_contract_registry_records_card_20_closeout(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        registry_path = repo_root / "governance" / "data_module_db_contract_registry.toml"
+        record_root = repo_root / "docs" / "04-execution" / "records" / "data-foundation"
+        run_id = "data-module-db-contract-card-20260517-01"
+
+        self.assertTrue(registry_path.exists())
+        with registry_path.open("rb") as handle:
+            registry = tomllib.load(handle)
+
+        findings = _check_data_module_db_contract_registry(registry_path, registry)
+
+        self.assertEqual(findings, [])
+        self.assertEqual(registry.get("run_id"), run_id)
+        self.assertEqual(registry.get("roadmap_order"), 20)
+        self.assertEqual(registry.get("current_card_creates_db"), False)
+        self.assertEqual(registry.get("current_card_writes_data_root"), False)
+        self.assertEqual(
+            registry.get("next_data_foundation_card"),
+            "raw-market-full-build-ledger-card",
+        )
+
+        for suffix in ("card", "evidence-index", "record", "conclusion"):
+            self.assertTrue((record_root / f"020-{run_id}.{suffix}.md").exists())
+
+    def test_data_module_db_contract_registry_rejects_missing_database(self) -> None:
+        registry_path = Path("governance/data_module_db_contract_registry.toml")
+        registry = {
+            "registry_version": "2026-05-17.v1",
+            "stage": "governance-only",
+            "formal_db_mutation": "no",
+            "broker_feasibility": "deferred",
+            "run_id": "data-module-db-contract-card-20260517-01",
+            "roadmap_order": 20,
+            "current_card_creates_db": False,
+            "current_card_writes_data_root": False,
+            "next_data_foundation_card": "raw-market-full-build-ledger-card",
+            "common_governance_keys": [
+                "symbol",
+                "asset_type",
+                "timeframe",
+                "bar_dt",
+                "trade_dt",
+                "run_id",
+                "source_run_id",
+                "schema_version",
+                "rule_version",
+                "source_manifest_hash",
+                "checkpoint_key",
+            ],
+            "databases": [],
+        }
+
+        findings = _check_data_module_db_contract_registry(registry_path, registry)
+
+        self.assertTrue(any("missing Data database contracts" in item.message for item in findings))
 
     def test_local_tdx_source_inventory_registry_rejects_asteria_as_truth_root(self) -> None:
         registry_path = Path("governance/local_tdx_source_inventory_registry.toml")

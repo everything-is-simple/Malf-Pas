@@ -123,6 +123,7 @@ required_registries = [
     "governance/post_terminal_roadmap_discipline_registry.toml",
     "governance/data_foundation_roadmap_registry.toml",
     "governance/local_tdx_source_inventory_registry.toml",
+    "governance/data_module_db_contract_registry.toml",
     "governance/root_directory_registry.toml",
 ]
 required_plugin_files = [

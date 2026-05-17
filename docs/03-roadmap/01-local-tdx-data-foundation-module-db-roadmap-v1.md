@@ -331,6 +331,22 @@ next_data_foundation_card = data-module-db-contract-card
 4. tradability 来源登记 contract 明确到字段与 source role，不允许留空或默认为本地 truth。
 5. Data validator 最小骨架在本卡冻结，并可被后续卡直接接入 contract / validator / fixture tests。
 
+闭环结果：
+
+```text
+run_id = data-module-db-contract-card-20260517-01
+status = passed
+registry = governance/data_module_db_contract_registry.toml
+validator = scripts/data_foundation/validate_data_contract.py --json
+current_card_creates_db = false
+current_card_writes_data_root = false
+next_data_foundation_card = raw-market-full-build-ledger-card
+```
+
+本卡通过后，只表示 Data 六库 contract、表族、自然键、共同治理键、manifest / lineage
+和 validator 最小骨架已冻结；不表示六库已经创建，也不表示 Data Foundation 已经
+`development_usable = true` 或 `daily_usable = true`。
+
 ### 12.4 `021-raw-market-full-build-ledger-card`
 
 目标：
