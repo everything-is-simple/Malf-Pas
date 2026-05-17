@@ -1,6 +1,6 @@
 # Malf-Pas 结论索引 v1
 
-日期：2026-05-16
+日期：2026-05-17
 
 ## 1. 说明
 
@@ -28,3 +28,4 @@
 | `governance` | `open-source-adapter-boundary-card-20260516-01` | `passed` | 开源 adapter 边界已冻结；首张治理 roadmap 已收口为 `none / terminal` | `docs/04-execution/records/governance/016-open-source-adapter-boundary-card-20260516-01.conclusion.md` |
 | `governance` | `roadmap-ready-development-daily-usability-discipline-card-20260516-01` | `passed` | 后续 roadmap ready 必须同时满足 development usable 与 daily usable 的系统纪律已永久化 | `docs/04-execution/records/governance/017-roadmap-ready-development-daily-usability-discipline-card-20260516-01.conclusion.md` |
 | `data-foundation` | `data-foundation-roadmap-freeze-card-20260517-01` | `passed` | 系统第二张 Roadmap 已冻结为 Data Foundation only；第 18 卡未建库、未写数据根、未打开下游范围 | `docs/04-execution/records/data-foundation/018-data-foundation-roadmap-freeze-card-20260517-01.conclusion.md` |
+| `data-foundation` | `local-tdx-source-inventory-card-20260517-01` | `passed` | 当前本地 TDX truth roots 与上一版 Asteria Data 五库只读对照已冻结；第 19 卡未建库、未写数据根、未迁移旧 schema | `docs/04-execution/records/data-foundation/019-local-tdx-source-inventory-card-20260517-01.conclusion.md` |

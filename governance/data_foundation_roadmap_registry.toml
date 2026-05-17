@@ -21,7 +21,8 @@ malf_pas_signal_authorized = false
 broker_feasibility_opened = false
 profit_claim_authorized = false
 legacy_code_migration_authorized = false
-next_data_foundation_card = "local-tdx-source-inventory-card"
+last_closed_data_foundation_card = "local-tdx-source-inventory-card-20260517-01"
+next_data_foundation_card = "data-module-db-contract-card"
 
 allowed_later_authorization_scope = [
     "raw_market.duckdb",

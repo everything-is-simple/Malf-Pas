@@ -10,6 +10,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
 from malf_pas.governance.checks import (
     _check_governance_roadmap_doc,
+    _check_local_tdx_source_inventory_registry,
     _check_malf_pas_revision_roadmap_registry,
     _check_malf_pas_scenario_atlas_registry,
     _check_pas_v1_2_strength_weakness_matrix_registry,
@@ -181,7 +182,11 @@ class GovernanceChecksTest(unittest.TestCase):
         )
         self.assertEqual(
             registry.get("next_data_foundation_card"),
-            "local-tdx-source-inventory-card",
+            "data-module-db-contract-card",
+        )
+        self.assertEqual(
+            registry.get("last_closed_data_foundation_card"),
+            "local-tdx-source-inventory-card-20260517-01",
         )
         self.assertEqual(registry.get("downstream_runtime_authorized"), False)
 
@@ -194,6 +199,61 @@ class GovernanceChecksTest(unittest.TestCase):
             "018-data-foundation-roadmap-freeze-card-20260517-01.conclusion.md",
             conclusion_index,
         )
+
+    def test_local_tdx_source_inventory_registry_records_asteria_reference(self) -> None:
+        repo_root = Path(__file__).resolve().parents[2]
+        registry_path = repo_root / "governance" / "local_tdx_source_inventory_registry.toml"
+        record_root = repo_root / "docs" / "04-execution" / "records" / "data-foundation"
+        run_id = "local-tdx-source-inventory-card-20260517-01"
+
+        self.assertTrue(registry_path.exists())
+        with registry_path.open("rb") as handle:
+            registry = tomllib.load(handle)
+
+        findings = _check_local_tdx_source_inventory_registry(registry_path, registry)
+
+        self.assertEqual(findings, [])
+        self.assertEqual(
+            registry.get("current_truth_roots"),
+            ["H:/tdx_offline_Data", "H:/new_tdx64"],
+        )
+        self.assertEqual(registry.get("previous_reference_root"), "H:/Asteria-data")
+        self.assertEqual(registry.get("previous_reference_role"), "reference_baseline_only")
+        self.assertFalse(registry.get("previous_reference_current_truth_owner"))
+        self.assertEqual(registry.get("week_month_availability_status"), "day-derived")
+        self.assertEqual(registry.get("tradability_availability_status"), "blocked")
+        self.assertEqual(registry.get("next_data_foundation_card"), "data-module-db-contract-card")
+
+        for suffix in ("card", "evidence-index", "record", "conclusion"):
+            self.assertTrue((record_root / f"019-{run_id}.{suffix}.md").exists())
+
+    def test_local_tdx_source_inventory_registry_rejects_asteria_as_truth_root(self) -> None:
+        registry_path = Path("governance/local_tdx_source_inventory_registry.toml")
+        registry = {
+            "registry_version": "2026-05-17.v1",
+            "stage": "governance-only",
+            "formal_db_mutation": "no",
+            "broker_feasibility": "deferred",
+            "current_truth_roots": ["H:/tdx_offline_Data", "H:/new_tdx64", "H:/Asteria-data"],
+            "previous_reference_root": "H:/Asteria-data",
+            "previous_reference_role": "reference_baseline_only",
+            "previous_reference_current_truth_owner": False,
+            "previous_reference_schema_migration_source": False,
+            "previous_reference_runner_migration_source": False,
+            "previous_reference_scratch_or_output_root": False,
+            "week_month_availability_status": "direct",
+            "tradability_availability_status": "TDX direct",
+            "previous_asteria_data_databases": [],
+        }
+
+        findings = _check_local_tdx_source_inventory_registry(registry_path, registry)
+
+        self.assertTrue(any("current_truth_roots" in item.message for item in findings))
+        self.assertTrue(
+            any("week/month must remain day-derived" in item.message for item in findings)
+        )
+        self.assertTrue(any("tradability must remain blocked" in item.message for item in findings))
+        self.assertTrue(any("previous Asteria Data DB" in item.message for item in findings))
 
     def test_governance_checks_fail_without_roadmap_ready_usability_rules(self) -> None:
         repo_root = Path(__file__).resolve().parents[2]

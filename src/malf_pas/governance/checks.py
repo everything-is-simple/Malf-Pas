@@ -195,6 +195,10 @@ def _check_registries(repo_root: Path, governance: dict[str, Any]) -> list[Findi
             )
         if raw_path == "governance/data_foundation_roadmap_registry.toml":
             findings.extend(_check_data_foundation_roadmap_registry(repo_root / raw_path, registry))
+        if raw_path == "governance/local_tdx_source_inventory_registry.toml":
+            findings.extend(
+                _check_local_tdx_source_inventory_registry(repo_root / raw_path, registry)
+            )
     return findings
 
 
@@ -209,6 +213,9 @@ def _check_repo_governance_registry(path: Path, registry: dict[str, Any]) -> lis
             "governance/open_source_adapter_boundary_registry.toml"
         ),
         "data_foundation_roadmap_registry": "governance/data_foundation_roadmap_registry.toml",
+        "local_tdx_source_inventory_registry": (
+            "governance/local_tdx_source_inventory_registry.toml"
+        ),
         "current_allowed_next_card": "",
     }
     for key, expected in expected_values.items():
@@ -531,7 +538,8 @@ def _check_data_foundation_roadmap_registry(
         "broker_feasibility_opened": False,
         "profit_claim_authorized": False,
         "legacy_code_migration_authorized": False,
-        "next_data_foundation_card": "local-tdx-source-inventory-card",
+        "next_data_foundation_card": "data-module-db-contract-card",
+        "last_closed_data_foundation_card": "local-tdx-source-inventory-card-20260517-01",
     }
     for key, expected in expected_values.items():
         if registry.get(key) != expected:
@@ -566,6 +574,101 @@ def _check_data_foundation_roadmap_registry(
     ]:
         if invariants.get(invariant_id) is not True:
             findings.append(Finding(path, f"{invariant_id} invariant must be true"))
+    return findings
+
+
+def _check_local_tdx_source_inventory_registry(
+    path: Path, registry: dict[str, Any]
+) -> list[Finding]:
+    findings: list[Finding] = []
+    expected_values: dict[str, Any] = {
+        "registry_version": "2026-05-17.v1",
+        "stage": "governance-only",
+        "formal_db_mutation": "no",
+        "broker_feasibility": "deferred",
+        "authority_doc": "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md",
+        "run_id": "local-tdx-source-inventory-card-20260517-01",
+        "roadmap_order": 19,
+        "card_status": "passed",
+        "previous_reference_root": "H:/Asteria-data",
+        "previous_reference_role": "reference_baseline_only",
+        "previous_reference_current_truth_owner": False,
+        "previous_reference_schema_migration_source": False,
+        "previous_reference_runner_migration_source": False,
+        "previous_reference_scratch_or_output_root": False,
+        "week_month_availability_status": "day-derived",
+        "tradability_availability_status": "blocked",
+        "current_card_writes_data_root": False,
+        "current_card_creates_db": False,
+        "next_data_foundation_card": "data-module-db-contract-card",
+    }
+    for key, expected in expected_values.items():
+        if registry.get(key) != expected:
+            findings.append(Finding(path, f"{key} must be {expected!r}"))
+
+    if registry.get("current_truth_roots") != ["H:/tdx_offline_Data", "H:/new_tdx64"]:
+        findings.append(
+            Finding(
+                path,
+                "current_truth_roots must contain only H:/tdx_offline_Data and H:/new_tdx64",
+            )
+        )
+
+    if "H:/Asteria-data" in set(registry.get("current_truth_roots", [])):
+        findings.append(Finding(path, "H:/Asteria-data must not be a current truth root"))
+
+    if registry.get("forbidden_formal_truth") != ["TuShare", "baostock", "AKShare"]:
+        findings.append(Finding(path, "forbidden_formal_truth must reject network providers"))
+
+    if registry.get("week_month_availability_status") != "day-derived":
+        findings.append(
+            Finding(path, "week/month must remain day-derived until current direct proof exists")
+        )
+
+    if registry.get("tradability_availability_status") != "blocked":
+        findings.append(
+            Finding(path, "tradability must remain blocked until card 23 proves current source")
+        )
+
+    required_previous_dbs = {
+        "raw_market.duckdb",
+        "market_base_day.duckdb",
+        "market_base_week.duckdb",
+        "market_base_month.duckdb",
+        "market_meta.duckdb",
+    }
+    previous_dbs = {
+        item.get("name"): item
+        for item in registry.get("previous_asteria_data_databases", [])
+        if isinstance(item, dict)
+    }
+    missing_dbs = sorted(required_previous_dbs - set(previous_dbs))
+    if missing_dbs:
+        findings.append(Finding(path, f"previous Asteria Data DB entries missing {missing_dbs}"))
+    for db_name in sorted(required_previous_dbs & set(previous_dbs)):
+        entry = previous_dbs[db_name]
+        expected_path = f"H:/Asteria-data/{db_name}"
+        if entry.get("path") != expected_path:
+            findings.append(Finding(path, f"{db_name} path must be {expected_path!r}"))
+        if entry.get("status") not in {"present", "present_unreadable"}:
+            findings.append(Finding(path, f"{db_name} previous Asteria Data DB must be present"))
+        if entry.get("required") is not True:
+            findings.append(Finding(path, f"{db_name} must be marked required"))
+
+    source_families = registry.get("source_families", {})
+    for family in ["stock", "index", "block", "day"]:
+        if source_families.get(family) != "covered":
+            findings.append(Finding(path, f"source_families.{family} must be covered"))
+
+    conclusions = registry.get("reference_conclusions", {})
+    for key in [
+        "raw_market_source_registry",
+        "market_base_day_week_month",
+        "market_meta_tradability",
+    ]:
+        if not str(conclusions.get(key, "")).strip():
+            findings.append(Finding(path, f"reference_conclusions.{key} must be recorded"))
+
     return findings
 
 

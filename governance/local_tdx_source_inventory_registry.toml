@@ -1,0 +1,100 @@
+registry_version = "2026-05-17.v1"
+stage = "governance-only"
+formal_db_mutation = "no"
+broker_feasibility = "deferred"
+authority_doc = "docs/03-roadmap/01-local-tdx-data-foundation-module-db-roadmap-v1.md"
+run_id = "local-tdx-source-inventory-card-20260517-01"
+roadmap_order = 19
+card_status = "passed"
+current_truth_roots = ["H:/tdx_offline_Data", "H:/new_tdx64"]
+previous_reference_root = "H:/Asteria-data"
+previous_reference_role = "reference_baseline_only"
+previous_reference_current_truth_owner = false
+previous_reference_schema_migration_source = false
+previous_reference_runner_migration_source = false
+previous_reference_scratch_or_output_root = false
+forbidden_formal_truth = ["TuShare", "baostock", "AKShare"]
+fingerprint_policy = "path + size + mtime + content_hash + source_root + source_revision"
+content_hash = "sha256"
+source_revision_policy = "file-metadata-revision-v1"
+week_month_availability_status = "day-derived"
+week_month_rule_version = "data-foundation-week-month-from-day-v1"
+week_month_direct_source_directories_found = 0
+tradability_availability_status = "blocked"
+current_card_writes_data_root = false
+current_card_creates_db = false
+next_data_foundation_card = "data-module-db-contract-card"
+
+[source_families]
+stock = "covered"
+index = "covered"
+block = "covered"
+day = "covered"
+week = "day-derived"
+month = "day-derived"
+tradability = "blocked"
+
+[tdx_offline_data]
+root = "H:/tdx_offline_Data"
+stock_non_adjusted_files = 5506
+stock_backward_adjusted_files = 5506
+stock_forward_adjusted_files = 5506
+index_non_adjusted_files = 100
+block_non_adjusted_files = 559
+raw_bj_day_files = 563
+raw_sh_day_files = 5823
+raw_sz_day_files = 5710
+
+[tdx_client]
+root = "H:/new_tdx64"
+vipdoc_bj_day_files = 568
+vipdoc_sh_day_files = 5894
+vipdoc_sz_day_files = 5734
+vipdoc_week_direct_dirs_present = false
+vipdoc_month_direct_dirs_present = false
+tradability_candidate_paths = [
+    "H:/new_tdx64/T0002/hq_cache/base.dbf",
+    "H:/new_tdx64/T0002/hq_cache/tdxhy.cfg",
+    "H:/new_tdx64/T0002/hq_cache/tdxzs.cfg",
+    "H:/new_tdx64/T0002/hq_cache/tdxstat.cfg",
+]
+
+[reference_conclusions]
+raw_market_source_registry = "previous raw_market shows source_file registry, content hash, local run audit, and reject audit table family shape."
+market_base_day_week_month = "previous market_base day/week/month shows materialized bar, latest pointer, run, and dirty_scope table family shape."
+market_meta_tradability = "previous market_meta shows symbol master, calendar, tradability_fact, source manifest, and industry/block relation table family shape."
+
+[[previous_asteria_data_databases]]
+name = "raw_market.duckdb"
+path = "H:/Asteria-data/raw_market.duckdb"
+status = "present"
+required = true
+table_count = 5
+
+[[previous_asteria_data_databases]]
+name = "market_base_day.duckdb"
+path = "H:/Asteria-data/market_base_day.duckdb"
+status = "present"
+required = true
+table_count = 5
+
+[[previous_asteria_data_databases]]
+name = "market_base_week.duckdb"
+path = "H:/Asteria-data/market_base_week.duckdb"
+status = "present"
+required = true
+table_count = 5
+
+[[previous_asteria_data_databases]]
+name = "market_base_month.duckdb"
+path = "H:/Asteria-data/market_base_month.duckdb"
+status = "present"
+required = true
+table_count = 5
+
+[[previous_asteria_data_databases]]
+name = "market_meta.duckdb"
+path = "H:/Asteria-data/market_meta.duckdb"
+status = "present"
+required = true
+table_count = 9

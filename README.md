@@ -85,7 +85,8 @@ No broker or live-trading discussion is opened by this repo initialization.
 Open-source adapter boundary is now frozen.
 Current governance roadmap status is none / terminal.
 First-day governance work is closed; Roadmap 2 is frozen as the Data Foundation roadmap by card 18.
-Next Data Foundation card is local-tdx-source-inventory-card.
+Data Foundation card 19 local-tdx-source-inventory-card is closed.
+Next Data Foundation card is data-module-db-contract-card.
 ```
 
 ## 阅读入口

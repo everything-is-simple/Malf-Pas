@@ -256,7 +256,7 @@ checkpoint_key
 run_id = data-foundation-roadmap-freeze-card-20260517-01
 status = passed
 registry = governance/data_foundation_roadmap_registry.toml
-next_data_foundation_card = local-tdx-source-inventory-card
+    next_data_foundation_card = data-module-db-contract-card
 ```
 
 本卡通过后，只表示 Roadmap 2 和 Data-only 授权边界已冻结；不表示 `H:\Malf-Pas-data`
@@ -287,6 +287,22 @@ next_data_foundation_card = local-tdx-source-inventory-card
 3. 若 week/month direct source 不完整或不可用，必须登记 day-derived 所需的 direct parent、manifest 与 rule version 输入边界。
 4. tradability 来源可用性结论必须明确写出 `TDX direct / authorized source_adapter / blocked`。
 5. 若 tradability 需要 adapter 补充，必须同时登记 gap 范围，不得把 adapter 默认升级为 formal truth owner。
+
+闭环结果：
+
+```text
+run_id = local-tdx-source-inventory-card-20260517-01
+status = passed
+registry = governance/local_tdx_source_inventory_registry.toml
+current_truth_roots = H:\tdx_offline_Data + H:\new_tdx64
+previous_reference_root = H:\Asteria-data / reference_baseline_only
+week_month_availability_status = day-derived
+tradability_availability_status = blocked
+next_data_foundation_card = data-module-db-contract-card
+```
+
+本卡通过后，只表示当前本地 TDX 源与上一版 Asteria Data 五库的只读对照边界已冻结；
+不表示 `H:\Malf-Pas-data` 已经写入，也不表示上一版 schema、runner 或 DuckDB 表面可被迁移。
 
 ### 12.3 `020-data-module-db-contract-card`
 
